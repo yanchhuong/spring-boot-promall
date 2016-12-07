@@ -14,12 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.code.service.UserService;
 
-import org.springframework.validation.BindingResult;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 
 @Controller
@@ -28,7 +23,6 @@ public class LoginController  {
 	UserService userService;
 	@RequestMapping(value = "/login",method = RequestMethod.GET)
 	public String showForm(ModelMap model,HttpServletRequest request) {
-		
 	/*	HttpSession session=request.getSession(false);
 		model.addAttribute("login", new LoginForm());
 		if(session==null){
