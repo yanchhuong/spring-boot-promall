@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: SpringBootWebMvcJspExample
+Implementation-Version: 1.0-SNAPSHOT
+Built-By: yanchhuong
+Implementation-Vendor-Id: SpringBootWebMvcJspExample
+Build-Jdk: 1.8.0_65
+Implementation-URL: http://projects.spring.io/spring-boot/SpringBootWe
+ bMvcJspExample/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: ESpark
+
