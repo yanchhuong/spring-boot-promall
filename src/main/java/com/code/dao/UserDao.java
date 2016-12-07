@@ -1,24 +1,11 @@
 package com.code.dao;
-import java.util.List;
-import java.util.Optional;
 
-import com.code.model.User;
-
+import com.code.model.UserDetailBean;
 
 public interface UserDao {
-
-	User findById(Integer id);
-	
-	User findOneByEmail(String email);
-	
-	User loginUser(String username,String password);
-
-	List<User> findAll();
-
-	void save(User user);
-
-	void update(User user);
-
-	void delete(Integer id);
+   
+	void  insertRole(UserDetailBean user);
+    void  insertUserLog(UserDetailBean user);
+    void insertUserDetail(UserDetailBean user);
 
 }
