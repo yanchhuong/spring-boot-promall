@@ -115,7 +115,7 @@ FOREIGN KEY (c_id_fk) REFERENCES conversation(c_id)
 );
 
  CREATE TABLE if not EXISTS user_detail (
-  detid SERIAL,
+  id SERIAL,
   username_fk varchar(45)  not NULL,
   fname varchar(45)  NULL,
   lname varchar(45)  NULL,
@@ -126,4 +126,4 @@ FOREIGN KEY (c_id_fk) REFERENCES conversation(c_id)
   birthdate varchar(8) null,
   usercd varchar(14) NOT NULL,
   FOREIGN KEY (username_fk) REFERENCES users(username),
-  PRIMARY KEY (detid) );
+  PRIMARY KEY (id) );

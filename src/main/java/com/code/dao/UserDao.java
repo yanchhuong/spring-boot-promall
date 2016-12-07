@@ -6,6 +6,10 @@ public interface UserDao {
    
 	void  insertRole(UserDetailBean user);
     void  insertUserLog(UserDetailBean user);
-    void insertUserDetail(UserDetailBean user);
+    void  insertUserDetail(UserDetailBean user);
+    
+    
+    
+    
 
 }
