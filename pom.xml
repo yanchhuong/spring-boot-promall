@@ -71,6 +71,70 @@
 
 
     <dependencies>
+    
+        <!--Jar for chat  +++++++++++++++++++++++++++++++++++++++++++++++-->
+		
+		<dependency>
+    		<groupId>com.google.guava</groupId>
+    		<artifactId>guava</artifactId>
+   			 <version>16.0</version>
+		</dependency>
+		
+		<dependency>
+     		 <groupId>javax.inject</groupId>
+      		<artifactId>javax.inject</artifactId>
+      		<version>1</version>
+       </dependency>
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>sockjs-client</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>stomp-websocket</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.3.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+		
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+		
+		</dependency>
+		<dependency>
+    		<groupId>org.springframework.data</groupId>
+    		<artifactId>spring-data-commons-core</artifactId>
+    		<version>1.1.0.RELEASE</version>
+		</dependency>
+		
+		<dependency>
+  			 <groupId>javax.persistence</groupId>
+   			 <artifactId>persistence-api</artifactId>
+  			 <version>1.0.2</version>
+  			 <scope>provided</scope>
+		</dependency>
+		<!--  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
