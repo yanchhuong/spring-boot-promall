@@ -2,13 +2,12 @@ package com.code.dao;
 
 import java.util.List;
 
-
-import com.code.model.ChatMessageModel;
+import com.code.chat.ChatMessage;
 
 
  
 public interface ChatMessageRepository {
-	public List<ChatMessageModel> getMessages(int messageIndex);
-	public void addMessage(ChatMessageModel ChatMessageModel) ;
+	public List<ChatMessage> getMessages(int messageIndex);
+	public void addMessage(ChatMessage ChatMessage) ;
     
 }
