@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService{
 		return true;
 	}
 
+	@Override
+	public boolean resetPassword(String username, String newpass) {
+		return userDao.resetPassword(username, newpass);
+	}
+
 }

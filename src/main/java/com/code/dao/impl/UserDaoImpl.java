@@ -110,17 +110,23 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 		 String sql = "UPDATE USER_DETAIL set fname=?, lname=? where id=?";
 		 this.getJdbcTemplate().update(sql, new Object[] {user.getFirst(),user.getLast(),user.getId()});
 	}
-	
+
+	@Override
+	public boolean resetPassword(String username, String newpass) {
+		boolean result = false;
+		try{
+			 String sql = "UPDATE USERS set password=? where username=?";
+	         this.getJdbcTemplate().update(sql, new Object[] {newpass,username});
+		 
+		}catch(Exception e){
+			 e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+
 	//Dynamic parameter search sample
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 		
 }
