@@ -1,17 +1,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<link rel="stylesheet" type="text/css" href="/css/css_page/reset.css" media="all">
-<link rel="stylesheet" type="text/css" href="/css/css_page/content.css" media="all">
-<link rel="stylesheet" type="text/css" href="/css/css_page/content_media_screen.css" media="all">
-<link rel="stylesheet" type="text/css" href="/css/css_page/button.css" media="all">
-<link rel="stylesheet" type="text/css" href="/css/css_page/slider.css" media="all">
-<script type="text/javascript" src="/js_lib/js_page/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="/js_lib/js_page/lightslider.js"></script>
-<script type="text/javascript" src="/js_lib/js_page/collJsPlugin.js"></script>
-<script type="text/javascript" src="/js_lib/js_page/common.js"></script>
+
+ <%@include file="fragments/include_page.jsp"%>
 
 </head>
 

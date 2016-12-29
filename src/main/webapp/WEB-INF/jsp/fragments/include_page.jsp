@@ -10,7 +10,7 @@
    <link rel="stylesheet" type="text/css" href="../../css/css_page/content_media_screen.css" media="all">
    <link rel="stylesheet" type="text/css" href="../../css/css_page/button.css" media="all">
    
-
+   <link rel="stylesheet" type="text/css" href="../../css/css_page/slider.css" media="all">
    
     <!--js file  
     <script src="../../js-lib/jquery-1.7.2.min.js"></script> 
@@ -18,9 +18,16 @@
     <script src="../../js-lib/stomp.js"></script>
     <script src="../../js-lib/jquery.validate.min.js"></script> -->
     
-    <script  src="../../js_lib/jquery-1.10.2.js"></script>
-    <script  src="../../js_lib/collJsPlugin.js"></script>
-    <script  src="../../js_lib/common.js"></script>
+    <script  src="../../js-lib/jquery-1.10.2.js"></script>
+    <script  src="../../js-lib/collJsPlugin.js"></script>
+    <script  src="../../js-lib/common.js"></script>
+    <script type="text/javascript" src="../../js-lib/lightslider.js"></script>
+    
+    
+
+
+
+
 </head>
 
 </html>

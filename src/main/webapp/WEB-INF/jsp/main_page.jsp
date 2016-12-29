@@ -15,7 +15,6 @@
 
 
  <%@include file="fragments/include_page.jsp"%>
-
 </head>
 
 <body>
