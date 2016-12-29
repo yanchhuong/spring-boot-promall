@@ -13,5 +13,9 @@ public class ViewsController {
 	public String postAds() {
 		return "post_001";
 	}
+	@RequestMapping(value="/preview",method = RequestMethod.GET)
+	public String previewPage() {
+		return "preview_page";
+	}
 
 }
