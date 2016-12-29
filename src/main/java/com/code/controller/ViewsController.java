@@ -9,5 +9,9 @@ public class ViewsController {
 	public String welcome() {
 		return "main_page";
 	}
+	@RequestMapping(value="/post",method = RequestMethod.GET)
+	public String postAds() {
+		return "post_001";
+	}
 
 }
