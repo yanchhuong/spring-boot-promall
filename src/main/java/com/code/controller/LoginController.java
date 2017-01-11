@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController  {
     @Autowired
 	UserService userService;
-	@RequestMapping(value = "/login",method = RequestMethod.GET)
+	@RequestMapping(value = "/login")
 	public String showForm(ModelMap model,HttpServletRequest request) {
 	/*	HttpSession session=request.getSession(false);
 		model.addAttribute("login", new LoginForm());

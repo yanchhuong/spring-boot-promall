@@ -41,6 +41,11 @@
                     <input type="text" class="txt" value="Product name, area name, @ shop name, initial search" disabled="">
                 </fieldset>
             </div>
+            
+            <div id="home" onclick="schView()">
+               <span>Home</span>
+            </div>
+            
 			<!-- //search_box_header -->
 
 			<!-- aleim -->
@@ -84,7 +89,7 @@
 					<dl class="category">
 						<dt>
 							<strong>Category</strong>
-							<button type="button" class="btn_upload"><span>Upload</span></button>
+							<button type="button" class="btn_upload"><span>Post Free here!</span></button>
 						</dt>
 						<dd id="sidebar_catagory_list">
 							<a href="#none" class="ctg_01">Women's clothing</a>
