@@ -17,7 +17,7 @@ public class MailController {
 	@RequestMapping("/send-mail")
 	public void sendMail() throws MessagingException {
 		
-		smtpMailSender.send("jaelsarah7@gmail.com", "Test mail from Spring", "Howdy");
+		smtpMailSender.send("jaelsarah7@gmail.com", "Test mail from Springs", "Howdy");
 		
 	}
 	
