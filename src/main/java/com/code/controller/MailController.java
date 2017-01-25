@@ -20,6 +20,4 @@ public class MailController {
 		smtpMailSender.send("jaelsarah7@gmail.com", "Test mail from Springs", "Howdy");
 		
 	}
-	
-
 }
