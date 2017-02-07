@@ -143,7 +143,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 	//Dynamic parameter search sample
 	
 	
-	public UserDetailBean findOneByEmail(String email) {
+	public UserDetailBean SearchDynamicParam(String email) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		String sql = "SELECT * FROM USER_DETAIL WHERE ";
 		

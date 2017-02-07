@@ -19,6 +19,11 @@ public class ChatViewController {
 			ModelMap model,HttpServletRequest request,RedirectAttributes redir) {
 		return "index";
 	}
+	@RequestMapping(value = "/chat",method = RequestMethod.GET)
+	public String realtimeChat(
+			ModelMap model,HttpServletRequest request,RedirectAttributes redir) {
+		return "realtimechat";
+	}
 	
 
 
