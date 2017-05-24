@@ -73,6 +73,8 @@ $(function(){
 						<div class="group_name ic_lnb_cmd ic_m3_1 on"><a href="#none">Page Control</a></div>
 						<ul class="group_name2">
 							<li><a href="#none">Business</a></li>
+							<li ><a href="#none">Feed back</a></li><!-- 활성화클래스 on -->
+							<li ><a href="#none">Message</a></li><!-- 활성화클래스 on -->
 							<!--(delete)20170309<li><a href="#none">직원등록</a></li>-->
 						</ul>
 					</div>
@@ -82,7 +84,8 @@ $(function(){
 						<div class="group_name ic_lnb_cmd ic_m3_2"><a href="#none">Page</a></div>
 						<ul class="group_name2">
 							<li><a href="#none">Menu</a></li>
-							<li class="on"><a href="#none">User Control</a></li><!-- 활성화클래스 on -->
+							<li class="on"><a href="#none">User</a></li><!-- 활성화클래스 on -->
+							
 						</ul>
 					</div>
 				</div>
