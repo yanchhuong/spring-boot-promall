@@ -17,5 +17,9 @@ public class ViewsController {
 	public String previewPage() {
 		return "preview_page";
 	}
+	@RequestMapping(value="/admin",method = RequestMethod.GET)
+	public String admin() {
+		return "admin";
+	}
 
 }
