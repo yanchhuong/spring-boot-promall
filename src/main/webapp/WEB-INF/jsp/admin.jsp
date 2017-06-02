@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <head>
 <title>Admin Control</title>
-
 <%@include file="fragments/include_admin.jsp"%>
-
 <script>
 $(function(){
 	// Invoke the plugin
@@ -99,8 +97,6 @@ $(function(){
 		<div class="content">
 
 			<div class="content_wrap">
-
-				
 
 			</div>
 
