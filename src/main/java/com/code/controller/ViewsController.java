@@ -21,5 +21,9 @@ public class ViewsController {
 	public String admin() {
 		return "admin";
 	}
+	@RequestMapping(value="/feedback",method = RequestMethod.GET)
+	public String feedback() {
+		return "feedback_001_view";
+	}
 
 }
