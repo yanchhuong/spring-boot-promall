@@ -118,8 +118,8 @@ body.lnb_bg{background:#fff url(/img/bg/body_lnb_bg.gif) repeat-y;}
 .content{float:left;width:100%;}
 /*.content_wrap{position:relative;padding:23px 25px 110px 25px;min-height:650px;}*/
 
-.content_wrap{position:relative;padding:16px 7px 1px 0px;min-height:650px;}
 
+.content_wrap{position:relative;padding:16px 7px 1px 10px;min-height:650px;}
 /* footer */
 .footer{width:100%;position:fixed;bottom:0;left:0;z-index:999;}
 /* copy right */
