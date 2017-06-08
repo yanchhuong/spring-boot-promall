@@ -1,15 +1,28 @@
+
+
 <!DOCTYPE html>
 <head>
 <title>Admin Control</title>
 <%@include file="fragments/include_admin.jsp"%>
+<script src="/js/admin.js"></script>
 <script>
 $(function(){
 	// Invoke the plugin
 	$('input, textarea').placeholder({customClass:'my-placeholder'});
 });
+function ifrMainResize(ani_yn, height1) {
+	if (typeof (height1) != "number") {
+		height1 = 20;
+	}
+	$("#ifr_content").css("height", ($("#ifr_content").contents().find(".content").height() + height1) + "px");
+	if(ani_yn != "N"){
+		$('body,html').animate({
+			scrollTop : 0
+		}, 0);
+	}
+}
 </script>
 </head>
-
 <body class="lnb_bg">
 
 <div class="wrap">
@@ -45,18 +58,18 @@ $(function(){
 					<div class="user_r_side">
 						<!--  select -->
 						<div class="select_com">
-							<div class="combo"><span>Admin</span><a href="#none"><img src="../img/btn/combo_link.png" alt="Setting"></a></div>
+							<div class="combo"><span>Setting</span><a href="#none"><img src="../img/btn/combo_link.png" alt="combo link"></a></div>
 							<ul style="display:none;">
-								<li><a href="#none">국민은행국민은행국민은행</a></li>
-								<li><a href="#none">나라상사</a></li>
-								<li><a href="#none">삼성중공업</a></li>
+								<li><a href="#none">Menu</a></li>
+								<li><a href="#none" >User</a></li>
+								<li><a href="#none">FeedBack</a></li>
 							</ul>
 						</div>
 						<!-- //select -->
 						<!-- <div class="select_com">
 							<div class="combo_no"><span>웹케시(주)웹케시(주)웹케시(주)</span></div>
 						</div> -->
-						
+						<p><strong>Admin</strong> User</p>
 					</div>
 				</div>
 				<!-- //user view -->
@@ -68,23 +81,15 @@ $(function(){
 				<!--company list -->
 				<div class="com_list">
 					<div class="com_item">
-						<div class="group_name ic_lnb_cmd ic_m3_1 on"><a href="#none">Page Control</a></div>
-						<ul class="group_name2">
-							<li><a href="#none">Business</a></li>
-							<li ><a href="#none">Feed back</a></li><!-- 활성화클래스 on -->
-							<li ><a href="#none">Message</a></li><!-- 활성화클래스 on -->
-							<!--(delete)20170309<li><a href="#none">직원등록</a></li>-->
-						</ul>
-					</div>
-				</div>
-				<div class="com_list">
-					<div class="com_item">
-						<div class="group_name ic_lnb_cmd ic_m3_2"><a href="#none">Page</a></div>
-						<ul class="group_name2">
-							<li><a href="#none">Menu</a></li>
-							<li class="on"><a href="#none">User</a></li><!-- 활성화클래스 on -->
-							
-						</ul>
+						<div class="group_name ic_lnb_cmd ic_m6_1 on"><a href="#none">Controll Panel</a></div><!-- 활성화클래스 on -->
+						<div class="group_name2">
+							<ul>
+								<li><a href="#none" id="cmenu" >Menu</a></li>
+								<li><a href="#none" id="cuser"  >User</a></li><!-- (add)20170309 -->
+								<li><a href="#none" id="cmessage">Message</a></li>
+								<li><a href="#none" id="cfeedback">Feedback</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 				<!--//company list -->
@@ -92,14 +97,14 @@ $(function(){
 			<!-- //group wrap -->
 		</div>
 		<!-- //lnb box -->
+		
+		<iframe id="ifr_content" name="ifr_content" src="cmenu" 
+                    style="width:100%;min-width:600px;height:auto;" 
+                    scrolling="auto" frameborder="0" marginheight="0" marginwidth="0" >
+       	</iframe> 
 
 		<!-- content wrap -->
 		<div class="content">
-
-			<div class="content_wrap">
-
-			</div>
-
 		</div>
 		<!-- //content wrap -->
 	</div>

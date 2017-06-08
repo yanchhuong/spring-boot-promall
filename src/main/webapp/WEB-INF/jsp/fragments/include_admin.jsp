@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+    <meta charset="utf-8">
     <meta http-equiv="Cache-Control" content="No-Cache">
     <meta http-equiv="Pragma" content="No-Cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,8 +22,4 @@
     <script type="text/javascript" src="../../js_admin/jquery.placeholder.min.js"></script>
     
     
-    
-
-</head>
-
-</html>
+   

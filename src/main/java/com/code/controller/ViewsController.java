@@ -21,9 +21,21 @@ public class ViewsController {
 	public String admin() {
 		return "admin";
 	}
-	@RequestMapping(value="/feedback",method = RequestMethod.GET)
+	@RequestMapping(value="/cfeedback",method = RequestMethod.GET)
 	public String feedback() {
-		return "feedback_001_view";
+		return "feedback_control_001_view";
+	}
+	@RequestMapping(value="/cuser",method = RequestMethod.GET)
+	public String User() {
+		return "user_control_001_view";
+	}
+	@RequestMapping(value="/cmenu",method = RequestMethod.GET)
+	public String menuControl() {
+		return "menu_control_001_view";
+	}
+	@RequestMapping(value="/cmessage",method = RequestMethod.GET)
+	public String messageControl() {
+		return "message_control_001_view";
 	}
 
 }
