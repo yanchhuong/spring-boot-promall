@@ -13,6 +13,7 @@ CREATE  TABLE IF NOT EXISTS users(
   FOREIGN KEY (username) REFERENCES users(username),
   PRIMARY KEY (rid)
   );
+  drop table category cascade;
   
   CREATE TABLE if not EXISTS category (
   catgid SERIAL,
@@ -20,7 +21,7 @@ CREATE  TABLE IF NOT EXISTS users(
   nm_eng varchar(50) NOT NULL,
   nm_kh varchar(50)     NULL,
   parent_cd varchar(50) NOT NULL,
-  indexof integer ,
+  lvl integer ,
   pid integer,
   usercd varchar(14),
   PRIMARY KEY (catgcd)
