@@ -83,7 +83,7 @@ top.ifrMainResize("N", 700);
 					</div>
 					<div class="list_scroll" style="">
 						<div class="list_scroll_fix">
-							<table class="list_table">
+							<table class="list_table" id="TBL_DATA">
 								<colgroup>
 								<col width="66px">
 								<col>

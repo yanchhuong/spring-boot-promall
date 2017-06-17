@@ -21,5 +21,10 @@
     <script type="text/javascript" src="../../js_admin/common.js"></script>
     <script type="text/javascript" src="../../js_admin/jquery.placeholder.min.js"></script>
     
+    <!--js custom  
+    <script type="text/javascript" src="../../common/js_admin/layout.popup.js"></script>
+    <script type="text/javascript" src="../../common/js_admin/wehrm.file.js"></script>
+    <script type="text/javascript" src="../../common/js_admin/wehrm.popup.js"></script>
+    <script type="text/javascript" src="../../common/js_admin/layout.wehrm.ui.js"></script>-->
     
-   
+<!--     <script type="text/javascript" src="../../common/js_admin/jquery-3.2.1.min.js"></script> -->
