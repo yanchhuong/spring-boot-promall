@@ -44,7 +44,7 @@ public class MessageController {
       
     }
     System.out.println(chatMessage.toString());
-    chatMessageService.addMessage(chatMessage);
+   // chatMessageService.addMessage(chatMessage);
     template.convertAndSendToUser(recipient, "/queue/messages", chatMessage);
   }
   

@@ -6,15 +6,42 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 @Entity
-@Table(name="articles")
+@Table(name="category")
 public class CategoryBean implements Serializable { 
 	private static final long serialVersionUID = 1L;
-	public int getCatgid() {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="catgid")
+    
+	private long catgid;  
+	@Column(name="catgcd")
+        
+	private String catgcd;
+	@Column(name="nm_eng")	
+	private String nm_eng;
+	
+	@Column(name="nm_kh")	
+	private String nm_kh;
+	
+	@Column(name="parent_cd")	
+	private String parent_cd;
+	
+	@Column(name="lvl")	
+	private String lvl;
+	
+	@Column(name="pid")	
+	private String pid;
+	
+	@Column(name="usercd")	
+	private String usercd;
+	
+	public long getCatgid() {
 		return catgid;
 	}
 
-	public void setCatgid(int catgid) {
+	public void setCatgid(long catgid) {
 		this.catgid = catgid;
 	}
 
@@ -78,28 +105,7 @@ public class CategoryBean implements Serializable {
 		return serialVersionUID;
 	}
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="catgid")
-        private int catgid;  
-	@Column(name="catgcd")
-        private String catgcd;
-	@Column(name="nm_eng")	
-	private String nm_eng;
-	
-	@Column(name="nm_kh")	
-	private String nm_kh;
-	
-	@Column(name="parent_cd")	
-	private String parent_cd;
-	@Column(name="lvl")	
-	private String lvl;
-	
-	@Column(name="pid")	
-	private String pid;
-	
-	@Column(name="usercd")	
-	private String usercd;
+
 	
 	
 }  

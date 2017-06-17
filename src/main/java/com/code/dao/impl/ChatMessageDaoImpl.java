@@ -25,7 +25,6 @@ public class ChatMessageDaoImpl extends JdbcDaoSupport implements ChatMessageRep
 	        setDataSource(dataSource);
 	 }
 	    //...
-	
 
 	@Override
 	public List<ChatMessage> getMessages(int messageIndex) {
