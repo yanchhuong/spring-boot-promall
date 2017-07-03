@@ -21,13 +21,19 @@ public class CategoryServiceImp implements ICategoryService{
 	@Override
 	public List<CategoryBean> findAll() {
 		// TODO Auto-generated method stub
-		return this.iCategory.findAll();
+		
+		return this.iCategory.findAlls();
 	}
-
+	
+	@Transactional(readOnly = false)
+	@Override
+	public void updateMenu(CategoryBean category) {
+		this.iCategory.updateMenu(category);
+		
+	}
 	@Override
 	public void saveCategoryBean(CategoryBean CategoryBean) {
-		// TODO Auto-generated method stub
-		
+		this.iCategory.saveAndFlush(CategoryBean);
 	}
 
 	@Override
@@ -38,10 +44,17 @@ public class CategoryServiceImp implements ICategoryService{
 
 	@Override
 	public void delete(long CategoryBeanId) {
-	this.iCategory.delete(CategoryBeanId);
+	   this.iCategory.delete(CategoryBeanId);
 		
 	}
-
+	@Override
+	public int getCatgidCount() {
+		return this.iCategory.getCatgidCount()+1;
+	}
+	@Override
+	public void removeMenuTree(int rootid) {
+		this.iCategory.removeMenuTree(rootid);
+	}
 	@Override
 	public List<CategoryBean> findByCategoryBeanFirstName(String CategoryBeanFirstName) {
 		// TODO Auto-generated method stub
@@ -78,5 +91,12 @@ public class CategoryServiceImp implements ICategoryService{
 		return null;
 	}
 
-	
+	@Override
+	public int getSeqCount(String lvl, long parentid) {
+		// TODO Auto-generated method stub
+		return this.iCategory.getSeqCount(lvl, parentid);
+	}
+
 }
+
+

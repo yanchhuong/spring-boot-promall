@@ -42,10 +42,6 @@
                 </fieldset>
             </div>
             
-            <div id="home" onclick="schView()">
-               <span>Home</span>
-            </div>
-            
 			<!-- //search_box_header -->
 
 			<!-- aleim -->

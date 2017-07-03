@@ -5,7 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+ <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+ <!-- default header name is X-CSRF-TOKEN -->
+ <meta name="_csrf" content="${_csrf.token}"/>
+ <meta name="_csrf_header" content="${_csrf.headerName}"/>
+   
 <%@include file="fragments/include_admin.jsp"%>
 <script src="/js/menu_control_001.js"></script>
 
@@ -28,6 +32,7 @@ top.ifrMainResize("N", 700);
 
 </head>
 <body>
+<img src='http://localhost:8080/upload_file/files/1498899552323' />
 <!-- content wrap -->
 		<div class="content">
 
@@ -41,12 +46,12 @@ top.ifrMainResize("N", 700);
 				<!-- //타이틀/버튼영역 -->
 
 				<!-- 안내 -->
-				<div class="pop_info_txt">
+				<!-- <div class="pop_info_txt">
 					<p style="padding:15px 0;">
 					* 이용기관의 부서를 등록하세요. 부서는 최대 8depth까지 구성이 가능합니다.<br>
 					* 부서등록은 관리자가 설정 가능하며, 관리자 지정 및 변경은 비즈플레이 환경설정에서 하실 수 있습니다.
 					</p>
-				</div>
+				</div> -->
 				<!-- //안내 -->
 
 				<!-- 상단 기능버튼 -->
@@ -81,7 +86,7 @@ top.ifrMainResize("N", 700);
 							</thead>
 						</table>
 					</div>
-					<div class="list_scroll" style="">
+					<div class="list_scroll" style="height: 655px;max-height: 545px;">
 						<div class="list_scroll_fix">
 							<table class="list_table" id="TBL_DATA">
 								<colgroup>
@@ -96,7 +101,7 @@ top.ifrMainResize("N", 700);
 									<tr>
 										<td class="t_center"></td>
 										<td class="t_left"><strong>Total</strong></td>
-										<td class="t_right"><strong>947</strong></td>
+										<td class="t_right" ><strong id="CNT"></strong></td>
 										<td class="t_left"></td>
 										<td class="t_left"></td>
 										<td class="t_left"></td>
@@ -514,6 +519,7 @@ top.ifrMainResize("N", 700);
 
 								</tbody>
 							</table>
+							<div>&nbsp;</div>
 						</div>
 					</div>
 				</div>
@@ -524,5 +530,6 @@ top.ifrMainResize("N", 700);
 		</div>
 		<!-- //content wrap -->
 
+<%@include file="fragments/html_iframes.jsp"%>
 </body>
 </html>

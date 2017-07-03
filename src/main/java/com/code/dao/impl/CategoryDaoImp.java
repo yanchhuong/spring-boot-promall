@@ -9,7 +9,7 @@ import com.code.dao.ICategory;
 import com.code.model.CategoryBean;
 
 @Repository
-public class CategoryDaoImp   {
+public class CategoryDaoImp {
 	
 	
 }

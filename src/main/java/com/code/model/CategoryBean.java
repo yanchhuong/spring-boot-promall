@@ -7,52 +7,82 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+import org.hibernate.annotations.NamedQuery;
+
+@Entity(name = "category")
+@NamedQuery(name = "CategoryBean.findAll", query="select catgid,nm_eng,nm_kh,parentid,lvl,pid,usercd,seq,regdate,vscatgid from category  order by catgid")
 @Table(name="category")
 public class CategoryBean implements Serializable { 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	
 	@Column(name="catgid")
-    
 	private long catgid;  
-	@Column(name="catgcd")
-        
-	private String catgcd;
+	
 	@Column(name="nm_eng")	
 	private String nm_eng;
 	
 	@Column(name="nm_kh")	
 	private String nm_kh;
 	
-	@Column(name="parent_cd")	
-	private String parent_cd;
+	@Column(name="parentid")	
+	private long parentid;
 	
 	@Column(name="lvl")	
 	private String lvl;
 	
 	@Column(name="pid")	
-	private String pid;
+	private long pid;
 	
 	@Column(name="usercd")	
 	private String usercd;
 	
+	@Column(name="seq")	
+	private int seq;
+	
+	@Column(name="regdate")	
+	private String regdate;
+	
+	@Column(name="vscatgid")	
+	private int vscatgid;
+	
+	
+	public int getVscatgid() {
+		return vscatgid;
+	}
+
+	public void setVscatgid(int vscatgid) {
+		this.vscatgid = vscatgid;
+	}
+
 	public long getCatgid() {
 		return catgid;
+	}
+
+	public int getSeq() {
+		return seq;
+	}
+
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+
+	public String getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+
+	public void setParentid(long parentid) {
+		this.parentid = parentid;
 	}
 
 	public void setCatgid(long catgid) {
 		this.catgid = catgid;
 	}
-
-	public String getCatgcd() {
-		return catgcd;
-	}
-
-	public void setCatgcd(String catgcd) {
-		this.catgcd = catgcd;
-	}
-
 	public String getNm_eng() {
 		return nm_eng;
 	}
@@ -69,14 +99,11 @@ public class CategoryBean implements Serializable {
 		this.nm_kh = nm_kh;
 	}
 
-	public String getParent_cd() {
-		return parent_cd;
+	public long getParentid() {
+		return parentid;
 	}
 
-	public void setParent_cd(String parent_cd) {
-		this.parent_cd = parent_cd;
-	}
-
+	
 	public String getLvl() {
 		return lvl;
 	}
@@ -85,11 +112,11 @@ public class CategoryBean implements Serializable {
 		this.lvl = lvl;
 	}
 
-	public String getPid() {
+	public long getPid() {
 		return pid;
 	}
 
-	public void setPid(String pid) {
+	public void setPid(long pid) {
 		this.pid = pid;
 	}
 
