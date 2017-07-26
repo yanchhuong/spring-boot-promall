@@ -128,7 +128,10 @@ body {
 #primary_nav_wrap ul ul a
 {
 	line-height:120%;
-	padding:10px 15px
+	padding:10px 15px;
+	aglign-text:left;
+	adjust-text:left;
+	
 }
 
 #primary_nav_wrap ul ul ul

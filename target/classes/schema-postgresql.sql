@@ -13,33 +13,33 @@ CREATE  TABLE IF NOT EXISTS users(
   FOREIGN KEY (username) REFERENCES users(username),
   PRIMARY KEY (rid)
   );
-  drop table category cascade;
-  
+
   CREATE TABLE if not EXISTS category (
   catgid SERIAL,
-  catgcd varchar(6) NOT NULL,
+  parentid integer NULL,
   nm_eng varchar(50) NOT NULL,
-  nm_kh varchar(50)     NULL,
-  parent_cd varchar(50) NOT NULL,
-  lvl integer ,
+  nm_kh varchar(50)  NULL,
+  lvl varchar (3) ,
   pid integer,
   usercd varchar(14),
-  PRIMARY KEY (catgcd)
+  regdate varchar(14),
+  seq integer,
+  vscatgid integer ,
+  PRIMARY KEY (catgid)
   );
 
-  
+  drop table filepicture;
   CREATE TABLE if not EXISTS filepicture (
-  fid SERIAL,
-  oriname  varchar(100) NOT NULL,
-  randname varchar(25)  NOT NULL,
-  date varchar (14)     not null,
-  extension varchar(4)  null,
-  ppath varchar(50)     null,
-  type boolean          null,
+  pid SERIAL,
+  orname  varchar(100) NOT NULL,
+  randname varchar(25)   NULL,
+  regdate varchar (14)   null,
+  type varchar(4)  null,
+  path varchar(50)     null,
   size integer          null,
-  prcd varchar(16)   not null,
-  username varchar(45)  not null,
-  PRIMARY KEY (fid)
+  prid varchar(16)      null,
+  username varchar(45)  null,
+  PRIMARY KEY (pid)
   );
   
   CREATE TABLE if not EXISTS products (

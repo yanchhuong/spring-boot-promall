@@ -16,7 +16,7 @@
 		<!-- header_inner top-bar-wrap -->
         <div class="header_inner">
 			<!-- logo -->
-            <h1 class="logo"><a href="#none"><img src="img/bg/bg_logo.png" alt="logo"></a></h1>
+            <h1 class="logo"><a href="javascrip:"><img src="img/bg/bg_logo.png" alt="logo"></a></h1>
 			<!-- //logo -->
 
 			<!-- button_menu_mobile -->
@@ -66,9 +66,9 @@
 						<dd id="sidebar_name">Please Login</dd>
 					</dl>
 					<div class="meminfo">
-						<a href="#none" class="sidebar_item"><em>Goods</em></a>
-						<a href="#none" class="sidebar_faverd"><em>stream</em></a>
-						<a href="#none" class="sidebar_following"><em>Follow</em></a>
+						<a href="javascrip:" class="sidebar_item"><em>Goods</em></a>
+						<a href="javascrip:" class="sidebar_faverd"><em>stream</em></a>
+						<a href="javascrip:" class="sidebar_following"><em>Follow</em></a>
 					</div>
 					<dl class="category">
 						<dt>
@@ -76,18 +76,18 @@
 							<button type="button" class="btn_upload"><span>Upload</span></button>
 						</dt>
 						<dd id="sidebar_catagory_list">
-							<a href="#none" class="ctg_01">Women's clothing</a>
-							<a href="#none" class="ctg_02">Men's clothing</a>
-							<a href="#none" class="ctg_03">Fashion goods</a>
-							<a href="#none" class="ctg_04">Beauty / Beauty</a>
-							<a href="#none" class="ctg_05">Baby / birth</a>
-							<a href="#none" class="ctg_06">sports / Leisure</a>
-							<a href="#none" class="ctg_07">digital / Appliances</a>
-							<a href="#none" class="ctg_08">Books / tickets / hobbies / pets</a>
-							<a href="#none" class="etc_01">Life / stationery / Furniture / Food</a>
-							<a href="#none" class="etc_02">Vehicles / Motorcycles</a>
-							<a href="#none" class="etc_03">More</a>
-							<a href="#none" class="etc_04">stargaz</a>
+							<a href="javascrip:" class="ctg_01">Women's clothing</a>
+							<a href="javascrip:" class="ctg_02">Men's clothing</a>
+							<a href="javascrip:" class="ctg_03">Fashion goods</a>
+							<a href="javascrip:" class="ctg_04">Beauty / Beauty</a>
+							<a href="javascrip:" class="ctg_05">Baby / birth</a>
+							<a href="javascrip:" class="ctg_06">sports / Leisure</a>
+							<a href="javascrip:" class="ctg_07">digital / Appliances</a>
+							<a href="javascrip:" class="ctg_08">Books / tickets / hobbies / pets</a>
+							<a href="javascrip:" class="etc_01">Life / stationery / Furniture / Food</a>
+							<a href="javascrip:" class="etc_02">Vehicles / Motorcycles</a>
+							<a href="javascrip:" class="etc_03">More</a>
+							<a href="javascrip:" class="etc_04">stargaz</a>
 						</dd>
 					</dl>
 					<div class="btncenter">
@@ -138,8 +138,8 @@
 								<ul class="items_foot_opts">
 									<li class="ico_wishlist"><span>999</span></li>
 									<li class="ico_view"><span>99999</span></li>
-									<li class="ico_report"><a href="#none">Report</a></li>
-									<li class="ico_fbshare"><a href="#none"></a></li>
+									<li class="ico_report"><a href="javascrip:">Report</a></li>
+									<li class="ico_fbshare"><a href="javascrip:"></a></li>
 									<li class="ico_time"><span>66:66 min PM</span></li>
 								</ul>
 							</div>
@@ -152,8 +152,8 @@
 						<!-- tab -->
 						<div class="tabType01 mgb10">
 							<ul>
-								<li class="on"><a href="#none">Products Detail</a></li>
-								<li><a href="#none">Video</a></li>
+								<li class="on"><a href="javascrip:">Products Detail</a></li>
+								<li><a href="javascrip:">Video</a></li>
 							</ul>
 						</div>
 						<!-- //tab -->
@@ -200,8 +200,8 @@
 							</div>
 							<div class="comment_opt">
 								<ul class="layer_comm_opt">
-									<li class="comm_delete"><a href="#none">Delete</a></li>
-									<li class="comm_edit"><a href="#none">Edit</a></li>
+									<li class="comm_delete"><a href="javascrip:">Delete</a></li>
+									<li class="comm_edit"><a href="javascrip:">Edit</a></li>
 									<li class="comm_date"><span>12:60 min AM</span></li>
 								</ul>
 							</div>
@@ -216,8 +216,8 @@
 							</div>
 							<div class="comment_opt">
 								<ul class="layer_comm_opt">
-									<li class="comm_delete"><a href="#none">Delete</a></li>
-									<li class="comm_edit"><a href="#none">Edit</a></li>
+									<li class="comm_delete"><a href="javascrip:">Delete</a></li>
+									<li class="comm_edit"><a href="javascrip:">Edit</a></li>
 									<li class="comm_date"><span>12:60 min AM</span></li>
 								</ul>
 							</div>
@@ -232,8 +232,8 @@
 							</div>
 							<div class="comment_opt">
 								<ul class="layer_comm_opt">
-									<li class="comm_delete"><a href="#none">Delete</a></li>
-									<li class="comm_edit"><a href="#none">Edit</a></li>
+									<li class="comm_delete"><a href="javascrip:">Delete</a></li>
+									<li class="comm_edit"><a href="javascrip:">Edit</a></li>
 									<li class="comm_date"><span>12:60 min AM</span></li>
 								</ul>
 							</div>
@@ -244,7 +244,7 @@
 								<div class="field_comment">
 									<textarea name="" placeholder="Your comment" style="height:31px;"></textarea>
 									<div class="btn_wrap mgt5 tar">
-										<a href="#none" class="btn_b1">Post</a>
+										<a href="javascrip:" class="btn_b1">Post</a>
 									</div>
 								</div>
 							</div>
@@ -255,8 +255,8 @@
 								<div>
 									<textarea name="" placeholder="Your comment">It is the best Products for me!!!!It is the best Products for me!!!!It is the best Products for me!!!!It is the best Products for me!!!!It is the best Products for me!!!!It is the best Products for me!!!!</textarea>
 									<div class="btn_wrap mgt5 tar" style="">
-										<a href="#none" class="btn_b1">Save</a>
-										<a href="#none" class="btn_wh1">Cancel</a>
+										<a href="javascrip:" class="btn_b1">Save</a>
+										<a href="javascrip:" class="btn_wh1">Cancel</a>
 									</div>
 								</div>
 							</div>
@@ -276,7 +276,7 @@
 								<div class="field_comment">
 									<textarea name="" placeholder="Your comment" style="height:31px;"></textarea>
 									<div class="btn_wrap mgt5 tar">
-										<a href="#none" class="btn_b1">Post</a>
+										<a href="javascrip:" class="btn_b1">Post</a>
 									</div>
 								</div>
 							</div>
@@ -287,8 +287,8 @@
 								<div>
 									<textarea name="" placeholder="Your comment">It is the best Products for me!!!!It is the best Products for me!!!!It is the best Products for me!!!!It is the best Products for me!!!!It is the best Products for me!!!!It is the best Products for me!!!!</textarea>
 									<div class="btn_wrap mgt5 tar" style="">
-										<a href="#none" class="btn_b1">Save</a>
-										<a href="#none" class="btn_wh1">Cancel</a>
+										<a href="javascrip:" class="btn_b1">Save</a>
+										<a href="javascrip:" class="btn_wh1">Cancel</a>
 									</div>
 								</div>
 							</div>
@@ -299,15 +299,15 @@
 
 				<!-- pagination -->
 				<div class="pagination mgb15">
-					<a href="#none" class="pag_prev">next</a>
+					<a href="javascrip:" class="pag_prev">next</a>
 					<span>
-						<a href="#none" class="on">1</a>
-						<a href="#none">2</a>
-						<a href="#none">3</a>
-						<a href="#none">4</a>
-						<a href="#none">5</a>
+						<a href="javascrip:" class="on">1</a>
+						<a href="javascrip:">2</a>
+						<a href="javascrip:">3</a>
+						<a href="javascrip:">4</a>
+						<a href="javascrip:">5</a>
 					</span>
-					<a href="#none" class="pag_next">next</a>
+					<a href="javascrip:" class="pag_next">next</a>
 				</div>
 				<!-- //pagination -->
 
@@ -315,7 +315,7 @@
 				<div class="sellerwrap">
 					<div class="seller_inner">
 						<div class="sellershop">
-							<a href="#none">
+							<a href="javascrip:">
 								<dl>
 									<dt>
 										<p>Shoping Online<span>'s shop</span></p>
@@ -340,14 +340,14 @@
 	
 						<!-- button_wrap -->
 						<div class="btn_wrap">
-							<a href="#none" class="btn_visitshop">Visit Shop</a>
+							<a href="javascrip:" class="btn_visitshop">Visit Shop</a>
 						</div>
 						<!-- //button_wrap -->
 	
 						<!-- button_wrap -->
 						<div class="btn_wrap mgt15">
-							<a href="#none" class="btn_follow">Follow</a>
-							<a href="#none" class="btn_chat">Chat</a>
+							<a href="javascrip:" class="btn_follow">Follow</a>
+							<a href="javascrip:" class="btn_chat">Chat</a>
 						</div>
 						<!-- //button_wrap -->
 					</div>
@@ -368,13 +368,13 @@
 				<div class="related_prod">
 					<div class="tit_rel_prod">
 						<h3 class="tit_relprod_h3">Related Products</h3>
-						<a href="#none" class="btn_recollape">View More</a>
+						<a href="javascrip:" class="btn_recollape">View More</a>
 					</div>
 					
 					<!-- goods_list -->
 					<ul class="goodslist_detail">
 						<li>
-							<a href="#none" class="thumb">
+							<a href="javascrip:" class="thumb">
 								<img src="img/products/prod_01.jpg" alt="" class="thumb loaded">
 								<p class="txtinfo">
 									<em>Adidas Three Line One Man Line One Man</em>
@@ -385,22 +385,22 @@
 							<div class="items_foot">
 								<div class="flt">
 									<ul class="items_foot_opt">
-										<li class="ico_local"><a href="#none"></a></li>
-										<li class="ico_save"><a href="#none"></a></li>
-										<li class="ico_fb"><a href="#none"></a></li>
+										<li class="ico_local"><a href="javascrip:"></a></li>
+										<li class="ico_save"><a href="javascrip:"></a></li>
+										<li class="ico_fb"><a href="javascrip:"></a></li>
 									</ul>
 								</div>
 								
 								<div class="frl">
 									<ul class="items_foot_view">
-										<li class="ico_local"><a href="#none">999</a></li>
-										<li class="ico_atlist"><a href="#none">999</a></li>
+										<li class="ico_local"><a href="javascrip:">999</a></li>
+										<li class="ico_atlist"><a href="javascrip:">999</a></li>
 									</ul>
 								</div>
 							</div>
 						</li>
 						<li>
-							<a href="#none" class="thumb">
+							<a href="javascrip:" class="thumb">
 								<span class="badge icon_plus">Plus</span>
 								<img src="img/products/prod_02.jpg" alt="" class="thumb loaded">
 								<p class="txtinfo">
@@ -412,22 +412,22 @@
 							<div class="items_foot">
 								<div class="flt">
 									<ul class="items_foot_opt">
-										<li class="ico_local"><a href="#none"></a></li>
-										<li class="ico_save"><a href="#none"></a></li>
-										<li class="ico_fb"><a href="#none"></a></li>
+										<li class="ico_local"><a href="javascrip:"></a></li>
+										<li class="ico_save"><a href="javascrip:"></a></li>
+										<li class="ico_fb"><a href="javascrip:"></a></li>
 									</ul>
 								</div>
 								
 								<div class="frl">
 									<ul class="items_foot_view">
-										<li class="ico_local"><a href="#none">999</a></li>
-										<li class="ico_atlist"><a href="#none">999</a></li>
+										<li class="ico_local"><a href="javascrip:">999</a></li>
+										<li class="ico_atlist"><a href="javascrip:">999</a></li>
 									</ul>
 								</div>
 							</div>
 						</li>
 						<li>
-							<a href="#none" class="thumb">
+							<a href="javascrip:" class="thumb">
 								<img src="img/products/prod_03.jpg" alt="" class="thumb loaded">
 								<p class="txtinfo">
 									<em>Mmolded horn nt</em>
@@ -437,22 +437,22 @@
 							<div class="items_foot">
 								<div class="flt">
 									<ul class="items_foot_opt">
-										<li class="ico_local"><a href="#none"></a></li>
-										<li class="ico_save"><a href="#none"></a></li>
-										<li class="ico_fb"><a href="#none"></a></li>
+										<li class="ico_local"><a href="javascrip:"></a></li>
+										<li class="ico_save"><a href="javascrip:"></a></li>
+										<li class="ico_fb"><a href="javascrip:"></a></li>
 									</ul>
 								</div>
 								
 								<div class="frl">
 									<ul class="items_foot_view">
-										<li class="ico_local"><a href="#none">999</a></li>
-										<li class="ico_atlist"><a href="#none">999</a></li>
+										<li class="ico_local"><a href="javascrip:">999</a></li>
+										<li class="ico_atlist"><a href="javascrip:">999</a></li>
 									</ul>
 								</div>
 							</div>
 						</li>
 						<li>
-							<a href="#none" class="thumb">
+							<a href="javascrip:" class="thumb">
 								<span class="badge icon_plus">Plus</span>
 								<img src="img/products/prod_07.jpg" alt="" class="thumb loaded">
 								<p class="txtinfo">
@@ -463,22 +463,22 @@
 							<div class="items_foot">
 								<div class="flt">
 									<ul class="items_foot_opt">
-										<li class="ico_local"><a href="#none"></a></li>
-										<li class="ico_save"><a href="#none"></a></li>
-										<li class="ico_fb"><a href="#none"></a></li>
+										<li class="ico_local"><a href="javascrip:"></a></li>
+										<li class="ico_save"><a href="javascrip:"></a></li>
+										<li class="ico_fb"><a href="javascrip:"></a></li>
 									</ul>
 								</div>
 								
 								<div class="frl">
 									<ul class="items_foot_view">
-										<li class="ico_local"><a href="#none">999</a></li>
-										<li class="ico_atlist"><a href="#none">999</a></li>
+										<li class="ico_local"><a href="javascrip:">999</a></li>
+										<li class="ico_atlist"><a href="javascrip:">999</a></li>
 									</ul>
 								</div>
 							</div>
 						</li>
 						<li>
-							<a href="#none" class="thumb">
+							<a href="javascrip:" class="thumb">
 								<span class="badge icon_plus">Plus</span>
 							<img src="img/products/prod_08.jpg" alt="" class="thumb loaded">
 								<p class="txtinfo">
@@ -490,22 +490,22 @@
 							<div class="items_foot">
 								<div class="flt">
 									<ul class="items_foot_opt">
-										<li class="ico_local"><a href="#none"></a></li>
-										<li class="ico_save"><a href="#none"></a></li>
-										<li class="ico_fb"><a href="#none"></a></li>
+										<li class="ico_local"><a href="javascrip:"></a></li>
+										<li class="ico_save"><a href="javascrip:"></a></li>
+										<li class="ico_fb"><a href="javascrip:"></a></li>
 									</ul>
 								</div>
 								
 								<div class="frl">
 									<ul class="items_foot_view">
-										<li class="ico_local"><a href="#none">999</a></li>
-										<li class="ico_atlist"><a href="#none">999</a></li>
+										<li class="ico_local"><a href="javascrip:">999</a></li>
+										<li class="ico_atlist"><a href="javascrip:">999</a></li>
 									</ul>
 								</div>
 							</div>
 						</li>
 						<li>
-							<a href="#none" class="thumb">
+							<a href="javascrip:" class="thumb">
 								<span class="badge icon_plus">Plus</span>
 							<img src="img/products/prod_09.jpg" alt="" class="thumb loaded">
 								<p class="txtinfo">
@@ -516,22 +516,22 @@
 							<div class="items_foot">
 								<div class="flt">
 									<ul class="items_foot_opt">
-										<li class="ico_local"><a href="#none"></a></li>
-										<li class="ico_save"><a href="#none"></a></li>
-										<li class="ico_fb"><a href="#none"></a></li>
+										<li class="ico_local"><a href="javascrip:"></a></li>
+										<li class="ico_save"><a href="javascrip:"></a></li>
+										<li class="ico_fb"><a href="javascrip:"></a></li>
 									</ul>
 								</div>
 								
 								<div class="frl">
 									<ul class="items_foot_view">
-										<li class="ico_local"><a href="#none">999</a></li>
-										<li class="ico_atlist"><a href="#none">999</a></li>
+										<li class="ico_local"><a href="javascrip:">999</a></li>
+										<li class="ico_atlist"><a href="javascrip:">999</a></li>
 									</ul>
 								</div>
 							</div>
 						</li>
 						<li>
-							<a href="#none" class="thumb">
+							<a href="javascrip:" class="thumb">
 								<span class="badge icon_plus">Plus</span>
 								<img src="img/products/prod_10.jpg" alt="" class="thumb loaded">
 								<p class="txtinfo">
@@ -542,22 +542,22 @@
 							<div class="items_foot">
 								<div class="flt">
 									<ul class="items_foot_opt">
-										<li class="ico_local"><a href="#none"></a></li>
-										<li class="ico_save"><a href="#none"></a></li>
-										<li class="ico_fb"><a href="#none"></a></li>
+										<li class="ico_local"><a href="javascrip:"></a></li>
+										<li class="ico_save"><a href="javascrip:"></a></li>
+										<li class="ico_fb"><a href="javascrip:"></a></li>
 									</ul>
 								</div>
 								
 								<div class="frl">
 									<ul class="items_foot_view">
-										<li class="ico_local"><a href="#none">999</a></li>
-										<li class="ico_atlist"><a href="#none">999</a></li>
+										<li class="ico_local"><a href="javascrip:">999</a></li>
+										<li class="ico_atlist"><a href="javascrip:">999</a></li>
 									</ul>
 								</div>
 							</div>
 						</li>
 						<li>
-							<a href="#none" class="thumb">
+							<a href="javascrip:" class="thumb">
 								<span class="badge icon_plus">Plus</span>
 								<img src="img/products/prod_11.jpg" alt="" class="thumb loaded">
 								<p class="txtinfo">
@@ -568,22 +568,22 @@
 							<div class="items_foot">
 								<div class="flt">
 									<ul class="items_foot_opt">
-										<li class="ico_local"><a href="#none"></a></li>
-										<li class="ico_save"><a href="#none"></a></li>
-										<li class="ico_fb"><a href="#none"></a></li>
+										<li class="ico_local"><a href="javascrip:"></a></li>
+										<li class="ico_save"><a href="javascrip:"></a></li>
+										<li class="ico_fb"><a href="javascrip:"></a></li>
 									</ul>
 								</div>
 	
 								<div class="frl">
 									<ul class="items_foot_view">
-										<li class="ico_local"><a href="#none">999</a></li>
-										<li class="ico_atlist"><a href="#none">999</a></li>
+										<li class="ico_local"><a href="javascrip:">999</a></li>
+										<li class="ico_atlist"><a href="javascrip:">999</a></li>
 									</ul>
 								</div>
 							</div>
 						</li>
 						<li>
-							<a href="#none" class="thumb">
+							<a href="javascrip:" class="thumb">
 								<span class="badge icon_plus">Plus</span>
 								<img src="img/products/prod_12.jpg" alt="" class="thumb loaded">
 								<p class="txtinfo">
@@ -594,16 +594,16 @@
 							<div class="items_foot">
 								<div class="flt">
 									<ul class="items_foot_opt">
-										<li class="ico_local"><a href="#none"></a></li>
-										<li class="ico_save"><a href="#none"></a></li>
-										<li class="ico_fb"><a href="#none"></a></li>
+										<li class="ico_local"><a href="javascrip:"></a></li>
+										<li class="ico_save"><a href="javascrip:"></a></li>
+										<li class="ico_fb"><a href="javascrip:"></a></li>
 									</ul>
 								</div>
 								
 								<div class="frl">
 									<ul class="items_foot_view">
-										<li class="ico_local"><a href="#none">999</a></li>
-										<li class="ico_atlist"><a href="#none">999</a></li>
+										<li class="ico_local"><a href="javascrip:">999</a></li>
+										<li class="ico_atlist"><a href="javascrip:">999</a></li>
 									</ul>
 								</div>
 							</div>
@@ -622,10 +622,10 @@
 	<footer>
 		<div class="footerwrap">
 			<div class="botmenu">
-				<a href="#none">Information</a>
-				<a href="#none">Terms and Conditions</a>
-				<a href="#none">Privacy Policy</a>
-				<a href="#none">Terms of Service</a>
+				<a href="javascrip:">Information</a>
+				<a href="javascrip:">Terms and Conditions</a>
+				<a href="javascrip:">Privacy Policy</a>
+				<a href="javascrip:">Terms of Service</a>
 			</div>
 			<address>
 				<p>

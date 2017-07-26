@@ -44,7 +44,15 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click", "#btaddImg", function(){
-		wehrm.popup.openPopup("popup_uploadimg_002");
+		var input={};
+		input["randname"]= $(this).parents("tr").find("#randname").val();
+		input["catgid"]=  $(this).parents("tr").find("#catgid").val();
+		input["pid"]=     $(this).parents("tr").find("#pid").val();
+		
+	//	wehrm.popup.openPopup("popup_uploadimg_002");
+		wehrm.popup.openPopup("popup_uploadimg_002",input, function(data){
+			callbackFn(data);
+    	});
 	});
 	//add main
 	$(document).on("click", "#addMain",function(e){
@@ -73,7 +81,6 @@ $(document).ready(function(){
 		$(this).parent().find('.depset_layer').show();
    });
 });
-
 menu_control_001.init=function(){	
 	
 }
@@ -102,6 +109,9 @@ menu_control_001.listMenu=function(){
     			html += '           <input type="hidden" id= "usercd" value="'+v.usercd +'"/> ';
     			html += '           <input type="hidden" id= "parentid" value="'+v.parentid +'"/> ';
     			html += '           <input type="hidden" id= "vscatgid" value="'+v.vscatgid +'"/> ';
+    			html += '           <input type="hidden" id= "fullengname" value="'+v.fullengname +'"/> ';
+    			html += '           <input type="hidden" id= "fullkhname" value="'+v.fullkhname +'"/> ';
+    			html += '           <input type="hidden" id= "randname" value="'+v.randname +'"/> ';
 				html += '			<!-- layer popup -->									';
 				html += '			<div class="tree_layerpop" style="display:none;">		';
     			html += '				<ul>												';
@@ -137,7 +147,7 @@ menu_control_001.listMenu=function(){
     			html += '	</tr>                                                                    ';
           })
           
-          if(dat.length == 0){
+          if(dat.OUT_REC.length == 0){
         	  var  html =' <tr>                                                                   '; 
         	       html+=' <td class="t_center brd_r">								              ';
         	    /* edithtml+='	<div class="ly_po">									              ';
@@ -164,7 +174,7 @@ menu_control_001.listMenu=function(){
         	       html+='	     </div>										                    ';
         	       html+='	 </td>											                    ';
         	       html+=' <td class="t_right"><a class="txt_d" id="parentid"></a></td>         ';
-        	       html+=' <td class="t_left"><a class="txt_d off" id="lvl">1</a></td>	        ';
+        	       html+=' <td class="t_left"><a class="txt_d off" id="lvl" value="1">1</a></td>	        ';
         	       html+=' <td class="t_left"><a class="txt_d off" id="usercd"></a></td>	    ';
         	       html+=' <td class="t_center">									            ';
         	       html+='	<div style="position:relative;">							        ';
@@ -200,9 +210,7 @@ menu_control_001.listMenu=function(){
 };
 menu_control_001.editTrHtml = function(input){
 	 var edithtml='';
-	 var parentid='';
-	 var catgid = 'C' + Math.floor(Math.random() * 104554);
-	 var radom= Math.floor(Math.random() * 104554);
+	
 		if(input.lvl!='1'){
 			parentid = input.parentid ;
 		}
@@ -267,25 +275,20 @@ menu_control_001.updateMenu = function(obj){
 menu_control_001.addMenu= function(data,type){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken = $("meta[name='_csrf']").attr("content");
-	var urls='';
 	var input={};
-	if(type!=1){
-		urls = '/category/save';
-	}else{
-		urls = '/category/update';
+	if(type ==1){
 		input["catgid"]      = $(data).parents("tr").find('#catgid').val();
 	}
 	input["vscatgid"]    = $(data).parents("tr").find('#vscatgid').val();
 	input["nm_eng"]      = $(data).parents("tr").find('#txtnmeng').val();
 	input["nm_kh"]       = $(data).parents("tr").find('#txtnmkh').val();
-	input["lvl"]         = $(data).parents("tr").find('#lvl').text();
+	input["lvl"]         = $(data).parents("tr").find('#lvl').val();
 	input["parentid"]    = $(data).parents("tr").find('#parentid').text();
 	input["pid"]         = '';
 	input["usercd"]      = $(data).parents("tr").find('#usercd').text();
-	console.log(input);
 	 $.ajax({
 	        type   : 'POST',
-	    	url    :  urls ,
+	    	url    : '/category/save',
 	    	cache: false,
             dataType: 'json',
 	    	contentType: 'application/json',
@@ -295,7 +298,6 @@ menu_control_001.addMenu= function(data,type){
 	        },
 	        data:JSON.stringify(input),
 	    	success :function(result){
-	    		console.log(result);
 	    		menu_control_001.listMenu();
 	    	 }
 		   })
@@ -305,7 +307,6 @@ menu_control_001.removeMenuTree= function(data){
 	var csrfToken = $("meta[name='_csrf']").attr("content");*/
 	var input={};
 	input["catgid"]      = $(data).parents("tr").find('#catgid').val();
-	console.log(input);
 	 $.ajax({
 	        type   : 'GET',
 	    	url    : 'category/remove',
@@ -323,13 +324,18 @@ menu_control_001.removeMenuTree= function(data){
 		   })
 	
 };
-
 //sort json
 function sortByKey(array, key) {
 return array.sort(function(a, b) {
     var x = a[key]; var y = b[key];
     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 });
+}
+//call back
+function callbackFn(data){
+	if(data.IS_TRUE){
+		menu_control_001.listMenu();
+	}	
 }
 
 //empl_0004_01.js

@@ -5,7 +5,7 @@
   <title>Multi Step Form with Progress Bar using jQuery and CSS3</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
       <link rel='stylesheet' href='/css/post.css'>
-      <script src="/js/post_control_001.js"></script>
+     
 </head>
 <body>
  <!-- multistep form -->
@@ -21,22 +21,22 @@
   <fieldset id='form0'>
     <h2 class='fs-title'>Select category </h2>
     <h3 class='fs-subtitle'>This is step 1</h3>
-	<nav id='primary_nav_wrap'>
+<nav id='primary_nav_wrap'>
 <ul>
-  <li class='current-menu-item'><a href='' class='next'>Vehicle</a></li>
-  <li class='current-menu-item'><a href='#'> Buy and Sell</a>
-    <ul>
-      <li class='next'><a href='#' class='next'>Phone Tablet</a></li>
-      <li class='next'><a href='#' class='next'>Phone Accessary</a></li>
-      <li class='next'><a href='#' class='next'>Phone number</a></li>
-      <li class='next'><a href='#'>Computers</a>
-        <ul>
-          <li class='next'><a href='#'  class='next'>Deep Menu 1</a></li>
-          <li class='next'><a href='#'  class='next'>Deep Menu 2</a></li>
-        </ul>
-      </li>
-      <li class='next'><a  class='next' href='#'>Sub Menu 5</a></li>
-    </ul>
+ <li class='current-menu-item'><a href='' class='next'>Vehicle</a></li>
+   	 <li class='current-menu-item'><a href='#'> Buy and Sell</a>
+      <ul>
+      	 <li class='next'><a href='#' class='next'>Phone Tablet</a></li>
+      	 <li class='next'><a href='#' class='next'>Phone Accessary</a></li>
+      	 <li class='next'><a href='#' class='next'>Phone number</a></li>
+      	 <li class='next'><a href='#'>Computers</a>
+         <ul>
+           <li class='next'><a href='#'  class='next'>Deep Menu 1</a></li>
+           <li class='next'><a href='#'  class='next'>Deep Menu 2</a></li>
+         </ul>
+         </li>
+         <li class='next'><a  class='next' href='#'>Sub Menu 5</a></li>
+     </ul>
   </li>
   <li class='current-menu-item'><a href='#'>House & Land</a>
     <ul>
@@ -100,7 +100,7 @@
   <li class='current-menu-item'><a href='#'>Menu 5</a></li>
   <li class='current-menu-item'><a href='#'>Menu 6</a></li>
   </ul>
-  </nav>
+</nav>
 
   </fieldset>
   <fieldset id='form1'>
@@ -186,8 +186,9 @@
   </fieldset>
   
 </form>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+      <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+      <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+      <script src="/js/post_control_001.js"></script>
 
         <script>
         $(function() {

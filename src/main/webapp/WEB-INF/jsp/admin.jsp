@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <head>
 <title>Admin Control</title>
@@ -10,7 +8,7 @@ $(function(){
 	// Invoke the plugin
 	$('input, textarea').placeholder({customClass:'my-placeholder'});
 });
-function ifrMainResize(ani_yn, height1) {
+ function ifrMainResize(ani_yn, height1) {
 	if (typeof (height1) != "number") {
 		height1 = 20;
 	}
@@ -20,25 +18,24 @@ function ifrMainResize(ani_yn, height1) {
 			scrollTop : 0
 		}, 0);
 	}
-}
+} 
 </script>
 </head>
 <body class="lnb_bg">
 
 <div class="wrap">
-
 	<!-- (공통)header -->
 	<div class="cmd_header type2" id="cmd_header"><!-- [D] type1(메인), type2(업무) -->
 		<div class="cmd_header_inner">
 			<div class="cmd_lft">
 				<h1>
-					<a href="#none">
+					<a href="javascrip:">
 						<img src="../img/cmd_header/app_logo_type2.png" alt="" class="logo_resize">
 						<span id="" class="">Admin Control</span>
 					</a>
 				</h1>
 				<h3>
-					<a href="#none"><span id="" class=""></span></a>
+					<a href="javascrip:"><span id="" class=""></span></a>
 				</h3>
 			</div>
 		</div>
@@ -58,17 +55,17 @@ function ifrMainResize(ani_yn, height1) {
 					<div class="user_r_side">
 						<!--  select -->
 						<div class="select_com">
-							<div class="combo"><span>Setting</span><a href="#none"><img src="../img/btn/combo_link.png" alt="combo link"></a></div>
+							<div class="combo"><span>Setting</span><a href="javascrip:"><img src="../img/btn/combo_link.png" alt="combo link"></a></div>
 							<ul style="display:none;">
-								<li><a href="#none">Menu</a></li>
-								<li><a href="#none" >User</a></li>
-								<li><a href="#none">FeedBack</a></li>
+								<li><a href="javascrip:">Menu</a></li>
+								<li><a href="javascrip:" >User</a></li>
+								<li><a href="javascrip:">FeedBack</a></li>
 							</ul>
 						</div>
 						<!-- //select -->
-						<!-- <div class="select_com">
+						<div class="select_com">
 							<div class="combo_no"><span>웹케시(주)웹케시(주)웹케시(주)</span></div>
-						</div> -->
+						</div>
 						<p><strong>Admin</strong> User</p>
 					</div>
 				</div>
@@ -81,13 +78,13 @@ function ifrMainResize(ani_yn, height1) {
 				<!--company list -->
 				<div class="com_list">
 					<div class="com_item">
-						<div class="group_name ic_lnb_cmd ic_m6_1 on"><a href="#none">Controll Panel</a></div><!-- 활성화클래스 on -->
+						<div class="group_name ic_lnb_cmd ic_m6_1 on"><a href="javascrip:">Controll Panel</a></div><!-- 활성화클래스 on -->
 						<div class="group_name2">
 							<ul>
-								<li><a href="#none" id="cmenu" >Menu</a></li>
-								<li><a href="#none" id="cuser"  >User</a></li><!-- (add)20170309 -->
-								<li><a href="#none" id="cmessage">Message</a></li>
-								<li><a href="#none" id="cfeedback">Feedback</a></li>
+								<li><a href="javascrip:" id="cmenu" >Menu</a></li>
+								<li><a href="javascrip:" id="cuser"  >User</a></li><!-- (add)20170309 -->
+								<li><a href="javascrip:" id="cmessage">Message</a></li>
+								<li><a href="javascrip:" id="cfeedback">Feedback</a></li>
 							</ul>
 						</div>
 					</div>
@@ -99,7 +96,7 @@ function ifrMainResize(ani_yn, height1) {
 		<!-- //lnb box -->
 		
 		<iframe id="ifr_content" name="ifr_content" src="cmenu" 
-                    style="width:100%;min-width:600px;height:auto;" 
+                    style="width:100%;min-width:600px;height:auto" 
                     scrolling="auto" frameborder="0" marginheight="0" marginwidth="0" >
        	</iframe> 
 
@@ -118,8 +115,8 @@ function ifrMainResize(ani_yn, height1) {
 			</div>
 			<div class="cmd_rft">
 				<ul>
-					<li><a href="#none" id="">개인정보취급방침</a></li>
-					<li><a href="#none" id="">이용약관</a></li>
+					<li><a href="javascrip:" id=""></a></li>
+					<li><a href="javascrip:" id=""></a></li>
 					<li><span>고객센터 : 1566-0000</span></li>
 				</ul>
 			</div>

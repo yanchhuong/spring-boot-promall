@@ -104,15 +104,20 @@ body {
   cursor: pointer;
   z-index: 10;
 }
-.imgSet{
-	width: 500px;
-    height: 309px;
-    position: absolute;
-    left: 0;
-    top: -9px;;
-}
-	
 
+.imageUploadForm .imgFrame {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 300px;
+  cursor: pointer;
+  z-index: 10;
+}
+.imageUploadForm .imgFrame img {
+	max-height: 100%;
+    width: 100%;
+	left:0%;
+}
 
 .imageUploadForm.loading .helpText {
   font-size: 0;
@@ -126,11 +131,18 @@ body {
   display: none;
 }
 .imageUploadForm.loading .uploadedImg {
-  position: absolute;
+/*   position: absolute;
   bottom: 12.5%;
   left: 12.5%;
   width: 75%;
-  height: 65%;
+  height: 65%; */
+  
+    position: absolute;
+  top: 0;
+  width: 100%;
+  height: 300px;
+  cursor: pointer;
+  z-index: 10;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -139,6 +151,7 @@ body {
   -o-transition: opacity ease-out;
   -webkit-transition: opacity ease-out;
   transition: opacity ease-out;
+  
 }
 .imageUploadForm.loading .unveil {
   position: absolute;

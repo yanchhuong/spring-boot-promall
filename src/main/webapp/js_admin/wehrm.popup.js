@@ -73,7 +73,7 @@ wehrm.popup.openPopupDvsnList = function(wsvcId, input, callbackFn, topHeight) {
 	
 	var param = "";
 	if(typeof input != "undefined"){
-		param =  "?input=" + encodeURIComponent(jex.toStr(input));
+		param =  "?input=" + encodeURIComponent(toStr(input));
 	}
 	
 	
@@ -118,7 +118,7 @@ wehrm.popup.openPopup = function(wsvcId, input, callbackFn, topHeight) {
 	
 	var param = "";
 	if(typeof input != "undefined"){
-		param =  "?input=" + encodeURIComponent(jex.toStr(input));
+		param =  "?input=" + encodeURIComponent(toStr(input));
 	}
 	
 	
@@ -195,7 +195,7 @@ wehrm.popup.openPopup3 = function(wsvcId, input, callbackFn, topHeight) {
 	
 	var param = "";
 	if(typeof input != "undefined"){
-		param =  "?input=" + encodeURIComponent(jex.toStr(input));
+		param =  "?input=" + encodeURIComponent(toStr(input));
 	}
 	
 	
@@ -403,7 +403,10 @@ wehrm.popup.createFormLvl1 = function(param, action, formId, target) {
 	return $form;
 };
 
-
-
+function toStr(dat)	{ 
+if (typeof(JSON.stringify)!="function") 
+     throw new JexSysException("json2.js가 inculde가 되어 있지 않습니다."); 
+return JSON.stringify(dat);
+};
 
 

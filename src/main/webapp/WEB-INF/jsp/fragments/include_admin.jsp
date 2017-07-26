@@ -20,12 +20,21 @@
    <link rel="stylesheet" type="text/css" href="../../css_admin/idx_content.css" media="all">
    <link rel="stylesheet" type="text/css" href="../../css_admin/content.css" media="all">
     
+    
   <!--Jquery files  -->
     <script type="text/javascript" src="../../js_admin/1.10.2.jquery.min.js?<%=_localDatetim%>"></script>
     <script type="text/javascript" src="../../js_admin/common.js?<%=_localDatetim%>"></script>
     <script type="text/javascript" src="../../js_admin/jquery.placeholder.min.js?<%=_localDatetim%>"></script>
-    
-    <!-- popup -->
+    <script type="text/javascript" src="../../js_admin/jquery.tmpl.min1.js?<%=_localDatetim%>"></script>
+  <!-- Pagination -->
+    <script type="text/javascript" src="../../js_admin/jquery.simplePagination.js?<%=_localDatetim%>"></script>
+   
+  <!-- datepicker -->
+   <link rel="stylesheet" type="text/css" href="../../css_admin/jquery-ui.css" media="all">
+   <script type="text/javascript" src="../../js_admin/jquery-ui.js?<%=_localDatetim%>"></script>
+   <script type="text/javascript" src="../../js_admin/wehrm.ui.js?<%=_localDatetim%>"></script>
+  
+  <!-- popup -->
     <script type="text/javascript" src="../../js_admin/wehrm.popup.js?<%=_localDatetim%>"></script> 
     <script type="text/javascript" src="../../js_admin/jquery.bpopup.min.js?<%=_localDatetim%>"></script>
     
