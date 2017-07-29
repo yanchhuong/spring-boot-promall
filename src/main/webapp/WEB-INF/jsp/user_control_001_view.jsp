@@ -60,11 +60,13 @@ $(function(){
 				<!-- 타이틀/버튼영역 -->
 				<div class="title_wrap">
 					<div class="left"><h1>Control User</h1></div>
-					<div class="right">
-			<!-- 			<div class="input_box"><input type="text" style="width:180px;" placeholder="성명, 사번, 부서, 직위, 직책"><a href="#none"><img src="../img/btn/btn_topsearch.gif" alt="조회"></a></div>
-						펼쳤을때<span class="btn_style1 up"><a href="#none">상세</a></span>
-						접혔을때<span class="btn_style1 down"><a href="#none">상세</a></span> -->
+				
+				    <div class="right" id="searchDefault">
+						<div class="input_box" id="input_upper" style="display: block;"><input type="text" id="SRCH_STR" style="width:150px;" placeholder="검색어를 입력하세요"><a id="btnBsSearch" href="javascript:"><img src="../img/btn/btn_topsearch.gif" alt="조회"></a></div><!-- modify20160707 -->
+						<!-- 펼쳤을때 --><span class="btn_style1  up" id="detail_up" style="display: none;"><a href="javascript:">Detail</a></span>
+						<!-- 접혔을때 --><span class="btn_style1  down on" id="detail_down" style="display: block;"><a href="javascript:">Detail</a></span>
 					</div>
+				
 				</div>
 				<!-- //타이틀/버튼영역 -->
 
@@ -95,17 +97,14 @@ $(function(){
 								</div></td>
 								<th scope="row"><div>검색조건</div></th>
 								<td><div>
-									<span class="txt_combo" style="width:100px;">
-										<a href="#none" class="txt">선택</a>
+									<span class="txt_combo " id="spStatSRC" style="width:100px;">
+										<a href="#none" class="txt">STATUS</a>
 										<!-- 레이어 -->
-										<div class="ly_txtcombo" style="display:none;">
-											<ul>
-												<li><a href="#none">성명</a></li>
-												<li class="on"><a href="#none">사번</a></li><!-- 활성화클래스 on -->
-												<li><a href="#none">부서</a></li>
-												<li><a href="#none">직위(직급)</a></li>
-												<li><a href="#none">직책</a></li>
-												<li><a href="#none">고용형태</a></li>
+										<div class="ly_txtcombo" id="divstatSRC" style="display:none;">
+											<ul id="ustatSRC">
+												<li><a href="#none">STATUS</a></li>
+												<li><a href="#none">block</a></li>
+												<li><a href="#none">Unblock</a></li>
 											</ul>
 										</div>
 										<!-- //레이어 -->
@@ -215,7 +214,7 @@ $(function(){
 										<!-- 레이어 -->
 										<div class="ly_txtcombo" id="txtstatus" style="display:none;">
 											<ul id="cbStat">
-												<li class="on"><a href="#none">block</a></li><!-- 활성화클래스 on -->
+												<li><a href="#none">block</a></li><!-- 활성화클래스 on -->
 											 	<li><a href="#none">Unblock</a></li>
 										    </ul> 
 										</div>
