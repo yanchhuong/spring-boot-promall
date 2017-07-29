@@ -167,6 +167,7 @@ menu_control_001.listMenu=function(){
         	       html+='            <span class="ico_treefolder"></span> 		                  ';
         	       html+='            <input type="hidden" id="catgid" value="1">                 ';
         	       html+='            <input type="hidden" id="vscatgid" value="1">               ';
+        	       html+='            <input type="hidden" id="lvl" value="1">                    ';
         	       html+='            <input type="text" id="txtnmeng" style="width:150px;">&nbsp;';
         	       html+='            <input type="text" id="txtnmkh" style="width:150px;">&nbsp; ';
         	       html+='		    <a id="btAdd"><img src="../img/btn/btn_s_ok.png" alt="저장"></a>';
@@ -174,7 +175,7 @@ menu_control_001.listMenu=function(){
         	       html+='	     </div>										                    ';
         	       html+='	 </td>											                    ';
         	       html+=' <td class="t_right"><a class="txt_d" id="parentid"></a></td>         ';
-        	       html+=' <td class="t_left"><a class="txt_d off" id="lvl" value="1">1</a></td>	        ';
+        	       html+=' <td class="t_left"><a class="txt_d off">1</a></td>	        ';
         	       html+=' <td class="t_left"><a class="txt_d off" id="usercd"></a></td>	    ';
         	       html+=' <td class="t_center">									            ';
         	       html+='	<div style="position:relative;">							        ';
@@ -284,8 +285,8 @@ menu_control_001.addMenu= function(data,type){
 	input["nm_kh"]       = $(data).parents("tr").find('#txtnmkh').val();
 	input["lvl"]         = $(data).parents("tr").find('#lvl').val();
 	input["parentid"]    = $(data).parents("tr").find('#parentid').text();
-	input["pid"]         = '';
 	input["usercd"]      = $(data).parents("tr").find('#usercd').text();
+	console.log(input);
 	 $.ajax({
 	        type   : 'POST',
 	    	url    : '/category/save',

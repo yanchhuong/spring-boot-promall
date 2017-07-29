@@ -4,22 +4,54 @@ var edithtml='';
 
 $(document).ready(function(){
 	user_control_001.ListData();
-/*	wehrm.ui.setDateRangePicker1("#calendarTab", {
-		keyTarget: "#SEND_DT_TAB_ONE",
-		startDate: moment(new Date(date.getFullYear(),date.getMonth(),1)).format('YYYY-MM-DD'),
-		endDate: moment().format('YYYY-MM-DD')
-	});	
-	*/
-
+	
+	//enable detail 
+	$("span#detail_up").click(function(){
+		$(this).hide();
+		$(this).removeClass("on");
+		
+		$("#input_upper").fadeIn();
+		$("span#detail_down").show();
+		$("span#detail_down").addClass("on");
+		$("div.tbl_srch").slideUp();
+	});
+	$("span#detail_down").click(function(){
+		$(this).hide();
+		$(this).removeClass("on");
+		
+		$("#input_upper").fadeOut();
+		$("span#detail_up").show();
+		$("span#detail_up").addClass("on");
+		$("div.tbl_srch").slideDown();
+		top.ifrMainResize("N",70);
+		
+	});
+    
+	//show status change
 	$(document).on("click","#cbStatus",function(e){
 		$(this).find(".ly_txtcombo").fadeToggle();
 	}).mouseleave(function(){
 		$(this).find(".ly_txtcombo").fadeOut();
 	});
-	$("#txtstatus ul#cbStat li").click(function(){	
+	//update status after change
+	$(document).on("click","#txtstatus ul#cbStat li",function(e){
 		comboSettingStatus(this,"개");
 		user_control_001.updateUseStatus(this);
 	});
+	
+	//show status change search
+	$(document).on("click","#spStatSRC",function(e){
+		$(this).find("#divstatSRC").fadeToggle();
+	}).mouseleave(function(){
+		$(this).find("#divstatSRC").fadeOut();
+	});
+	$(document).on("click","#divstatSRC ul#ustatSRC li",function(e){
+		$(this).parents('ul').find('li').removeClass('on');
+		$(this).addClass("on");
+		title = $.trim($(this).find("a").text());
+		$(this).parents('#spStatSRC').find('.txt').html(title);
+	});
+	
 	
 	$(document).on("click", ".btn_search_tb",function(e){
 		user_control_001.ListData();
@@ -62,12 +94,12 @@ user_control_001.updateUseStatus=function(data){
 	var input={};
 	    input["enabled"]= (enbled=='Unblock' ? true : false);
 	    input["usercd"] = $(data).parents("tr").find("#usercd").val();
-	var total= 0;
+	console.log(input);
 	$.ajax({
     	type   : 'POST',
-	    url    : "/users/update",
+	    url    : '/users/updatestatus',
 	    data   : JSON.stringify(input),
-	    cache: false,
+	    cache: true,
         dataType: 'json',
     	contentType: 'application/json',
         async: false,
@@ -76,8 +108,8 @@ user_control_001.updateUseStatus=function(data){
         },
 	})
     .done(function(dat) {
-    	console.log(dat);
-     })
+    //	user_control_001.ListData();
+    })
 };
 
 user_control_001.ListData=function(data){
@@ -101,7 +133,6 @@ user_control_001.ListData=function(data){
         },
 	})
     .done(function(dat) {
-    	console.log(dat);
     	var htmRole = $(".editbtn_top_box .tab");
     	var html = "";
     	htmRole.html('');
@@ -118,9 +149,12 @@ user_control_001.ListData=function(data){
 			$.map(dat.OUT_REC,function(val){
 				if(val["enabled"]!='t'){
 					val["enabled"] = "block";	
+					
 				}else{
+					$("#cbStat li").addClass("on");
 					val["enabled"] = "Unblock";	
 				} 
+
 				total +=1;
 				
 				return val;
@@ -161,15 +195,11 @@ function comboSetting(_this,unit) {
 		 PAGE_SIZE = title.replace(unit,"");
 	}  
 }
-
 function comboSettingStatus(_this) {
 	$(_this).parents('ul').find('li').removeClass('on');
 	$(_this).addClass("on");
 	title = $.trim($(_this).find("a").text());
 	$(_this).parents('#cbStatus').find('.txt').html(title);
-	console.log($(_this).parents('#cbStatus').find('.txt').text());
-	
-	
 }
 	
 	

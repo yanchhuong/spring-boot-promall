@@ -133,6 +133,7 @@ function SaveFile(){
 	      input["size"]     = $("#size").val();
 	      input["type"]     = $("#type").val();
 	      input["pid"]      = $("#pid").val();
+	      console.log(input);
 	  $.ajax({
 		    url    : '/upload_file/save_file_name',
 	    	cache  : true,
