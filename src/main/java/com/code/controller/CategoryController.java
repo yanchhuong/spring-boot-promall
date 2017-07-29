@@ -1,11 +1,13 @@
 package com.code.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -19,19 +21,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.code.dao.ICategory;
 import com.code.model.CategoryBean;
+import com.code.model.CategoryBean_R001;
+import com.code.model.FileUploadBean;
 import com.code.service.ICategoryService;
+import com.code.service.IFileImageService;
 
 
 
 @RestController
 @RequestMapping(value = "/category")
 public class CategoryController {
-	
-	    @Autowired(required = true)
+	  
 	    @Qualifier(value = "categoryService")
 	    private ICategoryService CategoryService;
-
-
+	    private IFileImageService iFileImageService;
+	    
+	    @Autowired(required = true)
+	    public CategoryController(ICategoryService CategoryService,IFileImageService iFileImageService){
+	    	this.CategoryService= CategoryService;
+	    	this.iFileImageService=iFileImageService;
+	    }
+	    
 	    @RequestMapping(value = "/find/{CategoryId}"
 	            , method = RequestMethod.GET
 	            , produces = {"application/json", "application/xml"})
@@ -49,16 +59,15 @@ public class CategoryController {
 	   
 		@RequestMapping(value = "/list", method = RequestMethod.GET , produces=MediaType.APPLICATION_JSON_VALUE)
 		 public  @ResponseBody Map<String,Object> getCategorys() {
-			   List<CategoryBean > obj = this.CategoryService.findAll();
-			   int total= this.CategoryService.getCatgidCount();
+			   List<CategoryBean_R001> obj = this.CategoryService.findAll();
+			   long total= this.CategoryService.getCatgidCount();
 		        return new HashMap<String,Object>(){
 		            {
 		                put("TOTAL",total);
 		                put("OUT_REC",obj);
 		            }
 		        };
-		   }
-		   
+		  } 
 	    @RequestMapping(value = "/delete/{CategoryId}", method = RequestMethod.DELETE)
 	    public Map<String,Object> deleteCategory(@PathVariable final int CategoryId) {
 	        this.CategoryService.delete(CategoryId);
@@ -72,24 +81,25 @@ public class CategoryController {
 	    @RequestMapping(value="/save",method = RequestMethod.POST)
 	           /*,consumes = {"application/json", "application/xml"}
 	            , produces = {"application/json", "application/xml"})*/
-	    public Map<String,Object> saveCategory(@RequestBody CategoryBean category){  
+	    public Map<String,Object> saveCategory(@RequestBody CategoryBean category){
+	    	this.iFileImageService.insertNew();
 	    	CategoryBean obj= category;
+	    	obj.setPid(this.iFileImageService.getMaxPid());
+	    	obj.setRegdate(DateFormatUtils.format(new Date(), "yyyyMMddhhmmss"));
 	    	obj.setVscatgid(this.CategoryService.getCatgidCount());
 	    	obj.setSeq(this.CategoryService.getSeqCount(category.getLvl(),category.getParentid())+1);
 	    	this.CategoryService.saveCategoryBean(obj);
-	    
 	        return new HashMap<String,Object>(){
 	            {
 	              put("message","Category Saved");
-	              put("Category",category);
+	              put("Category",obj);
 	            }
 	        };
 	    }
-	    @RequestMapping(value="/update",method = RequestMethod.POST)
-        /*,consumes = {"application/json", "application/xml"}
-         , produces = {"application/json", "application/xml"})*/
+/*	    @RequestMapping(value="/update",method = RequestMethod.POST)
+        ,consumes = {"application/json", "application/xml"}
+         , produces = {"application/json", "application/xml"})
        public Map<String,Object> updateCategory(@RequestBody CategoryBean category){  	
-	    	
  	   this.CategoryService.updateMenu(category);
           return new HashMap<String,Object>(){
          {
@@ -97,16 +107,14 @@ public class CategoryController {
             put("Category",category);
           }
         };
-      }
+      }*/
+	    
 	  @RequestMapping(value="/remove",method = RequestMethod.GET)
 	  public Map<String,Object> removeMenuTree(@RequestParam(value = "catgid") int rootid){  	
-		  System.out.println("@@@"+rootid);
 		  this.CategoryService.removeMenuTree(rootid);
 			  return new HashMap<String,Object>(){
 		           { put("message","Category was delete!"); }
-			  };      
-		
-	         
+			  };       
 	 }
 	    
 }
