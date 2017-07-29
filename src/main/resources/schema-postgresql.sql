@@ -28,16 +28,15 @@ CREATE  TABLE IF NOT EXISTS users(
   PRIMARY KEY (catgid)
   );
 
-  drop table filepicture;
   CREATE TABLE if not EXISTS filepicture (
   pid SERIAL,
-  orname  varchar(100) NOT NULL,
-  randname varchar(25)   NULL,
-  regdate varchar (14)   null,
-  type varchar(4)  null,
-  path varchar(50)     null,
-  size integer          null,
-  prid varchar(16)      null,
+  orname  varchar(100)   NULL,
+  randname varchar(100)   NULL,
+  regdate varchar (14)    null,
+  type varchar(10)        null,
+  path varchar(50)       null,
+  size integer      default 0 ,
+  prid integer      default 0 ,
   username varchar(45)  null,
   PRIMARY KEY (pid)
   );
@@ -49,10 +48,9 @@ CREATE  TABLE IF NOT EXISTS users(
   date  varchar (14)  not null,
   price integer       null,
   description varchar (600) null,
-  hitcnt integer       null,
   linksite integer     null,
   enable boolean       not null default true,
-  catgcd varchar(6)  not null,
+  catgcd varchar(14)  not null,
   username varchar(45) not null,
   FOREIGN KEY (username) REFERENCES users(username),
   FOREIGN KEY (catgcd) REFERENCES category(catgcd),
@@ -62,9 +60,9 @@ CREATE  TABLE IF NOT EXISTS users(
 
   CREATE TABLE if not EXISTS address (
   id SERIAL,
-  country  varchar (50)  NOT NULL,
-  province varchar (50) NOT NULL,
-  detail  varchar (100)  not null,
+  country  varchar (50)   NULL,
+  province varchar (50)    NULL,
+  detail  varchar (100)     null,
   username varchar(45) not null,
   FOREIGN KEY (username) REFERENCES users(username),
   PRIMARY KEY (id)

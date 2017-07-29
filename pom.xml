@@ -212,10 +212,10 @@
         </dependency>
         
         <!-- Log in log out   -->
-        <dependency>
+         <dependency>
        		  <groupId>org.springframework.boot</groupId>
       		  <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>  
+        </dependency>   
         <!--Database jar import  -->   
         <dependency>
 			<groupId>org.springframework.boot</groupId>
