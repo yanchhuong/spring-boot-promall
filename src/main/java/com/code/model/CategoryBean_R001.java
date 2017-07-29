@@ -7,12 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.NamedQuery;
-
 @Entity(name = "category")
-@NamedQuery(name = "CategoryBean.findAll", query="select catgid,nm_eng,nm_kh,parentid,lvl,pid,usercd,seq,regdate,vscatgid from category  order by catgid")
 @Table(name="category")
-public class CategoryBean implements Serializable { 
+public class CategoryBean_R001 implements Serializable { 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -39,20 +36,52 @@ public class CategoryBean implements Serializable {
 	private String usercd;
 	
 	@Column(name="seq")	
-	private long seq;
+	private int seq;
 	
 	@Column(name="regdate")	
 	private String regdate;
 	
 	@Column(name="vscatgid")	
-	private long vscatgid;
+	private int vscatgid;
 	
+	@Column(name="randname")	
+	private String randname;
 	
-	public long getVscatgid() {
+	@Column(name="fullengname")	
+	private String fullengname;
+	
+	@Column(name="fullkhname")	
+	private String fullkhname;
+	
+	public String getFullengname() {
+		return fullengname;
+	}
+
+	public void setFullengname(String fullengname) {
+		this.fullengname = fullengname;
+	}
+
+	public String getFullkhname() {
+		return fullkhname;
+	}
+
+	public void setFullkhname(String fullkhname) {
+		this.fullkhname = fullkhname;
+	}
+
+	public String getRandname() {
+		return randname;
+	}
+
+	public void setRandname(String randname) {
+		this.randname = randname;
+	}
+
+	public int getVscatgid() {
 		return vscatgid;
 	}
 
-	public void setVscatgid(long vscatgid) {
+	public void setVscatgid(int vscatgid) {
 		this.vscatgid = vscatgid;
 	}
 
@@ -60,11 +89,11 @@ public class CategoryBean implements Serializable {
 		return catgid;
 	}
 
-	public long getSeq() {
+	public int getSeq() {
 		return seq;
 	}
 
-	public void setSeq(long seq) {
+	public void setSeq(int seq) {
 		this.seq = seq;
 	}
 

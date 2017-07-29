@@ -11,8 +11,10 @@ import javax.annotation.PostConstruct;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -21,20 +23,21 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import com.code.dao.UserDao;
+import com.code.model.MUpdateUserStatusIn_U001;
+import com.code.model.MUserListIn_R001;
+import com.code.model.MUserListOut_R001;
+import com.code.model.RoleCountOut_R001;
 import com.code.model.UserDetailBean;
+import com.google.common.base.Strings;
 
 @Repository
-public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
-	
+public class UserDaoImpl extends JdbcDaoSupport implements UserDao{	
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-	
-	
 	@Autowired
 	public void setNamedParameterJdbcTemplate(
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
-
 	@Autowired
 	protected DataSource dataSource;
 	 
@@ -42,7 +45,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 	 private void initialize(){
 	        setDataSource(dataSource);
 	 }
-	    //...
+
 	
 	@Override
 	public void insertRole(UserDetailBean user) {
@@ -112,6 +115,46 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 	    });
 	}
 	
+	@Override
+	public List<MUserListOut_R001> getUserList(MUserListIn_R001 input) { 
+		String sql =  "select u.id,u.usercd,u.enabled,ur.role,	           "
+		             +"       CONCAT(ud.fname,ud.lname) as name,	       "
+		             +"       ud.sex,ud.cphone,ud.email,ud.regdate,	       "
+		             +"       ud.birthdate,fp.randname,				       "
+		             +"       CONCAT(addr.country,'|',addr.province,'|',addr.detail) as address"
+		             +"       from users u				                   "
+		             +" left join user_roles ur on u.username=ur.username   "
+		             +" left join user_detail ud on u.username=ud.username_fk"
+		             +" left join filepicture fp on u.username= fp.username"
+		             +" left join (select * from  address ad where status='1') as addr   on u.username= addr.username"
+		             +" where 1=1";
+		 
+		StringBuffer sb = new StringBuffer(sql);
+		if(input!=null){
+			if(!Strings.isNullOrEmpty(input.getKeyword())){
+				sb.append(" and ( ud.fname ilike '%"+input.getKeyword()+"%'");
+				sb.append(" or  ud.lname ilike '%"+input.getKeyword()+"%'");
+				sb.append(" or  ud.email ilike '%"+input.getKeyword()+"%'");
+				sb.append(" or  ud.cphone ilike '%"+input.getKeyword()+"%')");
+			}
+		}
+		if(!Strings.isNullOrEmpty(input.getRegdate())){
+			sb.append(" and ud.regdate = '"+input.getRegdate()+"'");
+		}
+	    if(!Strings.isNullOrEmpty(input.getBirthdate())){
+	    	sb.append(" and ud.birthdate = '"+input.getBirthdate()+"'");
+		}
+	    if(!Strings.isNullOrEmpty(input.getRole())){
+	    	sb.append(" and ur.role = '"+input.getRole()+"'");
+		}
+	    
+		System.out.println(sb.toString());
+		List<MUserListOut_R001> result  = getJdbcTemplate().query(sb.toString(), 
+					new BeanPropertyRowMapper<MUserListOut_R001>(MUserListOut_R001.class));
+
+		return result;
+	}
+	
 	// delete 
 	public void delete(long id) {
 		 String sql = "DELETE  FROM USERS where id=?";
@@ -119,7 +162,6 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 	}
 	
 	//update sample
-	
 	public void update(UserDetailBean user) {
 		 String sql = "UPDATE USER_DETAIL set fname=?, lname=? where id=?";
 		 this.getJdbcTemplate().update(sql, new Object[] {user.getFirst(),user.getLast(),user.getId()});
@@ -138,7 +180,6 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 		
 		return result;
 	}
-
 
 	//Dynamic parameter search sample
 	
@@ -182,8 +223,6 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 
 	}
 	
-	
-	
 	private static final class UserMapper implements RowMapper<UserDetailBean> {
 
 		public UserDetailBean mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -211,9 +250,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 	}
 	
     // for update Dynamic parameter	
-	
 	private SqlParameterSource getSqlParameterByModel(UserDetailBean user) {
-
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("id", user.getId());
 		paramSource.addValue("username", user.getUsername());
@@ -222,21 +259,37 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 		paramSource.addValue("address", user.getAddress());
 		paramSource.addValue("password", user.getPassword());
 		paramSource.addValue("fname", user.getFirst());
-		paramSource.addValue("lname", user.getLast());
+		paramSource.addValue("lname",user.getFirst());
 		paramSource.addValue("role", user.getRole());
 		paramSource.addValue("registerdate", user.getRegisterDate());
 		paramSource.addValue("profilename", user.getProfile_fname());
 		paramSource.addValue("role", user.isEnable());
 		paramSource.addValue("birthdate", user.getBirthOfDate());
 		
-		
 		// join String
+		paramSource.addValue("name", user.getFirst()+user.getFirst());
 		paramSource.addValue("sex", user.isSex());
 		paramSource.addValue("phone", user.getPhone());
 		paramSource.addValue("locatId", user.getLocat_id());
 		
 		return paramSource;
 	}
-	
 
+	@Override
+	public List<RoleCountOut_R001> getRoleCount() {
+		String sql =  "select count(*) as cnt , role from user_roles group by  role";
+		System.out.println(sql);
+		List<RoleCountOut_R001> result  = getJdbcTemplate().query(sql, 
+					new BeanPropertyRowMapper<RoleCountOut_R001>(RoleCountOut_R001.class));
+		return result;
+	}
+
+
+	@Override
+	public void updateUserStatus(MUpdateUserStatusIn_U001 input) {
+		String sql = "UPDATE USERS set enabled=? where usercd=?";
+        this.getJdbcTemplate().update(sql, new Object[] {input.isEnabled(),input.getUsercd()});	
+	}
+
+	
 }

@@ -30,20 +30,25 @@
  */
 package com.code.config;
 
+import org.apache.tomcat.jdbc.pool.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.code.service.StorageService;
@@ -62,29 +67,45 @@ import com.code.model.StorageProperties;
 @EntityScan(basePackages = "com.code.model")
 @EnableJpaRepositories(basePackages = "com.code.dao")
 @PropertySource("classpath:application.properties")
-
 @EnableConfigurationProperties(StorageProperties.class)
 public class WebMvcJspApplication extends SpringBootServletInitializer {
 	private static  Logger LOGGER =  LoggerFactory.getLogger(WebMvcJspApplication.class);
-
-
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(WebMvcJspApplication.class);
 	}
-
 	public static void main(String[] args) throws Exception {
 		LOGGER.info("Starting Main Application...");
 		SpringApplication.run(WebMvcJspApplication.class, args);
-		 LOGGER.info("Access URLs: http://localhost:8080\n");
+		LOGGER.info("Access URLs: http://localhost:8080\n");
+		WebMvcJspApplication obj=new WebMvcJspApplication();
+		LOGGER.info("Access Datasourc"+ obj.dataSource().getDriverClassName());
+		LOGGER.info("Access Datasourc"+ obj.dataSource().getConnectionProperties());
+		LOGGER.info("Access Datasourc"+ obj.dataSource().getUsername());
+		 
 	}
-
-	 @Bean
-	 CommandLineRunner init(StorageService storageService) {
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
 			return (args) -> {
 	            storageService.deleteAll();
 	            storageService.init();
 			};
 	 }
-	
+/*	 @ConfigurationProperties(prefix = "datasource.postgres")
+	 @Bean
+	 @Primary
+	 public DataSource dataSource() {
+	     return (DataSource) DataSourceBuilder
+	    		     .create()
+	    	        .username("postgres")
+	    	        .password("832862ng@")
+	    	        .url("jdbc:postgresql://localhost:5432/postgres")
+	    	        .driverClassName("org.postgresql.Driver")
+	    	        .build();
+	 }*/
+	 @Bean
+	 @ConfigurationProperties("spring.datasource")
+	 public DataSource dataSource() {
+	     return (DataSource) DataSourceBuilder.create().build();
+	 }
 }

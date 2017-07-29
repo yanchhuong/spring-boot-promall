@@ -1,5 +1,6 @@
 package com.code.dao;
 import com.code.model.CategoryBean;
+import com.code.model.CategoryBean_R001;
 
 import java.util.List;
 import java.util.Locale.Category;
@@ -12,25 +13,26 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 @Repository
-public interface ICategory extends JpaRepository<CategoryBean,Long>{	
+public interface ICategory extends JpaRepository<CategoryBean,Long>{
+	 @Transactional
 	 @Query(value=" WITH RECURSIVE category_tree AS "
 			 + " (SELECT *,CAST(nm_eng As varchar(1000)) As fullengname,CAST(nm_kh As varchar(1000)) As fullkhname"
 			 + " FROM category  WHERE parentid = 0"
-			 + " UNION all  SELECT si.*, CAST( sp.fullengname || '-->' || si.nm_eng As varchar(1000)) As fullengname ,"
-			 + " CAST( sp.fullkhname || '-->' ||  si.nm_kh As varchar(1000)) As fullkhname"
+			 + " UNION all  SELECT si.*, CAST( sp.fullengname || '>>' || si.nm_eng As varchar(1000)) As fullengname ,"
+			 + " CAST( sp.fullkhname || '>>' ||  si.nm_kh As varchar(1000)) As fullkhname"
 			 + " FROM category As si INNER JOIN category_tree AS sp"
 			 + " ON (si.parentid = cast(sp.catgid as integer))  "
-			 + " )SELECT * FROM category_tree ORDER BY fullengname;",nativeQuery = true)
+			 + " )SELECT t.* ,f.randname FROM category_tree  t "
+			 + " full join  filepicture f on t.pid=f.pid  ORDER BY fullengname;",nativeQuery = true)
 	 public List<CategoryBean> findAlls();
 
 	 //Modify
 	 @Modifying(clearAutomatically = true)
-	 @Query(value="update category set  nm_eng=COALESCE(:#{#category.nm_eng},nm_eng),"
-	 		+ "  nm_kh=COALESCE(:#{#category.nm_kh},nm_kh),"
-	 		+ "  pid=COALESCE(:#{#category.pid}, pid),"
-	 		+ "  usercd=COALESCE(:#{#category.usercd},usercd)"
-	 		+ "  where catgid= :#{#category.catgid}", nativeQuery=true)
-	 public void updateMenu(@Param(value="category") CategoryBean category); 
+	 @Query(value="update category set  "
+	 		+ "  pid=COALESCE(:#{#pid}, pid),"
+	 		+ "  usercd=COALESCE(:#{#usercd},usercd)"
+	 		+ "  where catgid= :#{#catgid}", nativeQuery=true)
+	 public void updateMenu(@Param(value="pid") long pid,@Param(value="usercd") String usercd,@Param(value="catgid") long catgid); 
 	 
 	 //Count 
 	 @Query(value="select count (catgid) from category ",nativeQuery=true)

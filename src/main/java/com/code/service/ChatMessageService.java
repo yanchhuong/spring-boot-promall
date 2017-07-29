@@ -1,8 +1,8 @@
 package com.code.service;
 
-import com.code.chat.ChatMessage;
+import com.code.model.LiveChatBean;
 
 public interface ChatMessageService {
 	
-	public void addMessage(ChatMessage ChatMessage) ;
+	public void addMessage(LiveChatBean ChatMessage) ;
 }

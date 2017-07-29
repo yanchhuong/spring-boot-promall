@@ -13,6 +13,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 import org.springframework.stereotype.Controller;
 
+import com.code.model.LiveChatBean;
 import com.code.service.ChatMessageService;
 
 
@@ -31,7 +32,7 @@ public class MessageController {
   }
 
   @MessageMapping("/chat")
-  public void greeting(Message<Object> message, @Payload ChatMessage chatMessage) throws Exception {
+  public void greeting(Message<Object> message, @Payload LiveChatBean chatMessage) throws Exception {
     Principal principal = message.getHeaders().get(SimpMessageHeaderAccessor.USER_HEADER, Principal.class);
     String authedSender = principal.getName();
     

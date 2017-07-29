@@ -7,30 +7,43 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.code.dao.ICategory;
+import com.code.dao.ICategoryCustom;
+import com.code.dao.IFileImageDao;
 import com.code.model.CategoryBean;
+import com.code.model.CategoryBean_R001;
 import com.code.service.ICategoryService;
 
 
 @Service(value = "categoryService")
 public class CategoryServiceImp implements ICategoryService{
-	@Autowired(required = true)
+	
 	private ICategory iCategory;
+	private ICategoryCustom iCategoryCustom;
+	
+	@Autowired(required = true)
+	public CategoryServiceImp(ICategory iCategory,ICategoryCustom iCategoryCustom){
+		this.iCategory=iCategory;
+		this.iCategoryCustom =iCategoryCustom;
+		
+	}
 
 	    
 	@Transactional(readOnly = true)
 	@Override
-	public List<CategoryBean> findAll() {
+	public List<CategoryBean_R001> findAll() {
 		// TODO Auto-generated method stub
 		
-		return this.iCategory.findAlls();
+		return this.iCategoryCustom.findAlls();
 	}
 	
 	@Transactional(readOnly = false)
 	@Override
-	public void updateMenu(CategoryBean category) {
-		this.iCategory.updateMenu(category);
+	public void updateMenu(long pid,String usercd,long catgid){
+		this.iCategory.updateMenu(pid,usercd,catgid);
 		
 	}
+	
+	@Transactional(readOnly = false)
 	@Override
 	public void saveCategoryBean(CategoryBean CategoryBean) {
 		this.iCategory.saveAndFlush(CategoryBean);
@@ -48,8 +61,8 @@ public class CategoryServiceImp implements ICategoryService{
 		
 	}
 	@Override
-	public int getCatgidCount() {
-		return this.iCategory.getCatgidCount()+1;
+	public long getCatgidCount() {
+		return this.iCategory.getCatgidCount();
 	}
 	@Override
 	public void removeMenuTree(int rootid) {
@@ -92,7 +105,7 @@ public class CategoryServiceImp implements ICategoryService{
 	}
 
 	@Override
-	public int getSeqCount(String lvl, long parentid) {
+	public long getSeqCount(String lvl, long parentid) {
 		// TODO Auto-generated method stub
 		return this.iCategory.getSeqCount(lvl, parentid);
 	}

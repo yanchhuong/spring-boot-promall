@@ -1,7 +1,6 @@
 package com.code.model;
 public class UserDetailBean extends UserBean {
 
-
 	public String getFirst() {
 		return first;
 	}

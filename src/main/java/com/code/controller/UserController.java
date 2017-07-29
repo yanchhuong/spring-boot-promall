@@ -3,15 +3,27 @@ package com.code.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.code.formater.PagingUtils;
+import com.code.model.CategoryBean_R001;
+import com.code.model.MUpdateUserStatusIn_U001;
+import com.code.model.MUserListIn_R001;
+import com.code.model.MUserListOut_R001;
+import com.code.model.RoleCountOut_R001;
 import com.code.model.UserDetailBean;
 import com.code.service.UserService;
 
@@ -25,7 +37,6 @@ public class UserController {
 	public UserController(UserService userService) {
 		this.userService=userService;
 	}
-	
 	@RequestMapping(value = "/sign_up",method = RequestMethod.POST)
 	public String AddUser(ModelMap model,HttpServletRequest request){
 	
@@ -45,12 +56,31 @@ public class UserController {
 		
 		return "Welcome !";
 	}
-/*	public String userCd(){
-		Random r = new Random(System.currentTimeMillis());
-	    int pick = 100000000 + r.nextInt(200000000);
-	    System.out.println(pick);
-		return ""+pick;	
-	}*/
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	 public  @ResponseBody Map<String,Object> getListUsers(@RequestBody MUserListIn_R001 input) {
+		   List<MUserListOut_R001> obj = this.userService.getUserList(input);
+		   List<RoleCountOut_R001> rolecnt=this.userService.getRoleCount(); 
+		   PagingUtils page=new PagingUtils();
+	        return new HashMap<String,Object>(){
+	            {
+	                put("OUT_REC",obj);
+	                put("PAGINATION",page);
+	                put("ROLE_REC",rolecnt);
+	            }
+	        };
+	}
+	@RequestMapping(value = "/updatestatus", method = RequestMethod.POST)
+	 public  @ResponseBody Map<String,Object> updateUsers(@RequestBody MUpdateUserStatusIn_U001 input) {
+		System.out.println("TestUpdate");
+		this.userService.updateUserStatus(input);
+	        return new HashMap<String,Object>(){
+	            {
+	                put("ERROR_SMS","");
+	                put("CODE","200");
+	               
+	            }
+	        };
+	}
 	public String nowDateTime(){
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date = new Date();
