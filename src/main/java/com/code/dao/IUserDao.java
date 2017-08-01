@@ -6,13 +6,13 @@ import com.code.model.MUpdateUserStatusIn_U001;
 import com.code.model.MUserListIn_R001;
 import com.code.model.MUserListOut_R001;
 import com.code.model.RoleCountOut_R001;
-import com.code.model.UserDetailBean;
+import com.code.model.UserSignupBeanIn_C001;
 
-public interface UserDao {
+public interface IUserDao {
    
-	void  insertRole(UserDetailBean user);
-    void  insertUserLog(UserDetailBean user);
-    void  insertUserDetail(UserDetailBean user);
+	void  insertRole(UserSignupBeanIn_C001 user);
+    void  insertUserLog(UserSignupBeanIn_C001 user);
+    void  insertUserDetail(UserSignupBeanIn_C001 user);
     boolean resetPassword(String username,String newpass);
     
     public List<MUserListOut_R001> getUserList(MUserListIn_R001 input);

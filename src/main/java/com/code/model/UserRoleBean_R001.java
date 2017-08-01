@@ -1,7 +1,9 @@
 package com.code.model;
 
-public class UserRoleBean {
+public class UserRoleBean_R001 {
   private long id ;
+  private String role="ROLE_USER";
+  private String userCd;
   public long getId() {
 	return id;
 }
@@ -27,8 +29,7 @@ public void setUserCd(String userCd) {
 	this.userCd = userCd;
 }
 private String username;
-  private String role="ROLE_USER";
-  private String userCd;
+ 
     
 
 }

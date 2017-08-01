@@ -6,9 +6,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.ui.ModelMap;
@@ -24,7 +26,8 @@ import com.code.model.MUpdateUserStatusIn_U001;
 import com.code.model.MUserListIn_R001;
 import com.code.model.MUserListOut_R001;
 import com.code.model.RoleCountOut_R001;
-import com.code.model.UserDetailBean;
+import com.code.model.RoleListBean_R001;
+import com.code.model.UserSignupBeanIn_C001;
 import com.code.service.UserService;
 
 
@@ -38,23 +41,20 @@ public class UserController {
 		this.userService=userService;
 	}
 	@RequestMapping(value = "/sign_up",method = RequestMethod.POST)
-	public String AddUser(ModelMap model,HttpServletRequest request){
-	
-		System.out.println(request.getParameter("email") +request.getParameter("password") );
-		
-		UserDetailBean record=new UserDetailBean();
-		record.setFirst(request.getParameter("firstname")); 
-		record.setLast(request.getParameter("lastname"));
-		record.setUsername(request.getParameter("email"));
-		record.setPassword(request.getParameter("password"));
-        record.setEmail(request.getParameter("email"));
-        record.setRegisterDate(nowDateTime());
-        record.setEnable(true);
-        record.setUserCd(nowDateTime());
+	public @ResponseBody Map<String,Object> addUser(ModelMap model,HttpServletRequest request,@RequestBody UserSignupBeanIn_C001 input){
+		UserSignupBeanIn_C001 record =  input;
+        record.setEnabled(true);
+        record.setUsername(input.getEmail());
+        record.setRegdate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
+        record.setUsercd(UUID.randomUUID().toString()+DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
         userService.AddUser(record); 
-		
-		
-		return "Welcome !";
+        return new HashMap<String,Object>(){
+            {
+                put("SUCCES","Save complete");
+                put("SMS","Welcome ngday online!");
+                put("ROLE_REC",record);
+            }
+        };
 	}
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	 public  @ResponseBody Map<String,Object> getListUsers(@RequestBody MUserListIn_R001 input) {
@@ -81,6 +81,21 @@ public class UserController {
 	            }
 	        };
 	}
+	
+	@RequestMapping(value = "/listroles", method = RequestMethod.GET)
+	 public  @ResponseBody Map<String,Object> listRole() {
+		System.out.println("reol");
+		List<RoleListBean_R001> rec= this.userService.getRoleList();
+	        return new HashMap<String,Object>(){
+	            {
+	                put("OUT_REC",rec);
+	                put("CODE","200");
+	               
+	            }
+	        };
+	}
+	
+	
 	public String nowDateTime(){
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date date = new Date();

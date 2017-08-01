@@ -22,16 +22,16 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-import com.code.dao.UserDao;
+import com.code.dao.IUserDao;
 import com.code.model.MUpdateUserStatusIn_U001;
 import com.code.model.MUserListIn_R001;
 import com.code.model.MUserListOut_R001;
 import com.code.model.RoleCountOut_R001;
-import com.code.model.UserDetailBean;
+import com.code.model.UserSignupBeanIn_C001;
 import com.google.common.base.Strings;
 
 @Repository
-public class UserDaoImpl extends JdbcDaoSupport implements UserDao{	
+public class UserDaoImpl extends JdbcDaoSupport implements IUserDao{	
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	@Autowired
 	public void setNamedParameterJdbcTemplate(
@@ -46,37 +46,33 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 	        setDataSource(dataSource);
 	 }
 
-	
 	@Override
-	public void insertRole(UserDetailBean user) {
-		String sql = "INSERT INTO USER_ROLES " +"(username,role) VALUES (?,?)" ;
-        this.getJdbcTemplate().update(sql, new Object[]{user.getUsername(),user.getRole()});
+	public void insertRole(UserSignupBeanIn_C001 user) {
+		String sql = "INSERT INTO USER_ROLES " +"(username,role,usercd) VALUES (?,?,?)" ;
+        this.getJdbcTemplate().update(sql, new Object[]{user.getUsername(),user.getRole(),user.getUsercd()});
 		
 	}
 	@Override
-	public void insertUserLog(UserDetailBean user) {
+	public void insertUserLog(UserSignupBeanIn_C001 user) {
 		String sql = "INSERT INTO USERS " +"(usercd,username,password) VALUES (?,?,?)" ;
-        this.getJdbcTemplate().update(sql, new Object[]{user.getUserCd(),user.getUsername(),user.getPassword()});
-        
-        
-		
+        this.getJdbcTemplate().update(sql, new Object[]{user.getUsercd(),user.getUsername(),user.getPassword()});
 	}
 	@Override
-	public void insertUserDetail(UserDetailBean user) {
+	public void insertUserDetail(UserSignupBeanIn_C001 user) {
 		String sql = "INSERT INTO USER_DETAIL " +"(regdate,fname,lname,username_fk,email,usercd) VALUES (?,?,?,?,?,?)" ;
-        this.getJdbcTemplate().update(sql, new Object[]{user.getRegisterDate(),user.getFirst(),user.getLast()
-        		,user.getUsername(),user.getEmail(),user.getUserCd()});
+        this.getJdbcTemplate().update(sql, new Object[]{user.getRegdate(),user.getFname(),user.getLname()
+        		,user.getUsername(),user.getEmail(),user.getUsercd()});
 		
 	}
 	
 	//insert batch
-	public void inserBatch(List<UserDetailBean> batch){
+	public void inserBatch(List<UserSignupBeanIn_C001> batch){
 	    String sql = "INSERT INTO USER_DETAIL " + "(fname, lname) VALUES ( ?, ?)";
 	    getJdbcTemplate().batchUpdate(sql, new BatchPreparedStatementSetter() {
 	        public void setValues(PreparedStatement ps, int i) throws SQLException {
-	        	UserDetailBean rec = batch.get(i);
-	            ps.setString(1, rec.getFirst());
-	            ps.setString(2, rec.getLast());
+	        	UserSignupBeanIn_C001 rec = batch.get(i);
+	            ps.setString(1, rec.getFname());
+	            ps.setString(2, rec.getLname());
 	        }
 	 
 	        public int getBatchSize() {
@@ -86,13 +82,13 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 	}
 	
 	// for example list all
-	public List<UserDetailBean> listUser(){
+	public List<UserSignupBeanIn_C001> listUser(){
 		  String sql = "SELECT usercd,username FROM USERS";
 		    List< Map < String, Object>> rows = this.getJdbcTemplate().queryForList(sql);
-		    List<UserDetailBean> result = new ArrayList<UserDetailBean>();
+		    List<UserSignupBeanIn_C001> result = new ArrayList<UserSignupBeanIn_C001>();
 		    for(Map <String, Object> row:rows){
-		    	UserDetailBean rec = new UserDetailBean();
-		    	rec.setUserCd((String)row.get("usercd"));
+		    	UserSignupBeanIn_C001 rec = new UserSignupBeanIn_C001();
+		    	rec.setUsercd((String)row.get("usercd"));
 		        rec.setUsername((String)row.get("username"));
 		        result.add(rec);
 		    }
@@ -101,15 +97,15 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
     }
 	
 	
-	public UserDetailBean SearchByname(String firstname) {
+	public UserSignupBeanIn_C001 SearchByname(String firstname) {
 		String sql = "SELECT * FROM USER_DETAIL WHERE fname = ? ORDER BY detid";
-	     return (UserDetailBean)this.getJdbcTemplate().queryForObject(sql, new Object[]{firstname}, new RowMapper<UserDetailBean>(){
+	     return (UserSignupBeanIn_C001)this.getJdbcTemplate().queryForObject(sql, new Object[]{firstname}, new RowMapper<UserSignupBeanIn_C001>(){
 	         @Override
-	         public UserDetailBean mapRow(ResultSet rs, int rwNumber) throws SQLException {
-	        	 UserDetailBean cust = new UserDetailBean();
+	         public UserSignupBeanIn_C001 mapRow(ResultSet rs, int rwNumber) throws SQLException {
+	        	 UserSignupBeanIn_C001 cust = new UserSignupBeanIn_C001();
 	             cust.setId(rs.getInt("id"));
-	             cust.setFirst(rs.getString("fname"));
-	             cust.setLast(rs.getString("lname"));
+	             cust.setFname(rs.getString("fname"));
+	             cust.setLname(rs.getString("lname"));
 	             return cust;
 	        }
 	    });
@@ -118,7 +114,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 	@Override
 	public List<MUserListOut_R001> getUserList(MUserListIn_R001 input) { 
 		String sql =  "select u.id,u.usercd,u.enabled,ur.role,	           "
-		             +"       CONCAT(ud.fname,ud.lname) as name,	       "
+		             +"       CONCAT(ud.fname,' ',ud.lname) as name,	       "
 		             +"       ud.sex,ud.cphone,ud.email,ud.regdate,	       "
 		             +"       ud.birthdate,fp.randname,				       "
 		             +"       CONCAT(addr.country,'|',addr.province,'|',addr.detail) as address"
@@ -162,9 +158,9 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 	}
 	
 	//update sample
-	public void update(UserDetailBean user) {
+	public void update(UserSignupBeanIn_C001 user) {
 		 String sql = "UPDATE USER_DETAIL set fname=?, lname=? where id=?";
-		 this.getJdbcTemplate().update(sql, new Object[] {user.getFirst(),user.getLast(),user.getId()});
+		 this.getJdbcTemplate().update(sql, new Object[] {user.getFname(),user.getLname(),user.getId()});
 	}
 
 	@Override
@@ -184,7 +180,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 	//Dynamic parameter search sample
 	
 	
-	public UserDetailBean SearchDynamicParam(String email) {
+	public UserSignupBeanIn_C001 SearchDynamicParam(String email) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		String sql = "SELECT * FROM USER_DETAIL WHERE ";
 		
@@ -194,7 +190,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 			sql  = sql + "EMAIL=:email";
 		}
 		
-		UserDetailBean result = null;
+		UserSignupBeanIn_C001 result = null;
 		try {
 			result = namedParameterJdbcTemplate.queryForObject(sql, params, new UserMapper());
 		} catch (EmptyResultDataAccessException e) {
@@ -205,7 +201,7 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 	}
 	
 	
-	public void updates(UserDetailBean user) {
+	public void updates(UserSignupBeanIn_C001 user) {
 
 		String sql = "UPDATE USER_DETAIL SET FNAME=:fname, EMAIL=:email, ADDRESS=:address, "
 			+ "PASSWORD=:password, SEX=:sex, LNAME=:lname, "
@@ -215,34 +211,25 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 
 	}
 	
-	public List<UserDetailBean> findAll() {
+	public List<UserSignupBeanIn_C001> findAll() {
 
 		String sql = "SELECT * FROM USER_DETAIL";
-		List<UserDetailBean> result = namedParameterJdbcTemplate.query(sql, new UserMapper());
+		List<UserSignupBeanIn_C001> result = namedParameterJdbcTemplate.query(sql, new UserMapper());
 		return result;
 
 	}
 	
-	private static final class UserMapper implements RowMapper<UserDetailBean> {
+	private static final class UserMapper implements RowMapper<UserSignupBeanIn_C001> {
 
-		public UserDetailBean mapRow(ResultSet rs, int rowNum) throws SQLException {
-			UserDetailBean user = new UserDetailBean();
+		public UserSignupBeanIn_C001 mapRow(ResultSet rs, int rowNum) throws SQLException {
+			UserSignupBeanIn_C001 user = new UserSignupBeanIn_C001();
 			user.setId(rs.getInt("id"));
-			user.setFirst(rs.getString("fname"));
-			user.setLast(rs.getString("lname"));
-			user.setAddress(rs.getString("address"));
-			user.setBirthOfDate(rs.getString("birthdate"));
-			user.setEmail(rs.getString("email"));
-			user.setLocat_id(rs.getString("locatId"));
+			user.setFname(rs.getString("fname"));
+			user.setLname(rs.getString("lname"));
 			user.setPassword(rs.getString("password"));
-			user.setPhone(rs.getString("phone"));
-			user.setRegisterDate(rs.getString("regdate"));
-			user.setEnable(rs.getBoolean("enable"));
-			user.setSex(rs.getBoolean("sex"));
-			user.setProfile_fname(rs.getString("profilename"));
-			
+			user.setEnabled(rs.getBoolean("enable"));
 			user.setRole(rs.getString("role"));
-			user.setUserCd(rs.getString("usercd"));
+			user.setUsercd(rs.getString("usercd"));
             user.setUsername(rs.getString("username"));
 			
 			return user;
@@ -250,31 +237,14 @@ public class UserDaoImpl extends JdbcDaoSupport implements UserDao{
 	}
 	
     // for update Dynamic parameter	
-	private SqlParameterSource getSqlParameterByModel(UserDetailBean user) {
+	private SqlParameterSource getSqlParameterByModel(UserSignupBeanIn_C001 user) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("id", user.getId());
 		paramSource.addValue("username", user.getUsername());
-		paramSource.addValue("usercd", user.getUserCd());
-		paramSource.addValue("email", user.getEmail());
-		paramSource.addValue("address", user.getAddress());
-		paramSource.addValue("password", user.getPassword());
-		paramSource.addValue("fname", user.getFirst());
-		paramSource.addValue("lname",user.getFirst());
 		paramSource.addValue("role", user.getRole());
-		paramSource.addValue("registerdate", user.getRegisterDate());
-		paramSource.addValue("profilename", user.getProfile_fname());
-		paramSource.addValue("role", user.isEnable());
-		paramSource.addValue("birthdate", user.getBirthOfDate());
-		
 		// join String
-		paramSource.addValue("name", user.getFirst()+user.getFirst());
-		paramSource.addValue("sex", user.isSex());
-		paramSource.addValue("phone", user.getPhone());
-		paramSource.addValue("locatId", user.getLocat_id());
-		
 		return paramSource;
 	}
-
 	@Override
 	public List<RoleCountOut_R001> getRoleCount() {
 		String sql =  "select count(*) as cnt , role from user_roles group by  role";
