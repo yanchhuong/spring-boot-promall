@@ -7,12 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +26,6 @@ import com.code.model.RoleCountOut_R001;
 import com.code.model.RoleListBean_R001;
 import com.code.model.UserSignupBeanIn_C001;
 import com.code.service.UserService;
-
-
-
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
@@ -94,13 +88,5 @@ public class UserController {
 	            }
 	        };
 	}
-	
-	
-	public String nowDateTime(){
-		DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-		Date date = new Date();
-		
-		return dateFormat.format(date);
-	}
-		 
+
 }

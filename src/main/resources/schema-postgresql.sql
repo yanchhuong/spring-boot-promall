@@ -1,17 +1,27 @@
 CREATE  TABLE IF NOT EXISTS users(
   id SERIAL,
-  usercd VARCHAR(14) not null,
+  usercd VARCHAR(50) not null,
   username VARCHAR(45) NOT NULL ,
   password VARCHAR(45) NOT NULL ,
   enabled boolean NOT NULL DEFAULT true ,
   PRIMARY KEY (username));
   
-    CREATE TABLE if not EXISTS user_roles (
-  rid SERIAL,
+CREATE TABLE if not EXISTS roles_list(
+   id serial primary key,
+   role varchar(45),
+   regdate varchar(14),
+   usercd varchar(50)
+);
+  
+CREATE TABLE if not EXISTS user_roles (
+  rid SERIAL primary key,
   username varchar(45) NOT NULL,
   role varchar(45) NOT NULL,
-  FOREIGN KEY (username) REFERENCES users(username),
-  PRIMARY KEY (rid)
+  regdate varchar(14),
+  sdate varchar(8),
+  edate varchar(8),
+  title varchar (50),
+  usercd varchar(50)  
   );
 
   CREATE TABLE if not EXISTS category (
@@ -21,7 +31,7 @@ CREATE  TABLE IF NOT EXISTS users(
   nm_kh varchar(50)  NULL,
   lvl varchar (3) ,
   pid integer,
-  usercd varchar(14),
+  usercd varchar(50),
   regdate varchar(14),
   seq integer,
   vscatgid integer ,
@@ -123,6 +133,6 @@ FOREIGN KEY (c_id_fk) REFERENCES conversation(c_id)
   email varchar(25)  not null,
   regdate varchar(14) not null,
   birthdate varchar(8) null,
-  usercd varchar(14) NOT NULL,
+  usercd varchar(50) NOT NULL,
   FOREIGN KEY (username_fk) REFERENCES users(username),
   PRIMARY KEY (id) );
