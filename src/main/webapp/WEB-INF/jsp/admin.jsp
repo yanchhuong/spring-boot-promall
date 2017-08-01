@@ -83,7 +83,7 @@ $(function(){
 							<ul>
 								<li><a href="javascrip:" id="cmenu" >Menu</a></li>
 								<li><a href="javascrip:" id="cuser"  >User</a></li><!-- (add)20170309 -->
-								<li><a href="javascrip:" id="cmessage">Message</a></li>
+								<li><a href="javascrip:" id="cmessage">Role</a></li>
 								<li><a href="javascrip:" id="cfeedback">Feedback</a></li>
 							</ul>
 						</div>

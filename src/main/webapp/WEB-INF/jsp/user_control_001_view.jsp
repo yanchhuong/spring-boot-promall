@@ -71,7 +71,7 @@ $(function(){
 				<!-- //타이틀/버튼영역 -->
 
 				<!-- table search-->
-				<div class="tbl_srch">
+				<div class="tbl_srch" style="display:none;">
 					<table class="">
 						<caption></caption>
 						<colgroup>
@@ -265,6 +265,6 @@ $(function(){
 
 		</div>
 		<!-- //content wrap -->
-
+<%@include file="fragments/html_iframes.jsp"%>
 </body>
 </html>
