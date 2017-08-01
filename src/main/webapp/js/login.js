@@ -49,32 +49,42 @@ $(document).ready(function(){
 		});
 
 });
-
 function ftsign_up(){
 			var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 			var csrfToken = $("meta[name='_csrf']").attr("content");
-			
 			var input={};
-
-			input["firstname"] = $("#firstname").val();
-			input["lastname"]  = $("#lastname").val();
+			input["fname"] = $("#firstname").val();
+			input["lname"]  = $("#lastname").val();
 			input["email"]     = $("#email").val();
 			input["password"]  = $("#password").val();
+			console.log(input);
+			console.log(csrfToken);
 			  $.ajax({
-			    	type   : 'POST',
-			    	url    :  '/users/sign_up',
-			    	cache: false,
-			        async: false,
-			        
-			        beforeSend: function(xhr) {
-			            xhr.setRequestHeader(csrfHeader, csrfToken);
-			        },
-			        data:input,
+					type   : 'POST',
+				    url    : "/users/sign_up",
+				    data   : JSON.stringify(input),
+				    cache: false,
+				    dataType: 'json',
+					contentType: 'application/json',
+				    async: false,
+				    beforeSend: function(xhr) {
+				        xhr.setRequestHeader(csrfHeader, csrfToken);
+				    },
+			        data:JSON.stringify(input),
 			    	success :function(result){
 			    		alert(result);
-			    		ListAll();
-			    	 }
-				   })
+			    }
+		})
 }
 
+	/*type   : 'POST',
+    url    : "/users/sign_up",
+    data   : JSON.stringify(input),
+    cache: false,
+    dataType: 'json',
+	contentType: 'application/json',
+    async: false,
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader(csrfHeader, csrfToken);
+    },*/
 

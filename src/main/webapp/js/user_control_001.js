@@ -2,9 +2,23 @@ var _this;
 var user_control_001={};
 var edithtml='';
 
-$(document).ready(function(){
+$(document).ready(function(e){
 	user_control_001.ListData();
-	
+	$(document).on("click","#Result_List tr .thumb",function(){
+	//	wehrm.popup.openPopup("popup_user_settingrole_001");
+		var input={};
+		    input["username"]="" ;
+		    input["usercd"]="";
+	     wehrm.popup.openPopup("popup_uploadimg_002",input, function(data){
+		      callbackFn(data);
+    	 });
+	});
+	$("#btnaAdd").click(function(){
+		wehrm.popup.openPopup("popup_add_role_list_001");
+		/*wehrm.popup.openPopup("popup_uploadimg_002",input, function(data){
+			callbackFn(data);
+    	});*/
+	});
 	//enable detail 
 	$("span#detail_up").click(function(){
 		$(this).hide();
@@ -62,8 +76,8 @@ $(document).ready(function(){
 		  }
 	});
 	$(document).on("click", ".tab li",function(e){
-		$(this).addClass("on");
 		$(this).siblings().removeClass();
+		$(this).addClass("on");
 		var data= $(this).text().replace(/[(0-9)]/gi,"");
 		user_control_001.ListData(data);
 	});
@@ -183,7 +197,7 @@ user_control_001.ListData=function(data){
 //call back
 function callbackFn(data){
 	if(data.IS_TRUE){
-		menu_control_001.listMenu();
+		user_control_001.ListData();
 	}	
 }
 function comboSetting(_this,unit) {
