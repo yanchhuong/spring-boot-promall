@@ -8,14 +8,13 @@
  <meta name="_csrf" content="${_csrf.token}"/>
  <meta name="_csrf_header" content="${_csrf.headerName}"/>
 <%@include file="fragments/include_admin.jsp"%>
+<%@include file="fragments/html_iframes.jsp"%>
 <script src="/js/user_control_001.js"></script>
 <script>
 $(function(){
 	// Invoke the plugin
 	$('input, textarea').placeholder({customClass:'my-placeholder'});
 });
-
-top.ifrMainResize("N", 878);
 
 </script>
 
@@ -55,7 +54,7 @@ $(function(){
 <!-- content wrap -->
 		<div class="content">
 
-			<div class="content_wrap">
+			<div class="content_wrap" style="padding: 24px 35px 11px 11px;">
 
 				<!-- 타이틀/버튼영역 -->
 				<div class="title_wrap">
@@ -127,7 +126,7 @@ $(function(){
 						<li><a href="#none">퇴사<span class="no">(100)</span></a></li>
 					</ul>
 					 <div class="right">
-						<span class="btn_style1_b" id="btnaAdd"><a href="javascript:">등록</a></span>
+						<span class="btn_style1_b" id="btnaAdd"><a href="javascript:">Add Role</a></span>
 						<!-- (PARK)20161202 --><span><a id="btn_download_excel" href="javascript:"><img src="../img/btn/btn_excel.gif" alt="엑셀저장"></a></span><!--                                    /(PARK)20161202 -->
 						<span class="txt_combo">
 							<a id="txtCbmYear" href="javascript:" class="txt"><span id="txtYear" class="bg">2017 년</span></a>
@@ -200,11 +199,11 @@ $(function(){
 										<img src="../img/img_nullphoto_s.png" alt="">
 									</div>
 								</td>
-								<td><div class="elipsis">{{= name }}</div></td>
+								<td><div class="elipsis" id="name">{{= name }}</div></td>
 								<td><div class="elipsis">{{= role }}</div></td>
 								<td><div>{{= birthdate }}</div></td>
 								<td><div>{{= cphone }}</div></td>
-								<td><div>{{= email }}</div></td>
+								<td><div id="email">{{= email }}</div></td>
 								<td><div>{{= address }}</div></td>
 								<td><div>{{= site }}</div></td>
 								<td><div>{{= regdate }}</div></td>
@@ -265,6 +264,6 @@ $(function(){
 
 		</div>
 		<!-- //content wrap -->
-<%@include file="fragments/html_iframes.jsp"%>
+
 </body>
 </html>

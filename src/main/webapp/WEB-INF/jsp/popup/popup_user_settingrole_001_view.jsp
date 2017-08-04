@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+
+String input = request.getParameter("input");
+
+%>    
 <!DOCTYPE html>
 <html lang="ko" xml:lang="ko">
 <head>
@@ -11,17 +16,55 @@
  <meta name="_csrf" content="${_csrf.token}"/>
  <meta name="_csrf_header" content="${_csrf.headerName}"/>
 <%@include file="../fragments/include_admin.jsp"%>
-<script src="../js/popup_user_settingrole_list_001.js"></script>
-<script>
+<script type="text/javascript" src="../../js/popup_user_settingrole_001.js?<%=_localDatetim%>"></script>
+
+<script type="text/javascript">
+
+var input = <%=input%>;
 $(function(){
-	// Invoke the plugin
-	$('input, textarea').placeholder({customClass:'my-placeholder'});
+	// Invoke the plugi
+	$("#usercd").val(input.usercd);
+	$("#name").val(input.name);
+	$("#email").val(input.email);
+	$('.txt_b2').text("* "+input.name + " role list");
 });
+
 </script>
+<style>
+img, label {
+    vertical-align: middle;
+    height: 15px;
+}
+input[type="text"], input[type="file"], input[type="password"] {
+    height: 22px;
+    line-height: 16px;
+    vertical-align: middle;
+    font-size: 12px;
+    color: rgb(85, 85, 85);
+    padding: 3px 4px 2px 2px;
+    width:78px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(180, 180, 180);
+    border-image: initial;
+    background: rgb(255, 255, 255);
+}
+// list have no line (frame)
+.txt_combo .ly_txtcombo ul {
+    border-top: 1px solid rgb(200, 200, 200);
+    border-right: 1px solid rgb(200, 200, 200);
+    border-bottom: 1px solid rgb(200, 200, 200);
+    border-left: 1px solid rgb(200, 200, 200);
+}
+
+</style>
+
 </head>
 
 <body style="width:800px;background-color:#ddd;">
-
+     <input type="hidden" id="usercd">
+     <input type="hidden" id="email">
+     <input type="hidden" id="name">
 	<div class="pop_wrap">
 
 		<!-- 팝업 헤더 -->
@@ -34,7 +77,7 @@ $(function(){
 		<!-- 팝업 컨텐츠 -->
 		<div class="pop_container">
 			<div class="txt_b2" style="margin-bottom:15px;">
-				* Mr.Lee role list
+			<!-- 	* Mr.Lee role list -->
 			</div>
 
 				<!-- 테이블 영역 -->
@@ -42,12 +85,12 @@ $(function(){
 					<table class="tbl_result">
 						<caption></caption>
 						<colgroup>
-						<col style="width:15%;">
-						<col>
+						<col style="width:17%;">
+						<col style="width:30%;">
 						<col style="width:15%;">
 						<col style="width:15%;">
 						<col style="width:10%;">
-						<col style="width:50px;">
+						<col style="width:12%;">
 						</colgroup>
 						<thead>
 							<tr>
@@ -59,7 +102,7 @@ $(function(){
 								<th scope="col"><div></div></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="Result_List">
 							<tr>
 								<td><div>2014년 연차</div></td>
 								<td><div>2014-01-01 ~ 2014-12-31</div></td>
@@ -95,6 +138,17 @@ $(function(){
 							</tr>
 						</tbody>
 					</table>
+					 <script id="tbl_result_template" type="text/x-jQuery-tmpl">
+                             <tr>
+								<td><div>{{= title}}</div></td>
+								<td><div>{{= sdate }} ~ {{= edate}}</div></td>
+								<td><div>{{= regdate}}</div></td>
+								<td><div>2014-01-02 10:00:00</div></td>
+								<td><div><a href="javascript:" id="role">{{= role}}</a></div></td>
+								<td class="ipt"><div class="t_right"><a href="javascript:" id="tbRemove"><img src="../img/btn/caution_icon1.png" alt="삭제"></a></div></td>
+							</tr>
+					</script>
+					
 				</div>
 				<!-- //테이블 영역 -->
 				<div class="add_newbox">

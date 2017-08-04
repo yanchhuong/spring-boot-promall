@@ -19,6 +19,13 @@ $(function(){
 	$('input, textarea').placeholder({customClass:'my-placeholder'});
 });
 </script>
+<style>
+img {
+    height: 22px;
+    border: none;
+}
+</style>
+
 </head>
 
 <body style="width:345px;background-color:#ddd;">
@@ -45,7 +52,7 @@ $(function(){
 					<col style="width:50px;">
 					</colgroup>
 					<tbody>
-						<tr>
+					<!-- 	<tr>
 							<td class="ipt"><div><input type="text" style="width:95%;" value="휴양시설"></div></td>
 							<td class="ipt">
 							      <div class="t_center">
@@ -56,14 +63,27 @@ $(function(){
 						<tr>
 							<td class="ipt"><div><input type="text" style="width:95%;" value="기타"></div></td>
 							<td class="ipt"><div class="t_center"><a href="#none"><img src="../img/btn/btn_row_del.png" alt="삭제"></a></div></td>
-						</tr>
+						</tr> -->
 					</tbody>
 				</table>
+				 <script id="tbl_result_template" type="text/x-jQuery-tmpl">
+                            <tr>
+                                   <td class="ipt">
+                                         <div><input type="text" style="width:95%;" value="{{= role}}">
+                                         </div>
+                                    </td>
+    	                            <td class="ipt">
+                                          <div class="t_center">
+                                            <a href="#none" id="tbRemove"><img src="../img/btn/btn_row_del.png" alt="삭제"></a>
+                                         </div>
+                                    </td>
+    	                    </tr>
+                </script>
 			</div>
 			<!-- //업무이력 수정 -->
 
 			<div class="add_newbox mgt10">
-				<a href="#none" class="add_newtxt"><span class="ico">사용유형 추가</span></a>
+				<a href="#none" class="add_newtxt"><span class="ico">Add More</span></a>
 			</div>
 
 		</div>
@@ -71,8 +91,8 @@ $(function(){
 
 		<!-- 팝업 하단 -->
 		<div class="pop_btm">
-			<span class="btn_style2_b"><a href="#none">저장</a></span>
-			<span class="btn_style2"><a href="#none">취소</a></span>
+		 	<!-- <span class="btn_style2_b"><a href="#none">저장</a></span>
+		    	<span class="btn_style2"><a href="#none">취소</a></span> -->
 		</div>
 		<!-- //팝업 하단 -->
 	</div>
