@@ -4,6 +4,7 @@ public class UserRoleBean_R001 {
   private long id ;
   private String role="ROLE_USER";
   private String userCd;
+  
   public long getId() {
 	return id;
 }

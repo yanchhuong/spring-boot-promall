@@ -1,5 +1,5 @@
 package com.code.model;
-public class RoleBusinessBeanOut_R001 {
+public class RoleBusinessBeanIn_C002 {
 	private long rid;
 	private String username;
 	private String role;

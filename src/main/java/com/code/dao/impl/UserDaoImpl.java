@@ -48,8 +48,8 @@ public class UserDaoImpl extends JdbcDaoSupport implements IUserDao{
 
 	@Override
 	public void insertRole(UserSignupBeanIn_C001 user) {
-		String sql = "INSERT INTO USER_ROLES " +"(username,role,usercd) VALUES (?,?,?)" ;
-        this.getJdbcTemplate().update(sql, new Object[]{user.getUsername(),user.getRole(),user.getUsercd()});
+		String sql = "INSERT INTO USER_ROLES " +"(username,role,regdate,usercd) VALUES (?,?,?,?)" ;
+        this.getJdbcTemplate().update(sql, new Object[]{user.getUsername(),user.getRole(),user.getRegdate(),user.getUsercd()});
 		
 	}
 	@Override
@@ -80,7 +80,6 @@ public class UserDaoImpl extends JdbcDaoSupport implements IUserDao{
 	        }
 	    });
 	}
-	
 	// for example list all
 	public List<UserSignupBeanIn_C001> listUser(){
 		  String sql = "SELECT usercd,username FROM USERS";
@@ -247,7 +246,8 @@ public class UserDaoImpl extends JdbcDaoSupport implements IUserDao{
 	}
 	@Override
 	public List<RoleCountOut_R001> getRoleCount() {
-		String sql =  "select count(*) as cnt , role from user_roles group by  role";
+		String sql =  "select count(*) as cnt , role from user_roles group by  role"
+				+ " union select count(*) , 'ALL' from  user_roles";
 		System.out.println(sql);
 		List<RoleCountOut_R001> result  = getJdbcTemplate().query(sql, 
 					new BeanPropertyRowMapper<RoleCountOut_R001>(RoleCountOut_R001.class));

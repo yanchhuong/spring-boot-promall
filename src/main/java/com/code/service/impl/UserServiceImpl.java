@@ -61,5 +61,17 @@ public class UserServiceImpl implements UserService{
 		return this.iRoleListRepository.findAll();
 	}
 
+	@Override
+	public void addRoleList(RoleListBean_R001 input) {
+	    this.iRoleListRepository.saveAndFlush(input);
+		
+	}
+
+	@Override
+	public void removeRoleListByRole(RoleListBean_R001 input) {
+		 this.iRoleListRepository.removeRoleListByRole(input.getRole());
+		
+	}
+
 
 }

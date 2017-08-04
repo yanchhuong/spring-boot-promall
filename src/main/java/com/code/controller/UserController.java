@@ -22,6 +22,7 @@ import com.code.model.CategoryBean_R001;
 import com.code.model.MUpdateUserStatusIn_U001;
 import com.code.model.MUserListIn_R001;
 import com.code.model.MUserListOut_R001;
+import com.code.model.RoleBusinessBeanOut_R001;
 import com.code.model.RoleCountOut_R001;
 import com.code.model.RoleListBean_R001;
 import com.code.model.UserSignupBeanIn_C001;
@@ -76,17 +77,45 @@ public class UserController {
 	        };
 	}
 	
-	@RequestMapping(value = "/listroles", method = RequestMethod.GET)
+	@RequestMapping(value = "/list_roles", method = RequestMethod.GET)
 	 public  @ResponseBody Map<String,Object> listRole() {
-		System.out.println("reol");
 		List<RoleListBean_R001> rec= this.userService.getRoleList();
 	        return new HashMap<String,Object>(){
 	            {
 	                put("OUT_REC",rec);
 	                put("CODE","200");
-	               
 	            }
 	        };
 	}
+	@RequestMapping(value = "/add_roles_list", method = RequestMethod.POST)
+	 public  @ResponseBody Map<String,Object> addRoleList(@RequestBody RoleListBean_R001 input) {
+		  if(input!=null){
+			  RoleListBean_R001 inRec= input;
+			  inRec.setRegdate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
+			  this.userService.addRoleList(input);
+		  }
+	        return new HashMap<String,Object>(){
+	            {
+	                put("OUT_REC",input);
+	                put("CODE","200"); 
+	            }
+	        };
+	}
+	@RequestMapping(value = "/remove_roles_list", method = RequestMethod.POST)
+	 public  @ResponseBody Map<String,Object> removeRoleList(@RequestBody RoleListBean_R001 input) {
+		  if(input!=null){
+			  this.userService.removeRoleListByRole(input);
+		  }
+	       return new HashMap<String,Object>(){
+	            {
+	                put("OUT_REC",input);
+	                put("CODE","200"); 
+	            }
+	       };
+	}
 
+	
+	
+	
+	
 }

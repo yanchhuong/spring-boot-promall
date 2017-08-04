@@ -15,5 +15,9 @@ public interface UserService {
     
     //list role
     public List<RoleListBean_R001> getRoleList();
+  //list add role
+    public void addRoleList(RoleListBean_R001 input);
+    //list remove role
+    public void removeRoleListByRole(RoleListBean_R001 input);
 
 }
