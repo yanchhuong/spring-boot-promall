@@ -225,7 +225,6 @@ wehrm.popup.openPopup4 = function(wsvcId, input, callbackFn, topHeight) {
 	$(iframe).attr("src", wsvcId+".act");
 };
 wehrm.popup.closePopup = function(wsvcId) {
-	
 	var iframe =  parent.document.getElementById(wsvcId+"_iframe");
 	parent.$(iframe).bPopup().close();
 	

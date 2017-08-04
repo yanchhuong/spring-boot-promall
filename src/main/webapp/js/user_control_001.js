@@ -7,9 +7,10 @@ $(document).ready(function(e){
 	$(document).on("click","#Result_List tr .thumb",function(){
 	//	wehrm.popup.openPopup("popup_user_settingrole_001");
 		var input={};
-		    input["username"]="" ;
-		    input["usercd"]="";
-	     wehrm.popup.openPopup("popup_uploadimg_002",input, function(data){
+		    input["name"]=$(this).parents('tr').find('#name').text() ;
+		    input["email"]=$(this).parents('tr').find('#email').text() ;
+		    input["usercd"]=$(this).parents('tr').find('#usercd').val() ;
+	     wehrm.popup.openPopup("popup_user_settingrole_001",input, function(data){
 		      callbackFn(data);
     	 });
 	});
@@ -51,6 +52,7 @@ $(document).ready(function(e){
 	$(document).on("click","#txtstatus ul#cbStat li",function(e){
 		comboSettingStatus(this,"개");
 		user_control_001.updateUseStatus(this);
+		user_control_001.ListData();
 	});
 	
 	//show status change search
@@ -66,7 +68,6 @@ $(document).ready(function(e){
 		$(this).parents('#spStatSRC').find('.txt').html(title);
 	});
 	
-	
 	$(document).on("click", ".btn_search_tb",function(e){
 		user_control_001.ListData();
 	});
@@ -79,11 +80,14 @@ $(document).ready(function(e){
 		$(this).siblings().removeClass();
 		$(this).addClass("on");
 		var data= $(this).text().replace(/[(0-9)]/gi,"");
+		if('ALL'==data){
+			data='';
+		}
 		user_control_001.ListData(data);
 	});
 	
 	$(document).on("focus", "#regdate",function(){
-		$(this).datepicker();
+		$(this).datepicker({dateFormat: 'dd-mm-yy'});
 	});
 	
 	$(document).on("click", ".btn_folder_plus",function(e){
@@ -151,7 +155,7 @@ user_control_001.ListData=function(data){
     	var html = "";
     	htmRole.html('');
     	$.each(dat.ROLE_REC, function(i,v){
-    		if(i==0){
+    		if(dat.ROLE_REC.length-1 == i){
     			html +='<li class="on"><a href="#none">'+v.role+'<span class="no">('+ v.cnt +')</span></a></li>'; 
     		}else{
     			html +='<li><a href="#none">'+v.role+'<span class="no">('+ v.cnt +')</span></a></li>'; 

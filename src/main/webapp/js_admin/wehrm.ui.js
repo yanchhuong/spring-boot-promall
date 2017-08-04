@@ -1364,7 +1364,7 @@ wehrm.ui.setMonthPicker = function(target, json) {
 		window.location.href = url;
 	};
 	wehrm.ui.formateDate = function(str){
-		if(jex.isNull(str)){
+		if(""==(str)){
 			return;
 		}
 		var year = str.substring(0,4);
@@ -1373,7 +1373,7 @@ wehrm.ui.setMonthPicker = function(target, json) {
 		return year+"-"+month+"-"+day;
 	};
 	wehrm.ui.formatDateTime = function(str){
-		if(jex.isNull(str)){
+		if(""==(str)){
 			return;
 		}
 		var year = str.substring(0,4);
@@ -1723,3 +1723,10 @@ wehrm.ui.clearFileUpload = function(selector){
 	};
 	
 };
+// convert null to empty string ("")
+function null2void(_instance , custom_value){
+	var instance = _instance;
+	if( custom_value == null ) custom_value = "";	
+	if( instance == "undefined" || instance == null || instance == "null" || instance ==""){return custom_value }  
+	return instance
+ };
