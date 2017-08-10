@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NamedQuery;
 
 @Entity(name = "category")
-@NamedQuery(name = "CategoryBean.findAll", query="select catgid,nm_eng,nm_kh,parentid,lvl,pid,usercd,seq,regdate,vscatgid from category  order by catgid")
 @Table(name="category")
 public class CategoryBean implements Serializable { 
 	private static final long serialVersionUID = 1L;
@@ -44,16 +43,27 @@ public class CategoryBean implements Serializable {
 	@Column(name="regdate")	
 	private String regdate;
 	
-	@Column(name="vscatgid")	
-	private long vscatgid;
+	@Column(name="catgcd")	
+	private String catgcd;
+	
+	@Column(name="catgparent")	
+	private String catgparent;
 	
 	
-	public long getVscatgid() {
-		return vscatgid;
+	public String getCatgcd() {
+		return catgcd;
 	}
 
-	public void setVscatgid(long vscatgid) {
-		this.vscatgid = vscatgid;
+	public void setCatgcd(String catgcd) {
+		this.catgcd = catgcd;
+	}
+
+	public String getCatgparent() {
+		return catgparent;
+	}
+
+	public void setCatgparent(String catgparent) {
+		this.catgparent = catgparent;
 	}
 
 	public long getCatgid() {

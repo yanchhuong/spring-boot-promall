@@ -1,12 +1,12 @@
 package com.code.model;
 
 public class MUserListIn_R001{
-
 	private String keyword;
 	private String role;
 	private String regdate;
 	private String birthdate;
 	private boolean enbled;
+	private String status;
 	public boolean isEnbled() {
 		return enbled;
 	}
@@ -21,7 +21,7 @@ public class MUserListIn_R001{
 	}
 	
 
-	private String status;
+
 	public String getKeyword() {
 		return keyword;
 	}

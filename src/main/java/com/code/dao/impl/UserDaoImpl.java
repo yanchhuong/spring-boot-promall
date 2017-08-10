@@ -134,13 +134,16 @@ public class UserDaoImpl extends JdbcDaoSupport implements IUserDao{
 			}
 		}
 		if(!Strings.isNullOrEmpty(input.getRegdate())){
-			sb.append(" and ud.regdate = '"+input.getRegdate()+"'");
+			sb.append(" and ud.regdate = '"+input.getRegdate()+"%'");
 		}
 	    if(!Strings.isNullOrEmpty(input.getBirthdate())){
 	    	sb.append(" and ud.birthdate = '"+input.getBirthdate()+"'");
 		}
 	    if(!Strings.isNullOrEmpty(input.getRole())){
 	    	sb.append(" and ur.role = '"+input.getRole()+"'");
+		}
+	    if(!Strings.isNullOrEmpty(input.getStatus())){
+	    	sb.append(" and  u.enabled = '"+input.getStatus()+"'");
 		}
 	    
 		System.out.println(sb.toString());
@@ -205,7 +208,6 @@ public class UserDaoImpl extends JdbcDaoSupport implements IUserDao{
 		String sql = "UPDATE USER_DETAIL SET FNAME=:fname, EMAIL=:email, ADDRESS=:address, "
 			+ "PASSWORD=:password, SEX=:sex, LNAME=:lname, "
 			+ "SEX=:sex, CPHONE=:phone, REGDATE=:regdate, BIRTHDATE=:birthdate WHERE USERNAME=:username";
-
 		namedParameterJdbcTemplate.update(sql, getSqlParameterByModel(user));
 
 	}

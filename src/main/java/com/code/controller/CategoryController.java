@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -79,14 +80,15 @@ public class CategoryController {
 	        };
 	    }
 	    @RequestMapping(value="/save",method = RequestMethod.POST)
-	           /*,consumes = {"application/json", "application/xml"}
-	            , produces = {"application/json", "application/xml"})*/
 	    public Map<String,Object> saveCategory(@RequestBody CategoryBean category){
 	    	this.iFileImageService.insertNew();
 	    	CategoryBean obj= category;
 	    	obj.setPid(this.iFileImageService.getMaxPid());
 	    	obj.setRegdate(DateFormatUtils.format(new Date(), "yyyyMMddhhmmss"));
-	    	obj.setVscatgid(this.CategoryService.getCatgidCount());
+	    	// add new category
+	    	if(obj.getCatgcd()== null){
+	    		obj.setCatgcd(UUID.randomUUID().toString()+DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
+	    	}
 	    	obj.setSeq(this.CategoryService.getSeqCount(category.getLvl(),category.getParentid())+1);
 	    	this.CategoryService.saveCategoryBean(obj);
 	        return new HashMap<String,Object>(){
@@ -96,19 +98,7 @@ public class CategoryController {
 	            }
 	        };
 	    }
-/*	    @RequestMapping(value="/update",method = RequestMethod.POST)
-        ,consumes = {"application/json", "application/xml"}
-         , produces = {"application/json", "application/xml"})
-       public Map<String,Object> updateCategory(@RequestBody CategoryBean category){  	
- 	   this.CategoryService.updateMenu(category);
-          return new HashMap<String,Object>(){
-         {
-            put("message","Category Saved");
-            put("Category",category);
-          }
-        };
-      }*/
-	    
+
 	  @RequestMapping(value="/remove",method = RequestMethod.GET)
 	  public Map<String,Object> removeMenuTree(@RequestParam(value = "catgid") int rootid){  	
 		  this.CategoryService.removeMenuTree(rootid);

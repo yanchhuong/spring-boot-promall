@@ -41,12 +41,31 @@ public class CategoryBean_R001 implements Serializable {
 	@Column(name="regdate")	
 	private String regdate;
 	
-	@Column(name="vscatgid")	
-	private int vscatgid;
+	@Column(name="catgcd")	
+	private String catgcd;
+	
+	@Column(name="catgparent")	
+	private String catgparent;
 	
 	@Column(name="randname")	
 	private String randname;
 	
+	public String getCatgcd() {
+		return catgcd;
+	}
+
+	public void setCatgcd(String catgcd) {
+		this.catgcd = catgcd;
+	}
+
+	public String getCatgparent() {
+		return catgparent;
+	}
+
+	public void setCatgparent(String catgparent) {
+		this.catgparent = catgparent;
+	}
+
 	@Column(name="fullengname")	
 	private String fullengname;
 	
@@ -77,13 +96,7 @@ public class CategoryBean_R001 implements Serializable {
 		this.randname = randname;
 	}
 
-	public int getVscatgid() {
-		return vscatgid;
-	}
-
-	public void setVscatgid(int vscatgid) {
-		this.vscatgid = vscatgid;
-	}
+	
 
 	public long getCatgid() {
 		return catgid;
