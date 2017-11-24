@@ -1,18 +1,28 @@
 package com.code.controller;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.hadoop.mapred.gethistory_jsp;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.code.session.SessionManager;
-import com.code.session.UserSession;
-@Controller
-public class ViewsController {
+@Configuration
+public class ViewsController extends WebMvcConfigurerAdapter {
 	
-	@RequestMapping(value="/",method = RequestMethod.GET)
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+	        registry.addViewController("/").setViewName("main_page");
+	        registry.addViewController("/post").setViewName("post_control_001_view");
+	        registry.addViewController("/preview").setViewName("preview_page");
+	        registry.addViewController("/admin").setViewName("admin");
+	        registry.addViewController("/feedback_control_001_view").setViewName("feedback_control_001_view");
+	        registry.addViewController("/user_control_001_view").setViewName("user_control_001_view");
+	        registry.addViewController("/menu_control_001_view").setViewName("menu_control_001_view");
+	        registry.addViewController("/message_control_001_view").setViewName("message_control_001_view");
+	        registry.addViewController("/product_control_001_view").setViewName("product_control_001_view");
+	        registry.addViewController("/location_control_001_view").setViewName("location_control_001_view");
+	        registry.addViewController("/auto_vehicle").setViewName("auto_vehicle");
+	}
+	
+	/*@RequestMapping(value="/",method = RequestMethod.GET)
 	public String welcome(HttpServletRequest request, HttpServletResponse response) {
 		return "main_page";
 	}
@@ -49,5 +59,16 @@ public class ViewsController {
 	public String productControl() {
 		return "product_control_001_view";
 	}
-
+	@RequestMapping(value="/location_control_001_view",method = RequestMethod.GET)
+	public String locationControl001() {
+		return "location_control_001_view";
+	}
+	
+	//======= auto vehicle
+	@RequestMapping(value="/auto_vehicle",method = RequestMethod.GET)
+	public String vehicle() {
+		return "auto_vehicle";
+	}
+	
+	*/
 }

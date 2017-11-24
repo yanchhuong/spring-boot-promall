@@ -18,6 +18,8 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.code.dao.IProductRepository;
+import com.code.formater.SqlSmartFormat;
+import com.code.formater.SqlSmartFormatFunctions;
 import com.code.model.ProductBeanIn_U001;
 import com.code.model.ProductListBeanIn_R001;
 import com.code.model.ProductListBeanOut_R001;
@@ -25,7 +27,8 @@ import com.code.model.UserSignupBeanIn_C001;
 import com.google.common.base.Strings;
 @Repository
 public class ProductRepositoryImpl extends JdbcDaoSupport implements IProductRepository{
-	
+
+	private SqlSmartFormat sqlSmartFormat = new SqlSmartFormatFunctions() ; 
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	@Autowired
 	public void setNamedParameterJdbcTemplate(
@@ -89,35 +92,12 @@ public class ProductRepositoryImpl extends JdbcDaoSupport implements IProductRep
 	@Override
 	public void updateProductStatus(ProductBeanIn_U001 input) {
 		 String sql = "update products set enabled=:enabled where prcd=:prcd";
-		 ArrayList<String> param = new ArrayList<String>();
-	     System.out.println(sql);
+	     
           try{
-        	  this.namedParameterJdbcTemplate.update(sql, getSqlParameterByModel(input));
+        	  this.namedParameterJdbcTemplate.update(sql, sqlSmartFormat.getSqlParameterByModel(input));
           }catch(Exception e){
-        	  
+        	  System.out.println(sql);
           }
 	   
 	}
-	  //Static param
-    /*	private SqlParameterSource getSqlParameterByModel(ProductBeanIn_U001 input) {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue("enabled", input.getEnabled());
-		paramSource.addValue("prcd", input.getPrcd());
-		paramSource.addValue("username", input.getUsername());
-		// join String
-		return paramSource;
-	}*/
-	
-	//Dymic paramter
-	private SqlParameterSource getSqlParameterByModel(Object input) throws IllegalArgumentException, IllegalAccessException {
-		MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		for (Field field : input.getClass().getDeclaredFields()) {
-			field.setAccessible(true);
-			Object value = field.get(input); 
-			paramSource.addValue(field.getName(),value);
-		}
-		// join String
-		return paramSource;
-	}
-
 }

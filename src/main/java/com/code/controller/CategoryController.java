@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.time.DateFormatUtils;
+import org.assertj.core.util.Compatibility.System;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -71,6 +72,7 @@ public class CategoryController {
 		  } 
 	    @RequestMapping(value = "/delete/{CategoryId}", method = RequestMethod.DELETE)
 	    public Map<String,Object> deleteCategory(@PathVariable final int CategoryId) {
+	  
 	        this.CategoryService.delete(CategoryId);
 	        return new HashMap<String,Object>(){
 	            {
