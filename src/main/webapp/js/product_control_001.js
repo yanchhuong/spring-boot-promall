@@ -1,12 +1,12 @@
-var _this;
-var user_control_001={};
-var edithtml='';
 var onDisable = "../img/ico/icon_alim_off.png";
 var onEnable = "../img/ico/icon_alim_on.png";
+var product_control_001={};
 var input={};
 $(document).ready(function(e){
-	user_control_001.ListData();
-	$(document).on("click","#Result_List tr .thumb",function(){
+	
+   product_control_001.listData();
+	
+   $(document).on("click","#Result_List tr .thumb",function(){
 	//	wehrm.popup.openPopup("popup_user_settingrole_001");
 		var input={};
 		    input["name"]=$(this).parents('tr').find('#name').text() ;
@@ -17,7 +17,7 @@ $(document).ready(function(e){
     	 });
 	});
 	$("#btnaAdd").click(function(){
-		wehrm.popup.openPopup("popup_add_role_list_001");
+		//wehrm.popup.openPopup("popup_add_role_list_001");
 		/*wehrm.popup.openPopup("popup_uploadimg_002",input, function(data){
 			callbackFn(data);
     	});*/
@@ -44,14 +44,31 @@ $(document).ready(function(e){
 		
 	});
 	
+	$(document).on("focus", "#regdate",function(){
+		$(this).datepicker({dateFormat: 'yy-mm-dd'});
+	});
+	$(document).on("click", ".btn_folder_plus",function(e){
+		$('.tree_layerpop').hide();
+		$(this).parent().find('.tree_layerpop').show();	
+	});
+	$('.combo_style').click(function(){
+		$("#pageNum").fadeToggle();
+	}).mouseleave(function(){
+		$("#pageNum").fadeOut();
+	});
+	$(".combo_style ul#pageNum li").click(function(){	
+		comboSetting(this,"개");
+		product_control_001.listData();	
+	});
+	
 	//Key search
 	$(document).on("click","#btnBsSearch",function(e){
-		user_control_001.ListData();	
+		product_control_001.listData();	
 	})
 	//key enter search
 	$("#SRCH_STR").keydown(function (e) {
 		  if (e.keyCode == 13) {
-			  user_control_001.ListData();
+			  product_control_001.listData();
 		  }
 	});
 	
@@ -66,8 +83,8 @@ $(document).ready(function(e){
 			$(this).find("img").attr("src",onEnable);
 		}
 		 input["enabled"]= status;
-		 input["usercd"] = $(this).parents("tr").find("#usercd").val();
-		 user_control_001.updateUseStatus(input);
+		 input["prcd"] = $(this).parents("tr").find("#prcd").val();
+		 product_control_001.updateProductStatus(input);
 	});
 	
 	//show status change search
@@ -85,92 +102,47 @@ $(document).ready(function(e){
 	
 	//search advance (detail)
 	$(document).on("click", ".btn_search_tb",function(e){
-		user_control_001.ListData();
+		product_control_001.listData();
 	});
 	$("#keySRC").keydown(function (e) {
 		  if (e.keyCode == 13) {
-			  user_control_001.ListData();
+			  product_control_001.listData();
 		  }
 	});
-	$(document).on("click", ".tab li",function(e){
-		$(this).siblings().removeClass();
-		$(this).addClass("on");
-		var data= $(this).text().replace(/[(0-9)]/gi,"");
-		if('ALL'==data){
-			data='';
-		}
-		user_control_001.ListData(data);
-	});
 	
-	$(document).on("focus", "#regdate",function(){
-		$(this).datepicker({dateFormat: 'yy-mm-dd'});
-	});
-	
-	$(document).on("click", ".btn_folder_plus",function(e){
-		$('.tree_layerpop').hide();
-		$(this).parent().find('.tree_layerpop').show();	
-	});
-	$('.combo_style').click(function(){
-		$("#pageNum").fadeToggle();
-	}).mouseleave(function(){
-		$("#pageNum").fadeOut();
-	});
-	$(".combo_style ul#pageNum li").click(function(){	
-		comboSetting(this,"개");
-		user_control_001.ListData();	
-	});
-});
+});	
 
-user_control_001.updateUseStatus=function(input){
-	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-	var csrfToken = $("meta[name='_csrf']").attr("content");
-	//var enbled= $(data).parents('#cbStatus').find('.txt').text();
-	/*var input={};
-	    input["enabled"]= (enbled=='Unblock' ? true : false);
-	    input["usercd"] = $(data).parents("tr").find("#usercd").val();*/
-	
-	console.log(input);
-	$.ajax({
-    	type   : 'POST',
-	    url    : '/users/updatestatus',
-	    data   : JSON.stringify(input),
-	    cache: true,
-        dataType: 'json',
-    	contentType: 'application/json',
-        async: false,
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader(csrfHeader, csrfToken);
-        },
-	})
-    .done(function(dat) {
-    //	user_control_001.ListData();
-    })
-};
-
-user_control_001.ListData=function(data){
+product_control_001.listData=function(){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken = $("meta[name='_csrf']").attr("content");
 	var enabled = $("#spStatSRC").find(".txt").text();
-	    if(enabled=="block"){
-	    	enabled= false;
-	    }else if(enabled=="Unblock"){
-	    	enabled= true;
-	    }else{
-	    	enabled="";
-	    }
-	var input={};
-	    if($("#detail_up").attr("class")== "btn_style1  up"){
-	    	input["keyword"]= $("#SRCH_STR").val();
-	    }else{
-	    	input["keyword"]= $("#keySRC").val();
-	    }
-	    input["role"] = data;
-	    input["status"] = enabled;
-	    input["regdate"] = $("#regdate").val().replace(/[-]/gi,"");
-	var total= 0;
+    if(enabled=="block"){
+    	enabled= false;
+    }else if(enabled=="Unblock"){
+    	enabled= true;
+    }else{
+    	enabled="";
+    }
+var input={};
+    if($("#detail_up").attr("class")== "btn_style1  up"){
+    	input["keyword"]= $("#SRCH_STR").val();
+    }else{
+    	input["keyword"]= $("#keySRC").val();
+    	if( $("#sPrice").val()!="" ||  $("#ePrice").val()!=""){
+    		 input["sprice"]  =   $("#sPrice").val()== "" ? 0 :$("#sPrice").val();
+   	         input["eprice"]  =   $("#ePrice").val()== "" ? 999999 :$("#ePrice").val();
+    	}else{
+    		 input["sprice"]  =  "";
+  	         input["eprice"]  =  "";
+    	}
+    }
+    input["enabled"] = enabled;
+    input["regdate"] = $("#regdate").val().replace(/[-]/gi,"");
+
+	   
 	$.ajax({
     	type   : 'POST',
-	    url    : "/users/list",
+	    url    : "/products/list",
 	    data   : JSON.stringify(input),
 	    cache: false,
         dataType: 'json',
@@ -184,23 +156,25 @@ user_control_001.ListData=function(data){
     	var htmRole = $(".editbtn_top_box .tab");
     	var html = "";
     	htmRole.html('');
-    	$.each(dat.ROLE_REC, function(i,v){
+    	/*$.each(dat.ROLE_REC, function(i,v){
     		if(dat.ROLE_REC.length-1 == i){
     			html +='<li class="on"><a href="#none">'+v.role+'<span class="no">('+ v.cnt +')</span></a></li>'; 
     		}else{
     			html +='<li><a href="#none">'+v.role+'<span class="no">('+ v.cnt +')</span></a></li>'; 
     		}
     		
-    	});
+    	});*/
     	htmRole.html(html);
     	if(dat.OUT_REC.length > 0 ){
 			$.map(dat.OUT_REC,function(val){
 				if(val["enabled"]=='t'){
-					val["enabled"]=onEnable;
+					val["enabled"] = onEnable;	
 				}else{
-					val["enabled"]=onDisable;
+					val["enabled"] = onDisable;	
 				} 
-				total +=1;
+
+			//	total +=1;
+				
 				return val;
 			});
 			$("#Result_List").html($("#tbl_result_template").tmpl(dat.OUT_REC));
@@ -210,7 +184,7 @@ user_control_001.ListData=function(data){
 		}
     	
     	var pagination = dat.PAGINATION;
-		drawTablePaing("table_paging", user_control_001.ListData, 1, 1);
+		drawTablePaing("table_paging",product_control_001.listData, 1, 1);
 	//	drawTablePaing(id selector,listrec,numshow,numpage);
 	//	drawTablePaing("table_paging", wadmhr_srch_0001.listData, pagination.PAGE_NO, pagination.TOTAL_PAGES);
 	//	
@@ -223,11 +197,35 @@ user_control_001.ListData=function(data){
    })
 };
 
-
+product_control_001.updateProductStatus=function(data){
+	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+	var csrfToken = $("meta[name='_csrf']").attr("content");
+	/*var enbled= $(data).parents('#cbStatus').find('.txt').text();
+	var input={};
+	    input["enabled"]= (enbled=='Unblock' ? true : false);
+	    input["prcd"] = $(data).parents("tr").find("#prcd").val();
+	    input["username"] = "";*/
+	console.log(input);
+	$.ajax({
+    	type   : 'POST',
+	    url    : '/products/update_status',
+	    data   : JSON.stringify(input),
+	    cache: true,
+        dataType: 'json',
+    	contentType: 'application/json',
+        async: false,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(csrfHeader, csrfToken);
+        },
+	})
+    .done(function(dat) {
+    //	user_control_001.ListData();
+    })
+};
 //call back
 function callbackFn(data){
 	if(data.IS_TRUE){
-		user_control_001.ListData();
+		product_control_001.listData();
 	}	
 }
 function comboSetting(_this,unit) {
@@ -246,6 +244,5 @@ function comboSettingStatus(_this) {
 	$(_this).parents('#cbStatus').find('.txt').html(title);
 }
 	
-	
-	
+
 	

@@ -1,11 +1,9 @@
-<!DOCTYPE html>
 <html >
 <head>
   <meta charset='UTF-8'>
   <title>Multi Step Form with Progress Bar using jQuery and CSS3</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
-      <link rel='stylesheet' href='/css/post.css'>
-     
+  <link rel='stylesheet' href='/css/post.css'>
 </head>
 <body>
  <!-- multistep form -->
@@ -22,83 +20,83 @@
     <h2 class='fs-title'>Select category </h2>
     <h3 class='fs-subtitle'>This is step 1</h3>
 <nav id='primary_nav_wrap'>
-<ul>
- <li class='current-menu-item'><a href='' class='next'>Vehicle</a></li>
-   	 <li class='current-menu-item'><a href='#'> Buy and Sell</a>
-      <ul>
-      	 <li class='next'><a href='#' class='next'>Phone Tablet</a></li>
-      	 <li class='next'><a href='#' class='next'>Phone Accessary</a></li>
-      	 <li class='next'><a href='#' class='next'>Phone number</a></li>
-      	 <li class='next'><a href='#'>Computers</a>
-         <ul>
-           <li class='next'><a href='#'  class='next'>Deep Menu 1</a></li>
-           <li class='next'><a href='#'  class='next'>Deep Menu 2</a></li>
-         </ul>
-         </li>
-         <li class='next'><a  class='next' href='#'>Sub Menu 5</a></li>
-     </ul>
-  </li>
-  <li class='current-menu-item'><a href='#'>House & Land</a>
-    <ul>
-      <li><a href='#'>for Sale</a>
-		   <ul>
-              <li><a href='#'  class='next'>House</a></li>
-              <li><a href='#'  class='next'>Apartment</a></li>
-              <li><a href='#'  class='next'>Land</a></li>
-			  <li><a href='#'  class='next'>Properties</a></li>
-           </ul>
-	  </li>
-      <li class='dir hasChild'><a href='#'>For rent</a>
-	        <ul>
-	          <li class='dir'><a href='#'  class='next'>House</a></li>
-              <li class='dir'><a href='#'  class='next'>Apartment</a></li>
-              <li class='dir'><a href='#'  class='next'>Land</a></li>
-			  <li class='dir'><a href='#'  class='next'>Properties</a></li>
-			 </ul>
+<ul id="MENU">
+<!--  <li class='current-menu-item'><a href='' class='next'>Vehicle</a></li> -->
+<!--    	 <li class='current-menu-item'><a href='#'> Buy and Sell</a> -->
+<!--       <ul> -->
+<!--       	 <li class='next'><a href='#' class='next'>Phone Tablet</a></li> -->
+<!--       	 <li class='next'><a href='#' class='next'>Phone Accessary</a></li> -->
+<!--       	 <li class='next'><a href='#' class='next'>Phone number</a></li> -->
+<!--       	 <li class='next'><a href='#'>Computers</a> -->
+<!--          <ul> -->
+<!--            <li class='next'><a href='#'  class='next'>Deep Menu 1</a></li> -->
+<!--            <li class='next'><a href='#'  class='next'>Deep Menu 2</a></li> -->
+<!--          </ul> -->
+<!--          </li> -->
+<!--          <li class='next'><a  class='next' href='#'>Sub Menu 5</a></li> -->
+<!--      </ul> -->
+<!--   </li> -->
+<!--   <li class='current-menu-item'><a href='#'>House & Land</a> -->
+<!--     <ul> -->
+<!--       <li><a href='#'>for Sale</a> -->
+<!-- 		   <ul> -->
+<!--               <li><a href='#'  class='next'>House</a></li> -->
+<!--               <li><a href='#'  class='next'>Apartment</a></li> -->
+<!--               <li><a href='#'  class='next'>Land</a></li> -->
+<!-- 			  <li><a href='#'  class='next'>Properties</a></li> -->
+<!--            </ul> -->
+<!-- 	  </li> -->
+<!--       <li class='dir hasChild'><a href='#'>For rent</a> -->
+<!-- 	        <ul> -->
+<!-- 	          <li class='dir'><a href='#'  class='next'>House</a></li> -->
+<!--               <li class='dir'><a href='#'  class='next'>Apartment</a></li> -->
+<!--               <li class='dir'><a href='#'  class='next'>Land</a></li> -->
+<!-- 			  <li class='dir'><a href='#'  class='next'>Properties</a></li> -->
+<!-- 			 </ul> -->
 			  
-	  </li>
-    </ul>
-  </li>
-  <li class='current-menu-item'><a href='#'>Clothes & Fashion Accessary</a>
-    <ul>
-      <li class='dir hasChild'><a href='#'>Woman</a>
-			<ul>
-				<li class='dir'><a href='#' class='next'>Bloouse</a></li>
-				<li class='dir'><a href='#' class='next'>One piece</a></li>
-				<li class='dir'><a href='#' class='next'>T-shirt</a></li>
-				<li class='dir'><a href='#' class='next'>Jeans</a></li>
-				<li class='dir'><a href='#' class='next'>Bag</a></li>
-				<li class='dir'><a href='#' class='next'>Jewry</a></li>
-				<li class='dir'><a href='#' class='next'>Others</a></li>
-			</ul>
-	  </li>
-	  <li class='dir hasChild'><a href='#'> Man</a>
-			<ul>
-				<li class='dir'><a href='#' class='next'>Trouser</a></li>
-				<li class='dir'><a href='#' class='next'>shirts</a></li>
-				<li class='dir'><a href='#' class='next'>T-shirt</a></li>
-				<li class='dir'><a href='#' class='next'>Jeans</a></li>
-				<li class='dir'><a href='#' class='next'>Jogger</a></li>
-				<li class='dir'><a href='#' class='next'>Bag</a></li>
-				<li class='dir'><a href='#' class='next'>>Watch</a></li>
-				<li class='dir'><a href='#' class='next'>Others</a></li>
-			</ul>
+<!-- 	  </li> -->
+<!--     </ul> -->
+<!--   </li> -->
+<!--   <li class='current-menu-item'><a href='#'>Clothes & Fashion Accessary</a> -->
+<!--     <ul> -->
+<!--       <li class='dir hasChild'><a href='#'>Woman</a> -->
+<!-- 			<ul> -->
+<!-- 				<li class='dir'><a href='#' class='next'>Bloouse</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>One piece</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>T-shirt</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>Jeans</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>Bag</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>Jewry</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>Others</a></li> -->
+<!-- 			</ul> -->
+<!-- 	  </li> -->
+<!-- 	  <li class='dir hasChild'><a href='#'> Man</a> -->
+<!-- 			<ul> -->
+<!-- 				<li class='dir'><a href='#' class='next'>Trouser</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>shirts</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>T-shirt</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>Jeans</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>Jogger</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>Bag</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>>Watch</a></li> -->
+<!-- 				<li class='dir'><a href='#' class='next'>Others</a></li> -->
+<!-- 			</ul> -->
 	  
-	  </li>
-	  <li class='dir'><a href='#'>children</a>
-        <ul>
-          <li><a href='#' class='next'>Category 1</a></li>
-          <li><a href='#' class='next'>Category 2</a></li>
-          <li><a href='#' class='next'>Category 3</a></li>
-          <li><a href='#' class='next'>Category 4</a></li>
-          <li><a href='#' class='next'>Category 5</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li class='current-menu-item'><a href='#'>Menu 4</a></li>
-  <li class='current-menu-item'><a href='#'>Menu 5</a></li>
-  <li class='current-menu-item'><a href='#'>Menu 6</a></li>
+<!-- 	  </li> -->
+<!-- 	  <li class='dir'><a href='#'>children</a> -->
+<!--         <ul> -->
+<!--           <li><a href='#' class='next'>Category 1</a></li> -->
+<!--           <li><a href='#' class='next'>Category 2</a></li> -->
+<!--           <li><a href='#' class='next'>Category 3</a></li> -->
+<!--           <li><a href='#' class='next'>Category 4</a></li> -->
+<!--           <li><a href='#' class='next'>Category 5</a></li> -->
+<!--         </ul> -->
+<!--       </li> -->
+<!--     </ul> -->
+<!--   </li> -->
+<!--   <li class='current-menu-item'><a href='#'>Menu 4</a></li> -->
+<!--   <li class='current-menu-item'><a href='#'>Menu 5</a></li> -->
+<!--   <li class='current-menu-item'><a href='#'>Menu 6</a></li> -->
   </ul>
 </nav>
 

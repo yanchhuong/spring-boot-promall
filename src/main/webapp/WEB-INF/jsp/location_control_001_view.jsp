@@ -11,7 +11,7 @@
  <meta name="_csrf_header" content="${_csrf.headerName}"/>
    
 <%@include file="fragments/include_admin.jsp"%>
-<script src="/js/menu_control_001.js"></script>
+<script src="/js/location_control_001.js"></script>
 
 <script>
 $(function(){
@@ -39,26 +39,68 @@ top.ifrMainResize("N", 878);
 
 				<!-- 타이틀/버튼영역 -->
 				<div class="title_wrap mgb15">
-					<div class="left"><h1>Category Control</h1></div>
-					<div class="right"></div>
+					<div class="left"><h1>Location Control</h1></div>
+					
 				</div>
 				<!-- //타이틀/버튼영역 -->
 
 				<!-- 안내 -->
-				<!-- <div class="pop_info_txt">
-					<p style="padding:15px 0;">
-					* 이용기관의 부서를 등록하세요. 부서는 최대 8depth까지 구성이 가능합니다.<br>
-					* 부서등록은 관리자가 설정 가능하며, 관리자 지정 및 변경은 비즈플레이 환경설정에서 하실 수 있습니다.
-					</p>
-				</div> -->
-				<!-- //안내 -->
-
-				<!-- 상단 기능버튼 -->
+			
+				<!-- table search-->
+				<div class="tbl_srch">
+					<table class="">
+						<caption></caption>
+						<colgroup>
+						<col style="width:62px;">
+						<col style="width:254px;">
+						<col style="width:60px;">
+						<col>
+						</colgroup>
+						<tbody>
+							<tr>
+								<th scope="row"><div>ខេត្ត/ក្រុង</div></th>
+								   <td>
+								   <div>
+									<span class="txt_combo " id="spCity" style="width:190px;">
+										<a href="javascript:" class="txt elipsis">Choose</a>
+										<!-- 레이어 -->
+										<div class="ly_txtcombo" id="divCity" style="display: none;">
+											<ul id="ulCity">
+												
+											</ul>
+										</div>
+										<!-- //레이어 -->
+									</span>
+									
+								  </div>
+								</td>
+								<th scope="row"><div>ស្រុក/ខ័ណ្ឌ</div></th>
+								<td>
+								   <div>
+									<span class="txt_combo " id="spProvince" style="width:190px;">
+										<a href="#none" class="txt">Choose</a>
+										<!-- 레이어 -->
+										<div class="ly_txtcombo" id="divProvince" style="display: none;">
+											<ul id="ulProvince">
+											</ul>
+										</div>
+										<!-- //레이어 -->
+									</span>
+									<input type="text" style="width:240px;" id="SCRKEY">
+									<span class="btn_search_tb"><a href="#none"> 검색 </a></span>
+								  </div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- //table search -->
+				
 				<div class="editbtn_top_box">
 					<div class="left">
-						최종수정일시 : 2016-01-02 12:00:00
 					</div>
 				</div>
+				
 				<!-- //상단 기능버튼 -->
 
 				<!-- 스크롤테이블 -->
@@ -79,7 +121,7 @@ top.ifrMainResize("N", 878);
 								<th scope="col" class="t_left">Name</th>
 								<th scope="col" class="t_right">Parent</th>
 								<th scope="col" class="t_left">Level</th>
-								<th scope="col" class="t_left">User</th>
+								<th scope="col" class="t_left">Description</th>
 								<th scope="col" class="t_left"></th>
 							</tr>
 							</thead>

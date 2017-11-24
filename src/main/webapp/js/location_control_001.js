@@ -4,13 +4,13 @@ var edithtml='';
 
 $(document).ready(function(){
 	menu_control_001.init();
-	menu_control_001.listMenu();	
+	menu_control_001.listdata();	
 	$(document).on("click", ".btn_folder_plus",function(e){
 		$('.tree_layerpop').hide();
 		$(this).parent().find('.tree_layerpop').show();	
 	});
 	$(document).on("click", "#btCancelAdd",function(e){
-		menu_control_001.listMenu();	
+		menu_control_001.listdata();	
 	});
 	$(document).on("click", "#btAdd",function(e){
 		menu_control_001.addMenu(this);
@@ -43,17 +43,7 @@ $(document).ready(function(){
 		$(".depset_layer").hide();
 	});
 	
-	$(document).on("click", "#btaddImg", function(){
-		var input={};
-		input["randname"]= $(this).parents("tr").find("#randname").val();
-		input["catgid"]=  $(this).parents("tr").find("#catgid").val();
-		input["pid"]=     $(this).parents("tr").find("#pid").val();
-		
-	//	wehrm.popup.openPopup("popup_uploadimg_002");
-		wehrm.popup.openPopup("popup_uploadimg_002",input, function(data){
-			callbackFn(data);
-    	});
-	});
+
 	//add main
 	$(document).on("click", "#addMain",function(e){
 		var input={};
@@ -69,50 +59,110 @@ $(document).ready(function(){
 	$(document).on("click", "#addSub",function(e){
 		var input={};
 		input.lvl = parseInt($(this).parents('tr').find("#lvl").attr("value"))+1;
-		input.parentid = $(this).parents('tr').find("#catgid").val();
-		input.usercd   = $(this).parents('tr').find("#usercd").val();
-		input.catgparent = $(this).parents('tr').find("#catgcd").val();
+		input.parentid = $(this).parents('tr').find("#id").val();
 		 $(this).parents().find("#edit").remove();
 		 $(this).parents('tr').after(menu_control_001.editTrHtml(input));
    });
+	
+	// search by keyword
+	$(document).on("keypress", "#SCRKEY",function(e){
+		if (e.keyCode == 13) {
+			menu_control_001.listdata();
+		 }
+    })
 	//setting
    $(document).on("click", ".btn_folderset",function(e){
 		$(this).parents().find("#edit").remove();
 		$(this).parent().find('.depset_layer').show();
    });
+	
+	//show City change search
+	$(document).on("click","#spCity",function(e){
+		$(this).find("#divCity").fadeToggle();
+	}).mouseleave(function(){
+		$(this).find("#divCity").fadeOut();
+	});
+	$(document).on("click","#divCity ul#ulCity li",function(e){
+		$(this).parents('ul').find('li').removeClass('on');
+		$(this).addClass("on");
+		title = $.trim($(this).find("a").text());
+		$(this).parents('#spCity').find('.txt').html(title);
+		menu_control_001.listdata($(this).find("a").attr("id"));
+	});
+	
+	//show Province change search
+	$(document).on("click","#spProvince",function(e){
+		if($("#spCity").find(".txt").text()!= 'Choose'){
+		     $(this).find("#divProvince").fadeToggle();
+		}    
+	}).mouseleave(function(){
+		$(this).find("#divProvince").fadeOut();
+	});
+	$(document).on("click","#divProvince ul#ulProvince li",function(e){
+		   $(this).parents('ul').find('li').removeClass('on');
+		   $(this).addClass("on");
+		   title = $.trim($(this).find("a").text());
+		   $(this).parents('#spProvince').find('.txt').html(title);
+		   menu_control_001.listdata($(this).find("a").attr("id"));
+		
+	});
+	
+	
 });
 menu_control_001.init=function(){	
 	
 }
-menu_control_001.listMenu=function(){
-	$.ajax({
-    	type   : 'GET',
-	    url    : "/category/list",
-	    cache  : true,
+menu_control_001.listdata=function(data){
+	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+	var csrfToken = $("meta[name='_csrf']").attr("content");
+	var input = {};
+	    input["keyword"]= $("#SCRKEY").val()=='' ? null : $("#SCRKEY").val();
+	    input["parentid"]= $("#ulCity .on").find("a").attr("id");
+	
+	$.ajax({ 
+	    url    : "/location_map/list",
+		type   : 'POST',
+		 data   : JSON.stringify(input),
+	    cache: false,
+        dataType: 'json',
+    	contentType: 'application/json',
+        async: false,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(csrfHeader, csrfToken);
+        },
 	    
 	})
     .done(function(dat) {
     	var tbody = $(".list_table tbody");
     	var html = "";
     	tbody.html('');
-    	console.log(dat);
+    	
+    	var listcity = "" , listPro="" ;
+    	var pro  = $("#ulProvince");
+    	$.each(dat.OUT_REC, function(i,v){
+    		if(v.lvl=='1'){
+    			listcity +='<li><a href="javascript:" class="elipsis" id="'+v.id+'">'+ v.nm_eng+ v.nm_kh + '</a></li>';
+    			
+    			$("#ulCity").html(listcity);
+    		}
+    		if(v.lvl=='2'){
+    			listPro +='<li><a href="javascript:" class="elipsis" id="'+v.id+'">'+ v.nm_eng+ v.nm_kh + '</a></li>';
+    			pro.html(listPro);
+    		}else{
+    			pro.html('');
+    		}
+    	})
+    
     	$.each(dat.OUT_REC, function(i,v){
     			html += '<tr>                                                                 ';
     			html += ' <td class="t_center brd_r">									      ';
     			html += '		<div class="ly_po">											  ';
     			html += '			<a class="btn_folder_plus" id="btnAddMenu">Add</a>		  ';
     			html += '           <input type="hidden" id= "lvl" value="'+ v.lvl +'"/>      ';
-    			html += '           <input type="hidden" id= "catgid" value="'+v.catgid +'"/> ';
+    			html += '           <input type="hidden" id= "id" value="'+ v.id +'"/>      ';
     			html += '           <input type="hidden" id= "nmeng" value="'+v.nm_eng +'"/>  ';
     			html += '           <input type="hidden" id= "nmkh" value="'+v.nm_kh +'"/>  ';
-    			html += '           <input type="hidden" id= "pid" value="'+v.pid    +'"/>    ';
-    			html += '           <input type="hidden" id= "usercd" value="'+v.usercd +'"/> ';
     			html += '           <input type="hidden" id= "parentid" value="'+v.parentid +'"/> ';
-    			html += '           <input type="hidden" id= "catgcd" value="'+ v.catgcd +'"/> ';
-    			html += '           <input type="hidden" id= "catgparent" value="'+v.catgparent +'"/> ';
-    			html += '           <input type="hidden" id= "fullengname" value="'+v.fullengname +'"/> ';
-    			html += '           <input type="hidden" id= "fullkhname" value="'+v.fullkhname +'"/> ';
-    			html += '           <input type="hidden" id= "randname" value="'+v.randname +'"/> ';
 				html += '			<!-- layer popup -->									';
 				html += '			<div class="tree_layerpop" style="display:none;">		';
     			html += '				<ul>												';
@@ -126,10 +176,10 @@ menu_control_001.listMenu=function(){
     			html += '		</div>												     	';
     			html += '	</td>														    ';
     			
-    			html += '	<td class="t_left"><div class="dp'+v.lvl+'" id="editMenu"><span class="ico_treefolder">'+v.lvl+'</span> <span class="txt">'+ v.nm_eng+'</span></div></td>';
+    			html += '	<td class="t_left"><div class="dp'+v.lvl+'" id="editMenu"><span class="ico_treefolder">'+v.lvl+'</span> <span class="txt">'+ v.nm_eng+' '+ v.nm_kh+'</span></div></td>';
     			html += '	<td class="t_right"><a class="txt_d">'+v.parentid+'</a></td>		     ';
     			html += '	<td class="t_left"><a class="txt_d off">'+v.lvl+'</a></td>				 ';
-    			html += '	<td class="t_left"><a class="txt_d off">'+v.usercd+'</a></td>			 ';
+    			html += '	<td class="t_left"><a class="txt_d off">'+v.descs+'</a></td>			 ';
     			
     			html += '	<td class="t_center">												     ';
     			html += '		<div style="position:relative;">									 ';
@@ -139,7 +189,6 @@ menu_control_001.listMenu=function(){
     			html += '				<ul>											             ';
     			html += '					<li class="first"><a id="btUpdate">Update</a></li>		 ';
     			html += '					<li><a id="btRemove">Remove</a></li>					 ';
-    			html += '					<li><a id="btaddImg">Add image</a></li>					 ';
     			html += '				</ul>											             ';
     			html += '			</div>												             ';
     			html += '			<!-- //layer -->										         ';
@@ -148,10 +197,10 @@ menu_control_001.listMenu=function(){
     			html += '	</tr>                                                                    ';
           })
           
-          if(dat.OUT_REC.length == 0){
+         if(dat.OUT_REC.length == 0){
         	  var  html =' <tr>                                                                   '; 
         	       html+=' <td class="t_center brd_r">								              ';
-        	    /* edithtml+='	<div class="ly_po">									              ';
+        	     edithtml+='	<div class="ly_po">									              ';
         	     edithtml+='		<a class="btn_folder_plus">추가</a>						      ';
         	     edithtml+='		<!-- layer popup -->								          ';
         	     edithtml+='		<div class="tree_layerpop" style="display:none;">		      ';
@@ -161,7 +210,7 @@ menu_control_001.listMenu=function(){
         	     edithtml+='			</ul>									                  ';
         	     edithtml+='		</div>										                  ';
         	     edithtml+='		<!-- //layer popup -->								          ';
-        	     edithtml+='	</div>											                  ';*/
+        	     edithtml+='	</div>											                  ';
         	       html+=' </td>											                      ';
         	       html+=' <td class="t_left">									                  ';
         	       html+='     <div class="dp1">									              ';
@@ -211,16 +260,15 @@ menu_control_001.listMenu=function(){
 };
 menu_control_001.editTrHtml = function(input){
 	 var  parentid = 0;
-	 var  catgparent = "";
 	 var edithtml='';
 		if(input.lvl!='1'){
 			parentid = input.parentid ;
-			catgparent = input.catgparent;
+		
 		}
      edithtml+=' <tr id="edit">                                                       '; 
      edithtml+=' <td class="t_center brd_r">								          ';
      edithtml+= '           <input type="hidden" id= "lvl" value="'+ input.lvl +'"/>  ';
-     edithtml+= '           <input type="hidden" id= "catgparent" value="'+ catgparent+'"/>';
+     edithtml+= '           <input type="hidden" id= "parentid" value="'+ parentid+'"/>';
  /*   edithtml+='	<div class="ly_po">									              ';
      edithtml+='		<a class="btn_folder_plus">추가</a>						      ';
      edithtml+='		<!-- layer popup -->								          ';
@@ -279,19 +327,18 @@ menu_control_001.addMenu= function(data,type){
 	var csrfToken = $("meta[name='_csrf']").attr("content");
 	var input={};
 	if(type ==1){
-		input["catgid"]      = $(data).parents("tr").find('#catgid').val();
-		input["catgcd"]      = $(data).parents("tr").find('#catgcd').val();
+		input["parentid"]= 0;
+	}else{
+		input["parentid"]  = $(data).parents("tr").find('#parentid').val();
 	}
-	input["catgparent"]  = $(data).parents("tr").find('#catgparent').val();
 	input["nm_eng"]      = $(data).parents("tr").find('#txtnmeng').val();
 	input["nm_kh"]       = $(data).parents("tr").find('#txtnmkh').val();
 	input["lvl"]         = $(data).parents("tr").find('#lvl').val();
-	input["parentid"]    = $(data).parents("tr").find('#parentid').text();
-	input["usercd"]      = $(data).parents("tr").find('#usercd').text();
+	input["mapcd"]       =  "";
 	console.log(input);
 	 $.ajax({
 	        type   : 'POST',
-	    	url    : '/category/save',
+	    	url    : '/location_map/add',
 	    	cache: false,
             dataType: 'json',
 	    	contentType: 'application/json',
@@ -301,7 +348,7 @@ menu_control_001.addMenu= function(data,type){
 	        },
 	        data:JSON.stringify(input),
 	    	success :function(result){
-	    		menu_control_001.listMenu();
+	    		menu_control_001.listdata();
 	    	 }
 		   })
 };	
@@ -322,7 +369,7 @@ menu_control_001.removeMenuTree= function(data){
 	        },*/
 	        data:input,
 	    	success :function(result){
-	    		menu_control_001.listMenu();
+	    		menu_control_001.listdata();
 	    	 }
 		   })
 	
@@ -337,7 +384,7 @@ return array.sort(function(a, b) {
 //call back
 function callbackFn(data){
 	if(data.IS_TRUE){
-		menu_control_001.listMenu();
+		menu_control_001.listdata();
 	}	
 }
 

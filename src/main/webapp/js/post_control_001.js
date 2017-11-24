@@ -5,7 +5,6 @@
  var post_control_001={};
  $(document).ready(function(){
 	 post_control_001.listMenu();
-	 
 	 $(".next").click(function(){
  		if(animating) return false;
  			animating = true;
@@ -17,8 +16,6 @@
  				current_fs = $(this).parent();
          		next_fs =  $(this).parent().next();
  			} 
- 	
- 
  			//activate next step on progressbar using the index of next_fs
  			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
  	
@@ -49,7 +46,7 @@
  				easing: 'easeInOutBack'
  			});
  		});
- 
+
  		$(".previous").click(function(){
  			if(animating) return false;
  			animating = true;
@@ -98,14 +95,28 @@ post_control_001.listMenu=function(){
 	    cache  : true
 	})
     .done(function(dat) {
-    	var tbody = $(".list_table tbody");
+    	var tbody = $("#primary_nav_wrap");
     	var html = "";
-    	tbody.html('');
-    	console.log(dat);
+//    	tbody.html('');
+
+    	html= "";
     	$.each(dat.OUT_REC, function(i,v){
-    			if(v.lvl)
-    		
-    		
-        })
+    		if(v.lvl == "1"){
+    		   html += "<li data-id="+v.catgid+" class='current-menu-item'><a href='' class='next'>"+v.nm_eng+"</a></li>";
+    		}
+    	});
+    	var ul="<ul></ul>";
+    	$("#MENU").append(html);
+    	$.each(dat.OUT_REC, function(i,v){
+    		if(v.lvl == "2"){
+    			$("#MENU li").each(function(){
+    	    		if($(this).data("id") == v.parentid){
+    	    		    $(this).append(ul).append("<li data-id="+v.catgid+" class='next'><a href='#' class='next'>"+v.nm_eng+"</a></li>");
+    	    		}
+    	    	});
+    		}
+        });
+    	
+    	
 	})
 };

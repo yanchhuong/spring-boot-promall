@@ -83,8 +83,10 @@ $(function(){
 							<ul>
 								<li><a href="javascrip:" id="cmenu" >Menu</a></li>
 								<li><a href="javascrip:" id="cuser"  >User</a></li><!-- (add)20170309 -->
-								<li><a href="javascrip:" id="cmessage">Role</a></li>
+								<li><a href="javascrip:" id="cproduct">Product</a></li>
 								<li><a href="javascrip:" id="cfeedback">Feedback</a></li>
+								<li><a href="javascrip:" id="cmessage">Message</a></li>
+								<li><a href="javascrip:" id="cLocation">Location</a></li>
 							</ul>
 						</div>
 					</div>
@@ -95,7 +97,7 @@ $(function(){
 		</div>
 		<!-- //lnb box -->
 		
-		<iframe id="ifr_content" name="ifr_content" src="cmenu" 
+		<iframe id="ifr_content" name="ifr_content" src="menu_control_001_view" 
                     style="width:100%;min-width:600px;height:auto" 
                     scrolling="auto" frameborder="0" marginheight="0" marginwidth="0" >
        	</iframe> 

@@ -208,17 +208,10 @@ $(function(){
 								<td><div>{{= site }}</div></td>
 								<td><div>{{= regdate }}</div></td>
 								<td><div>
-                                        <span class="txt_combo btn_combo_down" id="cbStatus" style="width:100px;">
-										<a href="#none" class="txt"> {{= enabled }}</a>
-										<!-- 레이어 -->
-										<div class="ly_txtcombo" id="txtstatus" style="display:none;">
-											<ul id="cbStat">
-												<li><a href="#none">block</a></li><!-- 활성화클래스 on -->
-											 	<li><a href="#none">Unblock</a></li>
-										    </ul> 
-										</div>
-										<!-- //레이어 -->
-									 </span>
+                                        <a href="javascript:" id="status" 
+                                            class="onOrOff">
+                                            <img src="{{= enabled }}" alt="">
+                                         </a>
                                     </div></td>		
 						</tr>
 					</script>

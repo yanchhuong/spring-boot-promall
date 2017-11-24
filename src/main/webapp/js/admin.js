@@ -14,16 +14,24 @@ $(document).ready(function(){
 	});
 	
 	$("#cmenu").click(function(){
-		$("#ifr_content").attr("src","cmenu");
+		$("#ifr_content").attr("src","menu_control_001_view");
 	});
-	
 	$("#cuser").click(function(){
-		$("#ifr_content").attr("src","cuser");
+		$("#ifr_content").attr("src","user_control_001_view");
 	});
-	$("#cmessage").click(function(){
-		$("#ifr_content").attr("src","cmessage");
+	$("#cproduct").click(function(){
+		$("#ifr_content").attr("src","product_control_001_view");
 	});
 	$("#cfeedback").click(function(){
-		$("#ifr_content").attr("src","cfeedback");
+		$("#ifr_content").attr("src","feedback_control_001_view");
 	});
+	$("#cmessage").click(function(){
+		$("#ifr_content").attr("src","message_control_001_view");
+	});
+	$("#cLocation").click(function(){
+		$("#ifr_content").attr("src","location_control_001_view");
+	});
+
+	
+
 })
