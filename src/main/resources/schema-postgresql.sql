@@ -34,8 +34,9 @@ CREATE TABLE if not EXISTS user_roles (
   usercd varchar(50),
   regdate varchar(14),
   seq integer,
-  vscatgid integer ,
-  PRIMARY KEY (catgid)
+  catgcd varchar(50) ,
+  catgparent varchar(50) ,
+  PRIMARY KEY (catgcd) 
   );
 
   CREATE TABLE if not EXISTS filepicture (
@@ -51,21 +52,22 @@ CREATE TABLE if not EXISTS user_roles (
   PRIMARY KEY (pid)
   );
   
-  CREATE TABLE if not EXISTS products (
+ CREATE TABLE if not EXISTS products (
   prid SERIAL,
-  prcd  varchar (16)  NOT NULL,
+  prcd  varchar (50)  NOT NULL,
   title varchar (100) NOT NULL,
-  date  varchar (14)  not null,
-  price integer       null,
-  description varchar (600) null,
-  linksite integer     null,
-  enable boolean       not null default true,
-  catgcd varchar(14)  not null,
+  regdate  varchar (14)  not null,
+  price decimal       null,
+  description varchar (1000) null,
+  url  varchar(300)   null,
+  enabled boolean      not null default true,
+  catgcd varchar(50)  not null,
   username varchar(45) not null,
   FOREIGN KEY (username) REFERENCES users(username),
   FOREIGN KEY (catgcd) REFERENCES category(catgcd),
   PRIMARY KEY (prcd)
   );
+  
   
 
   CREATE TABLE if not EXISTS address (
@@ -77,6 +79,19 @@ CREATE TABLE if not EXISTS user_roles (
   FOREIGN KEY (username) REFERENCES users(username),
   PRIMARY KEY (id)
   );
+  
+    
+ CREATE TABLE if not EXISTS locat_map (
+  id SERIAL,
+  parentid  integer       NULL,
+  lvl integer             ,
+  nm_eng varchar (100)     NULL,
+  nm_kh varchar (100)     NULL,
+  descs  varchar (100)     null,
+  PRIMARY KEY (id)
+  ); 
+  
+  
  
   
   CREATE TABLE if not EXISTS comments (
@@ -136,3 +151,28 @@ FOREIGN KEY (c_id_fk) REFERENCES conversation(c_id)
   usercd varchar(50) NOT NULL,
   FOREIGN KEY (username_fk) REFERENCES users(username),
   PRIMARY KEY (id) );
+  
+  
+ CREATE TABLE if not EXISTS  products_views(
+  id serial primary key,
+  prcd varchar(50),
+  username varchar(45)
+  );
+  
+ CREATE TABLE if not EXISTS  products_likes(
+  id serial primary key,
+  prcd varchar(50) not null,
+  usercd varchar(45) not null
+  );
+  
+ CREATE TABLE if not EXISTS  store_page(
+  id serial ,
+  storecd varchar(50) primary key,
+  store_nm varchar(100),
+  pid integer,
+  store_url varchar(500),
+  usercd varchar(50) not null,
+  username varchar(45)
+  );
+
+  
