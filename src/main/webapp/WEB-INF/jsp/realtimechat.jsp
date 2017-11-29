@@ -1,129 +1,240 @@
-<!DOCTYPE html>
-<!-- saved from url=(0051)http://tz-private-webchat.herokuapp.com/chat/585374 -->
-<html style="background-attachment: scroll;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Widget</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
-	<title>Private chat room | Tutorialzine Demo</title>
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+ 
+  <link rel="stylesheet" type="text/css" href="../css/realtimechat.css" media="all"> 
 
-	<link href="./Private chat room _ Tutorialzine Demo_files/css" rel="stylesheet" type="text/css">
-	
-	<link rel="stylesheet" type="text/css" href="../css/realtimechat.css" media="all"> 
-
-
-<style type="text/css">		#bsaHolder{				right: 25px;position: absolute;	top: 0;	width: 345px;z-index: 10;}		#bsaHolder span{		text-shadow:1px 1px 0 #fff;}		#bsap_aplink,		#bsap_aplink:visited{	bottom: 10px;color: #aaa;font: 11px arial, sans-serif;position: absolute;right: 14px;border:none;}		#bsaHolder .bsa_it_p{	display:none;}		#bsaHolder .bsa_it_ad{	background: -moz-linear-gradient(#F3F3F3, #FFFFFF, #F3F3F3) repeat scroll 0 0 transparent; background: -webkit-gradient(linear,0% 0%,0% 100%,color-stop(0, #f3f3f3),color-stop(0.5, #fff),color-stop(1, #f3f3f3)); background-color:#f4f4f4;								border-color: #fff;overflow: hidden;padding: 10px 10px 0;-moz-box-shadow: 0 0 2px #999;-webkit-box-shadow: 0 0 2px #999;box-shadow: 0 0 2px #999;								-moz-border-radius: 0 0 4px 4px;-webkit-border-radius: 0 0 4px 4px;border-radius: 0 0 4px 4px;}		#bsaHolder img{			display:block;border:none;}		#bsa_closeAd{			width:15px;height:15px;overflow:hidden;position:absolute;top:10px;right:11px;border:none !important;z-index:1;								text-decoration:none !important;background:url("http://cdn.tutorialzine.com/misc/enhance/x_icon.png") no-repeat;}		#bsa_closeAd:hover{		background-position:left bottom;}	</style><script id="_carbonads_projs" type="text/javascript" src="./Private chat room _ Tutorialzine Demo_files/C6AILKT.json"></script><style id="_legacy_carbonads_css">.one{position:relative}.one .bsa_it_ad{display:block;padding:15px;border:1px solid #e1e1e1;background:#f9f9f9;font-family:helvetica,arial,sans-serif;line-height:100%;position:relative}.one .bsa_it_ad a{text-decoration:none}.one .bsa_it_ad a:hover{text-decoration:none}.one .bsa_it_ad .bsa_it_t{display:block;font-size:12px;font-weight:bold;color:#212121;line-height:125%;padding:0 0 5px 0}.one .bsa_it_ad .bsa_it_d{display:block;color:#434343;font-size:12px;line-height:135%}.one .bsa_it_ad .bsa_it_i{float:left;margin:0 15px 10px 0}body .one .bsa_it_p{text-align:center;display:block !important}.one .bsa_it_p a{font-size:10px;color:#666;text-decoration:none}.one .bsa_it_ad .bsa_it_p a:hover{font-style:italic}</style><script type="text/javascript" src="./Private chat room _ Tutorialzine Demo_files/saved_resource"></script></head>
+</head>
 
 <body>
+    <div class="container clearfix">
+    <div class="people-list" id="people-list">
+      <div class="search">
+        <input type="text" placeholder="search" />
+        <i class="fa fa-search"></i>
+      </div>
+      <ul class="list">
+        <li class="clearfix">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
+          <div class="about">
+            <div class="name">Vincent Porter</div>
+            <div class="status">
+              <i class="fa fa-circle online"></i> online
+            </div>
+          </div>
+        </li>
+        
+        <li class="clearfix">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_02.jpg" alt="avatar" />
+          <div class="about">
+            <div class="name">Aiden Chavez</div>
+            <div class="status">
+              <i class="fa fa-circle offline"></i> left 7 mins ago
+            </div>
+          </div>
+        </li>
+        
+        <li class="clearfix">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_03.jpg" alt="avatar" />
+          <div class="about">
+            <div class="name">Mike Thomas</div>
+            <div class="status">
+              <i class="fa fa-circle online"></i> online
+            </div>
+          </div>
+        </li>
+        
+        <li class="clearfix">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_04.jpg" alt="avatar" />
+          <div class="about">
+            <div class="name">Erica Hughes</div>
+            <div class="status">
+              <i class="fa fa-circle online"></i> online
+            </div>
+          </div>
+        </li>
+        
+        <li class="clearfix">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_05.jpg" alt="avatar" />
+          <div class="about">
+            <div class="name">Ginger Johnston</div>
+            <div class="status">
+              <i class="fa fa-circle online"></i> online
+            </div>
+          </div>
+        </li>
+        
+        <li class="clearfix">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_06.jpg" alt="avatar" />
+          <div class="about">
+            <div class="name">Tracy Carpenter</div>
+            <div class="status">
+              <i class="fa fa-circle offline"></i> left 30 mins ago
+            </div>
+          </div>
+        </li>
+        
+        <li class="clearfix">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_07.jpg" alt="avatar" />
+          <div class="about">
+            <div class="name">Christian Kelly</div>
+            <div class="status">
+              <i class="fa fa-circle offline"></i> left 10 hours ago
+            </div>
+          </div>
+        </li>
+        
+        <li class="clearfix">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_08.jpg" alt="avatar" />
+          <div class="about">
+            <div class="name">Monica Ward</div>
+            <div class="status">
+              <i class="fa fa-circle online"></i> online
+            </div>
+          </div>
+        </li>
+        
+        <li class="clearfix">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_09.jpg" alt="avatar" />
+          <div class="about">
+            <div class="name">Dean Henry</div>
+            <div class="status">
+              <i class="fa fa-circle offline"></i> offline since Oct 28
+            </div>
+          </div>
+        </li>
+        
+        <li class="clearfix">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_10.jpg" alt="avatar" />
+          <div class="about">
+            <div class="name">Peyton Mckinney</div>
+            <div class="status">
+              <i class="fa fa-circle online"></i> online
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="chat">
+      <div class="chat-header clearfix">
+        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+        
+        <div class="chat-about">
+          <div class="chat-with">Chat with Vincent Porter</div>
+          <div class="chat-num-messages">already 1 902 messages</div>
+        </div>
+        <i class="fa fa-star"></i>
+      </div> <!-- end chat-header -->
+      
+      <div class="chat-history">
+        <ul>
+          <li class="clearfix">
+            <div class="message-data align-right">
+              <span class="message-data-time" >10:10 AM, Today</span> &nbsp; &nbsp;
+              <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
+              
+            </div>
+            <div class="message other-message float-right">
+              Hi Vincent, how are you? How is the project coming along?
+            </div>
+          </li>
+          
+          <li>
+            <div class="message-data">
+              <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
+              <span class="message-data-time">10:12 AM, Today</span>
+            </div>
+            <div class="message my-message">
+              Are we meeting today? Project has been already finished and I have results to show you.
+            </div>
+          </li>
+          
+          <li class="clearfix">
+            <div class="message-data align-right">
+              <span class="message-data-time" >10:14 AM, Today</span> &nbsp; &nbsp;
+              <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
+              
+            </div>
+            <div class="message other-message float-right">
+              Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
+            </div>
+          </li>
+          
+          <li>
+            <div class="message-data">
+              <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
+              <span class="message-data-time">10:20 AM, Today</span>
+            </div>
+            <div class="message my-message">
+              Actually everything was fine. I'm very excited to show this to our team.
+            </div>
+          </li>
+          
+          <li>
+            <div class="message-data">
+              <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
+              <span class="message-data-time">10:31 AM, Today</span>
+            </div>
+            <i class="fa fa-circle online"></i>
+            <i class="fa fa-circle online" style="color: #AED2A6"></i>
+            <i class="fa fa-circle online" style="color:#DAE9DA"></i>
+          </li>
+          
+        </ul>
+        
+      </div> <!-- end chat-history -->
+      
+      <div class="chat-message clearfix">
+        <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3"></textarea>
+                
+        <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
+        <i class="fa fa-file-image-o"></i>
+        
+        <button>Send</button>
 
-	<header class="banner">
+      </div> <!-- end chat-message -->
+      
+    </div> <!-- end chat -->
+    
+  </div> <!-- end container -->
 
-		<h1 class="bannertext">
-			<a href="http://tutorialzine.com/2014/03/nodejs-private-webchat/" id="logo">Tutorial<span>zine</span>: NODE.JS CHAT TUTORIAL</a>
-		</h1>
+<script id="message-template" type="text/x-handlebars-template">
+  <li class="clearfix">
+    <div class="message-data align-right">
+      <span class="message-data-time" >{{time}}, Today</span> &nbsp; &nbsp;
+      <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
+    </div>
+    <div class="message other-message float-right">
+      {{messageOutput}}
+    </div>
+  </li>
+</script>
 
-	</header>
+<script id="message-response-template" type="text/x-handlebars-template">
+  <li>
+    <div class="message-data">
+      <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
+      <span class="message-data-time">{{time}}, Today</span>
+    </div>
+    <div class="message my-message">
+      {{response}}
+    </div>
+  </li>
+</script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js'></script>
 
+<script  src="/js/realtimechat.js"></script>
+<script src="/js-lib/sockjs-0.3.4.js"></script>
+<script src="/js-lib/stomp.js"></script>
+<script src="/js-lib/jquery-2.1.0.min.js"></script>
 
-	<section class="section">
-
-		<!-- These elements are displayed as white info cards in the middle of the screen -->
-
-		<div class="connected" style="display: none;">
-
-			<img src="./Private chat room _ Tutorialzine Demo_files/unnamed.jpg" id="creatorImage">
-
-			<div class="infoConnected">
-				<h2>Who are you?</h2>
-				<br>
-
-				<form class="loginForm">
-					<input type="text" id="yourName" placeholder="Your nick name"><br>
-					<input type="text" id="yourEmail" placeholder="Your email address"><br>
-					<input type="submit" id="yourEnter" value="ENTER">
-				</form>
-
-			</div>
-
-		</div>
-
-		<div class="personinside" style="display: none;">
-
-			<img src="./Private chat room _ Tutorialzine Demo_files/unnamed.jpg" id="ownerImage">
-
-			<div class="infoInside">
-				<h2>Chat with <span class="nickname-chat">TT</span></h2>
-				<br>
-
-				<form class="loginForm">
-					<input type="text" id="hisName" placeholder="Your nick name"><br>
-					<input type="text" id="hisEmail" placeholder="Your email address"><br>
-					<input type="submit" id="hisEnter" value="CHAT">
-				</form>
-
-			</div>
-
-		</div>
-
-		<div class="invite-textfield" style="display: none;">
-
-			<h2>Oops, there are no other people in this chat!</h2>
-			<h5>Invite a friend by sending them this URL</h5>
-
-			<div class="link">
-				<a title="Invite a friend" href="http://tz-private-webchat.herokuapp.com/chat/585374" id="link">http://tz-private-webchat.herokuapp.com/chat/585374</a>
-			</div>
-
-		</div>
-
-		<div class="left" style="display: none;">
-
-			<img src="./Private chat room _ Tutorialzine Demo_files/unnamed.jpg" id="leftImage">
-
-			<div class="info">
-				<h2><span class="nickname-left"></span> has left this chat.</h2>
-				<h5>Invite somebody else by sending them this page.</h5>
-			</div>
-
-		</div>
-
-		<div class="toomanypeople" style="display: none;">
-
-			<h2>Oops, you can not join this chat!</h2>
-			<h5>There are already two people in it. Would you like to create a <a title="New Room" href="http://tz-private-webchat.herokuapp.com/create" id="room">new room</a>?</h5>
-
-		</div>
-
-		<div class="nomessages" style="display: none;">
-
-			<img src="./Private chat room _ Tutorialzine Demo_files/63b52f7b24dad3646b3f8d2283220461" id="noMessagesImage">
-
-			<div class="info">
-				<h2>You are chatting with <span class="nickname-chat">TT</span>.</h2>
-				<h5>Send them a message from the form below!</h5>
-			</div>
-
-		</div>
-
-		<div class="chatscreen" style="display: block;">
-
-			<ul class="chats"><li class="you"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/63b52f7b24dad3646b3f8d2283220461"><b>TT</b><i class="timesent" data-time="1469175234935">9 minutes ago</i> </div><p>sdfasf</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175239799">9 minutes ago</i> </div><p>hello</p></li><li class="you"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/63b52f7b24dad3646b3f8d2283220461"><b>TT</b><i class="timesent" data-time="1469175244517">9 minutes ago</i> </div><p>hhh</p></li><li class="you"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/63b52f7b24dad3646b3f8d2283220461"><b>TT</b><i class="timesent" data-time="1469175246575">9 minutes ago</i> </div><p>hhdhd]</p></li><li class="you"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/63b52f7b24dad3646b3f8d2283220461"><b>TT</b><i class="timesent" data-time="1469175249188">9 minutes ago</i> </div><p>ddhhd]</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175288573">8 minutes ago</i> </div><p>hesadf</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175313587">7 minutes ago</i> </div><p>gfh</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175315247">7 minutes ago</i> </div><p>gh</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175317130">7 minutes ago</i> </div><p>hgg</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175708891">a minute ago</i> </div><p>ki</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175713145">a minute ago</i> </div><p>kkj</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175714969">a minute ago</i> </div><p>ikkk</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175716738">a minute ago</i> </div><p>kj</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175718226">a few seconds ago</i> </div><p>jj</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175719698">a few seconds ago</i> </div><p>jj</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175730448">a few seconds ago</i> </div><p>dfdsfs</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175735664">a few seconds ago</i> </div><p>sdfdsf</p></li><li class="me"><div class="image"><img src="./Private chat room _ Tutorialzine Demo_files/bc7025792de200a662ccaccf037ad530"><b>yanchhuong</b><i class="timesent" data-time="1469175739184">a few seconds ago</i> </div><p>xcvsdf</p></li></ul>
-
-		</div>
-
-	</section>
-
-	<footer style="display: block;">
-
-		<form id="chatform">
-
-			<textarea id="message" placeholder="Write something.."></textarea>
-			<input type="submit" id="submit" value="SEND">
-
-		</form>
-
-	</footer>
-
-	<script src="./Private chat room _ Tutorialzine Demo_files/jquery.min.js"></script>
-	<script src="./Private chat room _ Tutorialzine Demo_files/moment.min.js"></script>
-	<script src="./Private chat room _ Tutorialzine Demo_files/socket.io.js"></script>
-	<script src="./Private chat room _ Tutorialzine Demo_files/chat.js"></script>
-
-</body></html>
+</body>
+</html>

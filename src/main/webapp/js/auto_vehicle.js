@@ -54,15 +54,18 @@ function onload(){
 				 var k=1;
 				 while ( j < len) {
 					 $.map(data[j].photoSrcs, function(i,v){
-						 
-						 if(k==1){
-							// html += "<img src='http://media.ed.edmunds-media.com"+ i +"'/>";
-							 html += "<div class='item active'><a class='hidden-xs highslide' href='http://media.ed.edmunds-media.com"+i+"'onclick='return hs.expand(this)'><img src='http://media.ed.edmunds-media.com"+i+"'></div>"; 
-							// html += "<div class='item'><a class='hidden-xs highslide'><img src='http://media.ed.edmunds-media.com"+i+"'></a><img class='visible-xs' src='http://media.ed.edmunds-media.com"+i+"'></div>"; 
-						 }else{
-							 html += "<div class='item'><a class='hidden-xs highslide' href='http://media.ed.edmunds-media.com"+i+"'onclick='return hs.expand(this)'><img src='http://media.ed.edmunds-media.com"+i+"'></div>"; 
-						 }
-						k++;
+						var str = parseInt(i.substring(i.lastIndexOf("_") + 1,i.lastIndexOf(".")));
+						if(str > 450){
+							 if(k==1){
+								// html += "<img src='http://media.ed.edmunds-media.com"+ i +"'/>";
+								 html += "<div class='item active'><a class='hidden-xs highslide' href='http://media.ed.edmunds-media.com"+i+"'onclick='return hs.expand(this)'><img src='http://media.ed.edmunds-media.com"+i+"'></div>"; 
+								// html += "<div class='item'><a class='hidden-xs highslide'><img src='http://media.ed.edmunds-media.com"+i+"'></a><img class='visible-xs' src='http://media.ed.edmunds-media.com"+i+"'></div>"; 
+							 }else{
+								 html += "<div class='item'><a class='hidden-xs highslide' href='http://media.ed.edmunds-media.com"+i+"'onclick='return hs.expand(this)'><img src='http://media.ed.edmunds-media.com"+i+"'></div>"; 
+							 }
+							 k++;
+						}
+						console.log(i);
 					 });
 					 j++;
 				 }

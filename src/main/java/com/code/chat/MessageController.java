@@ -35,6 +35,7 @@ public class MessageController {
   public void greeting(Message<Object> message, @Payload LiveChatBean chatMessage) throws Exception {
     Principal principal = message.getHeaders().get(SimpMessageHeaderAccessor.USER_HEADER, Principal.class);
     String authedSender = principal.getName();
+    System.out.println(message.getHeaders().getReplyChannel());
     
     chatMessage.setSender(authedSender);
     String recipient = chatMessage.getRecipient();

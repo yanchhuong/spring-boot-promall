@@ -1,645 +1,207 @@
-/*------------- Reset browser differences ------------- */
-
-
-
-* {
-	padding: 0;
-	margin: 0;
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+*, *:before, *:after {
+  box-sizing: border-box;
 }
-
-
-/* ------------ Body styles ------------ */
-
 
 body {
-	background-color: #f0f1f3;
-	color:#667073;
-	font: 16px/1.3 'Arial',sans-serif;
+  background: #C5DDEB;
+  font: 14px/20px "Lato", Arial, sans-serif;
+  padding: 40px 0;
+  color: white;
 }
 
-
-
-
-/* ------------ Header styles ------------ */
-
-
-
-/* ------ Home ------ */
-
-
-.homebanner {
-	height: 120px;
-	background-color: #3c4446;
+.container {
+  margin: 0 auto;
+  width: 750px;
+  background: #444753;
+  border-radius: 5px;
 }
 
-.homebannertext {
-	text-align:center;
-	padding-top: 35px;
-	font-family: 'Open Sans Condensed',serif;
-	font-weight: bold;
-	color:white;
+.people-list {
+  width: 260px;
+  float: left;
 }
-.homebannertext span {
-	color: #d6441b;
+.people-list .search {
+  padding: 20px;
 }
-
-#logo {
-	text-decoration: none;
-	color:white;
+.people-list input {
+  border-radius: 3px;
+  border: none;
+  padding: 14px;
+  color: white;
+  background: #6A6C75;
+  width: 90%;
+  font-size: 14px;
 }
-#logo:visited {
-	color: white;
+.people-list .fa-search {
+  position: relative;
+  left: -25px;
 }
-
-
-
-/* ------ Invite ------ */
-
-
-.banner {
-	height: 70px;
-	background-color: #3c4446;
-	margin-bottom: 200px;
+.people-list ul {
+  padding: 20px;
+  height: 770px;
 }
-
-.bannertext {
-	text-align:center;
-	padding-top: 15px;
-	font-family: 'Open Sans Condensed',serif;
-	font-weight: bold;
-	color:white;
-	font-size:25px;
+.people-list ul li {
+  padding-bottom: 20px;
 }
-.bannertext span {
-	color: #d6441b;
+.people-list img {
+  float: left;
 }
-
-
-
-
-/* ------------ Section styles ------------ */
-
-
-
-/* ------ Home ------ */
-
-
-.homesection {
-	text-align:center;
-	margin-top:140px;
+.people-list .about {
+  float: left;
+  margin-top: 8px;
+}
+.people-list .about {
+  padding-left: 8px;
+}
+.people-list .status {
+  color: #92959E;
 }
 
-.node {
-	padding-top: 20px;
-	text-align:center;
-	margin-bottom:120px;
+.chat {
+  width: 490px;
+  float: left;
+  background: #F2F5F8;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: #434651;
 }
-.node #chat {
-	font-family: 'Open Sans Condensed';
-	font-weight: normal;
-	color: #707368;
+.chat .chat-header {
+  padding: 20px;
+  border-bottom: 2px solid white;
 }
-
-#nodelogo {
-	width: 410px;
-	height: 110px;
-	margin-bottom: 35px;
+.chat .chat-header img {
+  float: left;
 }
-
-#create {
-	width: 300px;
-	height: 100px;
-	background-color: #70b1d1;
-	text-align:center;
-	display: block;
-	margin:0px auto;
-	border-radius: 3px;
-	box-shadow: 0px 5px 5px #e4e8e7;
-	text-decoration: none;
-	margin-bottom: 70px;
-	color: #eeffff;
+.chat .chat-header .chat-about {
+  float: left;
+  padding-left: 10px;
+  margin-top: 6px;
 }
-#create:visited {
-	color: #eeffff;
-	text-decoration: none;
+.chat .chat-header .chat-with {
+  font-weight: bold;
+  font-size: 16px;
 }
-#createbutton {
-	padding-top: 28px;
+.chat .chat-header .chat-num-messages {
+  color: #92959E;
 }
-#little {
-	font-weight: normal;
-	font-size: 13px;
+.chat .chat-header .fa-star {
+  float: right;
+  color: #D8DADF;
+  font-size: 20px;
+  margin-top: 12px;
 }
-#big {
-	font-weight: bold;
-	font-size: 23px;
+.chat .chat-history {
+  padding: 30px 30px 20px;
+  border-bottom: 2px solid white;
+  overflow-y: scroll;
+  height: 575px;
 }
-.tutorial{
-	margin-bottom:90px;
+.chat .chat-history .message-data {
+  margin-bottom: 15px;
 }
-#tutorial {
-	color: #88bfd4;
+.chat .chat-history .message-data-time {
+  color: #a8aab1;
+  padding-left: 6px;
 }
-#tutorial:visited {
-	color: #88bfd4;
+.chat .chat-history .message {
+  color: white;
+  padding: 18px 20px;
+  line-height: 26px;
+  font-size: 16px;
+  border-radius: 7px;
+  margin-bottom: 30px;
+  width: 90%;
+  position: relative;
 }
-
-
-
-/* ------ Connected ------*/
-
-.connected {
-	text-align:center;
-	display: block;
-	margin:0px auto;
-	width: 700px;
-	height: 400px;
-	background-color: #ffffff;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	color: #637277;
+.chat .chat-history .message:after {
+  bottom: 100%;
+  left: 7%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: #86BB71;
+  border-width: 10px;
+  margin-left: -10px;
 }
-.connected h2 {
-	padding-top: 20px;
+.chat .chat-history .my-message {
+  background: #86BB71;
 }
-.infoConnected {
-	text-align: left;
-	float: right;
-	margin: 65px 165px 0 0;
+.chat .chat-history .other-message {
+  background: #94C2ED;
 }
-#creatorImage {
-	float: left;
-	margin: 90px 0 0 140px;
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
+.chat .chat-history .other-message:after {
+  border-bottom-color: #94C2ED;
+  left: 93%;
 }
-
-#yourName {
-	float:left;
-	padding-left:10px;
-	width: 150px;
-	height: 30px;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	background-color: #f0f1f3;
-	border: 1px solid #d1d1d1;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	margin-bottom:20px;
-	overflow: hidden;
+.chat .chat-message {
+  padding: 30px;
 }
-
-#yourEmail {
-	float:left;
-	padding-left: 10px;
-	width: 200px;
-	height: 30px;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	background-color: #f0f1f3;
-	border: 1px solid #d1d1d1;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	margin-bottom:40px;
+.chat .chat-message textarea {
+  width: 100%;
+  border: none;
+  padding: 10px 20px;
+  font: 14px/22px "Lato", Arial, sans-serif;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  resize: none;
+}
+.chat .chat-message .fa-file-o, .chat .chat-message .fa-file-image-o {
+  font-size: 16px;
+  color: gray;
+  cursor: pointer;
+}
+.chat .chat-message button {
+  float: right;
+  color: #94C2ED;
+  font-size: 16px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  background: #F2F5F8;
+}
+.chat .chat-message button:hover {
+  color: #75b1e8;
 }
 
-#yourEnter {
-	float:left;
-	width: 110px;
-	height: 40px;
-	text-align:center;
-	background-color: #73b4d4;
-	border: none;
-	box-shadow: 3px 3px 3px #efedee;
-	border-radius: 2px;
-	color:white;
-	font-weight: bold;
-	font-size: 15px;
+.online, .offline, .me {
+  margin-right: 3px;
+  font-size: 10px;
 }
 
-
-
-/* ------ Person Inside ------*/
-
-.personinside {
-	text-align:center;
-	display: block;
-	margin:0px auto;
-	width: 700px;
-	height: 400px;
-	background-color: #ffffff;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	color: #637277;
-}
-.personinside h2 {
-	padding-top: 20px;
-	width: 210px;
-	overflow: hidden;
+.online {
+  color: #86BB71;
 }
 
-.infoInside {
-	text-align: left;
-	float: right;
-	margin: 65px 165px 0 0;
-}
-
-#ownerImage {
-	float: left;
-	margin: 90px 0 0 140px;
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-}
-
-#hisName {
-	float:left;
-	padding-left:10px;
-	width: 150px;
-	height: 30px;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	background-color: #f0f1f3;
-	border: 1px solid #d1d1d1;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	margin-bottom:20px;
-}
-
-#hisEmail {
-	float:left;
-	padding-left: 10px;
-	width: 200px;
-	height: 30px;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	background-color: #f0f1f3;
-	border: 1px solid #d1d1d1;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	margin-bottom:40px;
-}
-
-#hisEnter {
-	float:left;
-	width: 110px;
-	height: 40px;
-	text-align:center;
-	background-color: #73b4d4;
-	border: none;
-	box-shadow: 3px 3px 3px #efedee;
-	border-radius: 2px;
-	color:white;
-	font-weight: bold;
-	font-size: 15px;
-}
-
-
-/* ------ Invite ------ */
-
-
-.invite-textfield {
-	text-align:center;
-	display: block;
-	margin:0px auto;
-	width: 750px;
-	height: 300px;
-	background-color: #ffffff;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	color: #637277;
-}
-.invite-textfield h2 {
-	padding-top: 80px;
-}
-.invite-textfield h5 {
-	 font-weight: normal;
-	 margin: 10px 0 35px;
- }
-.invite-textfield .link {
-	width: 600px;
-	height: 35px;
-	text-align:center;
-	display: block;
-	margin:0px auto;
-	padding-top: 15px;
-	margin-bottom:120px;
-	border-radius: 4px;
-	background-color: #f0f1f3;
-}
-.invite-textfield #link{
-	text-decoration: none;
-	color: #637277;
-}
-
-
-/* ------ Left ------*/
-
-.left {
-	text-align:center;
-	display: block;
-	margin:0px auto;
-	width: 750px;
-	height: 300px;
-	background-color: #ffffff;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	color: #637277;
-	margin-bottom: 400px;
-}
-.left h2 {
-	padding-top: 50px;
-	padding-bottom: 6px;
-}
-.left h5 {
-	font-weight: normal;
-	margin-bottom: 100px;
-}
-
-#leftImage {
-	float: left;
-	margin: 90px 0 0 140px;
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-}
-.nickname-left {
-	width: 40px;
-	overflow: hidden;
-}
-
-/* ------ Too many People ------*/
-
-
-.toomanypeople {
-	text-align:center;
-	display: block;
-	margin:0px auto;
-	width: 750px;
-	height: 300px;
-	background-color: #ffffff;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	color: #637277;
-}
-.toomanypeople h2 {
-	padding-top: 100px;
-	padding-bottom: 8px;
-}
-.toomanypeople h5 {
-	font-weight: normal;
-	margin-bottom: 100px;
-}
-
-#room:visited {
-	color: #88bfd4;
-}
-
-
-
-/* ------ No Messages ------ */
-
-
-.nomessages {
-	text-align:center;
-	display: block;
-	margin:0px auto;
-	width: 750px;
-	height: 300px;
-	background-color: #ffffff;
-	border-radius: 3px;
-	box-shadow:0px 3px 3px #e3e4e6;
-	color: #637277;
-	margin-bottom: 400px;
-}
-.nomessages h2 {
-	padding-top: 50px;
-	overflow: hidden;
-	padding-bottom: 6px;
-}
-.nomessages h5 {
-	font-weight: normal;
-	margin-bottom: 100px;
-}
-
-#noMessagesImage {
-	float: left;
-	margin: 90px 0 0 140px;
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-}
-
-#img {
-	float: left;
-	margin: 90px 0 0 140px;
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-}
-.info {
-	text-align: left;
-	float: right;
-	margin: 65px 60px 0 0;
-	width: 405px;
-	overflow: hidden;
-}
-.nickname-chat {
-	overflow: hidden;
-}
-
-
-/* ------ Chat Screen ------ */
-
-
-
-.image {
-	clear:both;
-	float:left;
-	height: 160px;
-	width: 80px;
-	text-align:center;
-	overflow: hidden;
-}
-
-.image img {
-	float: left;
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-}
-
-.body {
-	text-align:center;
-	width: 40%;
-	display: block;
-	margin:0px auto 650px;
-	background-color: #ffffff;
-	color: #637277;
-}
-
-.chats {
-	list-style-type: none;
-	margin-top:10px;
+.offline {
+  color: #E38968;
 }
 
 .me {
-	clear:both;
-	float:left;
-	margin-bottom:10px;
+  color: #94C2ED;
 }
 
-.you {
-	clear:both;
-	float:right;
-	margin-bottom:10px;
+.align-left {
+  text-align: left;
 }
 
-.you .image{
-	float:right;
+.align-right {
+  text-align: right;
 }
 
-.chats .me p {
-	text-align:left;
-	float: left;
-	display: inline-block;
-	margin-left: 20px;
-	margin-bottom:30px;
-	padding: 25px 34px;
-	min-width: 160px;
-	min-height: 10px;
-	max-width: 510px;
-	background-color: #FFF;
-	border-radius: 3px;
-	box-shadow: 0px 3px 3px #E3E4E6;
-	color: #637277;
-	line-height: 1.4;
-	word-wrap: break-word;
+.float-right {
+  float: right;
 }
 
-.chats .you p {
-	text-align:left;
-	float: left;
-	display: inline-block;
-	margin-right:20px;
-	margin-bottom:30px;
-	padding: 25px 34px;
-	min-width: 160px;
-	min-height: 10px;
-	max-width: 510px;
-	background-color: #FFF;
-	border-radius: 3px;
-	box-shadow: 0px 3px 3px #E3E4E6;
-	color: #637277;
-	line-height: 1.4;
-	word-wrap: break-word;
-}
-
-.image b {
-	overflow: hidden;
-	display: block;
-	clear: both;
-	padding-top: 7px;
-}
-
-.image i{
-	font-size: 12px;
-	line-height: 1.2;
-	display: block;
-	opacity: 0.8;
-	padding-top: 4px;
-}
-
-
-/* ------------ Footer styles ------------ */
-
-footer {
-	position:fixed;
-	bottom:0;
-	left:0;
-	width:100%;
-	padding-top: 30px;
-	background-color: white;
-	height: 130px;
-}
-#chatform {
-	width:700px;
-	margin: 0 auto;
-	background-color: white;
-}
-
-#message {
-	width: 550px;
-	height: 80px;
-	display: block;
-	float:left;
-	margin: 0 auto;
-	background-color: #f9f9f9;
-	border: 1px solid #cccccc;
-	border-radius: 2px;
-	padding-left: 20px;
-	padding-top: 20px;
-	resize: none;
-	font:inherit;
-	color:inherit;
-}
-
-#submit {
-	width: 110px;
-	height: 60px;
-	float:right;
-	text-align:center;
-	background-color: #73b4d4;
-	display: block;
-	margin: 0 auto;
-	border: none;
-	box-shadow: 3px 3px 3px #efedee;
-	border-radius: 2px;
-	color:white;
-	font-weight: bold;
-	font-size: 17px;
-	outline: none;
-	cursor:pointer;
-}
-
-
-
-
-/* ---------------------- HIDE -------------------------- */
-
-
-.connected {
-	display: none;
-}
-
-.personinside {
-	display: none;
-}
-
-.invite-textfield {
-	display:none;
-}
-
-.left {
-	display:none;
-}
-
-.toomanypeople {
-	display:none;
-}
-
-.nomessages{
-	display:none;
-}
-
-footer {
-	display:none;
-}
-
-.chatscreen{
-	display:none;
-	width:700px;
-	margin: 0 auto 200px;
-	overflow:hidden;
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
 }

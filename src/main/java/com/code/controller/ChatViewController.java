@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class ChatViewController {
 
-    
 	@RequestMapping(value = "/chatting",method = RequestMethod.GET)
 	public String chatting(
 			ModelMap model,HttpServletRequest request,RedirectAttributes redir) {
