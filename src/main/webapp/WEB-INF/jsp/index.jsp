@@ -97,6 +97,7 @@
         var chatInput = '#input-chat-' + user;
         var message = $(chatInput).val();
         
+        console.log("chatInput"+chatInput);
         
         if (!message.length) {
           return;
@@ -134,7 +135,9 @@
           
           chatSubmit.click(function(event) {
             var user = event.currentTarget.id.substring(12); // gets rid of 'submit-chat-'
+            console.log("RECIEVER:"+user);
             sendMessageTo(user);
+            
           });
           
           chatContainer.append(chatWindow);
