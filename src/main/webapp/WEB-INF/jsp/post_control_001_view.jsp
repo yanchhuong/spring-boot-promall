@@ -17,90 +17,88 @@
   </ul>
   <!-- fieldsets -->
   <fieldset id='form0'>
-    <h2 class='fs-title'>Select category </h2>
+    <h2 class='fs-title'>Select category</h2>
     <h3 class='fs-subtitle'>This is step 1</h3>
-<nav id='primary_nav_wrap'>
-<ul id="MENU">
-<!--  <li class='current-menu-item'><a href='' class='next'>Vehicle</a></li> -->
-<!--    	 <li class='current-menu-item'><a href='#'> Buy and Sell</a> -->
-<!--       <ul> -->
-<!--       	 <li class='next'><a href='#' class='next'>Phone Tablet</a></li> -->
-<!--       	 <li class='next'><a href='#' class='next'>Phone Accessary</a></li> -->
-<!--       	 <li class='next'><a href='#' class='next'>Phone number</a></li> -->
-<!--       	 <li class='next'><a href='#'>Computers</a> -->
-<!--          <ul> -->
-<!--            <li class='next'><a href='#'  class='next'>Deep Menu 1</a></li> -->
-<!--            <li class='next'><a href='#'  class='next'>Deep Menu 2</a></li> -->
-<!--          </ul> -->
-<!--          </li> -->
-<!--          <li class='next'><a  class='next' href='#'>Sub Menu 5</a></li> -->
-<!--      </ul> -->
-<!--   </li> -->
-<!--   <li class='current-menu-item'><a href='#'>House & Land</a> -->
-<!--     <ul> -->
-<!--       <li><a href='#'>for Sale</a> -->
-<!-- 		   <ul> -->
-<!--               <li><a href='#'  class='next'>House</a></li> -->
-<!--               <li><a href='#'  class='next'>Apartment</a></li> -->
-<!--               <li><a href='#'  class='next'>Land</a></li> -->
-<!-- 			  <li><a href='#'  class='next'>Properties</a></li> -->
-<!--            </ul> -->
-<!-- 	  </li> -->
-<!--       <li class='dir hasChild'><a href='#'>For rent</a> -->
-<!-- 	        <ul> -->
-<!-- 	          <li class='dir'><a href='#'  class='next'>House</a></li> -->
-<!--               <li class='dir'><a href='#'  class='next'>Apartment</a></li> -->
-<!--               <li class='dir'><a href='#'  class='next'>Land</a></li> -->
-<!-- 			  <li class='dir'><a href='#'  class='next'>Properties</a></li> -->
-<!-- 			 </ul> -->
-			  
-<!-- 	  </li> -->
-<!--     </ul> -->
-<!--   </li> -->
-<!--   <li class='current-menu-item'><a href='#'>Clothes & Fashion Accessary</a> -->
-<!--     <ul> -->
-<!--       <li class='dir hasChild'><a href='#'>Woman</a> -->
-<!-- 			<ul> -->
-<!-- 				<li class='dir'><a href='#' class='next'>Bloouse</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>One piece</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>T-shirt</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>Jeans</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>Bag</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>Jewry</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>Others</a></li> -->
-<!-- 			</ul> -->
-<!-- 	  </li> -->
-<!-- 	  <li class='dir hasChild'><a href='#'> Man</a> -->
-<!-- 			<ul> -->
-<!-- 				<li class='dir'><a href='#' class='next'>Trouser</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>shirts</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>T-shirt</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>Jeans</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>Jogger</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>Bag</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>>Watch</a></li> -->
-<!-- 				<li class='dir'><a href='#' class='next'>Others</a></li> -->
-<!-- 			</ul> -->
-	  
-<!-- 	  </li> -->
-<!-- 	  <li class='dir'><a href='#'>children</a> -->
-<!--         <ul> -->
-<!--           <li><a href='#' class='next'>Category 1</a></li> -->
-<!--           <li><a href='#' class='next'>Category 2</a></li> -->
-<!--           <li><a href='#' class='next'>Category 3</a></li> -->
-<!--           <li><a href='#' class='next'>Category 4</a></li> -->
-<!--           <li><a href='#' class='next'>Category 5</a></li> -->
-<!--         </ul> -->
-<!--       </li> -->
-<!--     </ul> -->
-<!--   </li> -->
-<!--   <li class='current-menu-item'><a href='#'>Menu 4</a></li> -->
-<!--   <li class='current-menu-item'><a href='#'>Menu 5</a></li> -->
-<!--   <li class='current-menu-item'><a href='#'>Menu 6</a></li> -->
-  </ul>
-</nav>
+    
+	<div id="key-parties">
+		  <!-- Main Menu Container -->
+		<ul id="key-parties-menu">
+<!-- 
+		    First Product
+		    <li class="menu-item">
+		      Menu Button
+		      <a href="#" class="menu-item-btn selected" id="btn-1">
+		        <span>Cars</span>
+		        <i class="fa fa-chevron-down" aria-hidden="true"></i>  
+		      </a>
+		        
+		      Product item
+		      <div class="menu-item-content show-content" id="content-1">
+		        <h3>Cars</h3>
+		        <div class="contact-cards">
+		          <div class="shadow-overlay"></div>
+		          Card 1
+		          <div class="contact-card">
+		            <ul>
+		              <li class="next"><a href="#" class="next">Isuzu</a></li>
+		              <li><a href="#">Toyota</a></li>
+ 		              <li><a href="#">Lexus</a></li>
+		              <li><a href="#">Tesla1</a></li>
+		              <li><a href="#">Tesla2</a></li>
+		              <li><a href="#">Tesla3</a></li>
+		              <li><a href="#">Tesla4</a></li>
+		              <li><a href="#">Tesla5</a></li>
+		            </ul>
+		          </div>
+		        </div>
+		     </div>
+		     
+		    </li>
 
-  </fieldset>
+		    Second Product
+		    <li class="menu-item">
+		      Menu Button
+		      <a href="#" class="menu-item-btn" id="btn-2">
+		        <span>Apartment</span>
+		        <i class="fa fa-chevron-down" aria-hidden="true"></i>  
+		      </a>
+		      Product item
+		      <div class="menu-item-content" id="content-2">
+		        <h3>Apartment</h3>
+		        <div class="contact-cards">
+		          <div class="shadow-overlay"></div>
+		          Card 1
+		          <div class="contact-card">
+		            <ul>
+		              <li><a href="#">Isuzu</a></li>
+		              <li><a href="#">Toyota</a></li>
+ 		              <li><a href="#">Lexus</a></li>
+		              <li><a href="#">Tesla1</a></li>
+		              <li><a href="#">Tesla2</a></li>
+		              <li><a href="#">Tesla3</a></li>
+		              <li><a href="#">Tesla4</a></li>
+		              <li><a href="#">Tesla5</a></li>
+		            </ul>
+		          </div>
+		        </div>
+		     </div>
+		    </li>
+
+		    Third Product
+		    <li class="menu-item">
+		      Menu Button
+		      <a href="#" class="menu-item-btn" id="btn-3">
+		        <span>Smart Phone</span>
+		        <i class="fa fa-chevron-down" aria-hidden="true"></i>  
+		      </a>
+		    </li> -->
+
+		</ul> <!-- End of menu container -->
+	</div>
+	
+</fieldset>
+  
+  
   <fieldset id='form1'>
     <h2 class='fs-title'>INFORMATION PRODUCT</h2>
     <h3 class='fs-subtitle'>Fill product's information below!</h3>
