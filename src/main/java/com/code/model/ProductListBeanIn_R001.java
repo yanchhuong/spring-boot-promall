@@ -5,7 +5,7 @@ public class ProductListBeanIn_R001 {
 	private String eprice ;
 	private String enabled;
 	private String regdate;
-	private String keyword; // 
+	private String keyword; //
 	/*ud.fname
 	  ud.lname
 	  p.description

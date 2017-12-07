@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.code.formater.PagingUtils;
+import com.code.comm.PagingUtils;
 import com.code.model.ProductBeanIn_U001;
 import com.code.model.ProductListBeanIn_R001;
 import com.code.model.ProductListBeanOut_R001;
@@ -27,6 +27,7 @@ public class ProductController {
 		this.iProductService=iProductService;
 		
 	}
+	
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	 public  @ResponseBody Map<String,Object> getListProduct(@RequestBody ProductListBeanIn_R001 input) {
 		   List<ProductListBeanOut_R001> obj = this.iProductService.getProductList(input);

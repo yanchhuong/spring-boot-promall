@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.code.formater.PagingUtils;
+import com.code.comm.PagingUtils;
 import com.code.model.MUpdateUserStatusIn_U001;
 import com.code.model.MUserListIn_R001;
 import com.code.model.MUserListOut_R001;

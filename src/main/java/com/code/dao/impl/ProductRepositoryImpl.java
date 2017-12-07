@@ -17,9 +17,9 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.code.comm.SqlSmartFormat;
+import com.code.comm.SqlSmartFormatFunctions;
 import com.code.dao.IProductRepository;
-import com.code.formater.SqlSmartFormat;
-import com.code.formater.SqlSmartFormatFunctions;
 import com.code.model.ProductBeanIn_U001;
 import com.code.model.ProductListBeanIn_R001;
 import com.code.model.ProductListBeanOut_R001;
@@ -31,17 +31,16 @@ public class ProductRepositoryImpl extends JdbcDaoSupport implements IProductRep
 	private SqlSmartFormat sqlSmartFormat = new SqlSmartFormatFunctions() ; 
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	@Autowired
-	public void setNamedParameterJdbcTemplate(
-		NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
 	@Autowired
 	protected DataSource dataSource;
 	 
-	 @PostConstruct
-	 private void initialize(){
-	        setDataSource(dataSource);
-	 }
+	@PostConstruct
+	private void initialize(){
+	       setDataSource(dataSource);
+	}
 	@Override
 	public List<ProductListBeanOut_R001> getListProduct(ProductListBeanIn_R001 input) {
 		String sql = "select p.prid,p.prcd,p.title,p.regdate,p.price, "

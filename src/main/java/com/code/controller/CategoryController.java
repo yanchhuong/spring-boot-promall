@@ -5,15 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.assertj.core.util.Compatibility.System;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.code.dao.ICategory;
+
 import com.code.model.CategoryBean;
 import com.code.model.CategoryBean_R001;
-import com.code.model.FileUploadBean;
+
 import com.code.service.ICategoryService;
 import com.code.service.IFileImageService;
 
@@ -69,7 +64,8 @@ public class CategoryController {
 		                put("OUT_REC",obj);
 		            }
 		        };
-		  } 
+		  }
+		
 	    @RequestMapping(value = "/delete/{CategoryId}", method = RequestMethod.DELETE)
 	    public Map<String,Object> deleteCategory(@PathVariable final int CategoryId) {
 	  
@@ -81,6 +77,7 @@ public class CategoryController {
 	            }
 	        };
 	    }
+	    
 	    @RequestMapping(value="/save",method = RequestMethod.POST)
 	    public Map<String,Object> saveCategory(@RequestBody CategoryBean category){
 	    	this.iFileImageService.insertNew();

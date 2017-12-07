@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.code.formater.PagingUtils;
+import com.code.comm.PagingUtils;
 import com.code.model.LocatMapBeanIn_C001;
 import com.code.model.LocatMapBeanIn_R001;
 import com.code.model.LocatMapBeanOut_R001;

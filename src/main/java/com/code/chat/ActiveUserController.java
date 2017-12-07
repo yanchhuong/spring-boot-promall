@@ -17,7 +17,7 @@ public class ActiveUserController {
   private ActiveUserService activeUserService;
 
   @Inject
-  public ActiveUserController(ActiveUserService activeUserService) {
+  public ActiveUserController(ActiveUserService activeUserService){
     this.activeUserService = activeUserService;
   }
   

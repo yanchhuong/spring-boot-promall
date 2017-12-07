@@ -11,9 +11,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import com.code.comm.SqlSmartFormat;
+import com.code.comm.SqlSmartFormatFunctions;
 import com.code.dao.ILocationMapRepository;
-import com.code.formater.SqlSmartFormat;
-import com.code.formater.SqlSmartFormatFunctions;
 import com.code.model.LocatMapBeanIn_C001;
 import com.code.model.LocatMapBeanIn_R001;
 import com.code.model.LocatMapBeanOut_R001;

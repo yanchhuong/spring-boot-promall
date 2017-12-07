@@ -3,8 +3,10 @@
   <meta charset='UTF-8'>
   <title>Multi Step Form with Progress Bar using jQuery and CSS3</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+  <%@include file="fragments/include_admin.jsp"%>
   <link rel='stylesheet' href='/css/post.css'>
-</head>
+</head>'
+
 <body>
  <!-- multistep form -->
 <form id='msform'>
@@ -21,23 +23,16 @@
     <h3 class='fs-subtitle'>This is step 1</h3>
     
 	<div id="key-parties">
-		  <!-- Main Menu Container -->
-		<ul id="key-parties-menu">
-<!-- 
-		    First Product
-		    <li class="menu-item">
-		      Menu Button
+		<!-- Main Menu Container -->
+		<ul id="key-parties-menu" class="style-15">
+ 
+<!--  	  <li class="menu-item">
 		      <a href="#" class="menu-item-btn selected" id="btn-1">
 		        <span>Cars</span>
-		        <i class="fa fa-chevron-down" aria-hidden="true"></i>  
 		      </a>
-		        
-		      Product item
+
 		      <div class="menu-item-content show-content" id="content-1">
 		        <h3>Cars</h3>
-		        <div class="contact-cards">
-		          <div class="shadow-overlay"></div>
-		          Card 1
 		          <div class="contact-card">
 		            <ul>
 		              <li class="next"><a href="#" class="next">Isuzu</a></li>
@@ -50,24 +45,16 @@
 		              <li><a href="#">Tesla5</a></li>
 		            </ul>
 		          </div>
-		        </div>
 		     </div>
-		     
 		    </li>
 
-		    Second Product
 		    <li class="menu-item">
-		      Menu Button
 		      <a href="#" class="menu-item-btn" id="btn-2">
 		        <span>Apartment</span>
-		        <i class="fa fa-chevron-down" aria-hidden="true"></i>  
 		      </a>
-		      Product item
+
 		      <div class="menu-item-content" id="content-2">
 		        <h3>Apartment</h3>
-		        <div class="contact-cards">
-		          <div class="shadow-overlay"></div>
-		          Card 1
 		          <div class="contact-card">
 		            <ul>
 		              <li><a href="#">Isuzu</a></li>
@@ -80,23 +67,22 @@
 		              <li><a href="#">Tesla5</a></li>
 		            </ul>
 		          </div>
-		        </div>
 		     </div>
 		    </li>
 
-		    Third Product
 		    <li class="menu-item">
-		      Menu Button
 		      <a href="#" class="menu-item-btn" id="btn-3">
 		        <span>Smart Phone</span>
-		        <i class="fa fa-chevron-down" aria-hidden="true"></i>  
 		      </a>
-		    </li> -->
-
-		</ul> <!-- End of menu container -->
+		    </li>
+ -->
+ 		<div class="force-overflow"></div>
+		</ul> 
+		<!-- End of menu container -->
 	</div>
-	
+
 </fieldset>
+
   
   
   <fieldset id='form1'>
@@ -182,9 +168,9 @@
   </fieldset>
   
 </form>
-      <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-      <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
-      <script src="/js/post_control_001.js"></script>
+     <!--  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+      <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script> -->
+        <script src="/js/post_control_001.js"></script>
 
         <script>
         $(function() {

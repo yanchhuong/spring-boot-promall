@@ -45,8 +45,7 @@ popup_add_role_list_001.listRole=function(){
 				return val;
 			});
 			$("tbody").html($("#tbl_result_template").tmpl(dat.OUT_REC));
-		}
-		else{
+		}else{
 			$("tbody").html('<tr><td class="t_center noline" colspan="9"><div>내용이 없습니다.</div></td></tr>');
 		}
     	$(".add_newbox").show();

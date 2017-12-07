@@ -34,15 +34,17 @@ top.ifrMainResize("N", 700);
 				<div class="title_wrap">
 					<div class="left"><h1>증명서 발급대장</h1></div>
 					<div class="right">
-						<div class="input_box"><input type="text" style="width:180px;" placeholder="신청자, 용도, 증명서NO"><a href="#none"><img src="/img/btn/btn_topsearch.gif" alt="조회"></a></div>
-						<!-- 펼쳤을때 --><span class="btn_style1 up"><a href="#none">상세</a></span>
-						<!-- 접혔을때 --><span class="btn_style1 down"><a href="#none">상세</a></span>
+						<div class="input_box" id="input_upper">
+							<input type="text" style="width:180px;" placeholder="신청자, 용도, 증명서NO"><a href="#none"><img src="/img/btn/btn_topsearch.gif" alt="조회"></a>
+						</div>
+						<span class="btn_style1 up" id="detail_up" style="display:none;"><a href="#none">상세</a></span>
+						<span class="btn_style1 down on" id="detail_down"><a href="#none">상세</a></span>
 					</div>
 				</div>
 				<!-- //타이틀/버튼영역 -->
 
 				<!-- table search-->
-				<div class="tbl_srch">
+				<div class="tbl_srch" style="display:none;">
 					<table class="">
 						<caption></caption>
 						<colgroup>
@@ -66,7 +68,7 @@ top.ifrMainResize("N", 700);
 										<div class="ly_txtcombo" style="display:none;">
 											<ul>
 												<li><a href="#none">작성자</a></li>
-												<li class="on"><a href="#none">제목</a></li><!-- 활성화클래스 on -->
+												<li><a href="#none">제목</a></li><!-- 활성화클래스 on -->
 												<li><a href="#none">제목+내용</a></li>
 												<li><a href="#none">내용</a></li>
 											</ul>
@@ -154,13 +156,15 @@ top.ifrMainResize("N", 700);
 				<!-- Paging wrap -->
 				<div class="paging_wrap">
 					<div class="combo_wrap">
-						<div class="combo_style">
-							<a href="#none" class="btn_style btn_combo_down"><span>15</span></a>
-							<ul style="display:block;">
-								<li><a href="#none">15개</a></li>
-								<li><a href="#none">20개</a></li> 
-								<li><a href="#none">30개</a></li>
-							</ul>
+						<div class="combo_style" id="pagingPopBtn">
+							<a href="#javascript" class="btn_style btn_combo_down"><span>15개</span></a>
+							<div class="combo_layer" style="display:none;width:66px;">
+								<ul>
+									<li><a href="#none"><input type="hidden" id="" value="15">15개</a></li>
+									<li><a href="#none"><input type="hidden" id="" value="20">20개</a></li>
+									<li><a href="#none"><input type="hidden" id="" value="30">30개</a></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 					<!-- pagination -->
