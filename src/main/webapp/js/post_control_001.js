@@ -3,167 +3,112 @@
  var left, opacity, scale; //fieldset properties which we will animate
  var animating; //flag to prevent quick multiclick glitches
  var post_control_001={};
+ var ctgr_name = "";
+ var catgid;
  $(document).ready(function(){
-	 
+	 post_control_001.OnLoadImage();
 	 post_control_001.listMenu();
+	 
+	 $(document).on("click", ".menu-item-btn", function(){
+		 $('.selected').removeClass('selected');
+		 $('.show-content').removeClass('show-content');
+		 $(this).addClass('selected');
+		 $(this).next().addClass('show-content');
+	 });
 
-	// SELECT MENU BUTTON
-	  $('.menu-item-btn').click(function() {
-	    var buttonId = "#" + jQuery(this).attr("id");
-	    var lastChar = buttonId.charAt(buttonId.length-1);
-	    var contentId = '#content-' + lastChar;
-	    // If on mobile 
-	    if ($(window).width() <= 600) {
-	      if ($(contentId).hasClass('show-content')) {
-	        $(contentId).removeClass('show-content');
-	        $(buttonId).removeClass('selected');
-	      }
-	      else {
-	        $(contentId).addClass('show-content');
-	        $(buttonId).addClass('selected');
-	      }
-	    }
-	    // If on desktop
-	    else {
-	      $('.menu-item-btn').removeClass('selected');
-	      $(buttonId).addClass('selected');
-	      $('.menu-item-content').removeClass('show-content');
-	      $(contentId).addClass('show-content');
-	    }
-	  });
- 
-	  $('.menu-item-btn').click(function() {
-	    var buttonId = "#" + jQuery(this).attr("id");
-	    var lastChar = buttonId.charAt(buttonId.length-1);
-	    var contentId = '#content-' + lastChar;
-	    // If on mobile 
-	    if ($(window).width() <= 600) {
-	      if ($(contentId).hasClass('show-content')) {
-	        $(contentId).removeClass('show-content');
-	        $(buttonId).removeClass('selected');
-	      }
-	      else {
-	        $(contentId).addClass('show-content');
-	        $(buttonId).addClass('selected');
-	      }
-	    }
-	    // If on desktop
-	    else {
-	      $('.menu-item-btn').removeClass('selected');
-	      $(buttonId).addClass('selected');
-	      $('.menu-item-content').removeClass('show-content');
-	      $(contentId).addClass('show-content');
-	    }
-	  });
- 
-   $('.menu-item-btn').click(function() {
-   var buttonId = "#" + jQuery(this).attr("id");
-   var lastChar = buttonId.charAt(buttonId.length-1);
-   var contentId = '#content-' + lastChar;
-   // If on mobile 
-   if ($(window).width() <= 600) {
-     if ($(contentId).hasClass('show-content')) {
-       $(contentId).removeClass('show-content');
-       $(buttonId).removeClass('selected');
-     }
-     else {
-       $(contentId).addClass('show-content');
-       $(buttonId).addClass('selected');
-     }
-   }
-   // If on desktop
-   else {
-     $('.menu-item-btn').removeClass('selected');
-     $(buttonId).addClass('selected');
-     $('.menu-item-content').removeClass('show-content');
-     $(contentId).addClass('show-content');
-   }
- });	 
-	 
-	 
 	 $(document).on("click", ".next", function(){
  		if(animating) return false;
  			animating = true;
+ 				ctgr_name = $(this).parent().parent().parent().prev().text();
+ 			    ctgr_name += " » "+$(this).text().trim();
+ 			
  			if($(this).parent().is('li')){
- 					current_fs = $('#form0');
- 					next_fs  = $('#form1');
- 				}else{
- 				current_fs = $(this).parent();
-         		next_fs =  $(this).parent().next();
- 			} 
+ 				$("#ctgr_nm").val(ctgr_name);
+ 				catgid = $(this).attr("data-id");
+				current_fs = $('#form0');
+ 				next_fs    = $('#form1');
+ 			}else{
+	 			current_fs = $(this).parent();
+	        	next_fs    = $(this).parent().next();
+ 			}
  			//activate next step on progressbar using the index of next_fs
  			$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
- 	
- 			//show the next fieldset
- 				next_fs.show(); 
- 				//hide the current fieldset with style
- 				current_fs.animate({opacity: 0}, {
- 				step: function(now, mx) {
- 				//as the opacity of current_fs reduces to 0  stored in "now"
- 				//1. scale current_fs down to 80%
- 				scale = 1 - (1-  now) * 0.2;
- 				//2. bring next_fs from the right(50%)
- 				left = (now * 50)+"%";
- 				//3. increase opacity of next_fs to 1 as it moves in
- 				opacity = 1 - now;
- 				current_fs.css({
-	 				'transform': 'scale('+scale+')',
-	 				'position': 'absolute'
- 				});
- 				next_fs.css({'left': left, 'opacity': opacity});
- 				}, 
- 				duration: 800, 
- 				complete: function(){
- 				current_fs.hide();
- 				animating = false;
- 			}, 
- 			//this comes from the custom easing plugin
- 				easing: 'easeInOutBack'
- 			});
- 		});
 
- 		$(".previous").click(function(){
- 			if(animating) return false;
- 			animating = true;
- 	
- 			current_fs = $(this).parent();
- 			previous_fs = $(this).parent().prev();
- 	
- 			//deactivate current step on progressbar
- 			$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
- 	
- 			//show the previous fieldset
- 			previous_fs.show(); 
+ 			//show the next fieldset
+ 			next_fs.show();
  			//hide the current fieldset with style
  			current_fs.animate({opacity: 0}, {
- 				step: function(now, mx) {
- 			//as the opacity of current_fs reduces to 0  stored in "now"
- 			//1. scale previous_fs from 80% to 100%
- 				scale = 0.8 + (1 - now) * 0.2;
- 			//2. take current_fs to the right(50%)  from 0%
- 				left = ((1 - now) * 50)+"%";
- 			//3. increase opacity of previous_fs to 1 as it moves in
- 				opacity = 1 - now;
- 				current_fs.css({'left': left});
- 				previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
- 			}, 
- 			duration: 800, 
- 			complete: function(){
- 				current_fs.hide();
- 				animating = false;
- 			}, 
+	 			step: function(now, mx) {
+		 			//as the opacity of current_fs reduces to 0  stored in "now"
+		 			//1. scale current_fs down to 80%
+		 			scale = 1 - (1-  now) * 0.2;
+		 			//2. bring next_fs from the right(50%)
+		 			left = (now * 50)+"%";
+		 			//3. increase opacity of next_fs to 1 as it moves in
+		 			opacity = 1 - now;
+		 			current_fs.css({
+						'transform': 'scale('+scale+')',
+						'position': 'absolute'
+		 			});
+		 			next_fs.css({'left': left, 'opacity': opacity});
+	 			}, 
+	 			duration: 800, 
+	 			complete: function(){
+	 			current_fs.hide();
+	 			animating = false;
+	 		}, 
+	 		//this comes from the custom easing plugin
+	 		easing: 'easeInOutBack'
+ 			});
+	 });
+
+	 $(".previous").click(function(){
+		 if(animating) return false;
+		 animating = true;
+		 current_fs = $(this).parent();
+		 previous_fs = $(this).parent().prev();
+ 		 //deactivate current step on progressbar
+		 $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+ 		 //show the previous fieldset
+		 previous_fs.show(); 
+		 //hide the current fieldset with style
+		 current_fs.animate({opacity: 0}, {
+			 step: function(now, mx) {
+ 			 //as the opacity of current_fs reduces to 0  stored in "now"
+				 //1. scale previous_fs from 80% to 100%
+				 scale = 0.8 + (1 - now) * 0.2;
+				 //2. take current_fs to the right(50%)  from 0%
+ 				 left = ((1 - now) * 50)+"%";
+ 				 //3. increase opacity of previous_fs to 1 as it moves in
+ 				 opacity = 1 - now;
+ 				 current_fs.css({'left': left});
+ 				 previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+			 },
+ 			 duration: 800, 
+ 			 complete: function(){
+ 				 current_fs.hide();
+ 				 animating = false;
+ 			 },
  				//this comes from the custom easing plugin
  				easing: 'easeInOutBack'
  			});
- 		});
+ 	});
  
- 		$(".submit").click(function(){
- 			return false;
- 		})
- 		
- 		
+	 $(document).on("click", ".wrap_img", function(){
+		 $(this).remove();
+	 });
 
- });
+	 $(".submit").click(function(){
+		 return false;
+	 });
+	 
+	 $("#saveAll").click(function(){
+		 alert($("#province option:selected").text());
+		 //post_control_001.SaveProductPost();
+	 });
+
+});
 
 post_control_001.listMenu=function(){
 	$.ajax({
@@ -172,52 +117,184 @@ post_control_001.listMenu=function(){
 	    cache  : true
 	})
     .done(function(dat) {
+
     	var tbody = $("#key-parties-menu");
-    	var menu_item = $('<li class="menu-item"></li>');
     	var html = "";
-//    	tbody.html('');
+    	var parentId = '';
+    	var k = 1;
 
     	$.each(dat.OUT_REC, function(i,v){
     		if(v.lvl == "1"){
-    			html += '<a href="#" class="menu-item-btn" id="btn-1"><span>'+v.nm_eng+'</span><i class="fa fa-chevron-down" aria-hidden="true"></i></a>';
-    			menu_item.append(html);
-    			console.log(1);
+    			parentId = v.catgid;
+    			html += '<li data-id="'+v.catgid+'" class="menu-item">';
+    			html += '<a href="#" class="menu-item-btn" id="btn-1"><span>'+v.nm_eng+'</span></a>';
+    			html += '<div class="menu-item-content">';
+	    			html += '<h3 class="title">'+v.nm_eng+'</h3>';
+	    			html += '<div class="contact-card">';
+	    			html += '<ul>';
+		    			$.each(dat.OUT_REC, function(i,v){
+		    				if((parentId == v.parentid) && (v.lvl == "2")){
+		        				html += '<li><a href="#" class="next" data-id='+v.catgid+'>'+v.nm_eng+'</a></li>';
+		        			}
+		    			});
+	    			html += '</ul>';
+	    			html += '</div>';
+    			html += '</div';
+    			html += '</li>';
     		}
-    		
     	});
-    	
-    	//menu_item.append(html);
-    	tbody.html(menu_item);
-    	
-    	
-    	
-    	
-//    	html= "";
-//    	$.each(dat.OUT_REC, function(i,v){
-//    		if(v.lvl == "1"){
-//    		   html += "<li data-id="+v.catgid+" class='current-menu-item'><a href='' class='next'>"+v.nm_eng+"</a></li>";
-//    		}    		
-//    		
-//    	});
-//    	
-//    	$("#MENU").append(html);
-
-//    	var item = "";
-//    	$("#MENU li").each(function(){
-//			item = "";
-//			var mainLi = $(this).data("id");
-//			$.each(dat.OUT_REC, function(i,v){
-//				if(v.lvl == "2"){
-//    				if(mainLi == v.parentid){
-//    	    			console.log("test" +mainLi+" and "+v.parentid);
-//    	    			item += "<li data-id="+v.catgid+" class='next'><a href='#' class='next'>"+v.nm_eng+"</a></li>";    	    			
-//    	    		}
-//    	    	}    			
-//	        });
-//			$(this).append("<ul>"+item+"</ul>");
-//		});
-
-
-    	
+    	tbody.html(html);
 	})
 };
+
+post_control_001.SaveProductPost=function(){
+	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+	var csrfToken  = $("meta[name='_csrf']").attr("content");
+
+	var input = {};
+		
+	if($("#save_contact").is(":checked")){
+			input["title"] = $("#title");
+			input["price"] = $("#price");
+			input["description"] = $("#description");
+			
+//			here input image
+
+//			user_detail table
+			input["username_fk"] = $("#username");
+			input["cphone"]      = $("#phone_number");
+			alert(JSON.stringify(input));
+			console.log(JSON.stringify(input));
+		}else{
+			input["catgid"] = catgid;
+			input["title"]  = $("#title");
+			input["price"]  = $("#price");
+			input["description"] = $("#description");
+			
+//			here input image
+			input["path"]	  = $("img").attr("src");
+			input["orname"]   = $("#orname").val();
+			input["randname"] = $("#randname").val();
+			input["regdate"]  = $("#regdate").val();
+			input["size"]     = $("#size").val();
+			input["type"]     = $("#type").val();
+			
+			input["filePicture"] = {
+					"type":$("#type").val(),
+					"size":$("#size").val(),
+					"path":$("img").attr("src"),
+					"orname":$("#orname").val(),
+					"regdate":$("#regdate").val(),
+					"randname":$("#randname").val()
+				};
+			
+			/* store array 
+			 * hrmy_profiletot_0001 
+			 * */
+			
+//			user_detail table
+			input["username_fk"] = $("#username");
+			input["cphone"] = $("#phone_number");
+
+//			address table
+			input["country"] = $("#country");
+			input["detail"]  = $("#addr_detail");
+			alert(JSON.stringify(input));
+		}
+
+	console.log("result after input "+input);
+	$.ajax({
+		url: '',
+		cache: true,
+		processData: false,
+		contentType: false,
+		dataType: 'text',
+		contentType: 'application/json',
+		type: 'POST',
+		beforeSend: function(xhr) {
+            xhr.setRequestHeader(csrfHeader, csrfToken);
+        },
+        data: JSON.stringify(input),
+        success: function(result){
+        	
+        }
+	})
+};
+
+
+post_control_001.OnLoadImage=function(){
+	
+	var makeInput = function() {
+		return $('<input type="file" accept="image/jpeg, image/gif, image/png" name="files[]" style="opacity:0;">');
+	};
+	
+	$('#upload').click(function() {
+		var hookInput = makeInput();
+	    var id = 'i' + parseInt((new Date)/1000);
+	    hookInput.attr('id', id);
+	    $('.fileform').append(hookInput);
+	    $('#' + id).click();
+	    $(hookInput).on('change', setImage);
+	});
+	
+	function setImage() {
+		for (var i = 0; i < this.files.length; i++) {
+			var id = $(this).attr('id');
+			var file = this.files[i];
+			fr = new FileReader();
+			fr.onload = function(e) {
+				post_control_001.uploadFormData(file);
+//				var img = $('<img>');
+//	            img.attr('src', e.target.result);
+//	            img.css('height', '160px');
+//	            $('#results').append(img);
+//	            $(img).on('click', {id: id}, removeImage);
+			};
+			fr.readAsDataURL(file);
+			if ($('#results').children().length > 5) {
+				$('#upload').css('background', '#ddd');
+				$('#upload').unbind();
+			}
+		}
+	}
+
+	function removeImage(e) {
+		$(this).remove();
+	    $('#' + e.data.id).remove();
+	}
+};
+
+post_control_001.uploadFormData = function(file){
+	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+	var csrfToken  = $("meta[name='_csrf']").attr("content");
+	var oMyForm = new FormData();
+	var wrap_img = $('<div class="wrap_img" style="display: inline;"></div>');
+	
+	oMyForm.append("file", file);
+	$.ajax({
+		url: '/upload_file/uploadimg',
+	    data: oMyForm,
+	    dataType: 'text',
+	    cache   : true,
+	    processData: false,
+	    contentType: false,
+	    type: 'POST',
+	    beforeSend: function(xhr) {
+	    	xhr.setRequestHeader(csrfHeader, csrfToken);
+	    },
+	    success: function(data){
+	    	data=JSON.parse(data);
+	    	wrap_img.append($('<img width="200px" height="140px" style="margin:6px;">').attr("src", document.location.origin+"/upload_file/files/"+ data.RANDNAME));
+	    	wrap_img.append("<input type='hidden' id='orname' value='"+ data.OUT_REC.orname+"'>" ); 
+	    	wrap_img.append("<input type='hidden' id='regdate' value='"+ data.OUT_REC.regdate+"'>" ); 
+	    	wrap_img.append("<input type='hidden' id='size' value='"+ data.OUT_REC.size+"'>" ); 
+	    	wrap_img.append("<input type='hidden' id='type' value='"+ data.OUT_REC.type+"'>" );
+	    	$("#results").append(wrap_img);
+
+	    }
+	});
+};
+
+
+
+

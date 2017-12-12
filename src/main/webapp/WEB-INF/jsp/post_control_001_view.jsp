@@ -3,6 +3,8 @@
   <meta charset='UTF-8'>
   <title>Multi Step Form with Progress Bar using jQuery and CSS3</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+  <meta name="_csrf" content="${_csrf.token}"/>
+  <meta name="_csrf_header" content="${_csrf.headerName}"/>
   <%@include file="fragments/include_admin.jsp"%>
   <link rel='stylesheet' href='/css/post.css'>
 </head>'
@@ -83,135 +85,94 @@
 
 </fieldset>
 
-  
-  
   <fieldset id='form1'>
     <h2 class='fs-title'>INFORMATION PRODUCT</h2>
     <h3 class='fs-subtitle'>Fill product's information below!</h3>
 	<table >
 		<tr>
 	       <td>Category <span>*</span></td>
-           <td><input type='text' name='Category' placeholder='Category'  disabled /> </td>
-		</tr>  
+           <td><input type='text' name='Category' placeholder='Category'  disabled id="ctgr_nm" /> </td>
+		</tr>
 		<tr>
 	       <td>Title <span> * </span></td>
-            <td><input type='text' name='facebook' placeholder='title' /> </td>
-		</tr>  
+            <td><input type='text' name='title' placeholder='title' id="title" /> </td>
+		</tr>
 		<tr>
 	        <td>Price <span> *</span> </label> </td>
-            <td><input type='text' name='gplus' placeholder='price'/></td>
-		 </tr>
+            <td><input type='text' name='price' placeholder='price' id="price" /></td>
+		</tr>
 		<tr>
 		    <td>Description <span> *</span> </td>	
-            <td><textarea name='address' rows='5' placeholder='Descript about your product information' ></textarea></td>
-		 </tr> 
-		 
+            <td><textarea name='description' rows='5' placeholder='Descript about your product information' id="description" ></textarea></td>
+		 </tr>
 	</table>
 	<td><input type='button' name='previous' class='previous action-button' value='Previous' /> </td>
     <input type='button' name='next' class='next action-button' value='Next' />
   </fieldset>
+
   <fieldset id='form2'>
     <h2 class='fs-title'>Upload Original Picture</h2>
     <h3 class='fs-subtitle'>Be layolty to !</h3>
       <div id="results">
 	  </div>
-	 <div class="fileform" type="form" action="*">   
+	 <div class="fileform" type="form" action="*">
      </div>
-     <div id="upload">Upload more</div>  
-	
-	
+     <div id="upload">
+     	Upload more
+	</div>
+
     <input type='button' name='previous' class='previous action-button' value='Previous' />
     <input type='button' name='next' class='next action-button' value='Next' />
   </fieldset>
- 
+
   <fieldset id='form3'>
     <h2 class='fs-title'>Fill Your Contact</h2>
     <h3 class='fs-subtitle'>It's important for buyer!</h3>
     <table >
 		<tr>
 	       <td>Name <span>*</span></td>
-           <td><input type='text' name='Category' placeholder='your name'  visible='true'/> </td>
+           <td><input type='text' name='Category' placeholder='your name'  visible='true' id="username" /> </td>
 		</tr>  
 		<tr>
 	       <td>Phone <span> * </span></td>
-            <td><input type='text' name='facebook' placeholder='availible contact number' /> </td>
+            <td><input type='text' name='facebook' placeholder='availible contact number' id="phone_number" /> </td>
 		</tr>  
 		<tr>
 	        <td>Country <span> *</span> </label> </td>
-            <td><input type='text' name='gplus' placeholder='country'/></td>
+            <td><input type='text' name='gplus' placeholder='country' id="country" /></td>
 		 </tr>
 		 <tr>
-	        <td>State<span> *</span> </label> </td>
+	        <td>Province<span> *</span> </label> </td>
             <td>
 			   <form name=myform >
-				<select name='state' placeholder='Your Location'>
+				<select id="province" name='state' placeholder='Your Location'>
 					<option name=one value=one> one </option>
 					<option name=two value=two> two </option>
 					<option name=three value=three> three </option>
-					<option name=three value=three selected> three </option>
+					<!-- <option name=three value=three selected> three </option> -->
 				</select>
 				</form>
 			</td>
 		</tr>
 		<tr>
 		    <td>Address <span> *</span> </td>	
-            <td><textarea name='address' rows='5' placeholder='Your detail address' ></textarea></td>
+            <td><textarea name='address' rows='5' placeholder='Your detail address' id="addr_detail" ></textarea></td>
 		</tr> 
 		<tr>
-			<td><input id='save_contact' type='checkbox' checked='true' value='1'></td>
+			<td><input type='checkbox' checked='true' value='1' id='save_contact' /></td>
 			<td>Save contact!</td>
 		</tr>
 	</table>
 	 
     <input type='button' name='previous' class='previous action-button' value='Previous' />
-    <input type='submit' name='submit' class='submit action-button' value='Finish' />
+    <input type='submit' name='submit' class='submit action-button' value='Finish' id="saveAll" />
   </fieldset>
   
 </form>
-     <!--  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-      <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script> -->
-        <script src="/js/post_control_001.js"></script>
 
-        <script>
-        $(function() {
-            var makeInput = function() {
-              return $('<input type="file" accept="image/jpeg, image/gif, image/png" name="files[]" style="opacity:0;">');
-            };
-
-            $('#upload').click(function() {
-              var hookInput = makeInput();
-              var id = 'i' + parseInt((new Date)/1000);
-              hookInput.attr('id', id);
-              $('.fileform').append(hookInput);
-              $('#' + id).click();
-              $(hookInput).on('change', setImage);
-            });
-
-            function setImage() {
-              for (var i = 0; i < this.files.length; i++) {
-                var id = $(this).attr('id');
-                var file = this.files[i];
-                fr = new FileReader();
-                fr.onload = function(e) {
-                    var img = $('<img>');
-                    img.attr('src', e.target.result);
-                    img.css('height', '160px');
-                    $('#results').append(img);
-                    $(img).on('click', {id: id}, removeImage);
-                };
-                fr.readAsDataURL(file);
-                if ($('#results').children().length > 5) {
-                  $('#upload').css('background', '#ddd');
-                  $('#upload').unbind();
-                }
-              }
-            }
-            function removeImage(e) {
-              $(this).remove();
-              $('#' + e.data.id).remove();
-            }
-        });
-        </script>
+<!--<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script> -->
+	<script src="/js/post_control_001.js"></script>
 
 </body>
 </html>

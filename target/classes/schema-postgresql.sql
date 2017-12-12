@@ -1,3 +1,4 @@
+/*
 CREATE  TABLE IF NOT EXISTS users(
   id SERIAL,
   usercd VARCHAR(50) not null,
@@ -175,4 +176,4 @@ FOREIGN KEY (c_id_fk) REFERENCES conversation(c_id)
   username varchar(45)
   );
 
-  
+  */
