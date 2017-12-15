@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 @Repository
 public interface ICategoryCustom extends JpaRepository<CategoryBean_R001,Long>{
 	 @Transactional
@@ -23,9 +24,6 @@ public interface ICategoryCustom extends JpaRepository<CategoryBean_R001,Long>{
 			 + " FROM category As si INNER JOIN category_tree AS sp"
 			 + " ON (si.parentid = cast(sp.catgid as integer))  "
 			 + " )SELECT t.* ,f.randname FROM category_tree  t "
-			 + " left join  filepicture f on t.pid=f.pid  ORDER BY fullengname;",nativeQuery = true)
+			 + " left join  filepicture f on t.catgcd = f.catgcd ORDER BY fullengname;",nativeQuery = true)
 	 public List<CategoryBean_R001> findAlls();
-	 
-
-       
 }

@@ -11,8 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import com.code.comm.SqlSmartFormat;
-import com.code.comm.SqlSmartFormatFunctions;
+import com.code.comm.SqlFormatUtils;
 import com.code.dao.ILocationMapRepository;
 import com.code.model.LocatMapBeanIn_C001;
 import com.code.model.LocatMapBeanIn_R001;
@@ -24,7 +23,6 @@ import com.google.common.base.Strings;
 @Repository 
 public class LocationRepositoryImpl extends JdbcDaoSupport implements ILocationMapRepository {
 	
-	private SqlSmartFormat sqlSmartFormat = new SqlSmartFormatFunctions() ; 
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	@Autowired
 	public void setNamedParameterJdbcTemplate(
@@ -70,7 +68,7 @@ public class LocationRepositoryImpl extends JdbcDaoSupport implements ILocationM
 	public void addLocationMap(LocatMapBeanIn_C001 input) {
 		String sql = "INSERT INTO locat_map " +"(parentid,lvl,mapcd,nm_eng,nm_kh) VALUES (:parentid,:lvl,:mapcd,:nm_eng,:nm_kh)" ;
        try{
-    	   this.getJdbcTemplate().update(sql, sqlSmartFormat.getSqlParameterByModel(input));
+    	   this.getJdbcTemplate().update(sql, SqlFormatUtils.getSqlParameterSource(input));
        }catch(Exception e){
     	   System.out.println(sql);
        }

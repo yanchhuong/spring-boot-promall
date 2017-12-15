@@ -24,7 +24,7 @@ public class FileImageServiceImpl implements IFileImageService{
 
 	@Override
 	public void saveFileUploadBean(FileUploadBean fileUploadBean) {
-		this.iFileImageDao.saveAndFlush(fileUploadBean);
+		this.iFileImageDao.insertNew(fileUploadBean);
 	}
 
 	@Override
@@ -40,17 +40,13 @@ public class FileImageServiceImpl implements IFileImageService{
 	@Override
 	public long getPIDCount() {
 		// TODO Auto-generated method stub
-		return this.iFileImageDao.count();
+		return 1;
 	}
 	@Override
-	public void insertNew() {
-		this.iFileImageDao.insertNew();
+	public void insertNew(FileUploadBean fileUploadBean) {
+		this.iFileImageDao.insertNew(fileUploadBean);
 		
 	}
-	@Override
-	public long getMaxPid() {
-		// TODO Auto-generated method stub
-		return this.iFileImageDao.findMaxPid();
-	}
+
 
 }

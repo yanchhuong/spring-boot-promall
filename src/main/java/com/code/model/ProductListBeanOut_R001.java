@@ -11,6 +11,7 @@ public class ProductListBeanOut_R001 {
 	private String enabled;
 	private String catgcd;
 	private String owner;
+	private String type;
 	private String viewcnt;
 	private String likecnt;
 	private String store_nm;
@@ -79,6 +80,12 @@ public class ProductListBeanOut_R001 {
 	}
 	public void setOwner(String owner) {
 		this.owner = owner;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	public String getViewcnt() {
 		return viewcnt;

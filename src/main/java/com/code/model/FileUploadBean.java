@@ -1,38 +1,17 @@
 package com.code.model;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity(name = "filepicture")
-@Table(name="filepicture")
-public class FileUploadBean  implements Serializable {
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="pid")
-	private long pid;  
-	@Column(name="orname")
-	private  String orname  ;
-	@Column(name="randname")
-	private	String  randname ;
-	@Column(name="regdate")
-	private	String  regdate ;
-	@Column(name="path")
-	private	 String path ;
-	@Column(name="type")	
-	private	 String type;
-	@Column(name="size")	
-	private	long size ;
+public class FileUploadBean  {
 	
-
-	@Column(name="username")
-	private	 String username ;
+	private long pid;  
+	private  String orname  ;
+	private	String  randname ;
+	private	String  regdate ;
+	private	 String path ;
+	private	 String type;	
+	private	long size ;	
+	private	 String usercd;
+	private	 String catgcd;
+	private String prcd;
 	public long getPid() {
 		return pid;
 	}
@@ -75,15 +54,26 @@ public class FileUploadBean  implements Serializable {
 	public void setSize(long size) {
 		this.size = size;
 	}
-	public String getUsername() {
-		return username;
+	public String getUsercd() {
+		return usercd;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUsercd(String usercd) {
+		this.usercd = usercd;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getCatgcd() {
+		return catgcd;
 	}
+	public void setCatgcd(String catgcd) {
+		this.catgcd = catgcd;
+	}
+	public String getPrcd() {
+		return prcd;
+	}
+	public void setPrcd(String prcd) {
+		this.prcd = prcd;
+	}
+	
+	
 	
 			
 	

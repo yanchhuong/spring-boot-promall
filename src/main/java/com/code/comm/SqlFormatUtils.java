@@ -5,11 +5,11 @@ import java.lang.reflect.Field;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-public class SqlSmartFormatFunctions implements SqlSmartFormat {
-
+public class SqlFormatUtils {
+	public SqlFormatUtils(){
+	}
 	//Dynamic param
-	@Override
-	public SqlParameterSource getSqlParameterByModel(Object input) throws IllegalArgumentException, IllegalAccessException {
+	public static SqlParameterSource getSqlParameterSource(Object input) throws IllegalArgumentException, IllegalAccessException {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		for (Field field : input.getClass().getDeclaredFields()) {
 			field.setAccessible(true);
@@ -19,7 +19,6 @@ public class SqlSmartFormatFunctions implements SqlSmartFormat {
 		// join String
 		return paramSource;
 	}
-
 	  //Static param
     /*	private SqlParameterSource getSqlParameterByModel(ProductBeanIn_U001 input) {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();

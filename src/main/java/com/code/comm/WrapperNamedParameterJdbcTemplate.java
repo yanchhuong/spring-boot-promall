@@ -190,6 +190,7 @@ public class WrapperNamedParameterJdbcTemplate extends NamedParameterJdbcTemplat
         SqlQueriesUtil.debugSQL(sql, paramMap);
         return super.queryForList(sql, paramMap, elementType);
     }
+    
     /* (non-Javadoc)
      * @see org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate#queryForList(java.lang.String, org.springframework.jdbc.core.namedparam.SqlParameterSource)
      */
@@ -199,6 +200,7 @@ public class WrapperNamedParameterJdbcTemplate extends NamedParameterJdbcTemplat
         SqlQueriesUtil.debugSQL(sql, paramSource);
         return super.queryForList(sql, paramSource);
     }
+    
     /* (non-Javadoc)
      * @see org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate#queryForList(java.lang.String, java.util.Map)
      */

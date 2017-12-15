@@ -8,7 +8,7 @@ public class SmartFormater {
 	public SmartFormater() {
 		// TODO Auto-generated constructor stub
 	}
-	public String objectTOJson(Object obj) throws JsonProcessingException{
+	public static String objectTOJson(Object obj) throws JsonProcessingException{
 		
 		ObjectMapper mapper = new ObjectMapper();
 		

@@ -10,6 +10,6 @@ public interface IFileImageService {
     public FileUploadBean findOne(long fileUploadBeanId);
     public void remove(String filename);
     public long getPIDCount();
-    public void insertNew();
-    public long getMaxPid();
+    public void insertNew(FileUploadBean fileUploadBean);
+
 }
