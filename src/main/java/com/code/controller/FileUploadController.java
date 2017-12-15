@@ -94,7 +94,7 @@ public class FileUploadController {
     public @ResponseBody Map<String,Object>  upload(MultipartHttpServletRequest request, HttpServletResponse response) {
       //0. notice, we have used MultipartHttpServletRequest
       //1. get the files from the request object
-    	
+
       Iterator<String> itr =  request.getFileNames();
       MultipartFile mpf = request.getFile(itr.next());  
       ufile.setOrname(mpf.getOriginalFilename());
@@ -145,14 +145,14 @@ public class FileUploadController {
     	   };
     }
     @RequestMapping(value="/save_file_name",method = RequestMethod.POST ,produces=MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Map<String,Object> saveCategory(@RequestBody FileUploadBean fileUploadBean){  
-          this.iFileImageService.saveFileUploadBean(fileUploadBean);
-    		return new HashMap<String,Object>(){
-    			{
-    				put("SUCC","Filse was Saved");
-    				put("OUT_REC",fileUploadBean);
-    			}
-    		};
+    public @ResponseBody Map<String,Object> saveCategory(@RequestBody FileUploadBean fileUploadBean){
+    	this.iFileImageService.saveFileUploadBean(fileUploadBean);
+    	return new HashMap<String,Object>(){
+    		{
+    			put("SUCC","Filse was Saved");
+    			put("OUT_REC",fileUploadBean);
+    		}
+    	};
     }
     
     @RequestMapping(value="/test",method = RequestMethod.GET)

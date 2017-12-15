@@ -22,6 +22,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
+import com.code.comm.JdbcDaoSupportUtils;
+import com.code.comm.SqlSmartFormatFunctions;
 import com.code.dao.IUserDao;
 import com.code.model.MUpdateUserStatusIn_U001;
 import com.code.model.MUserListIn_R001;
@@ -33,10 +35,13 @@ import com.google.common.base.Strings;
 @Repository
 public class UserDaoImpl extends JdbcDaoSupport implements IUserDao{	
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+//	ExampleJdbcDaoSupport exampleJdbcDaoSupport=new ExampleJdbcDaoSupport();
+	SqlSmartFormatFunctions sqlSmartFormatFunctions =new SqlSmartFormatFunctions();
 	@Autowired
 	public void setNamedParameterJdbcTemplate(
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+		//this.ExampleJdbcDaoSupport=exampleJdbcDaoSupport;
 	}
 	@Autowired
 	protected DataSource dataSource;
@@ -44,13 +49,18 @@ public class UserDaoImpl extends JdbcDaoSupport implements IUserDao{
 	 @PostConstruct
 	 private void initialize(){
 	        setDataSource(dataSource);
+	        JdbcDaoSupportUtils.setDataSource(dataSource);
 	 }
 
 	@Override
 	public void insertRole(UserSignupBeanIn_C001 user) {
-		String sql = "INSERT INTO USER_ROLES " +"(username,role,regdate,usercd) VALUES (?,?,?,?)" ;
-        this.getJdbcTemplate().update(sql, new Object[]{user.getUsername(),user.getRole(),user.getRegdate(),user.getUsercd()});
-		
+		//String sql = "INSERT INTO USER_ROLES " +"(username,role,regdate,usercd) VALUES (?,?,?,?)" ;
+		String sql = "INSERT INTO USER_ROLES " +"(username,role,regdate,usercd) VALUES (:username,:role,:regdate,:usercd)" ;
+		try{
+			JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().update(sql, sqlSmartFormatFunctions.getSqlParameterByModel(user));
+		}catch(Exception e){
+			
+		}
 	}
 	@Override
 	public void insertUserLog(UserSignupBeanIn_C001 user) {

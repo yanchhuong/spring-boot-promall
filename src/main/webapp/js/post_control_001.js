@@ -5,9 +5,12 @@
  var post_control_001={};
  var ctgr_name = "";
  var catgid;
+ 
+ 
  $(document).ready(function(){
 	 post_control_001.OnLoadImage();
 	 post_control_001.listMenu();
+	 post_control_001.listProvince();
 	 
 	 $(document).on("click", ".menu-item-btn", function(){
 		 $('.selected').removeClass('selected');
@@ -85,7 +88,7 @@
  				 current_fs.css({'left': left});
  				 previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
 			 },
- 			 duration: 800, 
+ 			 duration: 800,
  			 complete: function(){
  				 current_fs.hide();
  				 animating = false;
@@ -104,8 +107,7 @@
 	 });
 	 
 	 $("#saveAll").click(function(){
-		 alert($("#province option:selected").text());
-		 //post_control_001.SaveProductPost();
+		 post_control_001.SaveProductPost();
 	 });
 
 });
@@ -147,62 +149,63 @@ post_control_001.listMenu=function(){
 	})
 };
 
+post_control_001.listProvince=function(){
+	$.ajax({
+    	type   : 'GET',
+	    url    : "/location_map/province_list",
+	    cache  : true
+	})
+    .done(function(dat){
+    	$.each(dat.OUT_REC, function(i,v){
+    		$("#form3 table #province").append($('<option name="'+v.nm_eng+'" id="'+v.id+'">'+v.nm_eng+'</option>'));
+    	});
+    	console.log(dat);
+    });
+
+};
+
+
 post_control_001.SaveProductPost=function(){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
-
-	var input = {};
+	var recImg 	= [];
+	var input   = {};
 		
 	if($("#save_contact").is(":checked")){
-			input["title"] = $("#title");
-			input["price"] = $("#price");
-			input["description"] = $("#description");
-			
-//			here input image
 
-//			user_detail table
-			input["username_fk"] = $("#username");
-			input["cphone"]      = $("#phone_number");
-			alert(JSON.stringify(input));
-			console.log(JSON.stringify(input));
-		}else{
-			input["catgid"] = catgid;
-			input["title"]  = $("#title");
-			input["price"]  = $("#price");
-			input["description"] = $("#description");
-			
-//			here input image
-			input["path"]	  = $("img").attr("src");
-			input["orname"]   = $("#orname").val();
-			input["randname"] = $("#randname").val();
-			input["regdate"]  = $("#regdate").val();
-			input["size"]     = $("#size").val();
-			input["type"]     = $("#type").val();
-			
-			input["filePicture"] = {
-					"type":$("#type").val(),
-					"size":$("#size").val(),
-					"path":$("img").attr("src"),
-					"orname":$("#orname").val(),
-					"regdate":$("#regdate").val(),
-					"randname":$("#randname").val()
-				};
-			
-			/* store array 
-			 * hrmy_profiletot_0001 
-			 * */
-			
-//			user_detail table
-			input["username_fk"] = $("#username");
-			input["cphone"] = $("#phone_number");
+	}else{
+		input["catgid"] = catgid;
+		input["title"]  = $("#title").val();
+		input["price"]  = $("#price").val();
+		input["description"] = $("#description").val();
 
-//			address table
-			input["country"] = $("#country");
-			input["detail"]  = $("#addr_detail");
-			alert(JSON.stringify(input));
-		}
+//		here input image
+		$("#results div").each(function(){
+			recImg.push({
+					"type"     :$("#type").val(),
+					"size"     :$("#size").val(),
+					"path"     :$("img").attr("src"),
+					"orname"   :$("#orname").val(),
+					"regdate"  :$("#regdate").val(),
+					"randname" :$("#randname").val()
+			});
+			console.log("push "+recImg);
+		});
+		input["IN_REC"] = recImg;
 
-	console.log("result after input "+input);
+//		user_detail table
+		input["username_fk"] = $("#username").val();
+		input["cphone"] = $("#phone_number").val();
+
+//		address table
+		input["country"]  = $("#country").val();
+		input["province"] = $("#province option:selected").text();
+		input["detail"]   = $("#addr_detail").val();
+		console.log(input);
+	}
+
+	console.log("result after input "+JSON.stringify(input));
+	
 	$.ajax({
 		url: '',
 		cache: true,
@@ -267,8 +270,8 @@ post_control_001.OnLoadImage=function(){
 post_control_001.uploadFormData = function(file){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
-	var oMyForm = new FormData();
-	var wrap_img = $('<div class="wrap_img" style="display: inline;"></div>');
+	var oMyForm    = new FormData();
+	var wrap_img   = $('<div class="wrap_img" style="display: inline;"></div>');
 	
 	oMyForm.append("file", file);
 	$.ajax({
@@ -285,9 +288,9 @@ post_control_001.uploadFormData = function(file){
 	    success: function(data){
 	    	data=JSON.parse(data);
 	    	wrap_img.append($('<img width="200px" height="140px" style="margin:6px;">').attr("src", document.location.origin+"/upload_file/files/"+ data.RANDNAME));
-	    	wrap_img.append("<input type='hidden' id='orname' value='"+ data.OUT_REC.orname+"'>" ); 
-	    	wrap_img.append("<input type='hidden' id='regdate' value='"+ data.OUT_REC.regdate+"'>" ); 
-	    	wrap_img.append("<input type='hidden' id='size' value='"+ data.OUT_REC.size+"'>" ); 
+	    	wrap_img.append("<input type='hidden' id='orname' value='"+ data.OUT_REC.orname+"'>" );
+	    	wrap_img.append("<input type='hidden' id='regdate' value='"+ data.OUT_REC.regdate+"'>" );
+	    	wrap_img.append("<input type='hidden' id='size' value='"+ data.OUT_REC.size+"'>" );
 	    	wrap_img.append("<input type='hidden' id='type' value='"+ data.OUT_REC.type+"'>" );
 	    	$("#results").append(wrap_img);
 

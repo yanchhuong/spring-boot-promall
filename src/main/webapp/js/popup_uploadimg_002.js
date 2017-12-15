@@ -38,7 +38,7 @@ $(document).ready(function(){
 			    $form.find("#imgframe").addClass("imgFrame");
 	    	}, 5000);
 	    });
-	
+
 		//using FormData() object
 	    $(document).on("click", "#tbRemove",function(){
 	    	var data=$("#randname").val();

@@ -16,6 +16,7 @@ import com.code.comm.PagingUtils;
 import com.code.model.LocatMapBeanIn_C001;
 import com.code.model.LocatMapBeanIn_R001;
 import com.code.model.LocatMapBeanOut_R001;
+import com.code.model.ProvinceBean_R001;
 import com.code.service.ILocationMapService;
 
 @RestController
@@ -43,6 +44,16 @@ public class LocationMapController {
 	                put("SMS","SUCCES");
 	            }
 	        };
+	}
+	@RequestMapping(value = "/province_list", method = RequestMethod.GET)
+	public @ResponseBody Map<String, Object> getProvinceList(){
+		List<ProvinceBean_R001> obj = this.iLocationMapService.getProvinceList();
+		return new HashMap<String, Object>(){
+			{
+				put("OUT_REC", obj);
+		
+			}
+		};
 	}
 
 }

@@ -146,9 +146,9 @@
             <td>
 			   <form name=myform >
 				<select id="province" name='state' placeholder='Your Location'>
-					<option name=one value=one> one </option>
+					<!-- <option name=one value=one> one </option>
 					<option name=two value=two> two </option>
-					<option name=three value=three> three </option>
+					<option name=three value=three> three </option> -->
 					<!-- <option name=three value=three selected> three </option> -->
 				</select>
 				</form>

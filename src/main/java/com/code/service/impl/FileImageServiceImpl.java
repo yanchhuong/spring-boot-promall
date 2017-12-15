@@ -15,7 +15,6 @@ public class FileImageServiceImpl implements IFileImageService{
 	@Autowired
 	public FileImageServiceImpl(IFileImageDao iFileImageDao){
 		this.iFileImageDao=iFileImageDao;
-		
 	}
 	@Override
 	public List<FileUploadBean> findAll() {
@@ -37,7 +36,6 @@ public class FileImageServiceImpl implements IFileImageService{
 	@Override
 	public void remove(String filename) {
 		this.iFileImageDao.remove(filename);
-		
 	}
 	@Override
 	public long getPIDCount() {

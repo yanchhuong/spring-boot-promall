@@ -17,6 +17,7 @@ import com.code.dao.ILocationMapRepository;
 import com.code.model.LocatMapBeanIn_C001;
 import com.code.model.LocatMapBeanIn_R001;
 import com.code.model.LocatMapBeanOut_R001;
+import com.code.model.ProvinceBean_R001;
 import com.google.common.base.Strings;
 
 
@@ -30,17 +31,18 @@ public class LocationRepositoryImpl extends JdbcDaoSupport implements ILocationM
 		NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
+	
 	@Autowired
 	protected DataSource dataSource;
 	 
-	 @PostConstruct
-	 private void initialize(){
-	        setDataSource(dataSource);
-	 }
+	@PostConstruct
+	private void initialize(){
+	       setDataSource(dataSource);
+	}
 
 	@Override
 	public List<LocatMapBeanOut_R001> getLocationMapList(LocatMapBeanIn_R001 input) {
-		String sql="with recursive locat_tree as  "
+		String sql="with recursive locat_tree as  \r\n"
 				  + "  (select *,cast(nm_eng as varchar(1000)) as fullengname"
 				  + "   from locat_map where lvl=1 "
 				  + "  union all select lc.* ,CAST( lt.fullengname || '>>' || lc.nm_eng As varchar(1000)) As fullengname "
@@ -61,7 +63,6 @@ public class LocationRepositoryImpl extends JdbcDaoSupport implements ILocationM
 		System.out.println(sb.toString());
 		List<LocatMapBeanOut_R001> result = getJdbcTemplate().query(sb.toString(), 
 						new BeanPropertyRowMapper<LocatMapBeanOut_R001>(LocatMapBeanOut_R001.class));		
-			
 	   return result;
 	}
 
@@ -73,9 +74,20 @@ public class LocationRepositoryImpl extends JdbcDaoSupport implements ILocationM
        }catch(Exception e){
     	   System.out.println(sql);
        }
-		
-		
-		
+	}
+
+	@Override
+	public List<ProvinceBean_R001> getProvinceList() {
+		String sql="\r\n" + 
+					"\r\n" + 
+					"select nm_kh, nm_eng, id from locat_map\r\n" + 
+					"where lvl = '1' \r\n" + 
+					"order by nm_eng";
+
+		System.out.println(sql);
+		List<ProvinceBean_R001> result = getJdbcTemplate().query(sql.toString(), 
+						new BeanPropertyRowMapper<ProvinceBean_R001>(ProvinceBean_R001.class));		
+	   return result;
 	}
 
 }

@@ -9,6 +9,7 @@ import com.code.dao.ILocationMapRepository;
 import com.code.model.LocatMapBeanIn_C001;
 import com.code.model.LocatMapBeanIn_R001;
 import com.code.model.LocatMapBeanOut_R001;
+import com.code.model.ProvinceBean_R001;
 import com.code.service.ILocationMapService;
 
 @Service 
@@ -30,6 +31,11 @@ public class LocationMapServiceImpl implements ILocationMapService{
 	public void addLocationMap(LocatMapBeanIn_C001 input) {
 		 this.iLocationMapRepository.addLocationMap(input);
 		
+	}
+
+	@Override
+	public List<ProvinceBean_R001> getProvinceList() {
+		return this.iLocationMapRepository.getProvinceList();
 	}
 
 
