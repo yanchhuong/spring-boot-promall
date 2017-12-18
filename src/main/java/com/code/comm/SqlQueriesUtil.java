@@ -87,7 +87,7 @@ public class SqlQueriesUtil {
                     LOG.error("Casting error with the parameter: ?", parameter);
                     System.out.println("Casting error with the parameter: ?"+ parameter);
                     paramMap=null;
-        
+
                 }
             } else {
                 debugSQL(sql);

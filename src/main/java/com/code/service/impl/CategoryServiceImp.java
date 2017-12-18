@@ -5,10 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.code.dao.ICategory;
-import com.code.dao.ICategoryCustom;
-import com.code.dao.IFileImageDao;
+import com.code.dao.ICategoryRepository;
 import com.code.model.CategoryBean;
 import com.code.model.CategoryBean_R001;
 import com.code.service.ICategoryService;
@@ -17,52 +14,37 @@ import com.code.service.ICategoryService;
 @Service(value = "categoryService")
 public class CategoryServiceImp implements ICategoryService{
 	
-	private ICategory iCategory;
-	private ICategoryCustom iCategoryCustom;
-	
+	private ICategoryRepository iCategory;
+
 	@Autowired(required = true)
-	public CategoryServiceImp(ICategory iCategory,ICategoryCustom iCategoryCustom){
-		this.iCategory=iCategory;
-		this.iCategoryCustom =iCategoryCustom;
-		
+	public CategoryServiceImp(ICategoryRepository iCategory){
+		this.iCategory=iCategory;		
 	}
 
 	    
 	@Transactional(readOnly = true)
 	@Override
 	public List<CategoryBean_R001> findAll() {
-		// TODO Auto-generated method stub
-		
-		return this.iCategoryCustom.findAlls();
+		return this.iCategory.findAlls();
 	}
 	
 	@Transactional(readOnly = false)
 	@Override
-	public void updateMenu(long pid,String usercd,long catgid){
-		this.iCategory.updateMenu(pid,usercd,catgid);
-		
+	public void saveCategoryBean(CategoryBean input) {
+		if(input.getCatgid() > 0) {
+			this.iCategory.updateCategory(input);
+		}else {
+			this.iCategory.insertCategory(input);
+		}	
 	}
-	
-	@Transactional(readOnly = false)
-	@Override
-	public void saveCategoryBean(CategoryBean CategoryBean) {
-		this.iCategory.saveAndFlush(CategoryBean);
-	}
-
-	@Override
-	public CategoryBean findOne(long CategoryBeanId) {
-		// TODO Auto-generated method stub
-		return this.iCategory.findOne(CategoryBeanId);
-	}
-
 	@Override
 	public void delete(long CategoryBeanId) {
 	   this.iCategory.delete(CategoryBeanId);
-		
 	}
+	
 	@Override
 	public long getCatgidCount() {
-		return this.iCategory.getCatgidCount();
+		return this.iCategory.getCatidCount();
 	}
 	@Override
 	public void removeMenuTree(int rootid) {
@@ -104,10 +86,18 @@ public class CategoryServiceImp implements ICategoryService{
 		return null;
 	}
 
+
 	@Override
-	public long getSeqCount(String lvl, long parentid) {
+	public CategoryBean findOne(long CategoryBeanId) {
 		// TODO Auto-generated method stub
-		return this.iCategory.getSeqCount(lvl, parentid);
+		return null;
+	}
+
+
+	@Override
+	public void updateMenu(long pid, String usercd, long catgid) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

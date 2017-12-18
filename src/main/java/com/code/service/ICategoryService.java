@@ -20,7 +20,7 @@ public interface ICategoryService {
     List<CategoryBean> findByNamedParam(String name, String author, long price);
     
     public void updateMenu(long pid,String usercd,long catgid);
-    public long getSeqCount(String lvl,long parentid);
+//    public long getSeqCount(CategoryBean input);
     public long getCatgidCount();
     public void removeMenuTree(int rootid);
 }

@@ -41,7 +41,7 @@ $(document).ready(function(){
 
 		//using FormData() object
 	    $(document).on("click", "#tbRemove",function(){
-	    	var data=$("#randname").val();
+	    	var data = $("#randname").val();
 	    	if(data=='null' || data==null){
 	    		alert("No file to delete");
 	    		return;
@@ -57,7 +57,7 @@ $(document).ready(function(){
 	    });
 	    
 	    $(document).on("click", "#tbSave",function(e){
-	    	SaveFile();
+		    SaveFile();
 	    });
 });
 
@@ -77,9 +77,9 @@ function init(input){
 
 function removeFile(dat){
 	  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-	  var csrfToken = $("meta[name='_csrf']").attr("content");
-	 var input={};
-	     input.filename=dat;
+	  var csrfToken  = $("meta[name='_csrf']").attr("content");
+	 var input = {};
+	     input.filename = dat;
 	  $.ajax({
 		  url: '/upload_file/remove_file_name',
 		  cache: false,
@@ -130,15 +130,20 @@ function uploadFormData(){
 
 function SaveFile(){
 	  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-	  var csrfToken = $("meta[name='_csrf']").attr("content");
+	  var csrfToken  = $("meta[name='_csrf']").attr("content");
 	  var input = {};
-	      input["orname"]   = $("#orname").val();
+	  if($("#orname").val() == "" || $("#orname").val() == null){
+		  alert('No file to save or already exist.');
+	  }else{
+		  input["orname"]   = $("#orname").val();
 	      input["randname"] = $("#randname").val();
 	      input["regdate"]  = $("#regdate").val();
 	      input["size"]     = $("#size").val();
 	      input["type"]     = $("#type").val();
-	      input["pid"]      = $("#pid").val();
-	      console.log(input);
+	      input["catgcd"]   = $("#catgcd").val();
+	      console.log(input);  
+	  }
+	  
 	  $.ajax({
 		    url    : '/upload_file/save_file_name',
 	    	cache  : true,

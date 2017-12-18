@@ -2,6 +2,7 @@ var onDisable = "../img/ico/icon_alim_off.png";
 var onEnable = "../img/ico/icon_alim_on.png";
 var product_control_001={};
 var input={};
+
 $(document).ready(function(e){
 	
    product_control_001.listData();
@@ -112,25 +113,29 @@ $(document).ready(function(e){
 	
 });	
 
-product_control_001.listData=function(){
+product_control_001.listData = function(){
+	
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-	var csrfToken = $("meta[name='_csrf']").attr("content");
-	var enabled = $("#spStatSRC").find(".txt").text();
-    if(enabled=="block"){
-    	enabled= false;
-    }else if(enabled=="Unblock"){
-    	enabled= true;
+	var csrfToken  = $("meta[name='_csrf']").attr("content");
+	var enabled    = $("#spStatSRC").find(".txt").text();
+	
+    if(enabled == "block"){
+    	enabled = false;
+    }else if(enabled == "Unblock"){
+    	enabled = true;
     }else{
-    	enabled="";
+    	enabled = "";
     }
-var input={};
-    if($("#detail_up").attr("class")== "btn_style1  up"){
-    	input["keyword"]= $("#SRCH_STR").val();
+    
+    var input = {};
+    
+    if($("#detail_up").attr("class") == "btn_style1 up"){
+    	input["keyword"] = $("#SRCH_STR").val();
     }else{
-    	input["keyword"]= $("#keySRC").val();
-    	if( $("#sPrice").val()!="" ||  $("#ePrice").val()!=""){
-    		 input["sprice"]  =   $("#sPrice").val()== "" ? 0 :$("#sPrice").val();
-   	         input["eprice"]  =   $("#ePrice").val()== "" ? 999999 :$("#ePrice").val();
+    	input["keyword"] = $("#keySRC").val();
+    	if( $("#sPrice").val() != "" ||  $("#ePrice").val() != ""){
+    		 input["sprice"]  = $("#sPrice").val()== "" ? 0 :$("#sPrice").val();
+   	         input["eprice"]  = $("#ePrice").val()== "" ? 999999 :$("#ePrice").val();
     	}else{
     		 input["sprice"]  =  "";
   	         input["eprice"]  =  "";
@@ -144,7 +149,7 @@ var input={};
     	type   : 'POST',
 	    url    : "/products/list",
 	    data   : JSON.stringify(input),
-	    cache: false,
+	    cache  : false,
         dataType: 'json',
     	contentType: 'application/json',
         async: false,
@@ -154,7 +159,7 @@ var input={};
 	})
     .done(function(dat) {
     	var htmRole = $(".editbtn_top_box .tab");
-    	var html = "";
+    	var html    = "";
     	htmRole.html('');
     	/*$.each(dat.ROLE_REC, function(i,v){
     		if(dat.ROLE_REC.length-1 == i){
@@ -167,16 +172,17 @@ var input={};
     	htmRole.html(html);
     	if(dat.OUT_REC.length > 0 ){
 			$.map(dat.OUT_REC,function(val){
-				if(val["enabled"]=='t'){
+				if(val["enabled"] == 't'){
 					val["enabled"] = onEnable;	
 				}else{
 					val["enabled"] = onDisable;	
 				} 
+				val["regdate"] = wehrm.string.formatDateTime(val["regdate"],"-");	
 
 			//	total +=1;
 				
 				return val;
-			});
+			});			
 			$("#Result_List").html($("#tbl_result_template").tmpl(dat.OUT_REC));
 		}
 		else{

@@ -46,7 +46,9 @@ $(function(){
     left: 96px;
     z-index: 1112;
  }
- 
+ .content{
+ 	margin-bottom: 30px;
+ }
 </style>
 
 </head>
@@ -152,7 +154,7 @@ $(function(){
 						<col style="width:62px;">
 						<col>
 						<col style="width:15%;">
-						<col style="width:10%;">
+						<col style="width:15%;">
 						<col style="width:10%;">
 						<col style="width:10%;">
 						<col style="width:10%;">
@@ -194,7 +196,7 @@ $(function(){
 							</tr>
 						</tbody> -->
 					</table>
-					 <script id="tbl_result_template" type="text/x-jQuery-tmpl">
+					<script id="tbl_result_template" type="text/x-jQuery-tmpl">
 						<tr>
 								<td>
                                     <input type="hidden" id="prcd" value="{{= prcd }}">  
@@ -204,10 +206,10 @@ $(function(){
 								</td>
 								<td><div class="elipsis" id="name">{{= title }}</div></td>
 								<td><div class="elipsis">{{= price }}</div></td>
-								<td><div>{{= regdate }}</div></td>
-								<td><div>{{= cphone }}</div></td>
-								<td><div>{{= owner }}</div></td>
+								<td><div>{{= regdate}}</div></td>
 								<td><div>{{= address }}</div></td>
+								<td><div>{{= owner }}</div></td>
+								<td><div>{{= type }}</div></td>
 								<td><div>{{= viewcnt }}</div></td>
 								<td><div>{{= likecnt }}</div></td>
 								<td><div>

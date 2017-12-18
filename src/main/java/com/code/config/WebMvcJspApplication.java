@@ -46,9 +46,7 @@ import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.code.service.StorageService;
@@ -87,22 +85,10 @@ public class WebMvcJspApplication extends SpringBootServletInitializer {
 	@Bean
 	CommandLineRunner init(StorageService storageService) {
 			return (args) -> {
-	            storageService.deleteAll();
-	            storageService.init();
+	           // storageService.deleteAll();
+	            //storageService.init();
 			};
 	 }
-/*	 @ConfigurationProperties(prefix = "datasource.postgres")
-	 @Bean
-	 @Primary
-	 public DataSource dataSource() {
-	     return (DataSource) DataSourceBuilder
-	    		     .create()
-	    	        .username("postgres")
-	    	        .password("832862ng@")
-	    	        .url("jdbc:postgresql://localhost:5432/postgres")
-	    	        .driverClassName("org.postgresql.Driver")
-	    	        .build();
-	 }*/
 	 @Bean
 	 @ConfigurationProperties("spring.datasource")
 	 public DataSource dataSource() {

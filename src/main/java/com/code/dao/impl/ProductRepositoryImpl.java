@@ -9,22 +9,14 @@ import javax.annotation.PostConstruct;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
-
-import com.code.comm.SqlSmartFormat;
-import com.code.comm.SqlSmartFormatFunctions;
 import com.code.dao.IProductRepository;
 import com.code.model.PostProductBean_C001;
 import com.code.model.ProductBeanIn_U001;
 import com.code.model.ProductListBeanIn_R001;
 import com.code.model.ProductListBeanOut_R001;
-import com.code.model.UserSignupBeanIn_C001;
 import com.google.common.base.Strings;
 @Repository
 public class ProductRepositoryImpl extends JdbcDaoSupport implements IProductRepository{
@@ -84,7 +76,7 @@ public class ProductRepositoryImpl extends JdbcDaoSupport implements IProductRep
 	    sb.append(" group by  p.prcd, owner, sp.store_nm, cat.nm_eng");
 	    List<ProductListBeanOut_R001> result = null; 
 		try{
-			      result= getJdbcTemplate().query(sb.toString(), 
+			      result = getJdbcTemplate().query(sb.toString(), 
 					new BeanPropertyRowMapper<ProductListBeanOut_R001>(ProductListBeanOut_R001.class));
 		}catch(Exception e){
 			System.out.println(sb.toString());

@@ -38,6 +38,9 @@
     <script type="text/javascript" src="../../js_admin/wehrm.popup.js?<%=_localDatetim%>"></script> 
     <script type="text/javascript" src="../../js_admin/jquery.bpopup.min.js?<%=_localDatetim%>"></script>
     
+    <script type="text/javascript" src="../../js-lib/wehrm.string.js?<%=_localDatetim%>"></script>
+    
+    
     <!--js custom  
     <script type="text/javascript" src="../../common/js_admin/layout.popup.js"></script>
     <script type="text/javascript" src="../../common/js_admin/wehrm.file.js"></script>

@@ -1,25 +1,17 @@
 package com.code.dao.impl;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
-
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import com.code.comm.JdbcDaoSupportUtils;
@@ -212,10 +204,9 @@ public class UserDaoImpl implements IUserDao{
 	public List<RoleCountOut_R001> getRoleCount() {
 		String sql =  "select count(*) as cnt , role from user_roles group by  role"
 				+ " union select count(*) , 'ALL' from  user_roles";
-		System.out.println(sql);
 		List<RoleCountOut_R001> result  = null;
 		 try{
-			 result=JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().query(sql, 
+			 result = JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().query(sql, 
 						new BeanPropertyRowMapper<RoleCountOut_R001>(RoleCountOut_R001.class));
 			}catch(Exception e){	
 	        }

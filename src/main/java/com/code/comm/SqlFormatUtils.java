@@ -6,8 +6,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 public class SqlFormatUtils {
-	public SqlFormatUtils(){
-	}
+	public SqlFormatUtils(){}
 	//Dynamic param
 	public static SqlParameterSource getSqlParameterSource(Object input) throws IllegalArgumentException, IllegalAccessException {
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();

@@ -45,13 +45,13 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click", "#btaddImg", function(){
-		var input={};
-		input["randname"]= $(this).parents("tr").find("#randname").val();
-		input["catgid"]=  $(this).parents("tr").find("#catgid").val();
-		input["pid"]=     $(this).parents("tr").find("#pid").val();
+		var input = {};
+		input["randname"] = $(this).parents("tr").find("#randname").val();
+		input["catgid"]   = $(this).parents("tr").find("#catgid").val();
+		input["catgcd"]   = $(this).parents("tr").find("#catgcd").val();
 		
 	//	wehrm.popup.openPopup("popup_uploadimg_002");
-		wehrm.popup.openPopup("popup_uploadimg_002",input, function(data){
+		wehrm.popup.openPopup("popup_uploadimg_002", input, function(data){
 			callbackFn(data);
     	});
 	});

@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.code.dao.ICategory;
+import com.code.dao.ICategoryOld;
 import com.code.model.CategoryBean;
 import com.code.model.FileUploadBean;
 import com.code.service.IFileImageService;
@@ -43,10 +43,11 @@ import javax.servlet.http.HttpServletResponse;
 public class FileUploadController {
     private final StorageService storageService;
     private final IFileImageService iFileImageService;
-    private final ICategory iCategory ;
+    private final ICategoryOld iCategory ;
     FileUploadBean ufile;
+    
     @Autowired
-    public FileUploadController(StorageService storageService,IFileImageService iFileImageService,ICategory iCategory ) {
+    public FileUploadController(StorageService storageService,IFileImageService iFileImageService,ICategoryOld iCategory ) {
         this.storageService = storageService;
         this.iFileImageService=iFileImageService;
         this.iCategory=iCategory;
@@ -134,7 +135,7 @@ public class FileUploadController {
     }*/
     
     @RequestMapping(value = "/remove_file_name", method = RequestMethod.GET)
-    public @ResponseBody Map<String,Object> removeFile(@RequestParam(value = "filename") String filename){    	    
+    public @ResponseBody Map<String,Object> removeFile(@RequestParam(value = "filename") String filename){
     	    this.storageService.delete(filename);
         	this.iFileImageService.remove(filename);
     	    return new HashMap<String,Object>(){

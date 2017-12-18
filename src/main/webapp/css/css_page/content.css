@@ -79,18 +79,19 @@
 #gnb .category dd a{float:left;width:50%;;height:46px;padding:15px 0 0 41px;border-bottom:1px solid #f2f2f2;border-left:1px solid #f2f2f2;text-overflow:ellipsis;white-space:nowrap;overflow:hidden; background:no-repeat 10px 10px;background-size:24px 24px;font-size:14px;}
 #gnb .category dd a:hover, #gnb .category dd a.on, #gnb .category dd a.etc_03.on, #gnb .category dd a.etc_03:hover, .category dd a.etc_04.on, #gnb .category dd a.etc_04:hover{background-color:#1ab188;color:#fff;}
 #gnb .category dd a:last-child{border-bottom:none;}
-#gnb .category dd a.ctg_01{background-image:url(../../img/icon/ico_woman.png);}
-#gnb .category dd a.ctg_02{background-image:url(../../img/icon/ico_man.png);}
-#gnb .category dd a.ctg_03{background-image:url(../../img/icon/ico_category_icon_beauty.png);}
-#gnb .category dd a.ctg_04{background-image:url(../../img/icon/ico_beauty.png);}
-#gnb .category dd a.ctg_05{background-image:url(../../img/icon/ico_category_icon_baby.png);}
-#gnb .category dd a.ctg_06{background-image:url(../../img/icon/ico_sports.png);}
-#gnb .category dd a.ctg_07{background-image:url(../../img/icon/ico_category_icon_phone.png);}
-#gnb .category dd a.ctg_08{background-image:url(../../img/icon/ico_category_icon_book.png);}
-#gnb .category dd a.etc_01{background-image:url(../../img/icon/ico_category_icon_chair.png);}
-#gnb .category dd a.etc_02{background-image:url(../../img/icon/ico_car.png);}
-#gnb .category dd a.etc_03{background-image:url(../../img/icon/ico_category_icon_etc.png);color:#757575;}
-#gnb .category dd a.etc_04{background-image:url(../../img/icon/ico_category_icon_stargoods.png);color:#757575;}
+#gnb .category dd a.ctg_01{background-image:url(../../img/ico/ico_woman.png);}
+#gnb .category dd a.ctg_02{background-image:url(../../img/ico/ico_man.png);}
+#gnb .category dd a.ctg_03{background-image:url(../../img/ico/ico_category_icon_beauty.png);}
+#gnb .category dd a.ctg_04{background-image:url(../../img/ico/ico_beauty.png);}
+#gnb .category dd a.ctg_05{background-image:url(../../img/ico/ico_category_icon_baby.png);}
+#gnb .category dd a.ctg_06{background-image:url(../../img/ico/ico_sports.png);}
+#gnb .category dd a.ctg_07{background-image:url(../../img/ico/ico_category_icon_phone.png);}
+#gnb .category dd a.ctg_08{background-image:url(../../img/ico/ico_category_icon_book.png);}
+
+#gnb .category dd a.etc_01{background-image:url(../../img/ico/ico_category_icon_chair.png);}
+#gnb .category dd a.etc_02{background-image:url(../../img/ico/ico_car.png);}
+#gnb .category dd a.etc_03{background-image:url(../../img/ico/ico_category_icon_etc.png);color:#757575;}
+#gnb .category dd a.etc_04{background-image:url(../../img/ico/ico_category_icon_stargoods.png);color:#757575;}
 #gnb .linklist a{display:block;position:relative;height:43px;padding:15px 0 0 15px;border-bottom:1px solid #e8e8e8;color:#757575;font-size:14px;}
 #gnb .linklist a:before{position:absolute;top:15px;right:0;width:8px;height:12px;margin:0 20px 0 0;background:url('/static/mobile/images/icon/icon_more_03.png?b32291dbae19') no-repeat 100% 50%;background-size:8px 12px;content:'';}
 #gnb .btncenter{padding:20px 10px 30px;}

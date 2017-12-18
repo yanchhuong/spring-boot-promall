@@ -22,6 +22,7 @@
     <script  src="../../js-lib/collJsPlugin.js"></script>
     <script  src="../../js-lib/common.js"></script>
     <script type="text/javascript" src="../../js-lib/lightslider.js"></script>
+    <script type="text/javascript" src="/js/main_page.js"></script>
     
  
 </head>

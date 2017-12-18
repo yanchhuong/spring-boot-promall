@@ -65,6 +65,8 @@
 		<!-- //header_inner -->
     </div>
 	<!-- // header -->
+	
+	
 
 	<!-- container -->
 	<div id="container">
@@ -88,7 +90,7 @@
 							<button type="button" class="btn_upload"><span>Post Free here!</span></button>
 						</dt>
 						<dd id="sidebar_catagory_list">
-							<a href="#none" class="ctg_01">Women's clothing</a>
+							<!-- <a href="#none" class="ctg_01">Women's clothing</a>
 							<a href="#none" class="ctg_02">Men's clothing</a>
 							<a href="#none" class="ctg_03">Fashion goods</a>
 							<a href="#none" class="ctg_04">Beauty / Beauty</a>
@@ -99,7 +101,7 @@
 							<a href="#none" class="etc_01">Life / Stationery / Furniture / Food</a>
 							<a href="#none" class="etc_02">Vehicles / Motorcycles</a>
 							<a href="#none" class="etc_03">More</a>
-							<a href="#none" class="etc_04">Stargaz</a>
+							<a href="#none" class="etc_04">Stargaz</a> -->
 						</dd>
 					</dl>
 					<div class="btncenter">
@@ -489,6 +491,8 @@
 		<!-- //container -->
     </div>
 	<!-- // container -->
+	
+	
 
 	<!-- footer -->
 	<footer>

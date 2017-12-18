@@ -4,7 +4,7 @@
  var animating; //flag to prevent quick multiclick glitches
  var post_control_001={};
  var ctgr_name = "";
- var catgid;
+ var catgcd;
  
  
  $(document).ready(function(){
@@ -27,7 +27,7 @@
  			
  			if($(this).parent().is('li')){
  				$("#ctgr_nm").val(ctgr_name);
- 				catgid = $(this).attr("data-id");
+ 				catgcd = $(this).attr("data-id");
 				current_fs = $('#form0');
  				next_fs    = $('#form1');
  			}else{
@@ -136,7 +136,7 @@ post_control_001.listMenu=function(){
 	    			html += '<ul>';
 		    			$.each(dat.OUT_REC, function(i,v){
 		    				if((parentId == v.parentid) && (v.lvl == "2")){
-		        				html += '<li><a href="#" class="next" data-id='+v.catgid+'>'+v.nm_eng+'</a></li>';
+		        				html += '<li><a href="#" class="next" data-id='+v.catgcd+'>'+v.nm_eng+'</a></li>';
 		        			}
 		    			});
 	    			html += '</ul>';
@@ -159,9 +159,7 @@ post_control_001.listProvince=function(){
     	$.each(dat.OUT_REC, function(i,v){
     		$("#form3 table #province").append($('<option name="'+v.nm_eng+'" id="'+v.id+'">'+v.nm_eng+'</option>'));
     	});
-    	console.log(dat);
     });
-
 };
 
 
@@ -170,44 +168,48 @@ post_control_001.SaveProductPost=function(){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var recImg 	= [];
 	var input   = {};
-		
+	var isChk   = false;
+
 	if($("#save_contact").is(":checked")){
-
+		isChk = true;
+		//update
 	}else{
-		input["catgid"] = catgid;
-		input["title"]  = $("#title").val();
-		input["price"]  = $("#price").val();
-		input["description"] = $("#description").val();
-
-//		here input image
-		$("#results div").each(function(){
-			recImg.push({
-					"type"     :$("#type").val(),
-					"size"     :$("#size").val(),
-					"path"     :$("img").attr("src"),
-					"orname"   :$("#orname").val(),
-					"regdate"  :$("#regdate").val(),
-					"randname" :$("#randname").val()
-			});
-			console.log("push "+recImg);
-		});
-		input["IN_REC"] = recImg;
-
-//		user_detail table
-		input["username_fk"] = $("#username").val();
-		input["cphone"] = $("#phone_number").val();
-
-//		address table
-		input["country"]  = $("#country").val();
-		input["province"] = $("#province option:selected").text();
-		input["detail"]   = $("#addr_detail").val();
-		console.log(input);
+		isChk = false;
+		//insert
 	}
+	
+	input["is_checked"] = isChk;
+	input["catgcd"] = catgcd;
+	input["title"]  = $("#title").val();
+	input["price"]  = $("#price").val();
+	input["desc"] = $("#description").val();
 
+//	here input image
+	$("#results div").each(function(){
+		recImg.push({
+			"type"     :$(this).find("#type").val(),
+			"size"     :$(this).find("#size").val(),
+			"path"     :$(this).find("img").attr("value"),
+			"orname"   :$(this).find("#orname").val(),
+			"regdate"  :$(this).find("#regdate").val(),
+			"randname" :$(this).find("#randname").val()
+		});
+	});
+	input["inRec"] = recImg;
+
+//	user_detail table
+	input["usercd"] = "12fw3rwfdf23";
+	input["cphone"] = $("#phone_number").val();
+
+//	address table
+	input["country"]  = $("#country").val();
+	input["province"] = $("#province option:selected").text();
+	input["detail"]   = $("#addr_detail").val();
+	
 	console.log("result after input "+JSON.stringify(input));
 	
 	$.ajax({
-		url: '',
+		url: '/products/insert_product',
 		cache: true,
 		processData: false,
 		contentType: false,
@@ -219,7 +221,7 @@ post_control_001.SaveProductPost=function(){
         },
         data: JSON.stringify(input),
         success: function(result){
-        	
+        	alert(result);
         }
 	})
 };
@@ -287,10 +289,11 @@ post_control_001.uploadFormData = function(file){
 	    },
 	    success: function(data){
 	    	data=JSON.parse(data);
-	    	wrap_img.append($('<img width="200px" height="140px" style="margin:6px;">').attr("src", document.location.origin+"/upload_file/files/"+ data.RANDNAME));
+	    	wrap_img.append($('<img width="200px" height="140px" value="'+document.location.origin+"/upload_file/files/"+'" style="margin:6px;">').attr("src", document.location.origin+"/upload_file/files/"+ data.RANDNAME));
 	    	wrap_img.append("<input type='hidden' id='orname' value='"+ data.OUT_REC.orname+"'>" );
 	    	wrap_img.append("<input type='hidden' id='regdate' value='"+ data.OUT_REC.regdate+"'>" );
 	    	wrap_img.append("<input type='hidden' id='size' value='"+ data.OUT_REC.size+"'>" );
+	    	wrap_img.append("<input type='hidden' id='randname' value='"+ data.OUT_REC.randname+"'>" );
 	    	wrap_img.append("<input type='hidden' id='type' value='"+ data.OUT_REC.type+"'>" );
 	    	$("#results").append(wrap_img);
 

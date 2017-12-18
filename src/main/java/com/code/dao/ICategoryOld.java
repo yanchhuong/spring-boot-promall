@@ -13,18 +13,17 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 @Repository
-public interface ICategory extends JpaRepository<CategoryBean,Long>{
+public interface ICategoryOld extends JpaRepository<CategoryBean,Long>{
 	 @Transactional
-	 @Query(value="WITH RECURSIVE category_tree AS \r\n" + 
-	 		"      (SELECT *,\r\n" + 
-	 		"      CAST(nm_eng As varchar(1000)) As fullengname,CAST(nm_kh As varchar(1000)) As fullkhname \r\n" + 
-	 		"      FROM category  WHERE parentid = 0 \r\n" + 
-	 		"      UNION all  SELECT si.*, \r\n" + 
-	 		"      CAST( sp.fullengname || '>>' || si.nm_eng As varchar(1000)) As fullengname ,\r\n" + 
-	 		"      CAST( sp.fullkhname || '>>' ||  si.nm_kh As varchar(1000)) As fullkhname FROM category As si \r\n" + 
-	 		"      INNER JOIN category_tree AS sp ON (si.parentid = cast(sp.catgid as integer))   )\r\n" + 
-	 		"      SELECT t.* ,f.randname FROM category_tree  t  left join  filepicture f on t.catgcd=f.catgcd  ORDER BY fullengname;\r\n" + 
-	 		" select count (catgcd) from category ;",nativeQuery = true)
+	 @Query(value=" WITH RECURSIVE category_tree AS "
+			 + " (SELECT *,CAST(nm_eng As varchar(1000)) As fullengname,CAST(nm_kh As varchar(1000)) As fullkhname"
+			 + " FROM category  WHERE parentid = 0"
+			 + " UNION all  SELECT si.*, CAST( sp.fullengname || '>>' || si.nm_eng As varchar(1000)) As fullengname ,"
+			 + " CAST( sp.fullkhname || '>>' ||  si.nm_kh As varchar(1000)) As fullkhname"
+			 + " FROM category As si INNER JOIN category_tree AS sp"
+			 + " ON (si.parentid = cast(sp.catgid as integer))  "
+			 + " )SELECT t.* ,f.randname FROM category_tree  t "
+			 + " left join  filepicture f on t.catgcd = f.catgcd ORDER BY fullengname;",nativeQuery = true)
 	 public List<CategoryBean> findAlls();
 
 	 //Modify

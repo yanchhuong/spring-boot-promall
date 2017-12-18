@@ -149,23 +149,23 @@ user_control_001.updateUseStatus=function(input){
 
 user_control_001.ListData=function(data){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-	var csrfToken = $("meta[name='_csrf']").attr("content");
+	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var enabled = $("#spStatSRC").find(".txt").text();
-	    if(enabled=="block"){
-	    	enabled= false;
-	    }else if(enabled=="Unblock"){
-	    	enabled= true;
+	    if(enabled == "block"){
+	    	enabled = false;
+	    }else if(enabled == "Unblock"){
+	    	enabled = true;
 	    }else{
 	    	enabled="";
 	    }
-	var input={};
+	var input = {};
 	    if($("#detail_up").attr("class")== "btn_style1  up"){
-	    	input["keyword"]= $("#SRCH_STR").val();
+	    	input["keyword"] = $("#SRCH_STR").val();
 	    }else{
-	    	input["keyword"]= $("#keySRC").val();
+	    	input["keyword"] = $("#keySRC").val();
 	    }
 	    input["role"] = data;
-	    input["status"] = enabled;
+	    input["status"]  = enabled;
 	    input["regdate"] = $("#regdate").val().replace(/[-]/gi,"");
 	var total= 0;
 	$.ajax({

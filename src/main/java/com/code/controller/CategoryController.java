@@ -31,33 +31,18 @@ public class CategoryController {
 	  
 	    @Qualifier(value = "categoryService")
 	    private ICategoryService CategoryService;
-	    private IFileImageService iFileImageService;
+	//    private IFileImageService iFileImageService;
 	    
 	    @Autowired(required = true)
-	    public CategoryController(ICategoryService CategoryService,IFileImageService iFileImageService){
+	    public CategoryController(ICategoryService CategoryService/*,IFileImageService iFileImageService*/){
 	    	this.CategoryService= CategoryService;
-	    	this.iFileImageService=iFileImageService;
+	    //	this.iFileImageService=iFileImageService;
 	    }
-	    
-	    @RequestMapping(value = "/find/{CategoryId}"
-	            , method = RequestMethod.GET
-	            , produces = {"application/json", "application/xml"})
-	    public CategoryBean getCategory(@PathVariable int CategoryId) {
-	    	CategoryBean Category = CategoryService.findOne(CategoryId);
-	        return Category;
-	    }
-       /*
-	   @RequestMapping(value = "/list"
-	            , method = RequestMethod.GET
-	            , produces=MediaType.APPLICATION_JSON_VALUE)
-	    public  @ResponseBody List<CategoryBean> getCategorys() {
-	        return this.CategoryService.findAll();
-	    }*/
 	   
 		@RequestMapping(value = "/list", method = RequestMethod.GET , produces=MediaType.APPLICATION_JSON_VALUE)
 		 public  @ResponseBody Map<String,Object> getCategorys() {
 			   List<CategoryBean_R001> obj = this.CategoryService.findAll();
-			   long total= this.CategoryService.getCatgidCount();
+			   long total = this.CategoryService.getCatgidCount();
 		        return new HashMap<String,Object>(){
 		            {
 		                put("TOTAL",total);
@@ -80,29 +65,26 @@ public class CategoryController {
 	    
 	    @RequestMapping(value="/save",method = RequestMethod.POST)
 	    public Map<String,Object> saveCategory(@RequestBody CategoryBean category){
-	    	this.iFileImageService.insertNew();
-	    	CategoryBean obj= category;
-	    	obj.setPid(this.iFileImageService.getMaxPid());
+	    	CategoryBean obj = category;
 	    	obj.setRegdate(DateFormatUtils.format(new Date(), "yyyyMMddhhmmss"));
 	    	// add new category
-	    	if(obj.getCatgcd()== null){
+	    	if(obj.getCatgcd() == null){
 	    		obj.setCatgcd(UUID.randomUUID().toString()+DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
 	    	}
-	    	obj.setSeq(this.CategoryService.getSeqCount(category.getLvl(),category.getParentid())+1);
 	    	this.CategoryService.saveCategoryBean(obj);
 	        return new HashMap<String,Object>(){
 	            {
 	              put("message","Category Saved");
-	              put("Category",obj);
+	              put("Category","");
 	            }
 	        };
 	    }
 
-	  @RequestMapping(value="/remove",method = RequestMethod.GET)
-	  public Map<String,Object> removeMenuTree(@RequestParam(value = "catgid") int rootid){  	
-		  this.CategoryService.removeMenuTree(rootid);
-			  return new HashMap<String,Object>(){
-		           { put("message","Category was delete!"); }
+	   @RequestMapping(value="/remove",method = RequestMethod.GET)
+	   public Map<String,Object> removeMenuTree(@RequestParam(value = "catgid") int rootid){  	
+		   this.CategoryService.removeMenuTree(rootid);
+		   		return new HashMap<String,Object>(){
+		   			{ put("message","Category was delete!"); }
 			  };       
 	 }
 	    

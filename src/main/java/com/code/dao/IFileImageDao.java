@@ -9,20 +9,6 @@ import org.springframework.transaction.annotation.Transactional;*/
 import com.code.model.FileUploadBean;
 
 public interface IFileImageDao /* extends JpaRepository<FileUploadBean,Long>*/{
-	 //Modify
-//	 @Modifying(clearAutomatically = true)
-//	 @Query(value="update filepicture  set randname='null' where randname =:filename",nativeQuery=true)
-//	 @Transactional
-//	 public void remove(@Param(value="filename") String filename); 
-//	 
-//	 @Modifying
-//	 @Query(value="insert into filepicture (orname) values('addnew')",nativeQuery=true)
-//	 @Transactional
-//	 public void insertNew(); 
-//	 
-//	 @Query(value="select count(pid) as mx from filepicture",nativeQuery=true)
-//	 public long findMaxPid();
-	 
 	 public void remove(String filename);
 	 public void insertNew(FileUploadBean input);
 }

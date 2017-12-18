@@ -47,11 +47,12 @@ public class UserController {
             }
         };
 	}
+
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	 public  @ResponseBody Map<String,Object> getListUsers(@RequestBody MUserListIn_R001 input) {
 		   List<MUserListOut_R001> obj = this.userService.getUserList(input);
-		   List<RoleCountOut_R001> rolecnt=this.userService.getRoleCount(); 
-		   PagingUtils page=new PagingUtils();
+		   List<RoleCountOut_R001> rolecnt = this.userService.getRoleCount(); 
+		   PagingUtils page = new PagingUtils();
 	        return new HashMap<String,Object>(){
 	            {
 	                put("OUT_REC",obj);
@@ -60,11 +61,12 @@ public class UserController {
 	            }
 	        };
 	}
+
 	@RequestMapping(value = "/updatestatus", method = RequestMethod.POST)
-	 public  @ResponseBody Map<String,Object> updateUsers(@RequestBody MUpdateUserStatusIn_U001 input) {
+	public  @ResponseBody Map<String,Object> updateUsers(@RequestBody MUpdateUserStatusIn_U001 input) {
 		System.out.println("TestUpdate");
 		this.userService.updateUserStatus(input);
-	        return new HashMap<String,Object>(){
+			return new HashMap<String,Object>(){
 	            {
 	                put("ERROR_SMS","");
 	                put("CODE","200");
