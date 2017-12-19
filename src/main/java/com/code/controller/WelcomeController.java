@@ -51,11 +51,11 @@ public class WelcomeController {
 	private String message;
 	
 
-	@RequestMapping(value="/welcome",method = RequestMethod.GET)
+	@RequestMapping(value="/test_dao",method = RequestMethod.GET)
 	public String welcome(Map<String, Object> model) {
 		model.put("time", new Date());
 		model.put("message", this.message+" "+ System.getProperty("user.name"));
-		return "welcome";
+		return "test_dao";
 	}
 	@RequestMapping(value="/welcomeajax", method=RequestMethod.GET)
 	@ResponseBody

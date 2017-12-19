@@ -21,7 +21,9 @@ import com.code.model.MUpdateUserStatusIn_U001;
 import com.code.model.MUserListIn_R001;
 import com.code.model.MUserListOut_R001;
 import com.code.model.RoleCountOut_R001;
+import com.code.model.UserSessionBean;
 import com.code.model.UserSignupBeanIn_C001;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 
 @Repository
@@ -222,5 +224,23 @@ public class UserDaoImpl implements IUserDao{
 		}
 	}
 
-	
+	@Override
+	public List <UserSessionBean> getSessionDao(String input) {
+		String sql = "select a.usercd,b.fname||' '||b.lname as fullname,b.sex, "
+					+ "       c.randname,b.cphone,b.email from users a "
+					+ "       left join user_detail b on a.usercd = b.usercd "
+					+ "       left join filepicture c on c.usercd = a.usercd "
+					+ "             where 1=1 and a.username = :username";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("username", input);
+		
+		List <UserSessionBean> data=null;
+	    try {
+	         data = ConnectionUtils.getNamedParameterJdbcTemplate().query(sql,params,
+					new BeanPropertyRowMapper<UserSessionBean>(UserSessionBean.class));
+		 } catch (Exception e) {
+					// do nothing, return null
+	    }
+	    return data;
+	}
 }

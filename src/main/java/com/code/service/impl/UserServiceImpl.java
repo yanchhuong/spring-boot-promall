@@ -13,6 +13,7 @@ import com.code.model.MUserListIn_R001;
 import com.code.model.MUserListOut_R001;
 import com.code.model.RoleCountOut_R001;
 import com.code.model.RoleListBean_R001;
+import com.code.model.UserSessionBean;
 import com.code.model.UserSignupBeanIn_C001;
 import com.code.service.UserService;
 
@@ -71,6 +72,16 @@ public class UserServiceImpl implements UserService{
 	public void removeRoleListByRole(RoleListBean_R001 input) {
 		 this.iRoleListRepository.removeRoleListByRole(input.getRole());
 		
+	}
+
+	@Override
+	public UserSessionBean getSessionDao(String input) {
+		// TODO Auto-generated method stub
+		UserSessionBean data=null;
+		for(UserSessionBean obj: this.userDao.getSessionDao(input)){
+			data=obj;
+		}
+		return data;
 	}
 
 

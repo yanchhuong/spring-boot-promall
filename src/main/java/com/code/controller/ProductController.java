@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +23,9 @@ import com.code.model.PostProductBean_C001;
 import com.code.model.ProductBeanIn_U001;
 import com.code.model.ProductListBeanIn_R001;
 import com.code.model.ProductListBeanOut_R001;
+import com.code.model.UserSessionBean;
 import com.code.service.IProductService;
+import com.code.session.SessionManager;
 
 @RestController
 @RequestMapping(value = "/products")
@@ -57,17 +62,14 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/insert_product", method = RequestMethod.POST)
-	public  @ResponseBody Map<String,Object> insertProduct(@RequestBody PostProductBean_C001 input) {
+	public  @ResponseBody Map<String,Object> insertProduct(@RequestBody PostProductBean_C001 input,HttpServletRequest request, HttpServletResponse response) {
 		String ErrorMGS = "Cannot Insert";
 		for(FileUploadBean in:input.getInRec()) {
 			System.out.println(in.getRandname());
 		}
-
 		PostProductBean_C001 obj = input;
 		obj.setPrcd(UUID.randomUUID().toString()+DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
 		obj.setRegdate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
-		System.out.println(obj.getCatgcd());
-		
 		if(this.iProductService.insertProducts(obj)) {
 			ErrorMGS="Update success!";
 		}

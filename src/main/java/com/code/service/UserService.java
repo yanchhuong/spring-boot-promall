@@ -19,5 +19,7 @@ public interface UserService {
     public void addRoleList(RoleListBean_R001 input);
     //list remove role
     public void removeRoleListByRole(RoleListBean_R001 input);
-
+    
+    
+    public UserSessionBean getSessionDao(String input);
 }

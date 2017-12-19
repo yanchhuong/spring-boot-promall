@@ -15,11 +15,19 @@ import org.springframework.security.web.header.writers.frameoptions.XFrameOption
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.social.security.SpringSocialConfigurer;
 
+import com.code.service.UserService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
+	
+	@Autowired
+	private UserService iUserDao;
+	SecurityConfig(UserService iUserDao){
+		this.iUserDao=iUserDao;
+	}
 
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
@@ -39,19 +47,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/users").access("hasRole('ROLE_ADMIN')").antMatchers("/users/add")
 				.access("hasRole('ROLE_ADMIN')").antMatchers("/users/**/update").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/users/**/delete").access("hasRole('ROLE_ADMIN')")
+				
+				.antMatchers("/post").access("hasRole('ROLE_USER')")
+				
+				.antMatchers("/admin").access("hasRole('ROLE_ADMIN')")
+				.antMatchers("/users/add").access("hasRole('ROLE_ADMIN')").antMatchers("/users/**/update").access("hasRole('ROLE_ADMIN')")
 
 				.anyRequest().permitAll()
 				
 				.anyRequest().permitAll()
 		   .and()
 		   		.formLogin()
-		   		.loginPage("/login").successHandler(new SuccessLoginHandler())
+		   		.loginPage("/login").successHandler(new SuccessLoginHandler(iUserDao))
 		   		.usernameParameter("username")
 				.passwordParameter("password")
 				
 			.and()
 				.logout().logoutSuccessUrl("/login?logout")
-				
 			.and()
 				.exceptionHandling().accessDeniedPage("/403")
 			.and().csrf();

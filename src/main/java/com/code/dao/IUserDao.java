@@ -6,6 +6,7 @@ import com.code.model.MUpdateUserStatusIn_U001;
 import com.code.model.MUserListIn_R001;
 import com.code.model.MUserListOut_R001;
 import com.code.model.RoleCountOut_R001;
+import com.code.model.UserSessionBean;
 import com.code.model.UserSignupBeanIn_C001;
 
 public interface IUserDao {
@@ -18,5 +19,7 @@ public interface IUserDao {
     public List<MUserListOut_R001> getUserList(MUserListIn_R001 input);
     public List<RoleCountOut_R001> getRoleCount();
     public void updateUserStatus(MUpdateUserStatusIn_U001 input);
+    
+    public List<UserSessionBean> getSessionDao(String input);
 
 }
