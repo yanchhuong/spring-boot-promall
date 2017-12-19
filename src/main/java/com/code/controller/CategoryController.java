@@ -81,7 +81,7 @@ public class CategoryController {
 	    }
 
 	   @RequestMapping(value="/remove",method = RequestMethod.GET)
-	   public Map<String,Object> removeMenuTree(@RequestParam(value = "catgid") int rootid){  	
+	   public Map<String,Object> removeMenuTree(@RequestParam(value = "catgid") int rootid){ 
 		   this.CategoryService.removeMenuTree(rootid);
 		   		return new HashMap<String,Object>(){
 		   			{ put("message","Category was delete!"); }

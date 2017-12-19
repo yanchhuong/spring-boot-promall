@@ -3,7 +3,6 @@ package com.code.controller;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -11,24 +10,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.code.dao.ICategoryOld;
-import com.code.model.CategoryBean;
 import com.code.model.FileUploadBean;
 import com.code.service.IFileImageService;
 import com.code.service.StorageService;
-import com.code.service.impl.FileImageServiceImpl;
 import com.code.service.impl.StorageFileNotFoundException;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -43,14 +34,13 @@ import javax.servlet.http.HttpServletResponse;
 public class FileUploadController {
     private final StorageService storageService;
     private final IFileImageService iFileImageService;
-    private final ICategoryOld iCategory ;
+ 
     FileUploadBean ufile;
     
     @Autowired
-    public FileUploadController(StorageService storageService,IFileImageService iFileImageService,ICategoryOld iCategory ) {
+    public FileUploadController(StorageService storageService,IFileImageService iFileImageService) {
         this.storageService = storageService;
         this.iFileImageService=iFileImageService;
-        this.iCategory=iCategory;
         ufile  =new FileUploadBean();
     }
 
@@ -165,8 +155,6 @@ public class FileUploadController {
     			}
     		};
     }
-    
-    
    @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity handleStorageFileNotFound(StorageFileNotFoundException exc) {
         return ResponseEntity.notFound().build();

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-import com.code.comm.JdbcDaoSupportUtils;
+import com.code.comm.ConnectionUtils;
 import com.code.comm.SqlFormatUtils;
 import com.code.dao.IUserDao;
 import com.code.model.MUpdateUserStatusIn_U001;
@@ -30,7 +30,7 @@ public class UserDaoImpl implements IUserDao{
 	protected DataSource dataSource;
 	 @PostConstruct
 	 private void initialize(){
-	        JdbcDaoSupportUtils.setDataSource(dataSource);
+	        ConnectionUtils.setDataSource(dataSource);
 	 }
 
 	@Override
@@ -38,7 +38,7 @@ public class UserDaoImpl implements IUserDao{
 		//String sql = "INSERT INTO USER_ROLES " +"(username,role,regdate,usercd) VALUES (?,?,?,?)" ;
 		String sql = "INSERT INTO USER_ROLES " +"(username,role,regdate,usercd) VALUES (:username,:role,:regdate,:usercd)" ;
 		try{
-			JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(user));
+			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(user));
 		}catch(Exception e){
 			
 		}
@@ -48,7 +48,7 @@ public class UserDaoImpl implements IUserDao{
 		//String sql = "INSERT INTO USERS " +"(usercd,username,password) VALUES (?,?,?)" ;
 		String sql = "INSERT INTO USERS " +"(usercd,username,password) VALUES (:usercd,:username,:password)" ;
 		try{
-			JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
+			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
 		}catch(Exception e){
 			
 		}
@@ -57,7 +57,7 @@ public class UserDaoImpl implements IUserDao{
 	public void insertUserDetail(UserSignupBeanIn_C001 input) {
 		String sql = "INSERT INTO USER_DETAIL " +"(regdate,fname,lname,username_fk,email,usercd) VALUES (:regdate,:fname,:lname,:username,:email,:usercd)" ;
 		try{
-			JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().update(sql, SqlFormatUtils.getSqlParameterSource(input));
+			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql, SqlFormatUtils.getSqlParameterSource(input));
 		}catch(Exception e){
 			
 		}
@@ -122,7 +122,7 @@ public class UserDaoImpl implements IUserDao{
 		}
 		List<MUserListOut_R001> result  = null;
 		try{
-			result  = JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().query(sb.toString(), 
+			result  = ConnectionUtils.getNamedParameterJdbcTemplate().query(sb.toString(), 
 					new BeanPropertyRowMapper<MUserListOut_R001>(MUserListOut_R001.class));
 		}catch(Exception e){
 			
@@ -159,7 +159,7 @@ public class UserDaoImpl implements IUserDao{
 		
 		UserSignupBeanIn_C001 result = null;
 		try {
-			result = JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().queryForObject(sql, params, new UserMapper());
+			result = ConnectionUtils.getNamedParameterJdbcTemplate().queryForObject(sql, params, new UserMapper());
 		} catch (EmptyResultDataAccessException e) {
 			// do nothing, return null
 		}
@@ -170,7 +170,7 @@ public class UserDaoImpl implements IUserDao{
 		String sql = "UPDATE USER_DETAIL SET FNAME=:fname, EMAIL=:email, ADDRESS=:address, "
 			+ "PASSWORD=:password, SEX=:sex, LNAME=:lname, "
 			+ "SEX=:sex, CPHONE=:phone, REGDATE=:regdate, BIRTHDATE=:birthdate WHERE USERNAME=:username";
-		JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().update(sql, getSqlParameterByModel(user));
+		ConnectionUtils.getNamedParameterJdbcTemplate().update(sql, getSqlParameterByModel(user));
 
 	}
 	
@@ -206,7 +206,7 @@ public class UserDaoImpl implements IUserDao{
 				+ " union select count(*) , 'ALL' from  user_roles";
 		List<RoleCountOut_R001> result  = null;
 		 try{
-			 result = JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().query(sql, 
+			 result = ConnectionUtils.getNamedParameterJdbcTemplate().query(sql, 
 						new BeanPropertyRowMapper<RoleCountOut_R001>(RoleCountOut_R001.class));
 			}catch(Exception e){	
 	        }
@@ -216,7 +216,7 @@ public class UserDaoImpl implements IUserDao{
 	public void updateUserStatus(MUpdateUserStatusIn_U001 input) {
 		String sql = "UPDATE USERS set enabled=:enabled where usercd=:usercd";       
         try{
-			JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().update(sql, SqlFormatUtils.getSqlParameterSource(input));
+			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql, SqlFormatUtils.getSqlParameterSource(input));
 		}catch(Exception e){
 			
 		}

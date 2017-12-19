@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
-import com.code.comm.JdbcDaoSupportUtils;
+import com.code.comm.ConnectionUtils;
 import com.code.comm.SqlFormatUtils;
 import com.code.dao.ChatMessageRepository;
 import com.code.model.LiveChatBean;
@@ -26,7 +26,7 @@ public class ChatMessageDaoImpl implements ChatMessageRepository{
 	 
 	 @PostConstruct
 	 private void initialize(){
-		 JdbcDaoSupportUtils.setDataSource(dataSource);
+		 ConnectionUtils.setDataSource(dataSource);
 	 }
 
 	@Override
@@ -38,7 +38,7 @@ public class ChatMessageDaoImpl implements ChatMessageRepository{
 	public void addMessage(LiveChatBean input) {
 		String sql = "INSERT INTO CHATMESSAGE " +"(message,sender,recipient,ip,dtm) VALUES (:message,:sender,:recipient,:ip,:dtm)" ;
         try{
-			JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
+			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
 		}catch(Exception e){
 			
 		}

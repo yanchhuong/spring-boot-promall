@@ -86,7 +86,7 @@ public class WebMvcJspApplication extends SpringBootServletInitializer {
 	CommandLineRunner init(StorageService storageService) {
 			return (args) -> {
 	           // storageService.deleteAll();
-	            //storageService.init();
+	           //storageService.init();
 			};
 	 }
 	 @Bean

@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-@Repository
+/*@Repository
 public interface ICategoryOld extends JpaRepository<CategoryBean,Long>{
 	 @Transactional
 	 @Query(value=" WITH RECURSIVE category_tree AS "
@@ -56,4 +56,4 @@ public interface ICategoryOld extends JpaRepository<CategoryBean,Long>{
 	 
 	 
               
-}
+}*/

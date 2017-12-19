@@ -6,7 +6,7 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.code.comm.JdbcDaoSupportUtils;
+import com.code.comm.ConnectionUtils;
 import com.code.comm.SqlFormatUtils;
 import com.code.dao.IFileImageDao;
 import com.code.model.FileUploadBean;
@@ -17,14 +17,14 @@ public class FileImageDaoImpl  implements IFileImageDao {
 	 
 	@PostConstruct
 	private void initialize(){
-		 JdbcDaoSupportUtils.setDataSource(dataSource);
+		 ConnectionUtils.setDataSource(dataSource);
 	}
 
 	@Override
 	public void remove(String input) {
 		String sql = "delete  from filepicture where randname = :randname";
 		 try{
-				JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
+				ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
 			}catch(Exception e){
 				
 		}
@@ -36,7 +36,7 @@ public class FileImageDaoImpl  implements IFileImageDao {
 				    " values(:orname, :randname, :regdate, :type, :path, :size, :prcd, :usercd, :catgcd)";
 		//			"values(?,?,?,?,?,?,?,?,?)";
 		 try{
-				JdbcDaoSupportUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
+				ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
 			}catch(Exception e){
 				
 		}

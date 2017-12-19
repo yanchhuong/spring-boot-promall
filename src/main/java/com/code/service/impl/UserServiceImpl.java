@@ -58,12 +58,12 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<RoleListBean_R001> getRoleList() {
 		// TODO Auto-generated method stub
-		return this.iRoleListRepository.findAll();
+		return this.iRoleListRepository.getRoleBusiness();
 	}
 
 	@Override
 	public void addRoleList(RoleListBean_R001 input) {
-	    this.iRoleListRepository.saveAndFlush(input);
+	    this.iRoleListRepository.insertRole(input);
 		
 	}
 

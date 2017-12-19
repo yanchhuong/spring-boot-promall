@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 //import org.springframework.jdbc.core.simple.SimpleJdbcTemplate; //spring-jdbc   <version>5.0.2.RELEASE</version>
 
-public class JdbcDaoSupportUtils {
+public class ConnectionUtils {
 	 /** The simple jdbc insert. */
     private static SimpleJdbcInsert simpleJdbcInsert;   
     /** The jdbc template. */
@@ -33,7 +33,7 @@ public class JdbcDaoSupportUtils {
 		return jdbcTemplate;
 	}
 	public static void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		JdbcDaoSupportUtils.jdbcTemplate = jdbcTemplate;
+		ConnectionUtils.jdbcTemplate = jdbcTemplate;
 	}
 	/**
      * Gets the named parameter jdbc template.
