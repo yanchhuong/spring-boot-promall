@@ -12,9 +12,14 @@
 <script type="text/javascript" src="../js_lib/js_page/collJsPlugin.js"></script>
 <script type="text/javascript" src="../js_lib/js_page/common.js"></script> -->
 
+<meta name="_csrf" content="${_csrf.token}"/>
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
-
- <%@include file="fragments/include_page.jsp"%>
+<%@include file="fragments/include_page.jsp"%>
+<style>
+	
+</style> 
+ 
 </head>
 
 <body>
@@ -27,7 +32,7 @@
 		<!-- header_inner top-bar-wrap -->
         <div class="header_inner">
 			<!-- logo -->
-            <h1 class="logo"><a href="#none"><img src="img/bg/bg_logo.png" alt="logo"></a></h1>
+            <h1 class="logo"><a href="http://localhost:8080/"><img src="img/bg/bg_logo.png" alt="logo"></a></h1>
 			<!-- //logo -->
 
 			<!-- button_menu_mobile -->
@@ -117,22 +122,14 @@
 
 			<!-- sub_category -->
 			<div class="sub_cat">
-				<div class="hdbox">Women's Clothing <a href="#none" class="btn_subCatClose"><img src="img/btn/btn_subCatClose.png" alt="Sub Category Close"></a></div>
+				<div class="hdbox">
+					<h3><!-- Women's Clothing --></h3> 
+					<a href="#none" class="btn_subCatClose">
+						<img src="img/btn/btn_subCatClose.png" alt="Sub Category Close">
+					</a>
+				</div>
 				<div class="ctglist">
-					<ul>
-						<li><a href="#none"><em>Long sleeve T-shirt</em><span>999 Items</span></a></li>
-						<li><a href="#none"><em>Short Sleeve T-shirt</em><span>10 Items</span></a></li>
-						<li><a href="#none"><em>Man-to-man / hoody</em><span>99 Items</span></a></li>
-						<li><a href="#none"><em>One Piece</em><span>999 Items</span></a></li>
-						<li><a href="#none"><em>Blouse</em><span>800 Items</span></a></li>
-						<li><a href="#none"><em>Shirt / Souvenir</em><span>999 Items</span></a></li>
-						<li><a href="#none"><em>Long sleeve T-shirt</em><span>999 Items</span></a></li>
-						<li><a href="#none"><em>Short Sleeve T-shirt</em><span>10 Items</span></a></li>
-						<li><a href="#none"><em>Man-to-man / hoody</em><span>99 Items</span></a></li>
-						<li><a href="#none"><em>One Piece</em><span>999 Items</span></a></li>
-						<li><a href="#none"><em>Blouse</em><span>800 Items</span></a></li>
-						<li><a href="#none"><em>Shirt / Souvenir</em><span>999 Items</span></a></li>
-					</ul>
+					<ul></ul>
 					<button class="btn_more"><span class="btn_text">Show More</span><span class="btn_collape"></span></button>
 				</div>
 			</div>
@@ -159,7 +156,7 @@
 
 				<!-- goods_list -->
 				<ul class="goodslist">
-					<li>
+					<!-- <li>
 						<a href="#none" class="thumb">
 							<img src="img/products/prod_01.jpg" alt="" class="thumb loaded">
 							<p class="txtinfo">
@@ -184,7 +181,8 @@
 								</ul>
 							</div>
 						</div>
-					</li>
+					</li> -->
+<!--			
 					<li>
 						<a href="#none" class="thumb">
 							<span class="badge icon_plus">Plus</span>
@@ -471,12 +469,14 @@
 							</div>
 						</div>
 					</li>
+
+-->
 				</ul>
-				<!-- //goods_list -->
+				<!-- //goods_list -->				
 			</div>
 
-			<div class="pagination">
-				<a href="#none" class="pag_prev">next</a>
+			<div class="pagination paginationjs-theme-blue" style="cursor: default;padding-left: 450px;">
+				<!-- <a href="#none" class="pag_prev">next</a>
 				<span>
 					<a href="#none" class="on">1</a>
 					<a href="#none">2</a>
@@ -484,7 +484,7 @@
 					<a href="#none">4</a>
 					<a href="#none">5</a>
 				</span>
-				<a href="#none" class="pag_next">next</a>
+				<a href="#none" class="pag_next">next</a> -->
 			</div>
 
 		</div>
@@ -516,6 +516,7 @@
 		</div>
 	</footer>
 	<!-- //footer -->
+
 </div>
 <!-- //wrap -->
 

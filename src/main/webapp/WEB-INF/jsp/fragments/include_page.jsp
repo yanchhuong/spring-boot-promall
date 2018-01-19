@@ -10,6 +10,9 @@
    <link rel="stylesheet" type="text/css" href="../../css/css_page/content_media_screen.css" media="all">
    <link rel="stylesheet" type="text/css" href="../../css/css_page/button.css" media="all">
    
+   <!-- pagination -->
+   <link rel="stylesheet" type="text/css" href="../../css/css_page/pagination.css" media="all">
+   
    <link rel="stylesheet" type="text/css" href="../../css/css_page/slider.css" media="all">
    
     <!--js file  
@@ -21,9 +24,15 @@
     <script  src="../../js-lib/jquery-1.10.2.js"></script>
     <script  src="../../js-lib/collJsPlugin.js"></script>
     <script  src="../../js-lib/common.js"></script>
+    
+    <!-- pagination -->
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script  src="../../js-lib/pagination.js"></script>
+    
+    <script  src="../../js-lib/tbl.paginging.js"></script>
     <script type="text/javascript" src="../../js-lib/lightslider.js"></script>
     <script type="text/javascript" src="/js/main_page.js"></script>
-    
+
  
 </head>
 

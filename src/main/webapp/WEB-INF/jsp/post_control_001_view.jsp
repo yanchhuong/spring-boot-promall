@@ -1,3 +1,14 @@
+<%@page import="com.code.model.UserSessionBean"%>
+<%@page import="com.code.session.SessionManager"%>
+<%@page import="com.code.session.UserSession"%>
+<%
+	UserSessionBean sess = SessionManager.getSession(request, response);
+    String usercd = sess.getUsercd();
+	
+
+
+%>
+
 <html >
 <head>
   <meta charset='UTF-8'>
@@ -10,6 +21,9 @@
 </head>'
 
 <body>
+
+<input type="hidden" id="usercd" value="<%=usercd%>" />
+
  <!-- multistep form -->
 <form id='msform'>
   <!-- progressbar -->
@@ -98,6 +112,10 @@
             <td><input type='text' name='title' placeholder='title' id="title" /> </td>
 		</tr>
 		<tr>
+			<td></td>
+			<td><span id="alertPrice" style="color:red;display:none;">*Input only number</span></td>
+		</tr>
+		<tr>
 	        <td>Price <span> *</span> </label> </td>
             <td><input type='text' name='price' placeholder='price' id="price" /></td>
 		</tr>
@@ -110,33 +128,34 @@
     <input type='button' name='next' class='next action-button' value='Next' />
   </fieldset>
 
-  <fieldset id='form2'>
-    <h2 class='fs-title'>Upload Original Picture</h2>
+<fieldset id='form2'>	
+	<h2 class='fs-title'>Upload Original Picture</h2>
     <h3 class='fs-subtitle'>Be layolty to !</h3>
-      <div id="results">
-	  </div>
-	 <div class="fileform" type="form" action="*">
-     </div>
-     <div id="upload">
-     	Upload more
-	</div>
+    
+	<div id="results"> <!-- image will be replaced here --> </div>
+	<div class="fileform" type="form" action="*"></div>
+    <div id="upload">Upload more</div>
 
     <input type='button' name='previous' class='previous action-button' value='Previous' />
     <input type='button' name='next' class='next action-button' value='Next' />
-  </fieldset>
+</fieldset>
 
-  <fieldset id='form3'>
+<fieldset id='form3'>
     <h2 class='fs-title'>Fill Your Contact</h2>
     <h3 class='fs-subtitle'>It's important for buyer!</h3>
-    <table >
-		<tr>
+    <table>
+<!-- 		<tr>
 	       <td>Name <span>*</span></td>
            <td><input type='text' name='Category' placeholder='your name'  visible='true' id="username" /> </td>
-		</tr>  
+		</tr>   -->
+		<tr>
+			<td></td>
+			<td><span id="alertPhone" style="color:red;display:none;">*Input only number</span></td>
+		</tr>
 		<tr>
 	       <td>Phone <span> * </span></td>
             <td><input type='text' name='facebook' placeholder='availible contact number' id="phone_number" /> </td>
-		</tr>  
+		</tr>
 		<tr>
 	        <td>Country <span> *</span> </label> </td>
             <td><input type='text' name='gplus' placeholder='country' id="country" /></td>
@@ -166,7 +185,7 @@
 	 
     <input type='button' name='previous' class='previous action-button' value='Previous' />
     <input type='submit' name='submit' class='submit action-button' value='Finish' id="saveAll" />
-  </fieldset>
+</fieldset>
   
 </form>
 

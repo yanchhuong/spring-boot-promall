@@ -1,4 +1,11 @@
 
+<%
+String input="";
+if(request.getParameter("input")!=null){
+	 input = request.getParameter("input");
+}
+%>    
+    
 <!DOCTYPE html>
 <html >
 <head>
@@ -60,20 +67,22 @@
         <div id="login">   
           <h1>Welcome Back!</h1>
           
-          <form action="/login" method="post">
+          <form id="loginform" name="loginform">
           
             <div class="field-wrap">
             <label>
               Email Address<span class="req">*</span>
             </label>
-            <input type="text"required autocomplete="off" name="username" />
+            <input type="text"required autocomplete="off" name="username" id="username"/>
           </div>
           
           <div class="field-wrap">
             <label>
               Password<span class="req">*</span>
             </label>
-            <input type="password"required autocomplete="off" name="password"/>
+            <input type="password"required autocomplete="off" name="password"/ id="Lpassword">
+            
+            <input type="hidden" name="url" id="url" value=""/>
           </div>
           
           <p class="forgot"><a href="javascript:">Forgot Password?</a></p>
