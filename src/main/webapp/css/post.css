@@ -507,8 +507,28 @@ upload file
       	margin:0 5px 0 0;
         border:1px solid #000;
       }
-	 #results img:hover,#results img:focus {
+      
+      #results .wrap_img{
+      	padding: 20px;
+      	background-repeat: no-repeat;
+		background-position: top center;
+  		background-size: contain;
+  		background-image: url('../../img/bg/dustbin.png');
+      }
+      
+	#results img:hover, #results img:focus {
+		/* content: url('../../img/bg/dustbin.png'); */
+		/* background-image: url('../../img/bg/dustbin.png'); */
+		/* background: url('../../img/bg/dustbin.png') center center no-repeat; */
+		/* background-size: 50px; */
+		
 	 	cursor:pointer;
-	 	opacity: 0.3; filter: alpha(opacity=30);
-	    box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+	 	opacity: 0.3;
+	 	filter: alpha(opacity=30);
+ 	    box-shadow: 0 0 0 2px black, 0 0 0 3px #27AE60;
 	}
+
+	
+
+
+
