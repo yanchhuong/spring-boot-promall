@@ -23,22 +23,25 @@ public class FileImageDaoImpl  implements IFileImageDao {
 	@Override
 	public void remove(String input) {
 		String sql = "delete  from filepicture where randname = :randname";
-		 try{
-				ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
-			}catch(Exception e){
-				
+		try{
+			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		
 	}
+	
 	@Override
 	public void insertNew(FileUploadBean input) {
+		if(input.getOrname().length() > 100) {
+			input.setOrname("Big file");
+		}
 		String sql ="insert into filepicture (orname, randname, regdate, type, path, size, prcd, usercd, catgcd)"+
 				    " values(:orname, :randname, :regdate, :type, :path, :size, :prcd, :usercd, :catgcd)";
-		//			"values(?,?,?,?,?,?,?,?,?)";
-		 try{
-				ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
-			}catch(Exception e){
-				
+		try{
+			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 

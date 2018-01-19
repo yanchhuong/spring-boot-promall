@@ -2,7 +2,7 @@ package com.code.controller;
 
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +18,8 @@ import com.code.model.FileUploadBean;
 import com.code.service.IFileImageService;
 import com.code.service.StorageService;
 import com.code.service.impl.StorageFileNotFoundException;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 import java.io.IOException;
 import java.util.Date;
@@ -40,8 +42,8 @@ public class FileUploadController {
     @Autowired
     public FileUploadController(StorageService storageService,IFileImageService iFileImageService) {
         this.storageService = storageService;
-        this.iFileImageService=iFileImageService;
-        ufile  =new FileUploadBean();
+        this.iFileImageService = iFileImageService;
+        ufile = new FileUploadBean();
     }
 
     @RequestMapping("/loadall_file")
@@ -83,34 +85,40 @@ public class FileUploadController {
     
     @RequestMapping(value = "/uploadimg", method = RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Map<String,Object>  upload(MultipartHttpServletRequest request, HttpServletResponse response) {
-      //0. notice, we have used MultipartHttpServletRequest
-      //1. get the files from the request object
+    	//0. notice, we have used MultipartHttpServletRequest
+    	//1. get the files from the request object
 
-      Iterator<String> itr =  request.getFileNames();
-      MultipartFile mpf = request.getFile(itr.next());  
-      ufile.setOrname(mpf.getOriginalFilename());
-      String fileName = DateFormatUtils.format(new Date(), "yyyyMMdd") + "_"+ UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(mpf.getOriginalFilename());
-      try {
-         //just temporary save file info into ufile
-    	 storageService.store(mpf,fileName);
+    	Iterator<String> itr =  request.getFileNames();
+    	MultipartFile mpf = request.getFile(itr.next());  
+    	ufile.setOrname(mpf.getOriginalFilename());
+    	String fileName = DateFormatUtils.format(new Date(), "yyyyMMdd") + "_"+ UUID.randomUUID().toString() + "." + FilenameUtils.getExtension(mpf.getOriginalFilename());
+    	try {
+    		ufile.setSize(mpf.getBytes().length);
+    		ufile.setRegdate(DateFormatUtils.format(new Date(), "yyyyMMddhhmmss"));
+    		ufile.setType(mpf.getContentType());
+    		ufile.setRandname(fileName);
+    		
+    		
+    		//just temporary save file info into ufile
+    		//if(mpf.getBytes().length < 1048575) {
+    			System.out.println(mpf.getBytes().length);
+    			storageService.store(mpf,fileName);	
+    		//}
     	
-         ufile.setSize(mpf.getBytes().length);
-         ufile.setRegdate(DateFormatUtils.format(new Date(), "yyyyMMddhhmmss"));
-         ufile.setType(mpf.getContentType());
-         ufile.setRandname(fileName);
-     } catch (IOException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-     }
-      //2. send it back to the client as <img> that calls get method
-      //we are using getTimeInMillis to avoid server cached image 
-      return new HashMap<String,Object>(){
-          {
-              put("OUT_REC",ufile);
-              put("RANDNAME",fileName);
-          }
-      };
-   }
+    		
+    	} catch (IOException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+    	//2. send it back to the client as <img> that calls get method
+    	//we are using getTimeInMillis to avoid server cached image 
+    	return new HashMap<String,Object>(){
+    		{
+    			put("OUT_REC",ufile);
+    			put("RANDNAME",fileName);
+    		}
+    	};
+    }
 /*    
     @RequestMapping(value = "/get/{value}", method = RequestMethod.GET)
     public void get(HttpServletResponse response,@PathVariable String value){
@@ -135,6 +143,18 @@ public class FileUploadController {
     	          }
     	   };
     }
+    
+    @RequestMapping(value = "/remove_file_local", method = RequestMethod.GET)
+    public @ResponseBody Map<String,Object> removeFileLocal(@RequestParam(value = "filename") String filename){
+    	    this.storageService.delete(filename);
+    	    return new HashMap<String,Object>(){
+    	          {
+    	              put("filename",filename);
+    	              put("ERROR","delete success!");
+    	          }
+    	   };
+    }
+    
     @RequestMapping(value="/save_file_name",method = RequestMethod.POST ,produces=MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Map<String,Object> saveCategory(@RequestBody FileUploadBean fileUploadBean){
     	this.iFileImageService.saveFileUploadBean(fileUploadBean);

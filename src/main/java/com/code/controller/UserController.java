@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.code.comm.PAGINATION;
 import com.code.comm.PagingUtils;
 import com.code.model.MUpdateUserStatusIn_U001;
 import com.code.model.MUserListIn_R001;
@@ -47,24 +48,25 @@ public class UserController {
             }
         };
 	}
-
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	 public  @ResponseBody Map<String,Object> getListUsers(@RequestBody MUserListIn_R001 input) {
-		   List<MUserListOut_R001> obj = this.userService.getUserList(input);
+	 public  @ResponseBody Map<String,Object> getListUsers(@RequestBody MUserListIn_R001 input) {	   
+		   PAGINATION pageIn = new PAGINATION();
+		       pageIn.setPageNo(input.getPageNo());
+		       pageIn.setPageSize(input.getPageSize());
+    	  
+		   List<MUserListOut_R001> obj = this.userService.getUserList(input,pageIn);
 		   List<RoleCountOut_R001> rolecnt = this.userService.getRoleCount(); 
-		   PagingUtils page = new PagingUtils();
+		   PagingUtils page = this.userService.getPagingUtils(input,pageIn);
 	        return new HashMap<String,Object>(){
 	            {
 	                put("OUT_REC",obj);
-	                put("PAGINATION",page);
+	                put("PAGINATION",page.getPagination());
 	                put("ROLE_REC",rolecnt);
 	            }
 	        };
 	}
-
 	@RequestMapping(value = "/updatestatus", method = RequestMethod.POST)
 	public  @ResponseBody Map<String,Object> updateUsers(@RequestBody MUpdateUserStatusIn_U001 input) {
-		System.out.println("TestUpdate");
 		this.userService.updateUserStatus(input);
 			return new HashMap<String,Object>(){
 	            {

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Scope;
 public class UserSession {
 	private String username;
 	private String profile;
+	
 	public String getUsername() {
 		return username;
 	}

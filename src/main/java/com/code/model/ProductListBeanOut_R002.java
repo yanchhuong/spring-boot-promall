@@ -1,6 +1,6 @@
 package com.code.model;
 
-public class ProductListBeanOut_R001 {
+public class ProductListBeanOut_R002 {
 	private long prid;
 	private String prcd;
 	private String title;
@@ -8,14 +8,14 @@ public class ProductListBeanOut_R001 {
 	private String price ;
 	private String description;
 	private String url;
-	private String enabled;
 	private String catgcd;
-	private String catgid;
-	private String owner;
-	private String type;
+	private String parentid;
 	private String viewcnt;
 	private String likecnt;
 	private String store_nm;
+	private String randname;
+	private String nm_eng;
+	private String usercd;
 	
 	public long getPrid() {
 		return prid;
@@ -65,35 +65,17 @@ public class ProductListBeanOut_R001 {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public String getEnabled() {
-		return enabled;
-	}
-	public void setEnabled(String enabled) {
-		this.enabled = enabled;
-	}
 	public String getCatgcd() {
 		return catgcd;
 	}
 	public void setCatgcd(String catgcd) {
 		this.catgcd = catgcd;
 	}
-	public String getCatgid() {
-		return catgid;
+	public String getParentid() {
+		return parentid;
 	}
-	public void setCatgid(String catgid) {
-		this.catgid = catgid;
-	}
-	public String getOwner() {
-		return owner;
-	}
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
+	public void setParentid(String parentid) {
+		this.parentid = parentid;
 	}
 	public String getViewcnt() {
 		return viewcnt;
@@ -107,6 +89,25 @@ public class ProductListBeanOut_R001 {
 	public void setLikecnt(String likecnt) {
 		this.likecnt = likecnt;
 	}
+	public String getRandname() {
+		return randname;
+	}
+	public void setRandname(String randname) {
+		this.randname = randname;
+	}
+	public String getNm_eng() {
+		return nm_eng;
+	}
+	public void setNm_eng(String nm_eng) {
+		this.nm_eng = nm_eng;
+	}
+	public String getUsercd() {
+		return usercd;
+	}
+	public void setUsercd(String usercd) {
+		this.usercd = usercd;
+	}
+
 
 
 }

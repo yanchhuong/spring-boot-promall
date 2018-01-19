@@ -4,6 +4,8 @@ public class ProductBeanIn_U001 {
 	private boolean enabled;
 	private String prcd;
 	private String username;
+	private String usercd;
+	
 	public boolean getEnabled() {
 		return enabled;
 	}
@@ -21,6 +23,12 @@ public class ProductBeanIn_U001 {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public String getUsercd() {
+		return usercd;
+	}
+	public void setUsercd(String usercd) {
+		this.usercd = usercd;
 	}
 
 }

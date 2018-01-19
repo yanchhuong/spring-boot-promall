@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.code.model.CategoryBean;
 import com.code.model.CategoryBean_R001;
-
 import com.code.service.ICategoryService;
-import com.code.service.IFileImageService;
 
 
 
@@ -81,7 +79,7 @@ public class CategoryController {
 	    }
 
 	   @RequestMapping(value="/remove",method = RequestMethod.GET)
-	   public Map<String,Object> removeMenuTree(@RequestParam(value = "catgid") int rootid){ 
+	   public Map<String,Object> removeMenuTree(@RequestParam(value = "catgid") int rootid){  	
 		   this.CategoryService.removeMenuTree(rootid);
 		   		return new HashMap<String,Object>(){
 		   			{ put("message","Category was delete!"); }

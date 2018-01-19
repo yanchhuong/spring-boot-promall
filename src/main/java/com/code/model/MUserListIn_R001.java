@@ -1,12 +1,18 @@
 package com.code.model;
 
+
 public class MUserListIn_R001{
+	
+	private String pageNo;
+	private String pageSize;
 	private String keyword;
 	private String role;
 	private String regdate;
 	private String birthdate;
 	private boolean enbled;
 	private String status;
+	
+	
 	public boolean isEnbled() {
 		return enbled;
 	}
@@ -46,4 +52,17 @@ public class MUserListIn_R001{
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public String getPageNo() {
+		return pageNo;
+	}
+	public void setPageNo(String pageNo) {
+		this.pageNo = pageNo;
+	}
+	public String getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(String pageSize) {
+		this.pageSize = pageSize;
+	}
+	
 }

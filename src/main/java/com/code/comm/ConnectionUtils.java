@@ -1,8 +1,8 @@
 package com.code.comm;
+
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.support.DaoSupport;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 //import org.springframework.jdbc.core.simple.SimpleJdbcTemplate; //spring-jdbc   <version>5.0.2.RELEASE</version>

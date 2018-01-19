@@ -14,41 +14,41 @@ import com.code.service.ICategoryService;
 @Service(value = "categoryService")
 public class CategoryServiceImp implements ICategoryService{
 	
-	private ICategoryRepository iCategory;
+	private ICategoryRepository iCategoryRepo;
 
 	@Autowired(required = true)
 	public CategoryServiceImp(ICategoryRepository iCategory){
-		this.iCategory=iCategory;		
+		this.iCategoryRepo = iCategory;		
 	}
 
 	    
 	@Transactional(readOnly = true)
 	@Override
 	public List<CategoryBean_R001> findAll() {
-		return this.iCategory.findAlls();
+		return this.iCategoryRepo.findAlls();
 	}
 	
 	@Transactional(readOnly = false)
 	@Override
 	public void saveCategoryBean(CategoryBean input) {
 		if(input.getCatgid() > 0) {
-			this.iCategory.updateCategory(input);
+			this.iCategoryRepo.updateCategory(input);
 		}else {
-			this.iCategory.insertCategory(input);
+			this.iCategoryRepo.insertCategory(input);
 		}	
 	}
 	@Override
 	public void delete(long CategoryBeanId) {
-	   this.iCategory.delete(CategoryBeanId);
+	   this.iCategoryRepo.delete(CategoryBeanId);
 	}
 	
 	@Override
 	public long getCatgidCount() {
-		return this.iCategory.getCatidCount();
+		return this.iCategoryRepo.getCatidCount();
 	}
 	@Override
 	public void removeMenuTree(int rootid) {
-		this.iCategory.removeMenuTree(rootid);
+		this.iCategoryRepo.removeMenuTree(rootid);
 	}
 	@Override
 	public List<CategoryBean> findByCategoryBeanFirstName(String CategoryBeanFirstName) {

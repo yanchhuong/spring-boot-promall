@@ -23,10 +23,11 @@ public class CategoryDaoImp implements ICategoryRepository{
 	
 	@Autowired
 	protected DataSource dataSource;
-	 @PostConstruct
-	 private void initialize(){
-	        ConnectionUtils.setDataSource(dataSource);
-	 }
+	
+	@PostConstruct
+	private void initialize(){
+	       ConnectionUtils.setDataSource(dataSource);
+	}
 
 	@Override
 	public List<CategoryBean_R001> findAlls() {
@@ -69,7 +70,7 @@ public class CategoryDaoImp implements ICategoryRepository{
 				"   union all\r\n" + 
 				"     select c1.catgid,c1.parentid,p.rootid\r\n" + 
 				"   from category c1 join all_posts p on p.catgid = c1.parentid) \r\n" + 
-				"     DELETE FROM category WHERE catgid IN (SELECT catgid FROM all_posts WHERE catgid="+ rootid+");";       
+				"     DELETE FROM category WHERE catgid IN (SELECT catgid FROM all_posts WHERE rootid = "+ rootid+");";       
         try{
 			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql, SqlFormatUtils.getSqlParameterSource(rootid));
 		}catch(Exception e){

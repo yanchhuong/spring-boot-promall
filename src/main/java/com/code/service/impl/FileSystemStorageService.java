@@ -2,7 +2,7 @@ package com.code.service.impl;
 
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -16,10 +16,12 @@ import com.code.model.StorageProperties;
 import com.code.service.StorageService;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
@@ -109,11 +111,19 @@ public class FileSystemStorageService implements StorageService {
 	@Override
 	public void delete(String filename) {
 		try {
-			Files.delete(this.rootLocation.resolve(filename));	
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			Path file = load(filename);
+            Resource resource = new UrlResource(file.toUri());
+            if(resource.exists() || resource.isReadable()) {
+    			Files.delete(this.rootLocation.resolve(filename));
+            }else {
+                throw new StorageFileNotFoundException("Could not read file: " + filename);
+            }
+			//cFiles.delete(this.rootLocation.resolve(filename));	
+		} catch(IOException ex) {
+		    System.err.println("An IOException was caught!");
+		    ex.printStackTrace();
+		}	
+		
 		
 	}
 }

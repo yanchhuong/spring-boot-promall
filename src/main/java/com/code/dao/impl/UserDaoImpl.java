@@ -1,10 +1,13 @@
 package com.code.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+
+import org.apache.coyote.http2.ByteUtil;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -14,7 +17,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
+import com.code.comm.ByteUtilApp;
 import com.code.comm.ConnectionUtils;
+import com.code.comm.PAGINATION;
+import com.code.comm.PagingUtils;
 import com.code.comm.SqlFormatUtils;
 import com.code.dao.IUserDao;
 import com.code.model.MUpdateUserStatusIn_U001;
@@ -23,7 +29,6 @@ import com.code.model.MUserListOut_R001;
 import com.code.model.RoleCountOut_R001;
 import com.code.model.UserSessionBean;
 import com.code.model.UserSignupBeanIn_C001;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 
 @Repository
@@ -48,7 +53,7 @@ public class UserDaoImpl implements IUserDao{
 	@Override
 	public void insertUserLog(UserSignupBeanIn_C001 input) {
 		//String sql = "INSERT INTO USERS " +"(usercd,username,password) VALUES (?,?,?)" ;
-		String sql = "INSERT INTO USERS " +"(usercd,username,password) VALUES (:usercd,:username,:password)" ;
+		String sql = "INSERT INTO USERS " +"(usercd,username,password) VALUES (:usercd,:username,'"+ByteUtilApp.encrypePassword(input.getPassword())+"')";
 		try{
 			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
 		}catch(Exception e){
@@ -87,7 +92,7 @@ public class UserDaoImpl implements IUserDao{
 	}
 	
 	@Override
-	public List<MUserListOut_R001> getUserList(MUserListIn_R001 input) {
+	public List<MUserListOut_R001> getUserList(MUserListIn_R001 input,PAGINATION page) {
 		String sql =  "select u.id,u.usercd,u.enabled,ur.role,	           "
 		             +"       CONCAT(ud.fname,' ',ud.lname) as name,	   "
 		             +"       ud.sex,ud.cphone,ud.email,ud.regdate,	       "
@@ -101,33 +106,22 @@ public class UserDaoImpl implements IUserDao{
 		             +" left join address addr on u.usercd = addr.usercd"
 		             +" where 1=1";
 		 
-		StringBuffer sb = new StringBuffer(sql);
-		if(input!=null){
-			if(!Strings.isNullOrEmpty(input.getKeyword())){
-				sb.append(" and ( ud.fname ilike '%"+input.getKeyword()+"%'");
-				sb.append(" or  ud.lname ilike '%"+input.getKeyword()+"%'");
-				sb.append(" or  ud.email ilike '%"+input.getKeyword()+"%'");
-				sb.append(" or  ud.cphone ilike '%"+input.getKeyword()+"%')");
-			}
-		}
-		if(!Strings.isNullOrEmpty(input.getRegdate())){
-			sb.append(" and ud.regdate = '"+input.getRegdate()+"%'");
-		}
-	    if(!Strings.isNullOrEmpty(input.getBirthdate())){
-	    	sb.append(" and ud.birthdate = '"+input.getBirthdate()+"'");
-		}
-	    if(!Strings.isNullOrEmpty(input.getRole())){
-	    	sb.append(" and ur.role = '"+input.getRole()+"'");
-		}
-	    if(!Strings.isNullOrEmpty(input.getStatus())){
-	    	sb.append(" and  u.enabled = '"+input.getStatus()+"'");
-		}
+		HashMap<String, Object>	dynamicEle=getDynamicQuery(input); 
+		StringBuffer dQuery = new StringBuffer(sql);
+		dQuery.append(dynamicEle.get("dQuery"));
+		
+		Map<String, Object> params = (Map<String, Object>)dynamicEle.get("dParam");
+		PagingUtils pagingUtils = getPagingUtils(input,page);
+        if(page!=null){
+        	dQuery.append("\n LIMIT cast(:pagesize as numeric) OFFSET cast(:offset as numeric)");
+        	params.put("pagesize",pagingUtils.getPageSize());
+        	params.put("offset", pagingUtils.getOffset());
+        }
 		List<MUserListOut_R001> result  = null;
 		try{
-			result  = ConnectionUtils.getNamedParameterJdbcTemplate().query(sb.toString(), 
+			result  = ConnectionUtils.getNamedParameterJdbcTemplate().query(dQuery.toString(), params,
 					new BeanPropertyRowMapper<MUserListOut_R001>(MUserListOut_R001.class));
 		}catch(Exception e){
-			
 		}
 		return result;
 	}
@@ -242,5 +236,67 @@ public class UserDaoImpl implements IUserDao{
 					// do nothing, return null
 	    }
 	    return data;
+	}
+
+	private static HashMap<String,Object> getDynamicQuery(MUserListIn_R001  input) {
+		   HashMap<String, Object> hasmap = new HashMap<String, Object>();
+			StringBuffer sb = new StringBuffer();
+			Map<String, Object> params = new HashMap<String, Object>();
+			
+			if(input!=null){
+				if(!Strings.isNullOrEmpty(input.getKeyword())){
+					//sb.append(" and ( ud.fname ilike '%"+input.getKeyword()+"%'");
+					sb.append(" and ( ud.fname ilike :fname");
+					params.put("fname","%"+input.getKeyword()+"%");
+					sb.append(" or  ud.lname ilike :lname");
+					params.put("lname","%"+input.getKeyword()+"%");
+					sb.append(" or  ud.email ilike :email");
+					params.put("email", "%"+input.getKeyword()+"%");
+					sb.append(" or  ud.cphone ilike :cphone)");
+					params.put("cphone","%"+input.getKeyword()+"%");
+				}
+			}
+			if(!Strings.isNullOrEmpty(input.getRegdate())){
+				sb.append(" and ud.regdate ilike :regdate");
+				params.put("regdate", input.getRegdate()+"%");
+			}
+		    if(!Strings.isNullOrEmpty(input.getBirthdate())){
+		    	sb.append(" and ud.birthdate =:birthdate");
+		    	params.put("birthdate", input.getBirthdate());
+			}
+		    if(!Strings.isNullOrEmpty(input.getRole())){
+		    	sb.append(" and ur.role = :role");
+		    	params.put("role", input.getRegdate());
+			}
+		    if(!Strings.isNullOrEmpty(input.getStatus())){
+		    	sb.append(" and  u.enabled = :enabled");
+		    	params.put("enabled", input.getRegdate());
+			}
+		    hasmap.put("dQuery", sb);
+			hasmap.put("dParam", params);
+			return hasmap;
+	}
+	public PagingUtils getPagingUtils(MUserListIn_R001  input,PAGINATION page){
+		String sqlcnt =  "select count(*) "
+	             +"       from users u				                   "
+	             +" left join user_roles ur on u.username  = ur.username   "
+	             +" left join user_detail ud on u.username = ud.username_fk"
+	             +" left join filepicture fp on u.usercd = fp.usercd"
+//	             +" left join (select * from  address ad where status='1') as addr   on u.username= addr.username"
+	             +" left join address addr on u.usercd = addr.usercd"
+	             +" where 1=1";
+		 
+		HashMap<String, Object>	dynamicEle= getDynamicQuery(input); 
+		
+		StringBuffer dQueryCNT = new StringBuffer(sqlcnt);
+		dQueryCNT.append(dynamicEle.get("dQuery"));
+		Map<String, Object> params = (Map<String, Object>)dynamicEle.get("dParam");
+		
+		int result=0;
+		try{
+			 result = ConnectionUtils.getNamedParameterJdbcTemplate().queryForObject(sqlcnt, params,Integer.class);
+			}catch(Exception e){	
+	        }
+		return new PagingUtils(page,""+result);
 	}
 }

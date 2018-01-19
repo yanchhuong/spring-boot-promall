@@ -30,6 +30,7 @@
  */
 package com.code.config;
 
+import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.embedded.tomcat.TomcatConnectorCustomizer;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
@@ -68,6 +71,9 @@ import com.code.model.StorageProperties;
 @EnableConfigurationProperties(StorageProperties.class)
 public class WebMvcJspApplication extends SpringBootServletInitializer {
 	private static  Logger LOGGER =  LoggerFactory.getLogger(WebMvcJspApplication.class);
+	private int maxUploadSizeInMb = 10 * 1024 * 1024; // 10 MB
+
+	
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(WebMvcJspApplication.class);
@@ -94,4 +100,23 @@ public class WebMvcJspApplication extends SpringBootServletInitializer {
 	 public DataSource dataSource() {
 	     return (DataSource) DataSourceBuilder.create().build();
 	 }
+	 
+	 
+	 //Tomcat large file upload connection reset
+	    //http://www.mkyong.com/spring/spring-file-upload-and-connection-reset-issue/
+	    @Bean
+	    public TomcatEmbeddedServletContainerFactory tomcatEmbedded() {
+
+	        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
+
+	        tomcat.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> {
+	            if ((connector.getProtocolHandler() instanceof AbstractHttp11Protocol<?>)) {
+	                //-1 means unlimited
+	                ((AbstractHttp11Protocol<?>) connector.getProtocolHandler()).setMaxSwallowSize(maxUploadSizeInMb);
+	            }
+	        });
+
+	        return tomcat;
+
+	    }
 }

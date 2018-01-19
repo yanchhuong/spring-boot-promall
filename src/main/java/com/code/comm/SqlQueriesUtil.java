@@ -68,8 +68,8 @@ public class SqlQueriesUtil {
         MapSqlParameterSource paramMap=null;
         BeanPropertySqlParameterSource paramBean=null;
         EmptySqlParameterSource paramEmpty=null;
-        if (isSetShowSql()){
-            if (parameter!=null && isSetReplaceSqlParameters()){
+    //    if (isSetShowSql()){
+         //   if (parameter!=null && isSetReplaceSqlParameters()){
                 try {
                     if (MapSqlParameterSource.class.isAssignableFrom(parameter.getClass())){                    
                         paramMap = MapSqlParameterSource.class.cast(parameter);
@@ -81,28 +81,28 @@ public class SqlQueriesUtil {
                         debugSQL(sql, paramEmpty);
                     } else {
                         LOG.debug("The parameter don't have a indentified type");
-                        System.out.println("The parameter don't have a indentified type");
+                        System.out.println("\nThe parameter don't have a indentified type");
                     }                        
                 } catch (ClassCastException e){
                     LOG.error("Casting error with the parameter: ?", parameter);
-                    System.out.println("Casting error with the parameter: ?"+ parameter);
+                    System.out.println("\nCasting error with the parameter: ?"+ parameter);
                     paramMap=null;
 
                 }
-            } else {
+          /*  } else {
                 debugSQL(sql);
-            }
+            }*/
         }
-    }
+  //  }
     /**
      * Display the query with parameters if setShowSql=true
      * @param sql
      */
     public static void debugSQL(String sql) {
-        if (isSetShowSql() && sql!=null){
+     //   if (isSetShowSql() && sql!=null){
             LOG.debug("SQL_ORIGINAL: \t".concat(sql));       
-            System.out.println("SQL_ORIGINAL: \t".concat(sql));
-        }
+            System.out.println("\nSQL_ORIGINAL: \t".concat(sql));
+    //    }
     }
     /**
      * Display the query with parameters if setShowSql=true
@@ -143,7 +143,7 @@ public class SqlQueriesUtil {
         }
 //        LOG.debug("SQL_ORIGINAL:".concat(sql));
         LOG.debug("SQL_MAP_REPLACED: \t".concat(newSql));
-        System.out.println("SQL_MAP_REPLACED: \t".concat(newSql));
+        System.out.println("\nSQL_MAP_REPLACED: \t".concat(newSql));
 //        LOG.debug("PARAMS_MAP:".concat(Arrays.toString(parameter.getValues().entrySet().toArray())));
     }
     /**
@@ -152,10 +152,10 @@ public class SqlQueriesUtil {
      * @param parameter
      */
     private static void debugSQL(String sql, EmptySqlParameterSource parameter) {    
-        if (isSetShowSql()){
+      //  if (isSetShowSql()){
             LOG.debug("SQL_NO_PARAMETER: \t".concat(sql));
-            System.out.println("SQL_NO_PARAMETER: \t".concat(sql));
-        }
+            System.out.println("\nSQL_NO_PARAMETER: \t".concat(sql));
+     //   }
     }
     /**
      * Display the query with parameters if setShowSql=true
@@ -163,14 +163,14 @@ public class SqlQueriesUtil {
      * @param paramMap
      */
     public static void debugSQL(String sql, Map<String, ?> paramMap) {
-        if (isSetShowSql()){
+     //   if (isSetShowSql()){
             LOG.debug("SQL_ORIGINAL: \t".concat(sql));
             System.out.println("SQL_ORIGINAL: \t".concat(sql));
             if (paramMap!=null && !paramMap.isEmpty()){
                 LOG.debug("PARAMS: \t".concat(Arrays.toString(paramMap.entrySet().toArray())));
-                System.out.println("PARAMS: \t".concat(Arrays.toString(paramMap.entrySet().toArray())));
+                System.out.println("\nPARAMS: \t".concat(Arrays.toString(paramMap.entrySet().toArray())));
             }
-        }        
+ //       }        
     }
     /**
      * Display the query with parameters if setShowSql=true
@@ -182,14 +182,14 @@ public class SqlQueriesUtil {
         }        
     }
     public static void debugSQL(String sql, Map<String, ?>[] batchValues) {
-        if (isSetShowSql()){
+     //   if (isSetShowSql()){
             LOG.debug("SQL_ORIGINAL: \t".concat(sql));
-            System.out.println("SQL_ORIGINAL: \t".concat(sql));
+            System.out.println("\nSQL_ORIGINAL: \t".concat(sql));
             if (batchValues!=null && !(batchValues.length > 0)){
                 LOG.debug("PARAMS: \t".concat(batchValues.toString()));
-                System.out.println("PARAMS: \t".concat(batchValues.toString()));
+                System.out.println("\nPARAMS: \t".concat(batchValues.toString()));
             }
-        }
+   //     }
     }
     public static void debugSQL(String sql, SqlParameterSource[] batchArgs) {
         // TODO Auto-generated method stub
