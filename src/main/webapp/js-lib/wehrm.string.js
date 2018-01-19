@@ -92,6 +92,60 @@ if(!wehrm.string) {
 		  }
 	};
 	
+	//@@ return period of time
+	wehrm.string.periodTime = function(regdate) {
+		var postedate = wehrm.string.formatDateTime(regdate);
+		var oneYear = wehrm.string.formatDate(regdate);
+		var date1 = new Date(postedate);
+		var date2 = new Date();
+		var result = '';
+			
+//		console.log('difference in ms', date1 - date2);
+
+		// Use Math.abs() so the order of the dates can be ignored and you won't
+		// end up with negative numbers when date1 is before date2.
+//		console.log('difference in ms abs', Math.abs(date1 - date2));
+//		console.log('difference in seconds', Math.abs(date1 - date2) / 1000);
+
+		var diffInSeconds = Math.abs(date1 - date2) / 1000;
+		var days = Math.floor(diffInSeconds / 60 / 60 / 24);
+		var hours = Math.floor(diffInSeconds / 60 / 60 % 24);
+		var minutes = Math.floor(diffInSeconds / 60 % 60);
+		var seconds = Math.floor(diffInSeconds % 60);
+		var weeks = Math.floor(diffInSeconds / 60 / 60 / 24 / 7);
+		var months = Math.floor(diffInSeconds / 60 / 60 / 24 / 30);
+		var milliseconds = Math.round((diffInSeconds - Math.floor(diffInSeconds)) * 1000);
+
+//		console.log(months);
+//		console.log(weeks);
+//		console.log('days', days);
+//		console.log('hours', ('0' + hours).slice(-2));
+//		console.log('minutes', ('0' + minutes).slice(-2));
+//		console.log('seconds', ('0' + seconds).slice(-2));
+//		console.log('milliseconds', ('00' + milliseconds).slice(-3));
+
+		if(months > 11){
+			return oneYear;
+		}else if(months > 0){
+			result = months+" months";
+		}
+		else if(weeks > 0){
+			result = weeks+" weeks";
+		}else if(days > 0){
+			result = days+" days";
+		}else if(hours > 0){
+			result = hours+" hours";
+		}else if(minutes > 0){
+			result = minutes+" minutes";
+		}else if(seconds > 0){
+			result = seconds+" seconds";
+		}
+		result += " ago";
+		return result;
+}
+
+		
+	
 	//Format RR_NO
 	wehrm.string.formatRrNo = function(num,star) {
 		var result = num;

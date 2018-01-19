@@ -1,20 +1,22 @@
 ﻿// JavaScript Document
 $(document).ready(function(){
 	$.fn.readMore	=	function(opts){
-		var minHeight	=	164+"px";
-		var maxHeight 	=	$(this).children('ul').height();
-		
-		$(this).children('ul').css({'height':minHeight,'overflow':'hidden'});
-		$('body').delegate('.btn_more','click',function(){
-			$(this).prev('ul').animate({height:maxHeight+"px"},300);
-			$(this).addClass('read_few');
-			$(this).find('.btn_text').text("Show Less");
-		});
-		$('body').delegate('.read_few','click',function(){
-			$(this).prev('ul').animate({height:minHeight},300).stop();
-			$(this).find('.btn_text').text("Show More");
-			$(this).removeClass('read_few');
-		});
+//		var minHeight	=	164+"px";
+//		var maxHeight 	=	$(this).children('ul').height();
+//		
+//		console.log($(this).attr("class"));
+//		$(this).children('ul').css({'height':minHeight,'overflow':'hidden'});
+//		$('body').delegate('.btn_more','click',function(){
+//			$(this).prev('ul').animate({height:maxHeight+"px"},300);
+//			//console.log(maxHeight);
+//			$(this).addClass('read_few');
+//			$(this).find('.btn_text').text("Show Less");
+//		});
+//		$('body').delegate('.read_few','click',function(){
+//			$(this).prev('ul').animate({height:minHeight},300).stop();
+//			$(this).find('.btn_text').text("Show More");
+//			$(this).removeClass('read_few');
+//		});
 	};
 	
 	$.fn.readMoreDetPage	=	function(opts){

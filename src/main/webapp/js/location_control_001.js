@@ -335,7 +335,6 @@ menu_control_001.addMenu= function(data,type){
 	input["nm_kh"]       = $(data).parents("tr").find('#txtnmkh').val();
 	input["lvl"]         = $(data).parents("tr").find('#lvl').val();
 	input["mapcd"]       =  "";
-	console.log(input);
 	 $.ajax({
 	        type   : 'POST',
 	    	url    : '/location_map/add',

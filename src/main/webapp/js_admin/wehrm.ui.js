@@ -1730,3 +1730,30 @@ function null2void(_instance , custom_value){
 	if( instance == "undefined" || instance == null || instance == "null" || instance ==""){return custom_value }  
 	return instance
  };
+ 
+ wehrm.ui.getSession = function(){
+	 var sessionObj = null;
+		$.ajax({
+			type   : 'GET',
+		    url    : "/get_sesssion",
+		    cache  : true,
+		    async : false
+		})
+		.done(function(dat){
+			if(dat.SESSION_IS!=null){
+				sessionObj = dat;
+			}
+		})
+		return sessionObj;
+	};
+	
+wehrm.ui.logOut = function(){
+		 var sessionObj = null;
+			$.ajax({
+				type   : 'GET',
+			    url    : "/clear_sesssion",
+			    cache  : true,
+			    async : false
+			})
+			.done(function(dat){})
+};

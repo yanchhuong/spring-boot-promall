@@ -1,5 +1,6 @@
-$(document).ready(function(){
 
+var login={};
+$(document).ready(function(){
 	$('.form').find('input, textarea').on('keyup blur focus', function (e) {
 		var $this = $(this),
       	label = $this.prev('label');
@@ -27,7 +28,6 @@ $(document).ready(function(){
     		}
 
 		});
-
 		$('.tab a').on('click', function (e) {
 			e.preventDefault();
   
@@ -37,28 +37,58 @@ $(document).ready(function(){
 				target = $(this).attr('href');
 
 				$('.tab-content > div').not(target).hide();
-  
 				$(target).fadeIn(600);
-  
-
-	     });
+	    });
 		
 		$('#btsign_up').on('click', function (e) {
 			ftsign_up();
 		
 		});
+		
+	   $('#loginform').submit(function (event) {
+		    var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+			var csrfToken  = $("meta[name='_csrf']").attr("content");
+	        event.preventDefault();
+	        var data = 'username=' + $('#username').val() + '&password=' + $('#Lpassword').val();
+	        $.ajax({
+	            data: data,
+	            timeout: 1000,
+	            type: 'POST',
+	            url: '/login',
+	            async : false,
+	            beforeSend  : function(xhr) {
+	       			  xhr.setRequestHeader(csrfHeader, csrfToken);
+	       		},
+	    /*    success: function(data){
+	        	
+	        }*/
+	        }).done(function(data, textStatus, jqXHR) {
+	        	if(getSesion()!=""){
+					var	callbackFn = parent.wehrm.popup.callbackFn["login"];
+			  		  if($.isFunction(callbackFn)) {
+			  			  callbackFn({IS_TRUE:true});
+			  			  wehrm.popup.closePopup("login");
+			  		  }
+				}
+	            var preLoginInfo = JSON.parse($.cookie('restsecurity.pre.login.request'));
+	            alert(preLoginInfo.url);
+	            window.location = preLoginInfo.url;
+	        }).fail(function(jqXHR, textStatus, errorThrown) {
+	            alert('Booh! Wrong credentials, try again!');
+	        });
+	        
+       });
+	
 
 });
 function ftsign_up(){
 			var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-			var csrfToken = $("meta[name='_csrf']").attr("content");
+			var csrfToken  = $("meta[name='_csrf']").attr("content");
 			var input={};
-			input["fname"] = $("#firstname").val();
+			input["fname"]  = $("#firstname").val();
 			input["lname"]  = $("#lastname").val();
 			input["email"]     = $("#email").val();
 			input["password"]  = $("#password").val();
-			console.log(input);
-			console.log(csrfToken);
 			  $.ajax({
 					type   : 'POST',
 				    url    : "/users/sign_up",
@@ -76,15 +106,19 @@ function ftsign_up(){
 			    }
 		})
 }
-
-	/*type   : 'POST',
-    url    : "/users/sign_up",
-    data   : JSON.stringify(input),
-    cache: false,
-    dataType: 'json',
-	contentType: 'application/json',
-    async: false,
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader(csrfHeader, csrfToken);
-    },*/
+function getSesion(){
+	var sessionObj = "";
+	$.ajax({
+		type   : 'GET',
+	    url    : "/get_sesssion",
+	    cache  : true,
+	    async : false
+	})
+	.done(function(dat){
+		if(dat.SESSION_IS!=null){
+			sessionObj= dat.SESSION_IS.usercd;
+		}
+	})
+	return sessionObj;
+};
 

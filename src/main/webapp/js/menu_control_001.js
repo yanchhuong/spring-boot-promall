@@ -121,7 +121,7 @@ menu_control_001.listMenu=function(){
     			if( v.lvl == '1'){
     				html += '					<li><a id="addMain">Add Main</a></li>		';
     			}
-    			html += '				<li><a id="addSub">Add Sub</a></li>			';
+    			html += '				<li><a id="addSub">Add Sub</a></li>					';
     			html += '				</ul>											    ';
     			html += '			</div>												    ';
     			html += '			<!-- //layer popup -->								 	';

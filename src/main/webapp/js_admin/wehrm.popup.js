@@ -2,6 +2,8 @@ var wehrm;
 
 if(!wehrm) wehrm={};
 
+
+
 if(!wehrm.popup) {
 	wehrm.popup={};	
 	wehrm.popup.callbackFn = {};

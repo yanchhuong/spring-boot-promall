@@ -58,7 +58,6 @@ popup_add_role_list_001.addRoleList=function(){
 	var csrfToken = $("meta[name='_csrf']").attr("content");
 	var input={};
 	    input["role"]   = "ROLE_"+ $("#role").val().toUpperCase();
-	    console.log(input);
 	 $.ajax({
     	type   : 'POST',
 	    url    : '/users/add_roles_list',
@@ -81,7 +80,6 @@ popup_add_role_list_001.removeRoleList=function(dat){
 	var csrfToken = $("meta[name='_csrf']").attr("content");
 	var input={};
 	    input["role"]   = $(dat).parents("tr").find("input").val().toUpperCase();
-	    console.log(input);
 	 $.ajax({
     	type   : 'POST',
 	    url    : '/users/remove_roles_list',
@@ -106,7 +104,6 @@ function ifrMainResize(dat) {
 		parent.$("#popup_add_role_list_001_iframe").height(h+"px");
 	}else{
 		h = h + 21;
-		console.log(h);
 		parent.$("#popup_add_role_list_001_iframe").height(h+"px");
 	}
 	

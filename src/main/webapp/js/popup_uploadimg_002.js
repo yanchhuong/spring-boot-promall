@@ -141,7 +141,7 @@ function SaveFile(){
 	      input["size"]     = $("#size").val();
 	      input["type"]     = $("#type").val();
 	      input["catgcd"]   = $("#catgcd").val();
-	      console.log(input);  
+	      console.log(input);
 	  }
 	  
 	  $.ajax({

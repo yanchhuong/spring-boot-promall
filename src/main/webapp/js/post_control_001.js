@@ -8,8 +8,9 @@
  
  
  $(document).ready(function(){
-	 post_control_001.OnLoadImage();
+	 
 	 post_control_001.listMenu();
+	 post_control_001.OnLoadImage();
 	 post_control_001.listProvince();
 	 
 	 $(document).on("click", ".menu-item-btn", function(){
@@ -97,9 +98,35 @@
  				easing: 'easeInOutBack'
  			});
  	});
+	 
+	 $("#price").on("keypress",function (event) {
+         //this.value = this.value.replace(/[^0-9\.]/g,'');
+		 $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+	         if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+	         	$("#alertPrice").show();
+	            event.preventDefault();
+	         }else{
+	         	$("#alertPrice").hide();
+	         }
+	     });
+	 
+	 $("#phone_number").on("keypress",function (event) {
+         //this.value = this.value.replace(/[^0-9\.]/g,'');
+		 $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+	         if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+	         	$("#alertPhone").show();
+	            event.preventDefault();
+	         }else{
+	         	$("#alertPhone").hide();
+	         }
+	     });
+	 
  
 	 $(document).on("click", ".wrap_img", function(){
+		 var dat = $(this).find("#randname").val();
+		 post_control_001.removeFile(dat);
 		 $(this).remove();
+		 
 	 });
 
 	 $(".submit").click(function(){
@@ -131,16 +158,16 @@ post_control_001.listMenu=function(){
     			html += '<li data-id="'+v.catgid+'" class="menu-item">';
     			html += '<a href="#" class="menu-item-btn" id="btn-1"><span>'+v.nm_eng+'</span></a>';
     			html += '<div class="menu-item-content">';
-	    			html += '<h3 class="title">'+v.nm_eng+'</h3>';
-	    			html += '<div class="contact-card">';
-	    			html += '<ul>';
-		    			$.each(dat.OUT_REC, function(i,v){
-		    				if((parentId == v.parentid) && (v.lvl == "2")){
-		        				html += '<li><a href="#" class="next" data-id='+v.catgcd+'>'+v.nm_eng+'</a></li>';
-		        			}
-		    			});
-	    			html += '</ul>';
-	    			html += '</div>';
+	    		html += '<h3 class="title">'+v.nm_eng+'</h3>';
+	    		html += '<div class="contact-card">';
+	    		html += '<ul>';
+		    		$.each(dat.OUT_REC, function(i,v){
+		    			if((parentId == v.parentid) && (v.lvl == "2")){
+		        			html += '<li><a href="#" class="next" data-id='+v.catgcd+'>'+v.nm_eng+'</a></li>';
+		        		}
+		    		});
+	    		html += '</ul>';
+	    		html += '</div>';
     			html += '</div';
     			html += '</li>';
     		}
@@ -169,7 +196,7 @@ post_control_001.SaveProductPost=function(){
 	var recImg 	= [];
 	var input   = {};
 	var isChk   = false;
-
+	
 	if($("#save_contact").is(":checked")){
 		isChk = true;
 		//update
@@ -182,7 +209,7 @@ post_control_001.SaveProductPost=function(){
 	input["catgcd"] = catgcd;
 	input["title"]  = $("#title").val();
 	input["price"]  = $("#price").val();
-	input["desc"] = $("#description").val();
+	input["desc"]   = $("#description").val();
 
 //	here input image
 	$("#results div").each(function(){
@@ -197,11 +224,9 @@ post_control_001.SaveProductPost=function(){
 	});
 	input["inRec"] = recImg;
 
-//	user_detail table
-	input["usercd"] = "12fw3rwfdf23";
-	input["cphone"] = $("#phone_number").val();
-
 //	address table
+	input["usercd"]   = $("#usercd").val();
+	input["cphone"]   = $("#phone_number").val();
 	input["country"]  = $("#country").val();
 	input["province"] = $("#province option:selected").text();
 	input["detail"]   = $("#addr_detail").val();
@@ -226,11 +251,10 @@ post_control_001.SaveProductPost=function(){
 	})
 };
 
-
 post_control_001.OnLoadImage=function(){
 	
 	var makeInput = function() {
-		return $('<input type="file" accept="image/jpeg, image/gif, image/png" name="files[]" style="opacity:0;">');
+		return $('<input type="file" accept="image/jpeg, image/gif, image/png" name="files[]" style="opacity:0;" multiple>');
 	};
 	
 	$('#upload').click(function() {
@@ -244,18 +268,23 @@ post_control_001.OnLoadImage=function(){
 	
 	function setImage() {
 		for (var i = 0; i < this.files.length; i++) {
+
 			var id = $(this).attr('id');
-			var file = this.files[i];
+			var newFile = $(this).get(0).files[i];
 			fr = new FileReader();
-			fr.onload = function(e) {
-				post_control_001.uploadFormData(file);
+
+			if(newFile.size <  10485760){
+				post_control_001.uploadFormData(newFile);
+			}else{
+				alert("over size limit...");
+			}
 //				var img = $('<img>');
 //	            img.attr('src', e.target.result);
 //	            img.css('height', '160px');
 //	            $('#results').append(img);
 //	            $(img).on('click', {id: id}, removeImage);
-			};
-			fr.readAsDataURL(file);
+				
+//			fr.readAsDataURL(newFile);
 			if ($('#results').children().length > 5) {
 				$('#upload').css('background', '#ddd');
 				$('#upload').unbind();
@@ -274,7 +303,7 @@ post_control_001.uploadFormData = function(file){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var oMyForm    = new FormData();
 	var wrap_img   = $('<div class="wrap_img" style="display: inline;"></div>');
-	
+
 	oMyForm.append("file", file);
 	$.ajax({
 		url: '/upload_file/uploadimg',
@@ -288,6 +317,7 @@ post_control_001.uploadFormData = function(file){
 	    	xhr.setRequestHeader(csrfHeader, csrfToken);
 	    },
 	    success: function(data){
+	    	
 	    	data=JSON.parse(data);
 	    	wrap_img.append($('<img width="200px" height="140px" value="'+document.location.origin+"/upload_file/files/"+'" style="margin:6px;">').attr("src", document.location.origin+"/upload_file/files/"+ data.RANDNAME));
 	    	wrap_img.append("<input type='hidden' id='orname' value='"+ data.OUT_REC.orname+"'>" );
@@ -300,6 +330,29 @@ post_control_001.uploadFormData = function(file){
 	    }
 	});
 };
+
+post_control_001.removeFile = function(dat){
+	
+	  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+	  var csrfToken  = $("meta[name='_csrf']").attr("content");
+	  var input = {};
+	     input.filename = dat;
+	  $.ajax({
+		  url: '/upload_file/remove_file_local',
+		  cache: false,
+		  dataType: 'json',
+	      contentType: 'application/json',
+	      async: true,
+		  beforeSend: function(xhr) {
+			  xhr.setRequestHeader(csrfHeader, csrfToken);
+		  },
+		  data:input,
+		  success: function(data){
+//			  alert(data.ERROR);
+		  }
+	  });
+};
+
 
 
 
