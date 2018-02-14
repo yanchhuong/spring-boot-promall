@@ -1,240 +1,211 @@
+<!DOCTYPE html>
 <html lang="en" >
+
 <head>
-  <meta charset="UTF-8">
-  <title>Chat Widget</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <!-- default header name is X-CSRF-TOKEN -->
+ <meta name="_csrf" content="${_csrf.token}"/>
+ <meta name="_csrf_header" content="${_csrf.headerName}"/>
+  <title>Direct Messaging</title>
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
-  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
- 
-  <link rel="stylesheet" type="text/css" href="../css/realtimechat.css" media="all"> 
-
+  
+    <link rel="stylesheet" type="text/css" href="../css/realtimechat.css" media="all"> 
+    <script src="/js-lib/jquery-2.1.0.min.js"></script>
+    <script src="/js-lib/sockjs-0.3.4.js"></script>
+    <script src="/js-lib/stomp.js"></script>   
+  
 </head>
 
 <body>
-    <div class="container clearfix">
-    <div class="people-list" id="people-list">
-      <div class="search">
-        <input type="text" placeholder="search" />
-        <i class="fa fa-search"></i>
-      </div>
-      <ul class="list">
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Vincent Porter</div>
-            <div class="status">
-              <i class="fa fa-circle online"></i> online
+
+  <div class="wrapper">
+    <div class="container">
+        <div class="left">
+            <div class="top">
+                <input type="text" />
+                <a href="javascript:;" class="search"></a>
             </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_02.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Aiden Chavez</div>
-            <div class="status">
-              <i class="fa fa-circle offline"></i> left 7 mins ago
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_03.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Mike Thomas</div>
-            <div class="status">
-              <i class="fa fa-circle online"></i> online
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_04.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Erica Hughes</div>
-            <div class="status">
-              <i class="fa fa-circle online"></i> online
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_05.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Ginger Johnston</div>
-            <div class="status">
-              <i class="fa fa-circle online"></i> online
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_06.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Tracy Carpenter</div>
-            <div class="status">
-              <i class="fa fa-circle offline"></i> left 30 mins ago
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_07.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Christian Kelly</div>
-            <div class="status">
-              <i class="fa fa-circle offline"></i> left 10 hours ago
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_08.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Monica Ward</div>
-            <div class="status">
-              <i class="fa fa-circle online"></i> online
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_09.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Dean Henry</div>
-            <div class="status">
-              <i class="fa fa-circle offline"></i> offline since Oct 28
-            </div>
-          </div>
-        </li>
-        
-        <li class="clearfix">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_10.jpg" alt="avatar" />
-          <div class="about">
-            <div class="name">Peyton Mckinney</div>
-            <div class="status">
-              <i class="fa fa-circle online"></i> online
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-    
-    <div class="chat">
-      <div class="chat-header clearfix">
-        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
-        
-        <div class="chat-about">
-          <div class="chat-with">Chat with Vincent Porter</div>
-          <div class="chat-num-messages">already 1 902 messages</div>
+            <ul class="people" id="userList">
+                <li class="person" data-chat="person1">
+                    <img src="https://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" />
+                    <span class="name">Thomas Bangalter</span>
+                    <span class="time">2:09 PM</span>
+                    <span class="preview">I was wondering...</span>
+                </li>
+                <li class="person" data-chat="person2">
+                    <img src="https://s3.postimg.org/yf86x7z1r/img2.jpg" alt="" />
+                    <span class="name">Dog Woofson</span>
+                    <span class="time">1:44 PM</span>
+                    <span class="preview">I've forgotten how it felt before</span>
+                </li>
+                <li class="person" data-chat="person3">
+                    <img src="https://s3.postimg.org/h9q4sm433/img3.jpg" alt="" />
+                    <span class="name">Louis CK</span>
+                    <span class="time">2:09 PM</span>
+                    <span class="preview">But we’re probably gonna need a new carpet.</span>
+                </li>
+                <li class="person" data-chat="person4">
+                    <img src="https://s3.postimg.org/quect8isv/img4.jpg" alt="" />
+                    <span class="name">Bo Jackson</span>
+                    <span class="time">2:09 PM</span>
+                    <span class="preview">It’s not that bad...</span>
+                </li>
+                <li class="person" data-chat="person5">
+                    <img src="https://s16.postimg.org/ete1l89z5/img5.jpg" alt="" />
+                    <span class="name">Michael Jordan</span>
+                    <span class="time">2:09 PM</span>
+                    <span class="preview">Wasup for the third time like is 
+                         you bling bitch</span>
+                </li>
+                <li class="person" data-chat="AAA">
+                    <img src="https://s30.postimg.org/kwi7e42rh/img6.jpg" alt="" />
+                    <span class="name">Drake</span>
+                    <span class="time">2:09 PM</span>
+                    <span class="preview">howdoyoudoaspace</span>
+                </li> 
+            </ul>
         </div>
-        <i class="fa fa-star"></i>
-      </div> <!-- end chat-header -->
-      
-      <div class="chat-history">
-        <ul>
-          <li class="clearfix">
-            <div class="message-data align-right">
-              <span class="message-data-time" >10:10 AM, Today</span> &nbsp; &nbsp;
-              <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
-              
+        <div class="right" id="tapChatting">
+            <div class="top"><span>To: <span class="name" id="reciever" data-id="">Dog Woofson</span></span></div>
+            <div class="chat" data-chat="person1">
+                <div class="conversation-start">
+                    <span>Today, 6:48 AM</span>
+                </div>
+                <div class="bubble you">
+                    Hello,
+                </div>
+                <div class="bubble you">
+                    it's me.
+                </div>
+                <div class="bubble you">
+                    I was wondering...
+                </div>
             </div>
-            <div class="message other-message float-right">
-              Hi Vincent, how are you? How is the project coming along?
+            <div class="chat" data-chat="person2">
+                <div class="conversation-start">
+                    <span>Today, 5:38 PM</span>
+                </div>
+                <div class="bubble you">
+                    Hello, can you hear me?
+                </div>
+                <div class="bubble you">
+                    I'm in California dreaming
+                </div>
+                <div class="bubble me">
+                    ... about who we used to be.
+                </div>
+                <div class="bubble me">
+                    Are you serious?
+                </div>
+                <div class="bubble you">
+                    When we were younger and free...
+                </div>
+                <div class="bubble you">
+                    I've forgotten how it felt before
+                </div>
             </div>
-          </li>
-          
-          <li>
-            <div class="message-data">
-              <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-              <span class="message-data-time">10:12 AM, Today</span>
+            <div class="chat" data-chat="person3">
+                <div class="conversation-start">
+                    <span>Today, 3:38 AM</span>
+                </div>
+                <div class="bubble you">
+                    Hey human!
+                </div>
+                <div class="bubble you">
+                    Umm... Someone took a shit in the hallway.
+                </div>
+                <div class="bubble me">
+                    ... what.
+                </div>
+                <div class="bubble me">
+                    Are you serious?
+                </div>
+                <div class="bubble you">
+                    I mean...
+                </div>
+                <div class="bubble you">
+                    It’s not that bad...
+                </div>
+                <div class="bubble you">
+                    But we’re probably gonna need a new carpet.
+                </div>
             </div>
-            <div class="message my-message">
-              Are we meeting today? Project has been already finished and I have results to show you.
+            <div class="chat" data-chat="person4">
+                <div class="conversation-start">
+                    <span>Yesterday, 4:20 PM</span>
+                </div>
+                <div class="bubble me">
+                    Hey human!
+                </div>
+                <div class="bubble me">
+                    Umm... Someone took a shit in the hallway.
+                </div>
+                <div class="bubble you">
+                    ... what.
+                </div>
+                <div class="bubble you">
+                    Are you serious?
+                </div>
+                <div class="bubble me">
+                    I mean...
+                </div>
+                <div class="bubble me">
+                    It’s not that bad...
+                </div>
             </div>
-          </li>
-          
-          <li class="clearfix">
-            <div class="message-data align-right">
-              <span class="message-data-time" >10:14 AM, Today</span> &nbsp; &nbsp;
-              <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
-              
-            </div>
-            <div class="message other-message float-right">
-              Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
-            </div>
-          </li>
-          
-          <li>
-            <div class="message-data">
-              <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-              <span class="message-data-time">10:20 AM, Today</span>
-            </div>
-            <div class="message my-message">
-              Actually everything was fine. I'm very excited to show this to our team.
-            </div>
-          </li>
-          
-          <li>
-            <div class="message-data">
-              <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-              <span class="message-data-time">10:31 AM, Today</span>
-            </div>
-            <i class="fa fa-circle online"></i>
-            <i class="fa fa-circle online" style="color: #AED2A6"></i>
-            <i class="fa fa-circle online" style="color:#DAE9DA"></i>
-          </li>
-          
-        </ul>
-        
-      </div> <!-- end chat-history -->
-      
-      <div class="chat-message clearfix">
-        <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3"></textarea>
-                
-        <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
-        <i class="fa fa-file-image-o"></i>
-        
-        <button>Send</button>
+            <div class="chat" data-chat="person5">
+                <div class="conversation-start">
+                    <span>Today, 6:28 AM</span>
+                </div>
+                <div class="bubble you">
+                    Wasup
+                </div>
+                <div class="bubble you">
+                    Wasup
+                </div>
+                <div class="bubble you">
+                    Wasup for the third time like is <br />you blind bitch
+                </div>
 
-      </div> <!-- end chat-message -->
-      
-    </div> <!-- end chat -->
-    
-  </div> <!-- end container -->
-
-<script id="message-template" type="text/x-handlebars-template">
-  <li class="clearfix">
-    <div class="message-data align-right">
-      <span class="message-data-time" >{{time}}, Today</span> &nbsp; &nbsp;
-      <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
+            </div>
+            <div class="chat" data-chat="person6">
+                <div class="conversation-start">
+                    <span>Monday, 1:27 PM</span>
+                </div>
+                <div class="bubble you">
+                    So, how's your new phone?
+                </div>
+                <div class="bubble you">
+                    You finally have a smartphone :D
+                </div>
+                <div class="bubble me">
+                    Drake?
+                </div>
+                <div class="bubble me">
+                    Why aren't you answering?
+                </div>
+                <div class="bubble you">
+                    howdoyoudoaspace
+                </div>
+            </div>
+            <div class="write">
+                <a href="javascript:" class="write-link attach"></a>
+                <input type="text" id="txtCHAT"/>
+                <a href="javascript:" class="write-link smiley"></a>
+                <a href="javascript:" class="write-link send"></a>
+            </div>
+        </div>
     </div>
-    <div class="message other-message float-right">
-      {{messageOutput}}
-    </div>
-  </li>
-</script>
-
-<script id="message-response-template" type="text/x-handlebars-template">
-  <li>
-    <div class="message-data">
-      <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-      <span class="message-data-time">{{time}}, Today</span>
-    </div>
-    <div class="message my-message">
-      {{response}}
-    </div>
-  </li>
-</script>
-  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js'></script>
-
+</div>
+ <!-- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+ -->
 <script  src="/js/realtimechat.js"></script>
-<script src="/js-lib/sockjs-0.3.4.js"></script>
-<script src="/js-lib/stomp.js"></script>
-<script src="/js-lib/jquery-2.1.0.min.js"></script>
+
+
+
 
 </body>
+
 </html>

@@ -14,107 +14,19 @@
 
 <!doctype html>
 <html lang="ko">
-<head>
-   	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-   	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-
-   	<meta name="_csrf" content="${_csrf.token}"/>
-   	<meta name="_csrf_header" content="${_csrf.headerName}"/>
-   	<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-   	
-   
+<head>	
+	<meta charset="UTF-8">
+	<meta name="_csrf" content="${_csrf.token}"/>
+	<meta name="_csrf_header" content="${_csrf.headerName}"/>
+    
+    
 	<%@include file="fragments/include_preview.jsp"%>
+	<%-- <%@include file="fragments/include_page.jsp"%> --%>
     <script type="text/javascript" src="/js/preview_page_001.js"></script>
-    <%-- <script type="text/javascript" src="/js-lib/lightslider.js?<%=_localDatetime%>"></script> --%>
-  
-  	<style>
-/* 	  	.tcb-product-slider {
-/* 	  background: #333;
- 	  background-image: url(https://unsplash.it/1240/530?image=721); */
-	  background-size: cover;
-	  background-repeat: no-repeat;
-	  padding: 10px 0;
-	}
-	.tcb-product-slider .carousel-control {
-	  width: 5%;
-	}
-	.tcb-product-item a {
-	  color: #147196;
-	}
-	.tcb-product-item a:hover {
-	  text-decoration: none;
-	}
-	.tcb-product-item .tcb-hline {
-	  margin: 10px 0;
-	  height: 1px;
-	  background: #ccc;
-	}
-	@media all and (max-width: 768px) {
-	  .tcb-product-item {
-	    margin-bottom: 30px;
-	  }
-	}
-	.tcb-product-photo {
-	  text-align: center;
-	  height: 180px;
-	  background: #fff;
-	}
-	.tcb-product-photo img {
-	  width: 100%;
-	  height: 100%;
-	  display: inline-block;
-	}
-	.tcb-product-info {
-	  background: #f0f0f0;
-	  padding: 15px;
-	}
-	.tcb-product-title h4 {
-	  margin-top: 0;
-	  white-space: nowrap;
-	  text-overflow: ellipsis;
-	  overflow: hidden;
-	}
-	.tcb-product-rating {
-	  color: #acacac;
-	}
-	.tcb-product-rating .active {
-	  color: #FFB500;
-	}
-	.tcb-product-price {
-	  color: firebrick;
-	  font-size: 18px;
-	}
-	
-	
-	
-	.details {
-	    margin: 50px 0; }
-	 .details h1 {
-	      font-size: 32px;
-	      text-align: center;
-	      margin-bottom: 3px; }
-	    .details .back-link {
-	      text-align: center; }
-	      .details .back-link a {
-	        display: inline-block;
-	        margin: 20px 0;
-	        padding: 15px 30px;
-	        background: #333;
-	        color: #fff;
-	        border-radius: 24px; }
-	        .details .back-link a svg {
-	          margin-right: 10px;
-	          vertical-align: text-top;
-	          display: inline-block; }
- */
-  	</style>
-  	<script type="text/javascript">
-  	 var _user_id = "<%=usercd%>";
-  	</script>
 </head>
-
+<style>
+</style>
 <body id="product">
-
 <input type="hidden" id="usercd" value="<%=usercd%>" />
 
 <!-- wrap -->
@@ -122,44 +34,7 @@
 
 	<!-- header -->
    	<div class="header_wrap"><!--<div class="header_wrap search">-->
-		<!-- header_inner top-bar-wrap -->
-        <div class="header_inner">
-			<!-- logo -->
-            <h1 class="logo"><a href="http://localhost:8080/"><img src="img/bg/bg_logo.png" alt="logo"></a></h1>
-			<!-- //logo -->
-
-			<!-- button_menu_mobile -->
-            <button type="button" class="btn_gnb">GNB</button>
-			<!-- //button_menu_mobile -->
-
-			<!-- search_box_header -->
-            <div id="searchview" onclick="schView()">
-                <fieldset>
-                    <legend>검색</legend>
-                    <input type="text" class="txt" value="Product name, area name, @ shop name, initial search" disabled="">
-                </fieldset>
-            </div>
-			<!-- //search_box_header -->
-
-			<!-- aleim -->
-            <button type="button" class="btn_alrim new" onclick="gotalklist()"><span>Notice</span></button>
-			<!--<button type="button" class="btn_alrim new" onclick="gotalklist()"><span>Notice</span></button>-->
-			<!-- //aleim -->
-
-			<!-- search_wrap -->
-            <div class="searchwrap">
-                <button type="button" class="btn_back" onclick="schHide()">뒤로</button>
-                <div id="searcharea">
-                    <fieldset>
-                        <legend>검색</legend>
-                        <input type="text" id="main_search_input_text" class="txt" placeholder="Product name, area name, @ shop name, initial search">
-                        <button type="button" class="btn_sch" onclick="gosearchPage()">검색</button>
-                    </fieldset>
-                </div>
-            </div>
-			<!-- //search_wrap -->
-        </div>
-		<!-- //header_inner -->
+		<jsp:include page="header_include.jsp"/>
     </div>
 	<!-- // header -->
 
@@ -176,8 +51,8 @@
 					</dl>
 					<div class="meminfo">
 						<a href="javascrip:" class="sidebar_item"><em>Goods</em></a>
-						<a href="javascrip:" class="sidebar_faverd"><em>stream</em></a>
-						<a href="javascrip:" class="sidebar_following"><em>Follow</em></a>
+						<a href="javascrip:" class="sidebar_signup"><em>Sign Up</em></a>
+						<a href="javascrip:" class="sidebar_login"><em>Log In</em></a>
 					</div>
 					<dl class="category">
 						<dt>
@@ -412,7 +287,7 @@
 				<!-- //comment_post -->
 
 				<!-- pagination -->
-				<div class="pagination mgb15" style="cursor: default;padding-left: 300px;">
+				<div class="pagination mgb15" style="cursor: default;padding-left: 43%;">
 					<!-- <a href="javascrip:" class="pag_prev">next</a>
 					<span>
 						<a href="javascrip:" class="on">1</a>
@@ -429,16 +304,18 @@
 				<div class="sellerwrap">
 					<div class="seller_inner">
 						<div class="sellershop">
-							<a href="javascrip:">
+							<a>
 								<dl>
-									<dt>
-										<p>Shoping Online<span>'s shop</span></p>
+									<dt id="sellerName">
+										<p>Shoping Online's TESTING</span></p>
 									</dt>
 									<dd class="info">
 										<span> Open 723 days</span>
 										<span>Products 9999 Items</span>
 									</dd>
-									<dd class="photo"><img src="img/users/users.jpg" alt="" class="loaded"></dd>
+									<dd id="sellerphoto" class="photo">
+										<img src="img/users/users.jpg" alt="" class="loaded">
+									</dd>
 								</dl>
 							</a>
 						</div>
@@ -786,7 +663,7 @@
 		</div>
 		<div class="txtmsg">
 			Please Do Not Hesitate to Contact US.<br>
-			Copyright ⓒ Online Shopping. All rights reserved
+			Copyright â Online Shopping. All rights reserved
 		</div>
 	</footer>
 	<!-- //footer -->

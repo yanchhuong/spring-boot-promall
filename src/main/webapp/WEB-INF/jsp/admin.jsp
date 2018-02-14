@@ -51,12 +51,12 @@ $(function(){
 			<div class="lnb_top">
 				<!-- user view -->
 				<div class="user_view">
-					<img src="../img/user_img.png" class="img_user">
+					<img src="../../img/users/users.jpg" class="img_user">
 					<div class="user_r_side">
 						<!--  select -->
-						<div class="select_com">
+						<div class="select_com" id="select_com">
 							<div class="combo"><span>Setting</span><a href="javascrip:"><img src="../img/btn/combo_link.png" alt="combo link"></a></div>
-							<ul style="display:none;">
+							<ul style="display:none;z-index:1;">
 								<li><a href="javascrip:">Menu</a></li>
 								<li><a href="javascrip:" >User</a></li>
 								<li><a href="javascrip:">FeedBack</a></li>

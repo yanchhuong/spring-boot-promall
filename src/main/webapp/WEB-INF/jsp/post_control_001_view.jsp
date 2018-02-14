@@ -3,10 +3,7 @@
 <%@page import="com.code.session.UserSession"%>
 <%
 	UserSessionBean sess = SessionManager.getSession(request, response);
-    String usercd = sess.getUsercd();
-	
-
-
+	String usercd = sess.getUsercd();
 %>
 
 <html >

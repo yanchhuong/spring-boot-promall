@@ -4,7 +4,7 @@
 <%
 
 UserSessionBean sess = SessionManager.getSession(request, response);
-//SessionManager.logout(request, response);
+SessionManager.logout(request, response);
 String usercd = sess.getUsercd();
 
 %>

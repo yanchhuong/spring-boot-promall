@@ -1,11 +1,4 @@
 
-<%
-String input="";
-if(request.getParameter("input")!=null){
-	 input = request.getParameter("input");
-}
-%>    
-    
 <!DOCTYPE html>
 <html >
 <head>
