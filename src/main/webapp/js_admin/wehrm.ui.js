@@ -1751,9 +1751,11 @@ wehrm.ui.logOut = function(){
 		 var sessionObj = null;
 			$.ajax({
 				type   : 'GET',
-			    url    : "/clear_sesssion",
+			    url    : "/clear_session",
 			    cache  : true,
-			    async : false
+			    async  : false
 			})
-			.done(function(dat){})
+			.done(function(dat){
+//				alert("Logout success.");
+			})
 };

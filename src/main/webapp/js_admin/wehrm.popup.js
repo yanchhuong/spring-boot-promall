@@ -85,7 +85,7 @@ wehrm.popup.openPopupDvsnList = function(wsvcId, input, callbackFn, topHeight) {
 };
 
 //general openPopup
-wehrm.popup.openPopup = function(wsvcId, input, callbackFn, topHeight) { 
+wehrm.popup.openPopup = function(wsvcId, input, callbackFn, topHeight) {
 	//console.log(wsvcId+"_iframe");
 	wehrm.popup.callbackFn[wsvcId] = callbackFn;
 //	var iframe =  parent.document.getElementById(wsvcId+"_iframe");
@@ -100,8 +100,9 @@ wehrm.popup.openPopup = function(wsvcId, input, callbackFn, topHeight) {
 		//$(iframe).bPopup(wehrm.popup.modalOptions);
 		if(topHeight != "" && topHeight != null){
 			$(iframe).bPopup({position:['auto',topHeight],follow: [true, true]});
-		}else
+		}else{
 			$(iframe).bPopup({position:['auto',45],follow: [true, true]});
+		}
 		
 		if(typeof(parent) != undefined) {
 //			parent.wehrm.ui.destroyProgressBar();

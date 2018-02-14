@@ -55,6 +55,7 @@ $(document).ready(function(){
 			callbackFn(data);
     	});
 	});
+	
 	//add main
 	$(document).on("click", "#addMain",function(e){
 		var input={};
@@ -244,8 +245,8 @@ menu_control_001.editTrHtml = function(input){
      edithtml+='            <span class="ico_treefolder">'+input.lvl+'</span> 		  ';
      edithtml+='            <input type="text" id="txtnmeng" style="width:150px;">&nbsp;';
      edithtml+='            <input type="text" id="txtnmkh" style="width:150px;">&nbsp;';
-     edithtml+='		    <a id="btAdd"><img src="../img/btn/btn_s_ok.png" alt="저장"></a>';
-     edithtml+='		    <a id="btCancelAdd" style="margin-left:2px;"><img src="../img/btn/btn_s_cnl.png" alt="취소"></a> ';
+     edithtml+='		    <a id="btAdd"><img src="../../img/btn/btn_s_ok.png" alt="저장"></a>';
+     edithtml+='		    <a id="btCancelAdd" style="margin-left:2px;"><img src="../../img/btn/btn_s_cnl.png" alt="취소"></a> ';
      edithtml+='	     </div>										                    ';
      edithtml+='	 </td>											                    ';
      edithtml+=' <td class="t_right"><a class="txt_d" id="parentid">'+parentid+'</a></td>';

@@ -1,269 +1,185 @@
-(function(){
-  
-  var chat = {
-    messageToSend: '',
-    messageResponses: [
-      'Why did the web developer leave the restaurant? Because of the table layout.',
-      'How do you comfort a JavaScript bug? You console it.',
-      'An SQL query enters a bar, approaches two tables and asks: "May I join you?"',
-      'What is the most used language in programming? Profanity.',
-      'What is the object-oriented way to become wealthy? Inheritance.',
-      'An SEO expert walks into a bar, bars, pub, tavern, public house, Irish pub, drinks, beer, alcohol'
-    ],
-    init: function() {
-      this.cacheDOM();
-      this.bindEvents();
-      this.render();
-    },
-    cacheDOM: function() {
-      this.$chatHistory = $('.chat-history');
-      this.$button = $('button');
-      this.$textarea = $('#message-to-send');
-      this.$chatHistoryList =  this.$chatHistory.find('ul');
-    },
-    bindEvents: function(event) {
-      this.$button.on('click', this.addMessage.bind(this));
-      this.$textarea.on('keyup', this.addMessageEnter.bind(this));
-    },
-    render: function() {
-      this.scrollToBottom();
-      if (this.messageToSend.trim() !== '') {
-        var template = Handlebars.compile( $("#message-template").html());
-        var context = { 
-          messageOutput: this.messageToSend,
-          time: this.getCurrentTime()
-        };
+//Global 
 
-        this.$chatHistoryList.append(template(context));
-        this.scrollToBottom();
-        this.$textarea.val('');
-        
-        // responses
-        var templateResponse = Handlebars.compile( $("#message-response-template").html());
-        var contextResponse = { 
-          response: this.getRandomItem(this.messageResponses),
-          time: this.getCurrentTime()
-        };
-        
-        setTimeout(function() {
-          this.$chatHistoryList.append(templateResponse(contextResponse));
-          this.scrollToBottom();
-        }.bind(this), 1500);
-        
-      }
+var stompClient = null;
+var socket = null;
+var whoami = null;
+$(document).ready(function(e){
+	//Onload
+	LoadData();
+
+	$('.chat[data-chat=person2]').addClass('active-chat');
+	$('.person[data-chat=person2]').addClass('active');
+
+	$('.left .person').mousedown(function(){
+	    if ($(this).hasClass('.active')) {
+	        return false;
+	    } else {
+	        var findChat = $(this).attr('data-chat');
+	        var personName = $(this).find('.name').text();
+	        $('.right .top .name').html(personName);
+	        $('.chat').removeClass('active-chat');
+	        $('.left .person').removeClass('active');
+	        $(this).addClass('active');
+	        $('.chat[data-chat = '+findChat+']').addClass('active-chat');
+	    }
+	    $("#reciever").attr("data-id",findChat);
+	});
+	$(".send").on("click",function(){
+		var receiver = $("#reciever").attr("data-id");
+		sendMessageTo(receiver,$("#txtCHAT").val());
+		$("#txtCHAT").val("");
+	});
+	$("#txtCHAT").on("keypress",function(event){
+		var receiver = $("#reciever").attr("data-id");
+		if (event.which == 13) {
+			sendMessageTo(receiver,$("#txtCHAT").val());
+			$("#txtCHAT").val("");
+         }
+	});
+	
+	//initialchat
+///	 connect();
+});
+function LoadData(){
+	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+	var csrfToken  = $("meta[name='_csrf']").attr("content");
+	var input = {};
+	    
+	$.ajax({
+    	type   : 'POST',
+	    url    : "/message/get_userchat_list",
+	    data   : JSON.stringify(input),
+	    cache: false,
+        dataType: 'json',
+    	contentType: 'application/json',
+        async: false,
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader(csrfHeader, csrfToken);
+        },
+	})
+    .done(function(dat) {
+    	cosole.log(dat);
+    })
+};
+function connect() {
+        socket = new SockJS('/chat');
+        stompClient = Stomp.over(socket);
+        stompClient.connect('', '', function(frame) {
+          whoami = frame.headers['user-name'];
+          console.log('whoami: ' + whoami);
+          console.log('Connected: ' + frame);
+          stompClient.subscribe('/user/queue/messages', function(message) {
+        	  console.log('message: ' + JSON.parse(message.body));
+                showMessage(JSON.parse(message.body));
+          });
+          stompClient.subscribe('/topic/active', function(activeMembers) {
+            showActive(activeMembers);  
+            console.log('TEST:'+ activeMembers);
+          });
+     });
+}
       
-    },
-    
-    addMessage: function() {
-      this.messageToSend = this.$textarea.val()
-      this.render(); 
-      this.sendMessageTo('bbb');
-    },
-    sendMessageTo:function(user) {
-        var chatInput = '#message-to-send';
-        var message = $(chatInput).val();
-        
-        console.log("chatInput:"+message);
-        
+function showActive(activeMembers) {
+        renderActive(activeMembers.body);
+        stompClient.send('/app/activeUsers', {}, '');
+}
+function renderActive(activeMembers) {
+	   $("#userList").html("");
+    	console.log('SHow :' +activeMembers);
+        var previouslySelected = $('.user-selected').text();
+        var usersWithPendingMessages = new Object();
+        $.each($('.pending-messages'), function(index, value) {
+             usersWithPendingMessages[value.id.substring(5)] = true; // strip the user-
+             alert(value.id.substring(5));
+        });
+        var members = $.parseJSON(activeMembers);
+        console.log("meme");
+        console.log(members);
+        var userDiv = $('<div>', {id: 'users'});
+        $.each(members, function(index, value) {
+            if (value === whoami) {
+              return true;
+            }
+            
+            $("li" ).each(function(index) {
+              	 console.log(value);
+            });
+            
+          /*      var myId='user-' + value;
+            var html="";
+            html+='<li class="person" data-chat="'+value+'" id="'+myId+'">';
+            html+='   <img src="https://s13.postimg.org/ih41k9tqr/img1.jpg" alt="" />';
+            html+='       <span class="name">'+value+'</span>';
+            html+='       <span class="time">2:09 PM</span>';
+            html+='       <span class="preview">I was wondering...</span>';
+            html+='   </li>';
+            $("#userList").append(html);*/
+          });
+ }
+      
+function disconnect() {
+        stompClient.disconnect();
+        console.log("Disconnected");
+ }
+ function sendMessageTo(user,message) {
+        var chatInput = '#input-chat-' + user;
+        var message = $("#txtCHAT").val();
+        console.log("chatInput"+chatInput);
         if (!message.length) {
-          return;
+           return;
         }
+   	
         stompClient.send("/app/chat",{"content-type": "application/json;charset=UTF-16"}, JSON.stringify({
           'recipient': user,
           'message' : message
         })); 
         $(chatInput).val('');
         $(chatInput).focus();
-    },
-    
-    addMessageEnter: function(event) {
-        // enter was pressed
-        if (event.keyCode === 13) {
-          this.addMessage();
-        }
-    },
-    scrollToBottom: function() {
-       this.$chatHistory.scrollTop(this.$chatHistory[0].scrollHeight);
-    },
-    getCurrentTime: function() {
-      return new Date().toLocaleTimeString().
-              replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
-    },
-    getRandomItem: function(arr) {
-      return arr[Math.floor(Math.random()*arr.length)];
-    }
-    
-  };
-  
-  chat.init();
-  
-  var searchFilter = {
-    options: { valueNames: ['name'] },
-    init: function() {
-      var userList = new List('people-list', this.options);
-      var noItems = $('<li id="no-items-found">No items found</li>');
+        
+ }
+function getChatWindow(userName) {
+        var existingChats = $('.chat active-chat');
+        var elementId = 'chat-' + userName;
+        var containerId = elementId + '-container';
+        var selector = '#' + containerId;
+        var inputId = 'input-' + elementId;
+        //if (!$(selector).length) {
+          var chatContainer = $('<div>', {id: containerId, class: 'chat-container'});
+          chatContainer.attr("data-chat",userName);
+          var chatWindow = $('<div>', {id: elementId, class: 'bubble'});
+          var chatInput = $('<input>', {id: inputId, type: 'text',
+            placeholder: 'Enter a message.  Something deep and meaningful.'});
+          var chatSubmit = $('<a>', {id: 'submit-' + elementId, class: 'write-link send'})
+        
+
+          if (existingChats.length) {
+              chatContainer.hide();
+          }
+        return $(selector);
+}
       
-      userList.on('updated', function(list) {
-        if (list.matchingItems.length === 0) {
-          $(list.list).append(noItems);
-        } else {
-          noItems.detach();
+function showMessage(message) {
+        var chatWindowTarget = (message.recipient === whoami) ? message.sender : message.recipient;
+        
+        var userDisplay = message.sender === whoami ? 'bubble me' : 'bubble you';
+        var container = $(".active-chat");
+		var html= '<div class="'+userDisplay+'">'+message.message+'</div>';
+		container.append(html);
+        
+        if (message.sender !== whoami) {
+          var sendingUser = $('#user-' + message.sender);
+          if (!sendingUser.hasClass('user-selected') && !sendingUser.hasClass('pending-messages')) {
+             sendingUser.append(newMessageIcon());
+             sendingUser.addClass('pending-messages');
+          }
         }
-      });
-    }
-  };
-  
-  searchFilter.init();
-  
-})();
+}
+function newMessageIcon() {
+        var newMessage = $('<span>', {class: 'newmessage'});
+        newMessage.html('&#x2709;');
+        return newMessage;
+}
+	
 
-
-$(document).ready(function(){
-	 var stompClient = null;
-     var socket = null;
-     var whoami = null;
-     
-     function connect() {
-       socket = new SockJS('/chat');
-       stompClient = Stomp.over(socket);
-       stompClient.connect('', '', function(frame) {
-         whoami = frame.headers['user-name'];
-         console.log('whoami: ' + whoami);
-         console.log('Connected: ' + frame);
-         stompClient.subscribe('/user/queue/messages', function(message) {
-       	  console.log('message: ' + JSON.parse(message.body));
-               showMessage(JSON.parse(message.body));
-         });
-         stompClient.subscribe('/topic/active', function(activeMembers) {
-           showActive(activeMembers);  
-           console.log('TEST:'+ activeMembers);
-         });
-       });
-     }
-     
-     function showActive(activeMembers) {
-       	console.log('Body :' +activeMembers.body);
-     //  renderActive(activeMembers.body);
-       stompClient.send('/app/activeUsers', {}, '');
-     }
-     
-     function renderActive(activeMembers) {
-       var body= $('.list').empty(''); 
-       var previouslySelected = $('.user-selected').text();
-       var usersWithPendingMessages = new Object();
-       $.each($('.pending-messages'), function(index, value) {
-         usersWithPendingMessages[value.id.substring(5)] = true; // strip the user-
-       });
-       var members = $.parseJSON(activeMembers);
-    
-       $.each(members, function(index, value) {
-         if (value === whoami) {
-           return true;
-         }
-         var userDiv ='<li class="clearfix">                                                                              '+
-         '  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar"> '+
-         '  <div class="about">										              '+
-         '    <div class="name">'+value +'</div>							      '+
-         '    <div class="status">									              '+
-         '      <i class="fa fa-circle online"></i> online						  '+
-         '    </div>											                  '+
-         '  </div>											                      ';
-         $('.list').append(userDiv);
-       });
-     
-     }
-     
-     function disconnect() {
-       stompClient.disconnect();
-       console.log("Disconnected");
-     }
-     function sendMessageTo(user) {
-       var chatInput = '#input-chat-' + user;
-       var message = $(chatInput).val();
-       
-       
-       if (!message.length) {
-         return;
-       }
-       stompClient.send("/app/chat",{"content-type": "application/json;charset=UTF-16"}, JSON.stringify({
-         'recipient': user,
-         'message' : message
-       })); 
-       $(chatInput).val('');
-       $(chatInput).focus();
-     }
-     
-     function getChatWindow(userName) {
-       var existingChats = $('.chat-container');
-       var elementId = 'chat-' + userName;
-       var containerId = elementId + '-container';
-       var selector = '#' + containerId;
-       var inputId = 'input-' + elementId;
-       if (!$(selector).length) {
-         var chatContainer = $('<div>', {id: containerId, class: 'chat-container'});
-         var chatWindow = $('<div>', {id: elementId, class: 'chat'});
-         var chatInput = $('<textarea>', {id: inputId, type: 'text', class: 'chat-input', rows: '2', cols: '75', 
-           placeholder: 'Enter a message.  Something deep and meaningful.  Something you can be proud of.'});
-         var chatSubmit = $('<button>', {id: 'submit-' + elementId, type: 'submit', class: 'chat-submit'})
-         chatSubmit.html('Send');
-         
-         chatInput.keypress(function(event) {
-           if (event.which == 13) {
-             var user = event.currentTarget.id.substring(11); // gets rid of 'input-chat-'
-             event.preventDefault();
-             sendMessageTo(user);
-             console.log("RECIEVER:"+user);
-           }
-         });
-         chatSubmit.click(function(event) {
-           var user = event.currentTarget.id.substring(12); // gets rid of 'submit-chat-'
-           sendMessageTo(user);
-         });
-         
-         chatContainer.append(chatWindow);
-         chatContainer.append(chatInput);
-         chatContainer.append(chatSubmit);
-         
-         if (existingChats.length) {
-           chatContainer.hide();
-         }
-         
-         $('body').append(chatContainer);
-       }
-       return $(selector);
-     }
-     
-     function showMessage(message) {
-       var chatWindowTarget = (message.recipient === whoami) ? message.sender : message.recipient;
-       var chatContainer = getChatWindow(chatWindowTarget);
-       var chatWindow = chatContainer.children('.chat');
-       var userDisplay = $('<span>', {class: (message.sender === whoami ? 'chat-sender' : 'chat-recipient')});
-       
-       userDisplay.html(message.sender + ' says: ');
-       
-       console.log(message);
-       var messageDisplay = $('<span>');
-       messageDisplay.html(message.message );
-       chatWindow.append(userDisplay).append(messageDisplay).append('<br/>');
-       chatWindow.animate({ scrollTop: chatWindow[0].scrollHeight}, 1);
-       if (message.sender !== whoami) {
-         var sendingUser = $('#user-' + message.sender);
-         if (!sendingUser.hasClass('user-selected') && !sendingUser.hasClass('pending-messages')) {
-           sendingUser.append(newMessageIcon());
-           sendingUser.addClass('pending-messages');
-         }
-       }
-     }
-     
-     function newMessageIcon() {
-       var newMessage = $('<span>', {class: 'newmessage'});
-       newMessage.html('&#x2709;');
-       return newMessage;
-     }
-     
-     $(document).ready(function() {
-       connect();
-     });
-});
 
 

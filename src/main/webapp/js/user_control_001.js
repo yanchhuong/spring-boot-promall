@@ -77,6 +77,7 @@ $(document).ready(function(e){
 	}).mouseleave(function(){
 		$(this).find("#divstatSRC").fadeOut();
 	});
+	
 	$(document).on("click","#divstatSRC ul#ustatSRC li",function(e){
 		$(this).parents('ul').find('li').removeClass('on');
 		$(this).addClass("on");
@@ -88,11 +89,13 @@ $(document).ready(function(e){
 	$(document).on("click", ".btn_search_tb",function(e){
 		user_control_001.ListData();
 	});
+	
 	$("#keySRC").keydown(function (e) {
 		  if (e.keyCode == 13) {
 			  user_control_001.ListData();
 		  }
 	});
+	
 	$(document).on("click", ".tab li",function(e){
 		$(this).siblings().removeClass();
 		$(this).addClass("on");
@@ -107,15 +110,21 @@ $(document).ready(function(e){
 		$(this).datepicker({dateFormat: 'yy-mm-dd'});
 	});
 	
+	$(document).on("click", "#img_date", function(){
+		$("#regdate").datepicker({dateFormat: 'yy-mm-dd'});
+	});
+	
 	$(document).on("click", ".btn_folder_plus",function(e){
 		$('.tree_layerpop').hide();
 		$(this).parent().find('.tree_layerpop').show();	
 	});
+	
 	$('.combo_style').click(function(){
 		$("#pageNum").fadeToggle();
 	}).mouseleave(function(){
 		$("#pageNum").fadeOut();
 	});
+	
 	$(".combo_style ul#pageNum li").click(function(){	
 		comboSetting(this,"개");
 		user_control_001.ListData();	

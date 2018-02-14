@@ -130,7 +130,7 @@ function drawTablePaging(div_id, callback, curPageNo, totPage,input_page_size) {
 		if($(this).hasClass("on")==true){ return false;}
 		
 		currentPage = $(this).html();
-		console.log(currentPage);
+		
 		if($.isFunction(callback)){
 		
 			callback(currentPage);

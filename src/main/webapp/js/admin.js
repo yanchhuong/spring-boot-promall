@@ -1,6 +1,12 @@
 var _this;
 $(document).ready(function(){
 	
+	$(document).delegate(".combo", "click", function(){
+//		$(this).siblings().show();
+		$("#select_com").find("ul").slideToggle();
+	});
+	
+	
 	if($("div#searchDefault span.on").attr("id") == "detail_down"){
 		input["SRCH_GBN"] = ""; 
 	}else if($("div#searchDefault span.on").attr("id") == "detail_up"){

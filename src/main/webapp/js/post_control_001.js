@@ -219,7 +219,8 @@ post_control_001.SaveProductPost=function(){
 			"path"     :$(this).find("img").attr("value"),
 			"orname"   :$(this).find("#orname").val(),
 			"regdate"  :$(this).find("#regdate").val(),
-			"randname" :$(this).find("#randname").val()
+			"randname" :$(this).find("#randname").val(),
+			"kind" :'4'
 		});
 	});
 	input["inRec"] = recImg;

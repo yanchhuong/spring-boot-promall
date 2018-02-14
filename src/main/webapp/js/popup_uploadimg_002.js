@@ -1,11 +1,12 @@
 var _dat = {};
-var popup_uploadimg_002 ={};
+var popup_uploadimg_002 = {};
 $(document).ready(function(){
+	
 	init(input);
-	var $form = $("#imageUploadForm"), 
+	var $form = $("#imageUploadForm"),
 	    $file = $("#file"),
 	    $uploadedImg = $("#uploadedImg");
-	    $helpText = $("#helpText");    
+	    $helpText 	 = $("#helpText");
 	    
 	    $uploadedImg.on('webkitAnimationEnd MSAnimationEnd oAnimationEnd animationend', function(){
 		    $form.addClass('loaded');
@@ -50,9 +51,10 @@ $(document).ready(function(){
 	    		$("#img").siblings().remove();
 	    		$("#img").attr("src", "");
 	    		$("#randname").val("null");
-	    		$("#filename").remove();
+	    		$("#file").remove();
 	    		$("#helpText").addClass("helpText");
-	    		$("#imgframe").removeClass(); 
+	    		$("#imgframe").removeClass();
+//	    		parent.location.reload();
 	    	}
 	    });
 	    
@@ -78,60 +80,67 @@ function init(input){
 function removeFile(dat){
 	  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	  var csrfToken  = $("meta[name='_csrf']").attr("content");
-	 var input = {};
-	     input.filename = dat;
+//	  var input = {};
+//	  
+//	  input.randname = dat;
+
 	  $.ajax({
-		  url: '/upload_file/remove_file_name',
-		  cache: false,
-          dataType: 'json',
+		  type   	: 'GET',
+		  url		: '/upload_file/remove_file_name',
+		  async		: true,
+		  cache		: false,
+          dataType	: 'json',
+          data		: {randname:dat},
 	      contentType: 'application/json',
-	      async: true,
 		  beforeSend: function(xhr) {
 			  xhr.setRequestHeader(csrfHeader, csrfToken);
 		  },
-		  data:input,
-		  success: function(data){
-			  var	callbackFn = parent.wehrm.popup.callbackFn["popup_uploadimg_002"];
+		  success	: function(data){
+	  		  alert(data.ERROR);
+			  var callbackFn = parent.wehrm.popup.callbackFn["popup_uploadimg_002"];
 	  		  if($.isFunction(callbackFn)) {
 	  			  callbackFn({IS_TRUE:true});
 	  		  }
+
 		  }
 	  });
 };
 
 function uploadFormData(){
-  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
-  var csrfToken  = $("meta[name='_csrf']").attr("content");
-  var oMyForm = new FormData();
+	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
+	var csrfToken  = $("meta[name='_csrf']").attr("content");
+  	var oMyForm = new FormData();
+  	
    
-  oMyForm.append("file", file.files[0]);
-  $.ajax({
-    url: '/upload_file/uploadimg',
-    data: oMyForm,
-    dataType: 'text',
-    cache   : true,
-    processData: false,
-    contentType: false,
-    type: 'POST',
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader(csrfHeader, csrfToken);
-    },
-    success: function(data){
-           data=JSON.parse(data);
-	        $("#img").attr("src", document.location.origin+"/upload_file/files/"+ data.RANDNAME);
-	    	$("#imgframe").append("<input type='hidden' id='orname' value='"+ data.OUT_REC.orname+"'>" ); 
-	    	$("#imgframe").append("<input type='hidden' id='regdate' value='"+ data.OUT_REC.regdate+"'>" ); 
-	    	$("#imgframe").append("<input type='hidden' id='size' value='"+ data.OUT_REC.size+"'>" ); 
-	    	$("#imgframe").append("<input type='hidden' id='type' value='"+ data.OUT_REC.type+"'>" );
-	    	$("#randname").val(''+data.OUT_REC.randname +'');
-    }
-  });
+  	oMyForm.append("file", file.files[0]);
+  	$.ajax({
+  		url			: '/upload_file/uploadimg',
+	    data		: oMyForm,
+	    cache   	: true,
+	    type		: 'POST',
+	    dataType	: 'text',
+	    processData	: false,
+	    contentType	: false,
+	    beforeSend: function(xhr) {
+	      xhr.setRequestHeader(csrfHeader, csrfToken);
+	    },
+	    success: function(data){
+	            data = JSON.parse(data);
+		        $("#img").attr("src", document.location.origin+"/upload_file/files/"+ data.RANDNAME);
+		    	$("#imgframe").append("<input type='hidden' id='orname' value='"+ data.OUT_REC.orname+"'>" ); 
+		    	$("#imgframe").append("<input type='hidden' id='regdate' value='"+ data.OUT_REC.regdate+"'>" ); 
+		    	$("#imgframe").append("<input type='hidden' id='size' value='"+ data.OUT_REC.size+"'>" ); 
+		    	$("#imgframe").append("<input type='hidden' id='type' value='"+ data.OUT_REC.type+"'>" );
+		    	$("#randname").val(''+data.OUT_REC.randname +'');
+	    }
+  	});
 };
 
 function SaveFile(){
 	  var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	  var csrfToken  = $("meta[name='_csrf']").attr("content");
 	  var input = {};
+	  
 	  if($("#orname").val() == "" || $("#orname").val() == null){
 		  alert('No file to save or already exist.');
 	  }else{
@@ -141,23 +150,23 @@ function SaveFile(){
 	      input["size"]     = $("#size").val();
 	      input["type"]     = $("#type").val();
 	      input["catgcd"]   = $("#catgcd").val();
-	      console.log(input);
+	      input["kind"]		= '1';
 	  }
 	  
 	  $.ajax({
-		    url    : '/upload_file/save_file_name',
-	    	cache  : true,
-	        processData: false,
-	        contentType: false,
-            dataType: 'text',
-	    	contentType: 'application/json',
-	    	type   : 'POST',
-	        beforeSend: function(xhr) {
+		    url    		: '/upload_file/save_file_name',
+	    	dataType	: 'text',
+	    	type   		: 'POST',
+	    	cache  		: true,
+	        processData	: false,
+	        contentType	: false,
+	    	contentType : 'application/json',
+	        beforeSend	: function(xhr) {
 	            xhr.setRequestHeader(csrfHeader, csrfToken);
 	        },
-	        data: JSON.stringify(input),
-	    	success :function(result){
-	    	  var	callbackFn = parent.wehrm.popup.callbackFn["popup_uploadimg_002"];
+	        data		: JSON.stringify(input),
+	    	success 	: function(result){
+	    	  var callbackFn = parent.wehrm.popup.callbackFn["popup_uploadimg_002"];
 	  		  if($.isFunction(callbackFn)) {
 	  			  callbackFn({IS_TRUE:true});
 	  		  }

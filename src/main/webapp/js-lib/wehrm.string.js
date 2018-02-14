@@ -42,6 +42,15 @@ if(!wehrm.string) {
 		return str.substr(0,8).replace(/(\d{4})(\d{2})(\d{2})/, "$1"+format+"$2"+format+"$3");
 	};
 	
+	//@@ normal format Date
+	wehrm.string.formatDateNormal = function(str, format){
+		if(str == "" || str == undefined) str = "";
+		if(format == undefined) format = "-";
+		if(str.length == 10)
+			str = str.replace(/-/g,"");
+		return str.substr(0,8).replace(/(\d{2})(\d{2})(\d{4})/, "$1"+format+"$2"+format+"$3");
+	};
+	
 	//@@ format DateTime
 	wehrm.string.formatDateTime = function(str, format){
 		if(str == "" || str == undefined) str = "";
@@ -196,5 +205,67 @@ if(!wehrm.string) {
 			return str;
 		} 
 	};
+	
+	wehrm.string.formatPhoneNumber = function(phone_val, world_cd){
+		var rtn_no = "";
+		
+		if(phone_val == "") return rtn_no;
+		
+		world_cd = null2void(world_cd, "");
+		if(world_cd == $("#KOR_NTNL_CD").val() || world_cd == ""){
+			//$("#user_phone").html(getTel(null2void(dat.EXNM_NO, "")));
+//			rtn_no = "(+855) " + getTel(null2void(phone_val, "").replace(/-/gi, "")).replace(/^0+/, " ");
+			rtn_no = getTel(null2void(phone_val, "").replace(/-/gi, ""));
+		} else {
+			//$("#user_phone").html(null2void(dat.EXNM_NO, "-"));
+			if(world_cd.split("_").length > 1){
+				rtn_no = "+" + world_cd.split("_")[1] + " " + null2void(phone_val, "-").replace(/-/gi, "");
+				$("#exnm_no1").val(rtn_no);
+			}
+		}
+		
+		return rtn_no;
+	}
+	
+	function getTel(telNo){
+		var temp = "";
+		var tel1 = "";
+		var tel2 = "";
+		var tel3 = "";
+		
+		if(null2void(telNo,"") == "")
+			return "";
+		
+		temp = telNo.split("-").join("");
+
+		if( temp.indexOf("02") > -1 && temp.substr(0,2) == "02" ){
+			tel1 = temp.substr(0,2);
+			temp = temp.substr(2,temp.length);
+		} else if( temp.length > 3 && " 0502, 0503, 0504, 0505, 0506, 0507, 0508".indexOf(temp.substr(0,4)) > -1 ){
+			tel1 = temp.substr(0,4);
+			temp = temp.substr(4,temp.length);
+		} else if( temp.length > 3 ){
+			tel1 = temp.substr(0,3);
+			temp = temp.substr(3,temp.length);
+		} else {
+			return temp;
+		}
+		
+		if( temp.length <= 7 ){
+			if( temp.length <= 3){
+				tel2 = temp.substr(0,temp.length);
+				return tel1 + "-" + tel2;
+			} else {
+				tel2 = temp.substr(0,3);
+				tel3 = temp.substr(3,temp.length);
+				return tel1 + "-" + tel2 + "-" + tel3;
+			}
+		} else {
+			tel2 = temp.substr(0,4);
+			tel3 = temp.substr(4,temp.length);
+			return tel1 + "-" + tel2 + "-" + tel3;
+		}
+
+	}
 	
 };
