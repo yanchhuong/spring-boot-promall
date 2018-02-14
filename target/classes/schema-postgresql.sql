@@ -1,11 +1,59 @@
-/*
-CREATE  TABLE IF NOT EXISTS users(
+/*chat  https://www.9lessons.info/2013/05/message-conversation-database-design.html
+  CREATE  TABLE IF NOT EXISTS users(
   id SERIAL,
   usercd VARCHAR(50) not null,
   username VARCHAR(45) NOT NULL ,
-  password VARCHAR(45) NOT NULL ,
+  password VARCHAR(100) NOT NULL ,
   enabled boolean NOT NULL DEFAULT true ,
-  PRIMARY KEY (username));
+  CONSTRAINT users_pkey PRIMARY KEY (username)
+  );
+CREATE  TABLE IF NOT EXISTS io_stock(
+  id SERIAL not null,
+  stcd VARCHAR(50) not null,
+  custcd VARCHAR(50) ,
+  suplier VARCHAR(50) ,
+  title  VARCHAR(400) ,
+  usercd varchar(50) not null,
+  io varchar(1) not null,
+  constraint io_stock_pk primary key (id,stcd));
+  
+  CREATE TABLE customers (
+   cid SERIAL not null,
+   custcd VARCHAR(50) not null,
+   lname varchar(100) not null,
+   fnam varchar(100) ,
+   addr varchar(255),
+   cphone varchar(15),
+   regdate varchar(14) not null,
+   mem_type varchar(1) ,
+   constraint customers_pk primary key (cid,custcd));
+  
+  CREATE  TABLE IF NOT EXISTS active_log(
+  id SERIAL not null,
+  usercd VARCHAR(50) not null,
+  datetime VARCHAR(400) ,
+  io varchar(1) not null,
+  constraint active_log_pk primary key (id));
+  
+  CREATE  TABLE IF NOT EXISTS log_histr(
+  id SERIAL not null,
+  usercd VARCHAR(50) not null,
+  login_time VARCHAR(10),
+  logout_time VARCHAR(10),
+  regdate varchar(8),
+  constraint log_histr_pk primary key (id));
+
+  
+  
+  CREATE  TABLE IF NOT EXISTS product_detial(
+  id SERIAL not null,
+  stcd VARCHAR(50) not null,
+  prcd VARCHAR(50) not null ,
+  qty  int ,
+  price decimal,
+  disc decimal,
+  total decimal,
+  constraint product_detial_pk primary key (id));
   
 CREATE TABLE if not EXISTS roles_list(
    id serial primary key,
@@ -13,6 +61,19 @@ CREATE TABLE if not EXISTS roles_list(
    regdate varchar(14),
    usercd varchar(50)
 );
+
+
+CREATE  TABLE IF NOT EXISTS page_store(
+  id SERIAL not null,
+  pcd VARCHAR(50) not null,
+  pnm VARCHAR(50) NOT NULL ,
+  title  VARCHAR(400) NOT NULL ,
+  regdate boolean NOT NULL DEFAULT true ,
+  usercd varchar(50),
+  url varchar(200),
+  enabled boolean NOT NULL DEFAULT true ,
+  constraint page_store_pk primary key (id,pcd,pnm)
+  );
   
 CREATE TABLE if not EXISTS user_roles (
   rid SERIAL primary key,
@@ -120,11 +181,41 @@ CREATE TABLE if not exists  conversation(
 c_id SERIAL NOT NULL PRIMARY KEY,
 user_one varchar(45) NOT NULL,
 user_two varchar(45) NOT NULL,
+usercd_one varchar(50) NOT NULL,
+usercd_two varchar(50) NOT NULL,
 ip varchar(30) DEFAULT NULL,
 dtm varchar(11) DEFAULT NULL,
 FOREIGN KEY (user_one) REFERENCES users(username),
 FOREIGN KEY (user_two) REFERENCES users(username)
 );
+
+CREATE table  if not exists  group_message(
+gid SERIAL NOT NUll,
+grpcd varchar(10) NOT null,
+grpkey varchar(50) NOT NULL,
+regdate varchar(14) not NULL,
+grpname varchar(200) not null,
+constraint group_message_pk primary key (gid,grpcd,grpkey));
+
+CREATE table  if not exists  join_group(
+id SERIAL NOT NUll,
+usercd varchar(50) NOT null,
+grpcd varchar(10) NOT NULL,
+regdate varchar(14) not NULL,
+accept boolean ,
+constraint join_group_pk primary key (id));
+
+
+CREATE table  if not exists  messages(
+mid SERIAL NOT NUll,
+reply text not null,
+mcd varchar(10) not null,
+grpcd varchar(10) NOT null,
+usercd varchar(50) NOT NULL,
+fullname varchar(50) not null,
+regdate varchar(14) not NULL,
+ip varchar(30) ,
+constraint messages_pk primary key (mid,mcd));
 
 
 
