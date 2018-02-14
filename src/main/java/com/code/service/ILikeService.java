@@ -3,7 +3,6 @@ package com.code.service;
 import java.util.List;
 
 import com.code.model.LikeBeanInOut_001;
-import com.code.model.ProductBeanIn_U001;
 
 public interface ILikeService {
 

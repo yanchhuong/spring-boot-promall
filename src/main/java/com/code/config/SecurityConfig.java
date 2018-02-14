@@ -20,9 +20,14 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.security.web.header.writers.frameoptions.WhiteListedAllowFromStrategy;
 import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.social.connect.ConnectionFactoryLocator;
+import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
+import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 import com.code.service.UserService;
+import com.code.service.impl.FacebookConnectionSignup;
 
 @Configuration
 @EnableWebSecurity
@@ -30,11 +35,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
 	
+/*sign in /sign up by facebook
+ * ref: http://www.baeldung.com/facebook-authentication-with-spring-security-and-social
+*/	
+	@Autowired
+    private ConnectionFactoryLocator connectionFactoryLocator;
+ 
+    @Autowired
+    private UsersConnectionRepository usersConnectionRepository;
+ 
+    @Autowired
+    private FacebookConnectionSignup facebookConnectionSignup;
+//------
+	
+	
 	@Autowired
 	private UserService iUserDao;
-	SecurityConfig(UserService iUserDao){
-		this.iUserDao=iUserDao;
-	}
 
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
@@ -47,7 +63,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-
+		
+		
+                 
 				// control by log in for page
 				.antMatchers("/chatting").access("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_EMPLOYEE')")
 
@@ -62,9 +80,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/users/add").access("hasRole('ROLE_ADMIN')")
 				
 				.antMatchers("/users/**/update").access("hasRole('ROLE_ADMIN')")
-
 				.anyRequest().permitAll()
 				
+		        .antMatchers("/login*","/signin/**","/signup/**").permitAll()
+		   /*.and() 
+		      .authorizeRequests().antMatchers("/rest/**").authenticated()//  authenticationEntryPoint(new RESTAuthenticationEntryPoint()
+           */				
 		   .and()
 		   		.formLogin()
 		   		.loginPage("/login")
@@ -80,7 +101,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		        .tokenRepository(persistentTokenRepository())
 		        .tokenValiditySeconds(24 * 60 * 60)
 			.and()
-				.exceptionHandling()//.accessDeniedPage("/403")
+				.exceptionHandling().accessDeniedPage("/403")
 				.accessDeniedHandler(accessDeniedHandler())
 			.and().csrf()
 			.csrfTokenRepository(new CookieCsrfTokenRepository()) // setting token
@@ -105,5 +126,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	      repo.setDataSource(dataSource);
 	      return repo;
 	 }
+	
+	@Bean
+    public ProviderSignInController providerSignInController() {
+        ((InMemoryUsersConnectionRepository) usersConnectionRepository)
+          .setConnectionSignUp(facebookConnectionSignup);
+         
+        return new ProviderSignInController(
+          connectionFactoryLocator, 
+          usersConnectionRepository, 
+          new FacebookSignInAdapter());
+    }
 
 }

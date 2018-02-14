@@ -3,15 +3,20 @@ package com.code.model;
 public class FileUploadBean  {
 	
 	private long pid;  
-	private  String orname  ;
+	private String orname  ;
 	private	String  randname ;
 	private	String  regdate ;
-	private	 String path ;
-	private	 String type;	
+	private	String path ;
+	private	String type;	
 	private	long size ;	
-	private	 String usercd;
-	private	 String catgcd;
+	private	String usercd;
+	private	String catgcd;
 	private String prcd;
+	private String pcd;
+	private String kind;
+	private String old_randname;
+	
+	
 	public long getPid() {
 		return pid;
 	}
@@ -71,6 +76,24 @@ public class FileUploadBean  {
 	}
 	public void setPrcd(String prcd) {
 		this.prcd = prcd;
+	}
+	public String getPcd() {
+		return pcd;
+	}
+	public void setPcd(String pcd) {
+		this.pcd = pcd;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+	public String getOld_randname() {
+		return old_randname;
+	}
+	public void setOld_randname(String old_randname) {
+		this.old_randname = old_randname;
 	}
 	
 	

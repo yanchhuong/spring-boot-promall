@@ -1,55 +1,21 @@
 package com.code.model;
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity(name = "category")
-@Table(name="category")
-public class CategoryBean_R001 implements Serializable { 
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
-	@Column(name="catgid")
+public class CategoryBean_R001{ 
 	private long catgid;  
-	
-	@Column(name="nm_eng")	
 	private String nm_eng;
-	
-	@Column(name="nm_kh")	
-	private String nm_kh;
-	
-	@Column(name="parentid")	
-	private long parentid;
-	
-	@Column(name="lvl")	
+	private String nm_kh;	
+	private long parentid;	
 	private String lvl;
-	
-	@Column(name="pid")	
 	private long pid;
-	
-	@Column(name="usercd")	
-	private String usercd;
-	
-	@Column(name="seq")	
+	private String usercd;	
 	private int seq;
-	
-	@Column(name="regdate")	
 	private String regdate;
-	
-	@Column(name="catgcd")	
-	private String catgcd;
-	
-	@Column(name="catgparent")	
-	private String catgparent;
-	
-	@Column(name="randname")	
+	private String catgcd;	
+	private String catgparent;	
 	private String randname;
-	
+	private String fullengname;
+	private String fullkhname;
+
 	public String getCatgcd() {
 		return catgcd;
 	}
@@ -66,12 +32,7 @@ public class CategoryBean_R001 implements Serializable {
 		this.catgparent = catgparent;
 	}
 
-	@Column(name="fullengname")	
-	private String fullengname;
-	
-	@Column(name="fullkhname")	
-	private String fullkhname;
-	
+
 	public String getFullengname() {
 		return fullengname;
 	}
@@ -170,11 +131,5 @@ public class CategoryBean_R001 implements Serializable {
 		this.usercd = usercd;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-
-	
 	
 }  

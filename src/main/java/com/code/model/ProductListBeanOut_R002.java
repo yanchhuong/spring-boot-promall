@@ -4,6 +4,7 @@ public class ProductListBeanOut_R002 {
 	private long prid;
 	private String prcd;
 	private String title;
+	private boolean enabled;
 	private String regdate;
 	private String price ;
 	private String description;
@@ -16,7 +17,22 @@ public class ProductListBeanOut_R002 {
 	private String randname;
 	private String nm_eng;
 	private String usercd;
+	private String province;
+	private String detail;
+
 	
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 	public long getPrid() {
 		return prid;
 	}
@@ -40,6 +56,12 @@ public class ProductListBeanOut_R002 {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public boolean getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	public String getRegdate() {
 		return regdate;

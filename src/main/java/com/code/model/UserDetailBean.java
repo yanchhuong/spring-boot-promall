@@ -1,13 +1,45 @@
 package com.code.model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-
 public class UserDetailBean extends UserBean {
 
+    private String first;
+    private String last;
+    private String fullname;
+    private String sex;
+    private String birthOfDate;
+    private String phone;
+    private String email;
+    private String locat_id;
+    private String address;
+    private String registerDate;
+    private String regdate;
+    private String birthdate;
+    private String cphone;
+    public String getFullname() {
+		return fullname;
+	}
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+	public String getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
+	public String getBirthdate() {
+		return birthdate;
+	}
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
+	}
+	public String getCphone() {
+		return cphone;
+	}
+	public void setCphone(String cphone) {
+		this.cphone = cphone;
+	}
+	private String profile_fname;
 
 	public String getFirst() {
 		return first;
@@ -21,10 +53,10 @@ public class UserDetailBean extends UserBean {
 	public void setLast(String last) {
 		this.last = last;
 	}
-	public boolean isSex() {
+	public String getSex() {
 		return sex;
 	}
-	public void setSex(boolean sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 	public String getBirthOfDate() {
@@ -69,17 +101,5 @@ public class UserDetailBean extends UserBean {
 	public void setProfile_fname(String profile_fname) {
 		this.profile_fname = profile_fname;
 	}
-
-    private String first;
-    private String last;
-    private boolean sex;
-    private String birthOfDate;
-    private String phone;
-    private String email;
-    private String locat_id;
-    private String address;
-    private String registerDate ;
-    private String profile_fname;
-	
 
 }

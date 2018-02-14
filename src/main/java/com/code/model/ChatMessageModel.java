@@ -1,31 +1,11 @@
 package com.code.model;
 
+import java.sql.Date;
 
-
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-import org.springframework.data.annotation.Id;
- 
-/**
- * @author huseyinbabal
- */
-
-
-/*@Entity
-@Table(name = "chatmessage")*/
 public class ChatMessageModel {
-    @Id
-    @Column(name = "id")
     private String id;
-    @Column(name = "text")
     private String text;
-    @Column(name = "author")
     private String author;
-    @Column(name = "date")
     private Date date;
  
     public ChatMessageModel() {
@@ -60,7 +40,6 @@ public class ChatMessageModel {
     public void setCreateDate(Date date) {
         this.date = date;
     }
- 
     @Override
     public String toString() {
         return "{" +

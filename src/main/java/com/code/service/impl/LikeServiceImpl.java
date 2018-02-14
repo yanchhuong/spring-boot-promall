@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.code.dao.ILikeRepository;
 import com.code.model.LikeBeanInOut_001;
-import com.code.model.ProductBeanIn_U001;
 import com.code.service.ILikeService;
 
 @Service

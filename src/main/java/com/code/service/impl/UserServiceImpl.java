@@ -22,12 +22,13 @@ import com.code.service.UserService;
 
 @Service 
 public class UserServiceImpl implements UserService{
-   private IUserDao userDao;
-   private IRoleListRepository iRoleListRepository ; 
+	private IUserDao userDao;
+   	private IRoleListRepository iRoleListRepository;
+   
 	@Autowired
 	public UserServiceImpl(IUserDao userDao,IRoleListRepository iRoleListRepository ){
-		this.userDao=userDao;
-		this.iRoleListRepository=iRoleListRepository;
+		this.userDao = userDao;
+		this.iRoleListRepository = iRoleListRepository;
 	}
 	
 	@Override

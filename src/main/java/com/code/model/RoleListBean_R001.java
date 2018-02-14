@@ -1,30 +1,9 @@
 package com.code.model;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.NamedQuery;
-
-@Entity(name = "RoleListBean")
-@Table(name="roles_list")
-public class RoleListBean_R001  implements Serializable{
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
-	@Column(name="id")	
+public class RoleListBean_R001{
 	private long id;
-	@Column(name="role")	
 	private String role;
-	@Column(name="regdate")	
 	private String regdate;
-	@Column(name="usercd")	
 	private String usercd;
 	public long getId() {
 		return id;
@@ -49,9 +28,6 @@ public class RoleListBean_R001  implements Serializable{
 	}
 	public void setUsercd(String usercd) {
 		this.usercd = usercd;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 }

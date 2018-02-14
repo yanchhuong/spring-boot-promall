@@ -15,9 +15,6 @@ import com.code.comm.ConnectionUtils;
 import com.code.comm.SqlFormatUtils;
 import com.code.dao.ILikeRepository;
 import com.code.model.LikeBeanInOut_001;
-import com.code.model.ProductBeanIn_U001;
-import com.code.model.ProductListBeanOut_R001;
-import com.google.common.base.Strings;
 
 @Repository
 public class LikeRepositoryDaoImpl implements ILikeRepository {

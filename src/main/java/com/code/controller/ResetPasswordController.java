@@ -1,6 +1,5 @@
 package com.code.controller;
 
-import java.security.SecureRandom;
 import java.util.Random;
 
 import javax.mail.MessagingException;

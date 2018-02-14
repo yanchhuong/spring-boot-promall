@@ -49,7 +49,7 @@ public class SuccessLoginHandler implements AuthenticationSuccessHandler{
 	            System.out.println("Can't redirect");
 	            return;
 	        }  
- //	   response.sendRedirect(request.getContextPath() + request.getParameter("url"));
+	      
 	//   redirectStrategy.sendRedirect(request, response, targetUrl);
 	}
 	 protected String determineTargetUrl(Authentication authentication) {

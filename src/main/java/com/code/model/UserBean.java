@@ -1,11 +1,15 @@
 package com.code.model;
 
 public class UserBean extends UserRoleBean_R001 {
-
+	private String password;
+	private boolean enable;
+	
 	private long id;
+	@Override
 	public long getId() {
 		return id;
 	}
+	@Override
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -21,6 +25,4 @@ public class UserBean extends UserRoleBean_R001 {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
-	private String password;
-	private boolean enable;
 }

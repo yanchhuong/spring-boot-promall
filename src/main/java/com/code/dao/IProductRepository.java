@@ -3,7 +3,6 @@ package com.code.dao;
 import java.util.List;
 
 import com.code.model.CategoryCount_OUT001;
-import com.code.model.CommentBean_001;
 import com.code.model.FileUploadBean;
 import com.code.model.PostProductBean_C001;
 import com.code.model.ProductAddressOut_R001;
@@ -35,5 +34,6 @@ public interface IProductRepository {
 	 * 
 	 * count product view*/
 	public void insertViewProduct(ProductBeanIn_U001 input);
-
+	
+	public int countProducts(ProductParam_IN001 input);
 }

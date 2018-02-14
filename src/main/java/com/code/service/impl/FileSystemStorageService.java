@@ -1,9 +1,6 @@
 package com.code.service.impl;
 
 
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -16,16 +13,12 @@ import com.code.model.StorageProperties;
 import com.code.service.StorageService;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
-import java.util.UUID;
 import java.util.stream.Stream;
 
 @Service
@@ -123,7 +116,7 @@ public class FileSystemStorageService implements StorageService {
 		    System.err.println("An IOException was caught!");
 		    ex.printStackTrace();
 		}	
-		
-		
 	}
+	
+	
 }

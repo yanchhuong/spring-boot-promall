@@ -30,6 +30,7 @@ public class SessionControler {
 		UserSessionBean user = iUserDao.getSessionDao(currentUser);
 		SessionManager.setSession(request, response, user);
 	}
+	
 	@RequestMapping(value = "/get_sesssion", method = RequestMethod.GET , produces=MediaType.APPLICATION_JSON_VALUE)
 	public@ResponseBody Map<String,Object> getSession(HttpServletResponse response,HttpServletRequest request) {
 		UserSessionBean user = SessionManager.getSession(request, response);
@@ -39,10 +40,10 @@ public class SessionControler {
 	            }
 	        };
 	}
-	@RequestMapping(value = "/clear_sesion", method = RequestMethod.GET , produces=MediaType.APPLICATION_JSON_VALUE)
+	
+	@RequestMapping(value = "/clear_session", method = RequestMethod.GET , produces=MediaType.APPLICATION_JSON_VALUE)
 	public void getClear(HttpServletResponse response,HttpServletRequest request) {
 		SessionManager.logout(request, response);
-		
 	}
 
 }

@@ -1,7 +1,5 @@
 package com.code.chat;
 
-import java.sql.Date;
-
 public class ChatMessage {
 	  
 	  public String getIp() {

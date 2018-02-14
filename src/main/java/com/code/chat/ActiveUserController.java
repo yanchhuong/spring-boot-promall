@@ -32,11 +32,6 @@ public class ActiveUserController {
     String str6= SimpMessageHeaderAccessor.getFirstNativeHeader("name", message.getHeaders());
 
    // UserSessionBean dat = iUserDao.getSessionDao(user.getName());
-    System.out.println("login:"+ str1);
-    System.out.println("usercd:"+ str2);
-    System.out.println("Auth-Token:"+ str4);
-    System.out.println("accept-version:"+ str5);
-    System.out.println("name:"+ str6);
     activeUserService.mark(user.getName());
   }
  

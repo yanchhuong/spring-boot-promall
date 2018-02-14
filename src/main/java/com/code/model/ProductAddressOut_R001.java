@@ -6,6 +6,8 @@ public class ProductAddressOut_R001 {
 	private String cphone;
 	private String province;
 	private String detail;
+	private String pcd;
+	private String pnm;
 	
 	
 	
@@ -32,6 +34,18 @@ public class ProductAddressOut_R001 {
 	}
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+	public String getPcd() {
+		return pcd;
+	}
+	public void setPcd(String pcd) {
+		this.pcd = pcd;
+	}
+	public String getPnm() {
+		return pnm;
+	}
+	public void setPnm(String pnm) {
+		this.pnm = pnm;
 	}
 	
 	

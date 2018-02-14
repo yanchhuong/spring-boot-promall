@@ -3,6 +3,7 @@ package com.code.controller;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
+import org.hsqldb.lib.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -19,7 +20,6 @@ import com.code.service.IFileImageService;
 import com.code.service.StorageService;
 import com.code.service.impl.StorageFileNotFoundException;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 
 import java.io.IOException;
 import java.util.Date;
@@ -133,30 +133,33 @@ public class FileUploadController {
     }*/
     
     @RequestMapping(value = "/remove_file_name", method = RequestMethod.GET)
-    public @ResponseBody Map<String,Object> removeFile(@RequestParam(value = "filename") String filename){
-    	    this.storageService.delete(filename);
-        	this.iFileImageService.remove(filename);
-    	    return new HashMap<String,Object>(){
-    	          {
-    	              put("filename",filename);
-    	              put("ERROR","delete success!");
-    	          }
-    	   };
+    public @ResponseBody Map<String,Object> removeFile(@RequestParam(value = "randname") String randname){
+		this.iFileImageService.remove(randname);
+		this.storageService.delete(randname);
+	    return new HashMap<String,Object>(){
+	          {
+	              put("randname",randname);
+	              put("ERROR","delete success!");
+	          }
+	   };
     }
     
     @RequestMapping(value = "/remove_file_local", method = RequestMethod.GET)
     public @ResponseBody Map<String,Object> removeFileLocal(@RequestParam(value = "filename") String filename){
-    	    this.storageService.delete(filename);
-    	    return new HashMap<String,Object>(){
-    	          {
-    	              put("filename",filename);
-    	              put("ERROR","delete success!");
-    	          }
-    	   };
+	    this.storageService.delete(filename);
+	    return new HashMap<String,Object>(){
+	          {
+	              put("filename",filename);
+	              put("ERROR","delete success!");
+	          }
+	   };
     }
     
     @RequestMapping(value="/save_file_name",method = RequestMethod.POST ,produces=MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Map<String,Object> saveCategory(@RequestBody FileUploadBean fileUploadBean){
+    	if(!StringUtil.isEmpty(fileUploadBean.getOld_randname())) {
+    		this.iFileImageService.deleteProfileImage(fileUploadBean);
+    	}
     	this.iFileImageService.saveFileUploadBean(fileUploadBean);
     	return new HashMap<String,Object>(){
     		{
@@ -168,12 +171,11 @@ public class FileUploadController {
     
     @RequestMapping(value="/test",method = RequestMethod.GET)
     public @ResponseBody Map<String,Object> test(){  
-    		return new HashMap<String,Object>(){
-    			{
+    	return new HashMap<String,Object>(){
+    		{
     			put("SUCC","Filse was Saved");
-    			
-    			}
-    		};
+    		}
+    	};
     }
    @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity handleStorageFileNotFound(StorageFileNotFoundException exc) {

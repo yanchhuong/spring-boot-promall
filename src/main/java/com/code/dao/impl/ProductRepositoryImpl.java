@@ -15,7 +15,6 @@ import com.code.comm.ConnectionUtils;
 import com.code.comm.SqlFormatUtils;
 import com.code.dao.IProductRepository;
 import com.code.model.CategoryCount_OUT001;
-import com.code.model.CommentBean_001;
 import com.code.model.FileUploadBean;
 import com.code.model.PostProductBean_C001;
 import com.code.model.ProductAddressOut_R001;
@@ -35,7 +34,7 @@ public class ProductRepositoryImpl implements IProductRepository{
 	private void initialize(){
 	       ConnectionUtils.setDataSource(dataSource);
 	}
-	
+
 	@Override
 	public List<ProductListBeanOut_R001> getListProduct(ProductListBeanIn_R001 input) {
 		String sql = "select   p.prid, p.prcd, p.title,                      \r\n" + 
@@ -106,7 +105,7 @@ public class ProductRepositoryImpl implements IProductRepository{
 		try{
 			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));
 		}catch(Exception e){
-
+			System.out.println("error sql: "+sql);
         }
 	}
 	
@@ -120,7 +119,7 @@ public class ProductRepositoryImpl implements IProductRepository{
 			ConnectionUtils.getNamedParameterJdbcTemplate().update(sql,SqlFormatUtils.getSqlParameterSource(input));      	  
       	  	chk = true;
         }catch(Exception e){
-
+			System.out.println("error sql: "+sql);
         }
 		return chk;
 	}
@@ -132,12 +131,15 @@ public class ProductRepositoryImpl implements IProductRepository{
 			"			union all \r\n" + 
 			"				select c1.catgid, c1.parentid, p.rootid					  \r\n" + 
 			"			from category c1 join all_posts p on p.catgid = c1.parentid)  \r\n" + 
-			"				select c.parentid, c.nm_eng, c.catgcd, p.usercd, p.title, \r\n"+ 
+			"				select c.parentid, c.nm_eng, c.catgcd, p.usercd, p.title, p.enabled, \r\n"+ 
 			"					   p.prcd, p.regdate, p.price, p.desc as description, \r\n" + 
 			"				(select randname from filepicture where  prcd=p.prcd  limit 1)  as randname ,\r\n" + 
 			"				(select count(*) from products_likes  where  prcd=p.prcd) as likecnt ,\r\n" + 
-			"		        (select count(*) from products_views where  prcd=p.prcd) as viewcnt\r\n" + 
-			"		  FROM category c right join products p on c.catgcd=p.catgcd  ";
+			"		        (select count(*) from products_views where  prcd=p.prcd) as viewcnt,\r\n" +
+	        "               ad.province, ad.detail \r\n"+
+			"		  FROM category c " +
+	        "                right join products p on c.catgcd=p.catgcd \r\n"+ 
+	        "        		 left join address ad on p.prcd = ad.prcd";
 //			"		WHERE catgid  IN (SELECT catgid FROM all_posts WHERE 1=1 and rootid=:catgid)\r\n";
 
          
@@ -147,24 +149,34 @@ public class ProductRepositoryImpl implements IProductRepository{
 	    
 	    
 	   if(!Strings.isNullOrEmpty(input.getCatgid())){
-	    	sb.append("WHERE catgid  IN (SELECT catgid FROM all_posts WHERE 1=1 and rootid = cast (:catgid as numeric)) ");
+	    	sb.append("\r\n WHERE catgid  IN (SELECT catgid FROM all_posts WHERE 1=1 and rootid = cast (:catgid as numeric)) ");
 		    params.put("catgid", input.getCatgid());
 	    }else {
-	    	sb.append("WHERE catgid  IN (SELECT catgid FROM all_posts WHERE 1=1)");
+	    	sb.append("\r\n WHERE catgid  IN (SELECT catgid FROM all_posts WHERE 1=1) \r\n");
 	    }
 	    
 	    if(!Strings.isNullOrEmpty(input.getRegdate())) {
-	    	sb.append("\nAND p.regdate = :regdate");
+	    	sb.append("\n and p.regdate = :regdate");
 	    	params.put("regdate", input.getRegdate());
 	    }
 	   
 	    if(!Strings.isNullOrEmpty(input.getPrcd())) {
-	    	sb.append("\nAND p.prcd = :prcd");
+	    	sb.append("\n and p.prcd = :prcd");
 	    	params.put("prcd", input.getPrcd());
 	    }
+	    
+	    if(!Strings.isNullOrEmpty(input.getPcd())) {
+			sb.append("\n and p.pcd = :pcd");
+			params.put("pcd", input.getPcd());
+		}
+
+		if(!Strings.isNullOrEmpty(input.getUsercd())) {
+			sb.append("\n and p.prcd in (select prcd from products_likes where usercd = :usercd)");
+			params.put("usercd", input.getUsercd());
+		}
 		
 	    
-	    List<ProductListBeanOut_R002> result = null; 
+	    List<ProductListBeanOut_R002> result = null;
 		try{
 			result  = ConnectionUtils.getNamedParameterJdbcTemplate().query(sb.toString(), params,
 					new BeanPropertyRowMapper<ProductListBeanOut_R002>(ProductListBeanOut_R002.class));
@@ -185,7 +197,7 @@ public class ProductRepositoryImpl implements IProductRepository{
 				"        FROM category c right join products p on c.catgcd=p.catgcd \r\n";
 				/*"        WHERE c.catgid  IN (SELECT catgid FROM all_posts where 1=1 and rootid=9 )*/
 	         
-			  Map<String, Object> params = new HashMap<String, Object>();	
+			Map<String, Object> params = new HashMap<String, Object>();	
 		    StringBuffer sb = new StringBuffer(sql);
 		    if(!Strings.isNullOrEmpty(input.getCatgid())){
 		    	sb.append("WHERE catgid  IN (SELECT catgid FROM all_posts WHERE 1=1 and  rootid=cast (:catgid as numeric))");
@@ -221,10 +233,11 @@ public class ProductRepositoryImpl implements IProductRepository{
 	@Override
 	public List<ProductAddressOut_R001> getProductAddress(String prcd) {
 		
-		String sql =  " select  fname||' '|| lname as fullname,  d.cphone, d.province, d.detail from user_detail  a \n" + 
-					  "     join users b on a.usercd=b.usercd \n" + 
-					  "     join products c on a.usercd = c.usercd\n" + 
-					  "     join address d on d.prcd = c.prcd\n" + 
+		String sql =  "  select  fname||' '|| lname as fullname,  d.cphone, d.province, d.detail, ps.pcd, ps.pnm from user_detail  a \r\n" + 
+					  "     join users b on a.usercd=b.usercd \r\n" + 
+					  "     join products c on a.usercd = c.usercd\r\n" + 
+					  "     join address d on d.prcd = c.prcd\r\n" + 
+					  "     left join page_store ps on ps.pcd = c.pcd\r\n"+ 
 					  "	where c.prcd='"+prcd+"'" ;
 		
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -235,7 +248,7 @@ public class ProductRepositoryImpl implements IProductRepository{
 			result  = ConnectionUtils.getNamedParameterJdbcTemplate().query(sql, params,
 					new BeanPropertyRowMapper<ProductAddressOut_R001>(ProductAddressOut_R001.class));
 		}catch(Exception e){
-			
+			System.out.println("error sql: "+sql);
 		}
 	return result;
 	
@@ -258,7 +271,7 @@ public class ProductRepositoryImpl implements IProductRepository{
 			result  = ConnectionUtils.getNamedParameterJdbcTemplate().query(sql, params,
 					new BeanPropertyRowMapper<FileUploadBean>(FileUploadBean.class));
 		}catch(Exception e){
-			
+			System.out.println("error sql: "+sql);
 		}
 	return result;
 	}
@@ -318,6 +331,35 @@ public class ProductRepositoryImpl implements IProductRepository{
         	System.out.println("error sql: "+sql);
         }
 	}
+
+	@Override
+	public int countProducts(ProductParam_IN001 input) {
+		String sql = "select count(p.prid) from products p\r\n"+
+					 	 "where 1 = 1 ";
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		StringBuffer dQuery = new StringBuffer(sql);
+		
+		if(!Strings.isNullOrEmpty(input.getPcd())) {
+			dQuery.append("\n and p.pcd = :pcd");
+			params.put("pcd", input.getPcd());
+		}
+		
+		if(!Strings.isNullOrEmpty(input.getUsercd())) {
+			dQuery.append("\n and p.prcd in (select prcd from products_likes where usercd = :usercd)");
+			params.put("usercd", input.getUsercd());
+		}
+		
+		
+		
+		int result  = 0;
+		try{
+			result = ConnectionUtils.getNamedParameterJdbcTemplate().queryForObject(dQuery.toString(), params,Integer.class);		
+		}catch(Exception e){
+			System.out.println("error: "+sql);
+		}
+		return result;
+}
 
 
 }

@@ -1,52 +1,15 @@
 package com.code.model;
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.NamedQuery;
-
-@Entity(name = "category")
-@Table(name="category")
-public class CategoryBean implements Serializable { 
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
-	@Column(name="catgid")
+public class CategoryBean{ 
 	private long catgid;  
-	
-	@Column(name="nm_eng")	
 	private String nm_eng;
-	
-	@Column(name="nm_kh")	
-	private String nm_kh;
-	
-	@Column(name="parentid")	
-	private long parentid;
-	
-	@Column(name="lvl")	
-	private String lvl;
-	
-	@Column(name="pid")	
+	private String nm_kh;	
+	private long parentid;	
+	private String lvl;	
 	private long pid;
-	
-	@Column(name="usercd")	
 	private String usercd;
-	
-	@Column(name="seq")	
 	private long seq;
-	
-	@Column(name="regdate")	
 	private String regdate;
-	
-	@Column(name="catgcd")	
-	private String catgcd;
-	
-	@Column(name="catgparent")	
+	private String catgcd;	
 	private String catgparent;
 	
 	
@@ -138,11 +101,4 @@ public class CategoryBean implements Serializable {
 		this.usercd = usercd;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-
-	
-	
 }  
