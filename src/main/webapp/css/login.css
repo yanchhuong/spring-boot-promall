@@ -22,12 +22,13 @@ a:hover {
 }
 
 .form {
-  background: rgba(255, 255, 255, 1);
-  padding: 40px;
-  max-width: 600px;
-  margin: 40px auto;
-  border-radius: 4px;
-  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+  	background: rgba(255, 255, 255, 1);
+    padding: 40px;
+    max-width: 765px;
+    margin: auto;
+    border-radius: 4px;
+    height: 512px;
+    box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
 
 .tab-group {
@@ -84,7 +85,7 @@ label {
   transition: all 0.25s ease;
   -webkit-backface-visibility: hidden;
   pointer-events: none;
-  font-size: 22px;
+  font-size: 18px;
   color: grey;
 }
 label .req {
@@ -93,8 +94,8 @@ label .req {
 }
 
 label.active {
-  -webkit-transform: translateY(50px);
-          transform: translateY(50px);
+  -webkit-transform: translateY(-20px);
+          transform: translateY(-20px);
   left: 2px;
   font-size: 14px;
 }

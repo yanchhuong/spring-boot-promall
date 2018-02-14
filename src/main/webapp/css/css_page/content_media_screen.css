@@ -4,6 +4,16 @@
 /**{-webkit-transition: all 0.5s ease;-moz-transition: all 0.5s ease;-o-transition: all 0.5s ease;-ms-transition: all 0.5s ease;transition: all 0.5s ease;}
 */
 
+@media(max-width:520px){
+	.header_inner #searchview input:disabled[type=text]{width:220px;}
+	.header_inner #searchview:after{position:absolute;top:16px;right: 32%;z-index:3;width:17px;height:20px;padding-left:10px;border-left:1px solid #1ab188;background:url(../../img/btn/btn_sch.png) no-repeat 100% 1px;background-size:17px 18px;content:'';}
+}
+
+@media(max-width:510px){
+	.header_inner #searchview input:disabled[type=text]{display:none;}
+	.header_inner #searchview:after{position:absolute;top:16px;right: 32%;z-index:3;width:17px;height:20px;padding-left:10px;border-left:1px solid #e8e8e8;background:url(../../img/btn/btn_sch.png) no-repeat 100% 1px;background-size:17px 18px;content:'';}
+}
+
 @media(min-width:960px){
     body{font-family:sans-serif;scrollbar-base-color:#E8E8E8;scrollbar-3dlight-color:#E8E8E8;scrollbar-highlight-color:#E8E8E8;scrollbar-track-color:#E8E8E8;scrollbar-arrow-color:#E8E8E8;scrollbar-shadow-color:#E8E8E8;scrollbar-darkshadow-color:#E8E8E8;}
   
@@ -17,7 +27,7 @@
     .header_inner h1.logo a{display:inline-block;}
    	.header_inner h1.logo a img{display:inline-block;}
 
-    .header_inner #searchview{margin:0 0 0 25px;width:665px;display:inline-block;}
+    .header_inner #searchview{margin:0 auto;width:665px;display:inline-block;}
     .header_inner #searchview input:disabled[type=text]{color:#000;}
     .header_inner .btn_alrim{position:absolute;display:inline-block;float:right;}
     .header_inner .searchwrap{width:940px;margin:0 auto;padding:5px 0 0 58px;height:52px;z-index:9999;}
@@ -32,7 +42,7 @@
 
 	/* Goods List */
 	.goodslist{padding-left:0;}
-    .goodslist > li{width:32%;margin:2% 2% 0 0;}
+    .goodslist > li{width:23%;/* margin:2% 2% 0 0; */}
 
     /* Goods List for Page Detail */
 	/*.goodslist_detail{padding-left:0;}
@@ -139,7 +149,7 @@
     .mb1-wrap{display:none;}
 	
 	/* Footer */
-	footer{width:720px;left:220px;}
+	footer{width:720px;left:120px;}
 	footer .footerwrap{text-align:center;}
     footer .footerwrap{text-align:center;}
     footer .footerwrap address p{display:inline;}
@@ -168,7 +178,7 @@
 	/* header_wrap */
     .header_inner{width:1260px;}
     .header_inner .searchwrap{width:1260px;}
-    .header_inner #searchview{width:980px;}
+    .header_inner #searchview{width:880px;}
     
 	
 	/* left_navigation_bar */
