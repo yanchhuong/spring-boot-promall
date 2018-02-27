@@ -8,23 +8,16 @@
 	<script type="text/javascript" src="../../js_admin/_loading.js?<%=_localDatetime%>"></script>
 
 <style>
-
 </style> 
- 
 </head>
-
-
 <body>
-
 <!-- wrap -->
 <div class="wrap ">
-
 	<!-- header -->
    	<div class="header_wrap"><!--<div class="header_wrap search">-->
 		<jsp:include page="header_include.jsp"/>
     </div>
 	<!-- // header -->
-
 	<!-- container -->
 	<div id="container">
 		<!-- left_navigation_bar -->
