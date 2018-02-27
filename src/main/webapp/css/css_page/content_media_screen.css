@@ -18,6 +18,7 @@
     body{font-family:sans-serif;scrollbar-base-color:#E8E8E8;scrollbar-3dlight-color:#E8E8E8;scrollbar-highlight-color:#E8E8E8;scrollbar-track-color:#E8E8E8;scrollbar-arrow-color:#E8E8E8;scrollbar-shadow-color:#E8E8E8;scrollbar-darkshadow-color:#E8E8E8;}
   
   	.wrap{width:940px;}
+  	.wrap_profile_page{width:940px;}
     .header_wrap{height:53px!important;}
 	.header_wrap.search{background-color:#F5F5F5;}
     .header_inner{width:940px;}
@@ -108,6 +109,7 @@
     .customerwrap{margin-bottom:inherit;padding-top:inherit;}
     .tab.st01{width:720px;left:inherit;right:inherit;position:inherit;top:inherit;}
     #search .wrap{width:940px;}
+    #search .wrap_profile_page{width:940px;}
     #search header .top-bar-wrap{width:940px;}
     #search header .searchwrap{width:940px;}
     #search header #searchview{width:665px;}
@@ -118,6 +120,7 @@
     #search .contactwrap{width:720px;}
     #search footer{width:720px;}
     #category_depth3 .wrap{width:940px;}
+    #category_depth3 .wrap_profile_page{width:940px;}
     #category_depth3 header .top-bar-wrap{width:940px;}
     #category_depth3 header .searchwrap{width:940px;}
     #category_depth3 header #searchview{width:665px;}
@@ -128,6 +131,7 @@
     #category_depth3 .contactwrap{width:720px;}
     #category_depth3 footer{width:720px;}
     .noheader .wrap{width:940px;}
+    .noheader .wrap_profile_page{width:940px;}
     .noheader header .top-bar-wrap{width:940px;}
     .noheader header .searchwrap{width:940px;}
     .noheader header #searchview{width:665px;}
@@ -174,6 +178,7 @@
 @media(min-width:1281px){
 	/* wrap */
 	.wrap{width:1260px;}
+	.wrap_profile_page{width:100%;}
 	
 	/* header_wrap */
     .header_inner{width:1260px;}
