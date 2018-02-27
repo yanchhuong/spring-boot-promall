@@ -36,4 +36,14 @@ public class TestController {
 	        };
 	}
 	
+	@RequestMapping(value = "/expire", method = RequestMethod.GET)
+	 public  @ResponseBody Map<String,Object> test(HttpServletRequest request, HttpServletResponse response) {
+		    System.out.println("I am out of time#############################");
+	        return new HashMap<String,Object>(){
+	            {
+	                put("CODE","200");
+	            }
+	        };
+	}
+	
 }

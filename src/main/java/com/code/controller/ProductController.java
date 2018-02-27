@@ -34,19 +34,6 @@ public class ProductController {
 	@Autowired
 	public ProductController(IProductService iProductService){
 		this.iProductService = iProductService;
-		
-	}
-	
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public  @ResponseBody Map<String,Object> getListProduct(@RequestBody ProductListBeanIn_R001 input){
-		List<ProductListBeanOut_R001> obj = this.iProductService.getProductList(input);
-		PagingUtils page = new PagingUtils();
-		return new HashMap<String,Object>(){
-	            {
-	                put("OUT_REC",obj);
-	                put("PAGINATION",page);
-	            }
-	        };
 	}
 
 	@RequestMapping(value = "/update_status", method = RequestMethod.POST)

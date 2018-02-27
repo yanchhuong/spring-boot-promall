@@ -32,56 +32,7 @@ public class ProductRepositoryImpl implements IProductRepository{
 	 
 	@PostConstruct
 	private void initialize(){
-	       ConnectionUtils.setDataSource(dataSource);
-	}
-
-	@Override
-	public List<ProductListBeanOut_R001> getListProduct(ProductListBeanIn_R001 input) {
-		String sql = "select   p.prid, p.prcd, p.title,                      \r\n" + 
-				"			   p.regdate, p.price, p.desc,                   \r\n" + 
-				"			   p.url, p.enabled, p.catgcd,                   \r\n" + 
-				"			cat.nm_eng as type,                              \r\n" + 
-				"	concat(ud.fname ,ud.lname) as owner,                     \r\n" + 
-				"	count(v.prcd)  as viewcnt,                               \r\n" + 
-				"	count(pl.prcd) as likecnt , sp.store_nm from products p  \r\n" + 
-				"full join products_views v on v.prcd   = p.prcd   		     \r\n" + 
-				"full join products_likes pl on pl.prcd = p.prcd  		     \r\n" + 
-				"left join user_detail ud on ud.usercd  = p.usercd  		 \r\n" + 
-				"left join store_page sp on sp.usercd   = p.usercd           \r\n" + 
-				"left join category cat on cat.catgcd   = p.catgcd           \r\n" + 
-				"where 1=1" ;
-
-	    StringBuffer sb = new StringBuffer(sql);
-	    
-		if(input!=null){
-			if(!Strings.isNullOrEmpty(input.getKeyword())){
-				sb.append(" and (ud.fname ilike '%"+input.getKeyword()+"%'");
-				sb.append(" or  ud.lname ilike '%"+input.getKeyword()+"%'");
-				sb.append(" or  p.description ilike '%"+input.getKeyword()+"%'");
-				sb.append(" or  p.url ilike '%"+input.getKeyword()+"%'");
-				sb.append(" or  p.title ilike '%"+input.getKeyword()+"%'");
-				sb.append(" or  sp.store_nm ilike '%"+input.getKeyword()+"%')");
-				
-			}
-			if(!Strings.isNullOrEmpty(input.getRegdate())){
-				sb.append(" and p.regdate = '"+input.getRegdate()+"%'");
-			}
-			if(!Strings.isNullOrEmpty(input.getSprice()) || !Strings.isNullOrEmpty(input.getEprice())){
-				  sb.append(" and p.price between "+input.getSprice()+" and "+ input.getEprice());
-			}
-			if(!Strings.isNullOrEmpty(input.getEnabled())){
-		    	sb.append(" and  p.enabled = '"+input.getEnabled()+"'");
-			}
-		}
-	    sb.append(" group by  p.prcd, owner, sp.store_nm, cat.nm_eng");
-	    List<ProductListBeanOut_R001> result = null; 
-		try{
-			result  = ConnectionUtils.getNamedParameterJdbcTemplate().query(sb.toString(), 
-					new BeanPropertyRowMapper<ProductListBeanOut_R001>(ProductListBeanOut_R001.class));
-		}catch(Exception e){
-			System.out.println(sb.toString());
-		}
-		return result;
+		ConnectionUtils.setDataSource(dataSource);
 	}
 	
 	@Override
@@ -279,7 +230,8 @@ public class ProductRepositoryImpl implements IProductRepository{
 	@Override
 	public List<ProductListBeanOut_R002> getRelatedProduct(ProductParam_IN001 input) {
 
-		String sql = "with recursive all_posts as (\r\n" + 
+		String sql ="--##related products ##\r\n" + 
+			"with recursive all_posts as (\r\n" + 
 			"				select catgid, parentid, catgid as rootid from category t1 \r\n" + 
 			"			union all \r\n" + 
 			"				select c1.catgid,c1.parentid,p.rootid \r\n" + 

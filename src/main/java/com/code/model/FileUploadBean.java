@@ -15,8 +15,15 @@ public class FileUploadBean  {
 	private String pcd;
 	private String kind;
 	private String old_randname;
+	private String pnm;
 	
 	
+	public String getPnm() {
+		return pnm;
+	}
+	public void setPnm(String pnm) {
+		this.pnm = pnm;
+	}
 	public long getPid() {
 		return pid;
 	}

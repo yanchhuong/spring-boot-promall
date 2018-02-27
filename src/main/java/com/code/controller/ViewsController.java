@@ -22,7 +22,6 @@ public class ViewsController extends WebMvcConfigurerAdapter {
 	        registry.addViewController("/auto_vehicle").setViewName("auto_vehicle");
 	        registry.addViewController("/product_search_control_001").setViewName("product_search_control_001_view");
 	        registry.addViewController("/profile").setViewName("profile_page_001_view");
-	        
 	}
 	
 	/*@RequestMapping(value="/",method = RequestMethod.GET)

@@ -100,9 +100,12 @@ public class UserDetailDaoImpl implements IUserDetailRepostory{
 		
 //		String usercd = input.getUsercd();
 //		usercd.replace("\"", "");	
-		String sql = "select orname, randname, regdate, 'type', 'path' \r\n" + 
-				     "       'size', prcd, usercd, catgcd, pcd, kind\r\n" + 
-				     "from filepicture where usercd = :usercd";
+		String sql = "select f.orname, f.randname, f.regdate, f.\"type\", f.\"path\",\r\n" + 
+					"		   f.\"size\", f.prcd, f.usercd, f.catgcd, f.kind,\r\n" + 
+					"		   p.pcd, p.pnm\r\n" + 
+					"from filepicture f\r\n" + 
+					"right join page_store p on p.usercd = f.usercd\r\n"+
+					"where p.usercd = :usercd";
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("usercd", input.getUsercd());

@@ -37,7 +37,7 @@ public class CategoryController {
 	    //	this.iFileImageService=iFileImageService;
 	    }
 	   
-		@RequestMapping(value = "/list", method = RequestMethod.GET , produces=MediaType.APPLICATION_JSON_VALUE)
+		@RequestMapping(value = "/list_category", method = RequestMethod.GET , produces=MediaType.APPLICATION_JSON_VALUE)
 		 public  @ResponseBody Map<String,Object> getCategorys() {
 			   List<CategoryBean_R001> obj = this.CategoryService.findAll();
 			   long total = this.CategoryService.getCatgidCount();

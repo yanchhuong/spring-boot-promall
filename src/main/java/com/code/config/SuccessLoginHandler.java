@@ -34,14 +34,10 @@ public class SuccessLoginHandler implements AuthenticationSuccessHandler{
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-		HttpSession session = request.getSession();
 		String currentUser = SecurityContextHolder.getContext().getAuthentication().getName();
 		UserSessionBean user = iUserDao.getSessionDao(currentUser);
 		SessionManager.setSession(request, response, user);
-		
 
-		UserSessionBean bb = SessionManager.getSession(request, response);
-		System.out.println("Session:"+ bb.getUsercd());
 //	
 		   String targetUrl = determineTargetUrl(authentication);
 

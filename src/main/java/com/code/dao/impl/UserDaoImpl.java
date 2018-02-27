@@ -217,10 +217,10 @@ public class UserDaoImpl implements IUserDao{
 			
 		}
 	}
-
+	
 	@Override
 	public List <UserSessionBean> getSessionDao(String input) {
-		String sql = "select a.usercd,b.fname||' '||b.lname as fullname,b.sex, "
+		String sql = "select a.usercd,b.fname||' '||b.lname as fullname,b.sex, b.username_fk as id, "
 					+ "       c.randname,b.cphone,b.email from users a "
 					+ "       left join user_detail b on a.usercd = b.usercd "
 					+ "       left join filepicture c on c.usercd = a.usercd "

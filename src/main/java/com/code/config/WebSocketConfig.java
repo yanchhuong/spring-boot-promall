@@ -48,9 +48,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/chat", "/activeUsers").withSockJS();
     }*/
   
-	private  ObjectMapper objMapper=new ObjectMapper() ;
+	private  ObjectMapper objMapper = new ObjectMapper() ;
 	
-	@Override
+	  @Override
 	  public void configureMessageBroker(MessageBrokerRegistry config) {
 	    config.enableSimpleBroker("/queue", "/topic");
 	    config.setApplicationDestinationPrefixes("/app");
@@ -59,7 +59,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 	  @Override
 	  public void registerStompEndpoints(StompEndpointRegistry registry) {
 	    registry.addEndpoint("/chat", "/activeUsers").withSockJS();
-	    
 	  }
 
 	  @Override

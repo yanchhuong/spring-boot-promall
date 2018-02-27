@@ -30,11 +30,6 @@ public class ProductServiceImp  implements IProductService{
 	}
 	
 	@Override
-	public List<ProductListBeanOut_R001> getProductList(ProductListBeanIn_R001 input) {
-		return this.iProductRepository.getListProduct(input);
-	}
-	
-	@Override
 	public void updateProductStatus(ProductBeanIn_U001 input) {
 		this.iProductRepository.updateProductStatus(input);
 	}

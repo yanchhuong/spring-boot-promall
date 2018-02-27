@@ -1,11 +1,13 @@
 package com.code.chat;
 
 import java.security.Principal;
+import java.util.Date;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -41,6 +43,7 @@ public class MessageController {
   public void greeting(Message<Object> message, @Payload LiveChatBean chatMessage) throws Exception {
     Principal principal = message.getHeaders().get(SimpMessageHeaderAccessor.USER_HEADER, Principal.class);
     String authedSender = principal.getName();
+    chatMessage.setDate(DateFormatUtils.format(new Date(), "yyyyMMddHHmmss"));
     chatMessage.setSender(authedSender);
     String recipient = chatMessage.getRecipient();
     
