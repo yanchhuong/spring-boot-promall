@@ -5,6 +5,7 @@
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
 
 	<%@include file="fragments/include_page.jsp"%>
+	<script type="text/javascript" src="../../js_admin/_loading.js?<%=_localDatetime%>"></script>
 
 <style>
 
@@ -37,7 +38,7 @@
 					</dl>
 					<div class="meminfo">
 						<a href="javascript:void(0);" class="sidebar_item"><em>Goods</em></a>
-						<a href="javascript:void(0);" class="sidebar_signup"><em>Sing Up</em></a>
+						<a href="javascript:void(0);" class="sidebar_signup"><em>Sign Up</em></a>
 						<a href="javascript:void(0);" class="sidebar_login"><em>Log In</em></a>
 					</div>
 					<dl class="category">

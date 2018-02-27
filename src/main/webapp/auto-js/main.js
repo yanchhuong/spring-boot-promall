@@ -470,11 +470,9 @@ $(() => {
           apiResponsesReceived += 1;
 
           const recalls = data.recallHolder.map((recall) => (
-            '
-            <h5>${recall.recallNumber} - ${recall.componentDescription}</h5>
-            <p><strong>${recall.defectConsequence}</strong></p>
-            <p>${recall.defectCorrectiveAction}</p>
-            '
+            '<h5>${recall.recallNumber} - ${recall.componentDescription}</h5>'+
+            '<p><strong>${recall.defectConsequence}</strong></p>'+
+            '<p>${recall.defectCorrectiveAction}</p>'
           ));
           $resultElements.recalls.html(recalls.join(''));
 
@@ -494,7 +492,7 @@ $(() => {
 
           const bulletins = data.serviceBulletinHolder.map((bulletin) => (
             
-            '<h5>${bulletin.bulletinNumber} - ${bulletin.componentDescription}</h5>'
+            '<h5>${bulletin.bulletinNumber} - ${bulletin.componentDescription}</h5>'+
             '<p>${bulletin.summaryText}</p>'
           ));
           $resultElements.bulletins.html(bulletins.join(''));

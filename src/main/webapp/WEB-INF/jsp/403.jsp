@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link href="css/app.css"rel="stylesheet"
-	type="text/css"></link>
+<link href="css/app.css"rel="stylesheet" type="text/css"></link>
 <title>Spring Security Example - ProgrammingFree</title>
+	<meta name="_csrf" content="${_csrf.token}"/>
+	<meta name="_csrf_parameter" content="${_csrf.parameterName}"/>
 </head>
 <body class="security-app">
 	<div class="details">
-	<h2>Spring Security - JDBC Authentication</h2>
+		<h2>Spring Security - JDBC Authentication</h2>
 		<a href="http://www.programming-free.com/2015/09/spring-security-jdbc-authentication.html" class="button green small">Tutorial</a> 
 		<a href="https://github.com/priyadb/SpringSecurityJdbcApp/archive/master.zip"
 			class="button red small">Download</a>
@@ -19,8 +19,8 @@
 			<h3>You do not have permission to access this page!</h3>	
 		</div>
 		<form action="/logout" method="post">
-			<input type="submit" class="button red big" value="Sign in as different user" /> <input
-				type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input type="submit" class="button red big" value="Sign in as different user" /> 
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		</form>		
 	</div>	
 </body>

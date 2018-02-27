@@ -3,9 +3,9 @@
 <%@page import="com.code.session.UserSession"%>
 <%
 
-UserSessionBean sess = SessionManager.getSession(request, response);
+/* UserSessionBean sess = SessionManager.getSession(request, response);
 SessionManager.logout(request, response);
-String usercd = sess.getUsercd();
+String usercd = sess.getUsercd(); */
 
 %>
 <!DOCTYPE html>
@@ -50,7 +50,7 @@ String usercd = sess.getUsercd();
 </head>
 <body>
 
-<input type="hidden" value="<%=usercd%>"/>
+<%-- <input type="hidden" value="<%=usercd%>"/> --%>
 <div class="example">
     <div class="container">
         <div class="jumbotron">
@@ -70,6 +70,7 @@ String usercd = sess.getUsercd();
                      <input type="button" value="Add" id="btAdd">
                      <input type="button" value="Search" id="tbSearch">
                      <input type="text" id="keysearch"/>
+                     <input name="myFile" type="file" id="txtfile">
                      <br>
                 </form>
             </nav>

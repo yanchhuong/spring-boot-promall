@@ -8,6 +8,8 @@ $(document).ready(function(){
 
 	if(getSession() != ''){
 		header_page.loadProfileHeaderImage();
+	}else{
+		$(".wrap_setting").find("ul > li:eq(0), li:eq(2)").hide();
 	}
 	
 	$(document).delegate("#logo", "click", function(){
@@ -29,10 +31,18 @@ $(document).ready(function(){
     	}
     });
     
+    $(document).delegate(".header_pro", "click", function(){
+    	$("#pro_test").slideToggle();
+    });
+    
+    $(document).delegate(".header_pro", "mouseenter", function(){
+    	$("#pro_test").slideToggle();
+    });
+    
     $(document).delegate("#dropdown-toggle", "click", function(){
     	countClick++;
     	$(".wrapper").hide();
-    	$('.notification-menu').slideToggle();
+    	$('#notification-menu').slideToggle();
     	$(".wrap_setting").hide();
     	$(".navbox").hide();
     	if(countClick > 1){
@@ -43,9 +53,23 @@ $(document).ready(function(){
     	}
     });
     
-    $(document).delegate(".notification-menu", "mouseleave", function(){
+    $(document).delegate("#dropdown-toggle", "mouseover", function(){
+    	countClick++;
+    	$(".wrapper").hide();
+    	$('#notification-menu').slideToggle();
+    	$(".wrap_setting").hide();
+    	$(".navbox").hide();
+    	if(countClick > 1){
+    		countClick = 0;
+    		$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
+    	}else{
+    		$(".btn_alrim").css({"background": "url(img/bg/musical-bell-outline-change.png) no-repeat 50% 14px", "background-size": "19px 23px"});
+    	}
+    });
+    
+    $(document).delegate("#notification-menu", "mouseleave", function(){
     	countClick = 0;
-    	$('.notification-menu').hide();
+    	$('#notification-menu').hide();
     	$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
     });
 
@@ -75,27 +99,50 @@ $(document).ready(function(){
     	}else{
     		$(".ico_chat").find("img").attr("src","img/bg/chat-red.png");
     	}
-    	$('.notification-menu').hide();
+    	$('#notification-menu').hide();
     	$(".wrapper").slideToggle();
     	$(".wrap_setting").hide();
     	$(".navbox").hide();
     	$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
     });
     
-    $(document).delegate("ul.people li", "click", function(){
+    $(document).delegate(".ico_chat", "mouseover", function(){
+    	countClick++;
+    	if(countClick > 1){
+    		countClick = 0;
+    		$(".ico_chat").find("img").attr("src","img/bg/chat.png");
+    	}else{
+    		$(".ico_chat").find("img").attr("src","img/bg/chat-red.png");
+    	}
+    	$('#notification-menu').hide();
+    	$(".wrapper").slideToggle();
+    	$(".wrap_setting").hide();
+    	$(".navbox").hide();
+    	$(".btn_alrim").css({"background": "url(../../img/bg/musical-bell-outline.png)  no-repeat 50% 14px", "background-size": "19px 23px"});
+    });
+    
+    $(document).delegate("ul.people > li.human", "click", function(){
     	countClick = 0;
     	$(".ico_chat").find("img").attr("src","img/bg/chat.png");
     	$(".wrapper").hide();
 //    	$(".chat_list").next().append(appendChat); 
     	$(".chatbox-holder").append(appendChat);
-    	
     });
+    
     $(document).delegate(".fa-minus", "click", function(){ $(this).parents('.chatbox').toggleClass('chatbox-min'); });
     $(document).delegate(".fa-close", "click", function(){ $(this).parents('.chatbox').remove(); });
     
     $(document).delegate('#navbox-trigger', "click", function(){
     	$(".wrapper").hide();
-    	$('.notification-menu').hide();
+    	$('#notification-menu').hide();
+    	$(".wrap_setting").hide();
+//    	$('#navigation-bar').toggleClass('navbox-open');
+    	$(".navbox").slideToggle();
+    });
+    
+    $(document).delegate('#navbox-trigger', "mouseover", function(){
+    	$(".wrapper").hide();
+    	$('#notification-menu').hide();
     	$(".wrap_setting").hide();
 //    	$('#navigation-bar').toggleClass('navbox-open');
     	$(".navbox").slideToggle();
@@ -104,9 +151,15 @@ $(document).ready(function(){
     $(document).delegate('#setting_trigger', "click", function(){
     	$(".wrapper").hide();
     	$(".navbox").hide();
-    	$('.notification-menu').hide();
+    	$('#notification-menu').hide();
     	$(".wrap_setting").slideToggle();
     });
+    
+    $(document).delegate(".animate > table, tbody", "click", function(){
+    	var pcd = $(this).find('td').attr('data-pcd');
+    	window.location.href = document.location.origin+'/profile?ref='+pcd;
+    });
+
     
 });
 
@@ -131,12 +184,17 @@ header_page.loadProfileHeaderImage = function(){
 			xhr.setRequestHeader(csrfHeader, csrfToken);
 		},
 		success : function(data){
-
+			$(".animate").find("table, tbody").html("");
+			
 			$.each(data.OUT_REC, function(i, v){
-//				$("#sidebar_photo").attr("src",document.location.origin+"/upload_file/files/"+v.randname);
 				$("#header_profile").attr("src",document.location.origin+"/upload_file/files/"+v.randname);
+				
+				if(v.pnm.length > 20){
+					$(".animate").find("table, tbody").append('<tr><td style="padding: 7px 0 10px 38px;" data-pcd="'+v.pcd+'">'+v.pnm.substring(0,15)+' . . .</td></tr>');
+				}else{
+					$(".animate").find("table, tbody").append('<tr><td style="padding: 7px 0 10px 38px;" data-pcd="'+v.pcd+'">'+v.pnm+'</td></tr>');
+				}
 			});
-
 		  }
 	  });
 };

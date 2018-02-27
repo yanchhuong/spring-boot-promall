@@ -51,7 +51,7 @@ $(document).ready(function(){
 	$(".goodslist li").live("click", function(){
 		var prcd = $(this).find("#prcd").val();
 		var parentid = $(this).find("#parentid").val();
-		window.location.href = document.location.origin+'/preview?prcd='+prcd+"&parentid="+parentid;
+		window.location.href = document.location.origin+'/preview?ref1='+prcd+"&ref2="+parentid;
 //		window.location.href = document.location.origin+'/preview?prcd='+prcd+"&parentid="+parentid;
 	});
 	
@@ -61,11 +61,10 @@ main_page.loadCategory = function(){
 	_loadingWholeStart();
 	$.ajax({
 		type   : 'GET',
-	    url    : "/category/list",
+	    url    : "/category/list_category",
 	    cache  : true,
 	    async  : false,
 	    success: (function(dat){
-		    _loadingWholeStop();
 	    	var html = "";
 	    	
 	    	$.each(dat.OUT_REC, function(i,v){
@@ -74,7 +73,8 @@ main_page.loadCategory = function(){
 	    			html += '<a href="javascript:" class="ctg_0'+j+'" catg-id="'+v.catgid+'" style="background-image:url('+document.location.origin+"/upload_file/files/"+v.randname+');background-size:20px;background-position:10px;">'+v.nm_eng+'</a>';
 	    		}
 	    	});
-	    	$("#sidebar_catagory_list").html(html);	    	
+	    	$("#sidebar_catagory_list").html(html);
+	    	_loadingWholeStop();
 	    })
 	});
 };
@@ -189,7 +189,7 @@ main_page.listProduct = function(parentId){
     	    	$.each(data, function(i,v){
     	    		html += '<li>';
     		        html += 	'<a href="javascript:" class="thumb">';
-    			    html += 		'<img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" alt="first_product" class="thumb loaded">';
+    			    html += 		'<img src="https://s3-us-west-1.amazonaws.com/g9bay-image-files/'+v.randname+'" alt="first_product" class="thumb loaded">';
     			    html += 		'<p class="txtinfo">';
     				html += 		'<em>'+v.title+'</em>';
     				html += 		'<strong class="flt"><span>$'+v.price+'</span></strong>';
@@ -246,7 +246,7 @@ main_page.loadProfileImage = function(){
 		success : function(data){
 
 			$.each(data.OUT_REC, function(i, v){
-				$("#sidebar_photo").attr("src",document.location.origin+"/upload_file/files/"+v.randname);
+				$("#sidebar_photo").attr("src","https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname);
 //				$("#header_profile").attr("src",document.location.origin+"/upload_file/files/"+v.randname);
 			});
 

@@ -160,10 +160,10 @@ $(document).ready(function() {
 	    $(this).slideUp(800);
     });
 	
-	$(document).delegate(".col-xs-6", "click", function(){
-		var prcd = $(this).find("#prcd").val();
+	$(document).delegate("#relPro", "click", function(){
+		var prcd 	 = $(this).find("#prcd").val();
 		var parentid = $(this).find("#parentid").val();
-		window.open(document.location.origin+'/preview?prcd='+prcd+"&parentid="+parentid);
+		window.open(document.location.origin+'/preview?ref1='+prcd+"&ref2="+parentid);
     });
 
 });
@@ -172,7 +172,7 @@ $(document).ready(function() {
 preview_page_001.loadCategory = function(){
 	$.ajax({
 		type   : 'GET',
-	    url    : "/category/list",
+	    url    : "/category/list_category",
 	    cache  : true
 	})
 	.done(function(dat){
@@ -225,7 +225,7 @@ preview_page_001.insertViewProduct = function(){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
 	
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
 	input["usercd"]  = $("#usercd").val();
 
     $.ajax({
@@ -251,7 +251,7 @@ preview_page_001.likeProduct = function(){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
 	
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
 	input["usercd"]  = $("#usercd").val();
 
     $.ajax({
@@ -276,7 +276,7 @@ preview_page_001.deleteLikeProduct = function(){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
 	
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
 	input["usercd"]  = $("#usercd").val();
 
     $.ajax({
@@ -301,7 +301,7 @@ preview_page_001.checkLikeProduct = function(){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
     $.ajax({
 		  type	: 'POST',
 		  url	:'/likes/check_like',
@@ -329,7 +329,7 @@ preview_page_001.checkLikeProduct = function(){
 preview_page_001.loadProductAddress = function(){
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
-	var input  =  $.urlParam("prcd");
+	var input  =  $.urlParam("ref1");
 	
     $.ajax({
 		  type	: 'POST',
@@ -364,7 +364,7 @@ preview_page_001.loadProductPictures = function(){
 //	_loadingWholeStart();
 	var csrfHeader = $("meta[name='_csrf_header']").attr("content");
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
-	var input  =  $.urlParam("prcd");
+	var input  =  $.urlParam("ref1");
 
 	
     $.ajax({
@@ -399,7 +399,7 @@ preview_page_001.loadProductDetail = function(){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
 		
-	input["prcd"]  =  $.urlParam("prcd");
+	input["prcd"]  =  $.urlParam("ref1");
 	
     $.ajax({
 		  type	: 'POST',
@@ -452,7 +452,7 @@ preview_page_001.insertProductCommentAdd = function(){
 	var input = {};
 	
 	input["content"] = $(".field_comment").find("#comment_contents").val();
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
 	input["usercd"]  = $("#usercd").val();
 
     $.ajax({
@@ -478,7 +478,7 @@ preview_page_001.loadProductComments = function(){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
 
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
 
     $.ajax({
 		  type	: 'POST',
@@ -571,7 +571,7 @@ preview_page_001.updateProductComments = function(data){
 	input["content"] = $(data).parents(".hideComment").children().find("#commentUpdate").val();
 	input["id"]		 = $(data).parents(".hideComment").children().find("input").val();
 	input["usercd"]	 = $("#usercd").val();
-	input["prcd"]    = $.urlParam("prcd");
+	input["prcd"]    = $.urlParam("ref1");
 	
     $.ajax({
 		  type	: 'POST',
@@ -625,8 +625,8 @@ preview_page_001.loadRelatedProduct = function(){
 	var csrfToken  = $("meta[name='_csrf']").attr("content");
 	var input = {};
 	
-	input["prcd"]  =  $.urlParam("prcd");
-	input["parentid"]  =  $.urlParam("parentid");
+	input["prcd"]  	   =  $.urlParam("ref1");
+	input["parentid"]  =  $.urlParam("ref2");
 
 
     $.ajax({
@@ -645,52 +645,53 @@ preview_page_001.loadRelatedProduct = function(){
 			  $(".carousel-inner").html("");
   			  var item3  = '';
   			  var checkI = 0;
-  			  
-  			 $.each(data.OUT_REC, function(i, v){
-  				  checkI++;
+  			 if(data.OUT_REC.length > 0 || data.OUT_REC == null){
+  	  			 $.each(data.OUT_REC, function(i, v){
+  	  				  checkI++;
 
-				  if(checkI == 1){
-					  item3 += '<div class="item">';
-					  item3 += '<div class="row">';
-				  }
+  					  if(checkI == 1){
+  						  item3 += '<div class="item">';
+  						  item3 += '<div class="row">';
+  					  }
 
-				  item3 += '<div class="col-xs-6 col-sm-4"> '
-			            + '    <div class="tcb-product-item"> '
-			            + '        <input type="hidden" id="prcd" value="'+v.prcd+'" /> '
-			            + '        <input type="hidden" id="parentid" value="'+v.parentid+'" /> '
-			            + '        <div class="tcb-product-photo"> '
-			            + '            <a href="#"><img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" class="img-responsive" alt="a" /></a> '
-			            + '        </div> '
-			            + '        <div class="tcb-product-info"> '
-			            + '            <div class="tcb-product-title"> '
-			            + '                <h4><a href="#">'+v.title+'</a></h4></div> '
-			            + '            <div class="tcb-product-rating">	'
-			            + '                <i class="active glyphicon glyphicon-star"></i><i class="active glyphicon glyphicon-star"></i>	'
-			            + '                <i class="active glyphicon glyphicon-star"></i><i class="active glyphicon glyphicon-star"></i>	'
-			            + '                <i class="glyphicon glyphicon-star"></i>	'
-			            + '                <a href="#">(4,585 ratings)</a> '
-			            + '            </div> '
-			            + '            <div class="tcb-hline"></div> '
-			            + '            <div class="tcb-product-price"> '
-			            + '                '+v.price+' (17% off) '
-			            + '            </div> '
-			            + '        </div> '
-			            + '    </div> '
-			            + ' </div> ';
-				  
-				  if(checkI == 3 || (data.OUT_REC.length-1) == i){
-					  checkI = 0;
-					  
-					  item3 += '</div>';
-					  item3 += '</div>';
-					  $(".carousel-inner").append(item3);
-					  
-					  item3 = "";
-				  }
-  			 });
-  			 $(".carousel-inner .item:eq(0)").addClass("active");
+  					  item3 += '<div class="col-xs-6 col-sm-4" id="relPro"> '
+  				            + '    <div class="tcb-product-item"> '
+  				            + '        <input type="hidden" id="prcd" value="'+v.prcd+'" /> '
+  				            + '        <input type="hidden" id="parentid" value="'+v.parentid+'" /> '
+  				            + '        <div class="tcb-product-photo"> '
+  				            + '            <a href="#"><img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" class="img-responsive" alt="a" /></a> '
+  				            + '        </div> '
+  				            + '        <div class="tcb-product-info"> '
+  				            + '            <div class="tcb-product-title"> '
+  				            + '                <h4><a href="#">'+v.title+'</a></h4></div> '
+  				            + '            <div class="tcb-product-rating">	'
+  				            + '                <i class="active glyphicon glyphicon-star"></i><i class="active glyphicon glyphicon-star"></i>	'
+  				            + '                <i class="active glyphicon glyphicon-star"></i><i class="active glyphicon glyphicon-star"></i>	'
+  				            + '                <i class="glyphicon glyphicon-star"></i>	'
+  				            + '                <a href="#">(4,585 ratings)</a> '
+  				            + '            </div> '
+  				            + '            <div class="tcb-hline"></div> '
+  				            + '            <div class="tcb-product-price"> '
+  				            + '                '+v.price+' (17% off) '
+  				            + '            </div> '
+  				            + '        </div> '
+  				            + '    </div> '
+  				            + ' </div> ';
+  					  
+  					  if(checkI == 3 || (data.OUT_REC.length-1) == i){
+  						  checkI = 0;
+  						  
+  						  item3 += '</div>';
+  						  item3 += '</div>';
+  						  $(".carousel-inner").append(item3);
+  						  
+  						  item3 = "";
+  					  }
+  	  			 });
+  	  			 $(".carousel-inner .item:eq(0)").addClass("active");
+  			 }
+
 	      }
-
     });
 };
 $.urlParam = function(name){

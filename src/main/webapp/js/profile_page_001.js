@@ -4,7 +4,7 @@ var _map;
 var _profileRandname = '';
 var _imageStatus = '';
 var onDisable = "../img/ico/icon_alim_off.png";
-var onEnable = "../img/ico/icon_alim_on.png";
+var onEnable  = "../img/ico/icon_alim_on.png";
 $(document).ready(function(){
 	
 	setTimeout(createMap, 1000);
@@ -114,12 +114,15 @@ $(document).ready(function(){
     	$(this).hide();
     	$("#blur").addClass("blur");
     	profile_page_001.updatePageName();
-//    	alert($(".user-name").text());
     });
-	
+    
 	$(document).delegate(".dropbtn", "click", function(){
-//		$(".pro-num").find("#myDropdown").hide();
-		$(this).next().slideToggle();
+		$("#myDropdown").hide();
+		$(this).siblings().slideToggle();
+	});
+	
+	$(document).delegate(".pro-dis", "mouseleave", function(){
+		$(".pro-num").find("#myDropdown").hide();
 	});
 	    
     $(document).delegate(".onOrOff", "click", function(){
@@ -163,7 +166,7 @@ $(document).ready(function(){
     $(document).delegate("#wrap-value", "click", function(){
     	var prcd = $(this).children().siblings().find("#prcd").val();
     	var parentid = $(this).children().siblings().find("#parentId").val();
-    	window.location.href = document.location.origin+'/preview?prcd='+prcd+"&parentid="+parentid;
+    	window.location.href = document.location.origin+'/preview?ref1='+prcd+"&ref2="+parentid;
     });
     
     $(document).delegate("#usr_pf_about", "click", function(){

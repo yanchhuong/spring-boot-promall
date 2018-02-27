@@ -15,6 +15,8 @@
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+   
+   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
    <link rel="stylesheet" type="text/css" href="../../css/css_page/reset.css" media="all"> 
    <link rel="stylesheet" type="text/css" href="../../css/css_page/content.css" media="all">
    <link rel="stylesheet" type="text/css" href="../../css/css_page/content_media_screen.css" media="all">
@@ -55,7 +57,7 @@
     <script  src="../../js-lib/tbl.paginging.js?<%=_localDatetime%>"></script>
     <script type="text/javascript" src="../../js-lib/lightslider.js?<%=_localDatetime%>"></script>
     <script type="text/javascript" src="/js/main_page.js?<%=_localDatetime%>"></script>
-    <script type="text/javascript" src="../../js_admin/_loading.js?<%=_localDatetime%>"></script>
+    
 
 
  

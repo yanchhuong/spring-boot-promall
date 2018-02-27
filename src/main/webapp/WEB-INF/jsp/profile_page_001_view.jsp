@@ -17,7 +17,6 @@
 <head>
 	<meta name="_csrf" content="${_csrf.token}"/>
 	<meta name="_csrf_header" content="${_csrf.headerName}"/>
-    
 	<%@include file="fragments/include_profile.jsp"%>
        
 	<style type="text/css">
@@ -37,7 +36,7 @@
 <input type="hidden" id="cv_enabled" />
 <input type="hidden" id="cv_regdate" />
 <!-- wrap -->
-<div class="wrap" style="padding-top:0;">
+<div class="wrap_profile_page" style="padding-top:0;">
 
 	<!-- header -->
    	<div class="header_wrap"><!--<div class="header_wrap search">-->
@@ -126,7 +125,8 @@
 		        </div>
 		        <div class="pro-dis">
 		            <div id="pro-thumb-wrap">
-		                <div class="pro-num"><div class="dropbtn"><img src="img/ico/three-dots.png" width="20" height="20" alt="More premium icon" title="More premium icon"></div>
+		                <div class="pro-num">
+		                	<div class="dropbtn"><img src="img/ico/three-dots.png" width="20" height="20" alt="More premium icon" title="More premium icon"></div>
 						  	<div id="myDropdown" class="dropdown-content">
 						  		<a href="#home" id="btn_edit">Edit</a>
 						    	<a href="#about" id="btn_delete">Delete</a>
