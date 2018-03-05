@@ -196,7 +196,7 @@ function LoadData(){
 	        	  html    +='<div class="wrap">'
 	        	  html    +='<span class="contact-status"></span>'
 			      if(v.randname!=null){
-		        	  html    +='<img width="40px" height="40px" src="'+document.location.origin+"/upload_file/files/"+ v.randname+'" alt="">'
+		        	  html    +='<img width="40px" height="40px" src="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+ v.randname+'" alt="">'
 			      }else{
 			          html    +=' <img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />'
 			      }
@@ -210,7 +210,7 @@ function LoadData(){
 	        	  html    +='</li>';
     		}else{
 			      if(v.randname!=null){
-			    	  strOurProfile +='	<img id="profile-img" height="50px" src="'+document.location.origin+"/upload_file/files/"+ v.randname+'" class="online" alt="" />';
+			    	  strOurProfile +='	<img id="profile-img" height="50px" src="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+ v.randname+'" class="online" alt="" />';
 			      }else{
 			    	  strOurProfile +=' <img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />';
 			      }
@@ -266,7 +266,7 @@ function loadChatListData(){
         	  html    +='<div class="wrap">'
         	  html    +='<span class="contact-status"></span>'
 		      if(v.randname!=null){
-	        	  html    +='<img width="40px" height="40px" src="'+document.location.origin+"/upload_file/files/"+ v.randname+'" alt="">'
+	        	  html    +='<img width="40px" height="40px" src="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+ v.randname+'" alt="">'
 		      }else{
 		          html    +=' <img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />'
 		      }
@@ -345,7 +345,7 @@ function loadChatMesage(data){
     		if(v.usercd == getSession().usercd){
         		strChat += '<li class="sent">';
   		      if(v.randname!=null){
-  		    	strChat		+='<img width="40px" height="40px" src="'+document.location.origin+"/upload_file/files/"+ v.randname+'" alt="">'
+  		    	strChat		+='<img width="40px" height="40px" src="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+ v.randname+'" alt="">'
 		      }else{
 		    	strChat		+= '<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />';
 		      }
@@ -354,7 +354,7 @@ function loadChatMesage(data){
     		}else{
         		strChat += '<li class="replies">';
         		  if(v.randname!=null){
-	  		    	strChat +='<img width="40px" height="40px" src="'+document.location.origin+"/upload_file/files/"+ v.randname+'" alt="">'
+	  		    	strChat +='<img width="40px" height="40px" src="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+ v.randname+'" alt="">'
 			      }else{
 			    	strChat +='<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />';
 			      }

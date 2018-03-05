@@ -70,7 +70,7 @@ main_page.loadCategory = function(){
 	    	$.each(dat.OUT_REC, function(i,v){
 	    		var j = i + 1;
 	    		if(v.lvl == "1"){
-	    			html += '<a href="javascript:" class="ctg_0'+j+'" catg-id="'+v.catgid+'" style="background-image:url('+document.location.origin+"/upload_file/files/"+v.randname+');background-size:20px;background-position:10px;">'+v.nm_eng+'</a>';
+	    			html += '<a href="javascript:" class="ctg_0'+j+'" catg-id="'+v.catgid+'" style="background-image:url('+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname+');background-size:20px;background-position:10px;">'+v.nm_eng+'</a>';
 	    		}
 	    	});
 	    	$("#sidebar_catagory_list").html(html);
@@ -183,7 +183,6 @@ main_page.listProduct = function(parentId){
     	        }
     	    },
     	    callback: function(data, pagination) {
-
     	    	var html = '';
     	    	$(".pagination").prev().find(".goodslist").empty();
     	    	$.each(data, function(i,v){

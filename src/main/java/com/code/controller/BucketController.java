@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.code.service.impl.AmazonClientService;
 
 @RestController
-@RequestMapping("/storage/")
+@RequestMapping("/storage")
 public class BucketController {
 
     private AmazonClientService amazonClient;

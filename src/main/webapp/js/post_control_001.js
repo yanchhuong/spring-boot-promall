@@ -320,7 +320,7 @@ post_control_001.uploadFormData = function(file){
 	    success: function(data){
 	    	
 	    	data=JSON.parse(data);
-	    	wrap_img.append($('<img width="200px" height="140px" value="'+document.location.origin+"/upload_file/files/"+'" style="margin:6px;">').attr("src", document.location.origin+"/upload_file/files/"+ data.RANDNAME));
+	    	wrap_img.append($('<img width="200px" height="140px" value="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+'" style="margin:6px;">').attr("src","https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+ data.RANDNAME));
 	    	wrap_img.append("<input type='hidden' id='orname' value='"+ data.OUT_REC.orname+"'>" );
 	    	wrap_img.append("<input type='hidden' id='regdate' value='"+ data.OUT_REC.regdate+"'>" );
 	    	wrap_img.append("<input type='hidden' id='size' value='"+ data.OUT_REC.size+"'>" );

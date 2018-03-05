@@ -69,7 +69,7 @@ function init(input){
 	if(isHas!= 'null'){
 	      $('#helpText').removeClass();
 	      $("#imgframe").addClass("imgFrame");
-		  $("#img").attr("src", document.location.origin+"/upload_file/files/"+ isHas);
+		  $("#img").attr("src","https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+ isHas);
 	}else{
 		  $('#helpText').addClass('helpText');
 	      $("#imgframe").removeClass();
@@ -126,7 +126,7 @@ function uploadFormData(){
 	    },
 	    success: function(data){
 	            data = JSON.parse(data);
-		        $("#img").attr("src", document.location.origin+"/upload_file/files/"+ data.RANDNAME);
+		        $("#img").attr("src","https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+ data.RANDNAME);
 		    	$("#imgframe").append("<input type='hidden' id='orname' value='"+ data.OUT_REC.orname+"'>" ); 
 		    	$("#imgframe").append("<input type='hidden' id='regdate' value='"+ data.OUT_REC.regdate+"'>" ); 
 		    	$("#imgframe").append("<input type='hidden' id='size' value='"+ data.OUT_REC.size+"'>" ); 

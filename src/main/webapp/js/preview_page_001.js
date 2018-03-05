@@ -181,7 +181,7 @@ preview_page_001.loadCategory = function(){
     	$.each(dat.OUT_REC, function(i,v){
     		var j = i + 1;
     		if(v.lvl == "1"){
-    			html += '<a href="#none" class="ctg_0'+j+'" catg-id="'+v.catgid+'" style="background-image:url('+document.location.origin+"/upload_file/files/"+v.randname+');background-size:20px;background-position:10px;">'+v.nm_eng+'</a>';
+    			html += '<a href="#none" class="ctg_0'+j+'" catg-id="'+v.catgid+'" style="background-image:url('+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname+');background-size:20px;background-position:10px;">'+v.nm_eng+'</a>';
     		}
     	});
     	$("#sidebar_catagory_list").html(html);
@@ -211,7 +211,7 @@ preview_page_001.loadProfileImage = function(){
 			$("#sellerphoto").html("");
 			console.log("image: "+JSON.stringify(data.OUT_REC));
 			$.each(data.OUT_REC, function(i, v){
-				strPrf += '<img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" alt="" class="loaded">';
+				strPrf += '<img src="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname+'" alt="" class="loaded">';
 			});
 
 			$("#sellerphoto").append(strPrf);
@@ -383,7 +383,7 @@ preview_page_001.loadProductPictures = function(){
 			  $("#image_gallery").html("");
 
 			  $.each(data.PICTURE_REC, function(i,v){
-				  html += '<li data-thumb="'+document.location.origin+"/upload_file/files/"+v.randname+'"><img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" alt="productPicture"></li>';
+				  html += '<li data-thumb="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname+'"><img src="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname+'" alt="productPicture"></li>';
 			  });
 
 			  $("#image_gallery").append(html);
@@ -514,7 +514,7 @@ preview_page_001.loadProductComments = function(){
 						 if(v.randname == null){
 						  html += 		'<div class="customer"><img src="img/users/customer001.png" alt=""></div>';  
 						 }else{
-						  html +=		'<div class="customer"><img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" alt=""></div>';
+						  html +=		'<div class="customer"><img src="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname+'" alt=""></div>';
 						 }
 						  html +=		'<div>';
 						  html +=			'<h5>'+v.fullname+'</h5>';
@@ -659,7 +659,7 @@ preview_page_001.loadRelatedProduct = function(){
   				            + '        <input type="hidden" id="prcd" value="'+v.prcd+'" /> '
   				            + '        <input type="hidden" id="parentid" value="'+v.parentid+'" /> '
   				            + '        <div class="tcb-product-photo"> '
-  				            + '            <a href="#"><img src="'+document.location.origin+"/upload_file/files/"+v.randname+'" class="img-responsive" alt="a" /></a> '
+  				            + '            <a href="#"><img src="'+"https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname+'" class="img-responsive" alt="a" /></a> '
   				            + '        </div> '
   				            + '        <div class="tcb-product-info"> '
   				            + '            <div class="tcb-product-title"> '

@@ -187,7 +187,7 @@ header_page.loadProfileHeaderImage = function(){
 			$(".animate").find("table, tbody").html("");
 			
 			$.each(data.OUT_REC, function(i, v){
-				$("#header_profile").attr("src",document.location.origin+"/upload_file/files/"+v.randname);
+				$("#header_profile").attr("src","https://s3-us-west-1.amazonaws.com/g9bay-image-files/"+v.randname);
 				
 				if(v.pnm.length > 20){
 					$(".animate").find("table, tbody").append('<tr><td style="padding: 7px 0 10px 38px;" data-pcd="'+v.pcd+'">'+v.pnm.substring(0,15)+' . . .</td></tr>');
